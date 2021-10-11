@@ -1,173 +1,102 @@
 <template>
-    <section class="card block">
+  <FormulateForm
+    class="login-form card block"
+    v-model="formValues"
+  >
 
-         <!-- Policy Details -->
-        <div class="block card">
-        <div class="card-header">
-            <h4 class="card-header-title is-4">Purchase Order Details</h4>
-            <span class="card-header-icon">
-            <b-icon icon="note-text-outline"></b-icon>
-            </span>
-        </div>
-        </div>
+   <div class="block card">
+      <div class="card-header">
+        <h4 class="card-header-title is-4">Purchase Order Details</h4>
+        <span class="card-header-icon">
+          <b-icon icon="note-text-outline"></b-icon>
+        </span>
+      </div>
+    </div>
 
-        <div
-         :class="['block box']"
-         >
-
-        <div class="columns">
-            <div class="column is-one-third">
-                <b-field label="Client">
-                    <b-input v-model="name"></b-input>
-                </b-field>
-            </div>
-
-            <div class="column is-one-third">
-
-        <b-field label="Cover"
-            type="is-danger"
-            message="This email is invalid">
-            <b-input type="email"
-                value="john@"
-                maxlength="30">
-            </b-input>
-        </b-field>
-            </div>
-
-            <div class="column is-one-third">
-                <b-field label="Currency">
-                    <b-input v-model="name"></b-input>
-                </b-field>
-            </div>
-
-           
-        </div>
-        
-        <div class="columns">
-
-             <div class="column is-one-third">
-
-            <b-field label="Quarters"
-                type="is-danger"
-                message="This email is invalid">
-                <b-input type="email"
-                    value="john@"
-                    maxlength="30">
-                </b-input>
-            </b-field>
-                </div>
-
-
-            <div class="column is-third">
-                <b-field label="Start Date"
-                    type="is-success"
-                    message="This username is available">
-                    <b-input value="johnsilver" maxlength="30"></b-input>
-                </b-field>
-            </div>
-
-            <div class="column is-third">
-                <b-field label="End Date">
-                    <b-input type="password"
-                        value="iwantmytreasure"
-                        password-reveal>
-                    </b-input>
-                </b-field>
-
-                
-            </div>
-        </div>
-
-        </div>
-
-         <div class="block card">
-        <div class="card-header">
-            <h4 class="card-header-title is-4">Debit Binder Details</h4>
-            <span class="card-header-icon">
-            <b-icon icon="note-text-outline"></b-icon>
-            </span>
-        </div>
-        </div>
-
-        <div
-         :class="['block box']"
-         >
-
-        <div class="columns">
-            <div class="column is-one-third">
-                <b-field label="Client">
-                    <b-input v-model="name"></b-input>
-                </b-field>
-            </div>
-
-            <div class="column is-one-third">
-
-        <b-field label="Cover"
-            type="is-danger"
-            message="This email is invalid">
-            <b-input type="email"
-                value="john@"
-                maxlength="30">
-            </b-input>
-        </b-field>
-            </div>
-
-            <div class="column is-one-third">
-                <b-field label="Currency">
-                    <b-input v-model="name"></b-input>
-                </b-field>
-            </div>
-
-           
-        </div>
-        
-        <div class="columns">
-
-             <div class="column is-one-third">
-
-            <b-field label="Quarters"
-                type="is-danger"
-                message="This email is invalid">
-                <b-input type="email"
-                    value="john@"
-                    maxlength="30">
-                </b-input>
-            </b-field>
-                </div>
-
-
-            <div class="column is-third">
-                <b-field label="Start Date"
-                    type="is-success"
-                    message="This username is available">
-                    <b-input value="johnsilver" maxlength="30"></b-input>
-                </b-field>
-            </div>
-
-            <div class="column is-third">
-                <b-field label="End Date">
-                    <b-input type="password"
-                        value="iwantmytreasure"
-                        password-reveal>
-                    </b-input>
-                </b-field>
-
-                
-            </div>
-        </div>
-
-        </div>
-        
-        
-    </section>
+    <h2 class="form-title">Register</h2>
+    <p>
+      You can place any elements you want inside a form. The inputs themselves
+      can even be deeply nested.
+    </p>
+    <FormulateInput
+      name="name"
+      type="text"
+      label="Your name"
+      placeholder="Your name"
+      validation="required"
+    />
+    <FormulateInput
+      name="email"
+      type="email"
+      label="Email address"
+      placeholder="Email address"
+      validation="required|email"
+    />
+    <div class="double-wide">
+      <FormulateInput
+        name="password"
+        type="password"
+        label="Password"
+        placeholder="Your password"
+        validation="required"
+      />
+      <FormulateInput
+        name="password_confirm"
+        type="password"
+        label="Confirm your password"
+        placeholder="Confirm password"
+        validation="required|confirm"
+        validation-name="Confirmation"
+      />
+    </div>
+    <FormulateInput
+      type="submit"
+      label="Register"
+    />
+    <pre
+      class="code"
+      v-text="formValues"
+    />
+  </FormulateForm>
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                name: 'John Silver'
-            }
-        }
+export default {
+  data () {
+    return {
+      formValues: {}
     }
+  }
+}
 </script>
+
+<style scoped>
+.login-form {
+  padding: 2em;
+  border: 1px solid #a8a8a8;
+  border-radius: .5em;
+  max-width: 500px;
+  box-sizing: border-box;
+}
+.form-title {
+  margin-top: 0;
+}
+.login-form::v-deep .formulate-input .formulate-input-element {
+  max-width: none;
+}
+@media (min-width: 420px) {
+  .double-wide {
+    display: flex;
+  }
+  .double-wide .formulate-input {
+    flex-grow: 1;
+    width: calc(50% - .5em);
+  }
+  .double-wide .formulate-input:first-child {
+    margin-right: .5em;
+  }
+  .double-wide .formulate-input:last-child {
+    margin-left: .5em;
+  }
+}
+</style>

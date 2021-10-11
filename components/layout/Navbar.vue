@@ -109,7 +109,7 @@ export default {
         {
           label: 'Actions',
           items: [
-            { icon: 'cash',  itemLabel: 'Procurement', link: '/clients/clients' 
+            { icon: 'cash',  itemLabel: 'Procurement', link: '/procurement/procurement' 
              },
             
           ],
@@ -117,13 +117,13 @@ export default {
         {
           label: 'Finances',
           items: [
-            { icon: 'file-chart', itemLabel: 'Compliance', link: '/receipts/receipts' },
+            { icon: 'file-chart', itemLabel: 'Compliance', link: '/compliance/compliance' },
           ],
         },
         {
           label: 'Reports',
           items: [
-            { icon: 'finance', itemLabel: ' Finance', link: '/reports/reports' },
+            { icon: 'finance', itemLabel: ' Finance', link: '/finance/finance' },
           ],
         },
       ],

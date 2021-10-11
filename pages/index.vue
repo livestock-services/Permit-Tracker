@@ -57,21 +57,21 @@ export default {
           type: 'is-info  ',
           icon: 'cash',
           name: 'Manage Procurement',
-          path: '/policies/policies',
+          path: '/procurement/procurement',
         },
 
          {
           type: 'is-warning ',
           icon: 'file-chart',
           name: 'Manage Compliance',
-          path: '/reports/reports',
+          path: '/compliance/compliance',
         },
 
         {
           type: 'is-success ',
           icon: 'finance',
           name: 'Manage Finance',
-          path: '/clients/clients',
+          path: '/finance/finance',
         },
         
        
