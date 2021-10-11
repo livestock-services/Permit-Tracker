@@ -48,39 +48,15 @@
            
         </div>
         
-        <div class="columns">
+       
 
-             <div class="column is-one-third">
-
-             <b-field label="Issued Date">
-                <b-datepicker
-                    placeholder="<-- Click to select -->"
-                    :min-date="minDate"
-                    :max-date="maxDate">
-                </b-datepicker>
-            </b-field>
+         <div class="buttons columns">
+                <div class="column is-one-third">
+                    <b-button type="is-info" expanded>
+                        Submit
+                    </b-button>
                 </div>
-
-
-            <div class="column is-third">
-                <b-field label="Created By"
-                   
-                    >
-                    <b-input placeholder="name..." maxlength="30"></b-input>
-                </b-field>
             </div>
-
-            <div class="column is-third">
-                <b-field label="End Date">
-                    <b-input type="password"
-                        value="iwantmytreasure"
-                        password-reveal>
-                    </b-input>
-                </b-field>
-
-                
-            </div>
-        </div>
 
         </div>
 
