@@ -92,6 +92,10 @@ export default {
   },
 
   methods: {
+
+    endSession(){
+     this.$router.push('/auth/login')
+    }
     //  ...mapActions('users', ['getAllUsers']),
   },
      
