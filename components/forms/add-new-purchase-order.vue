@@ -1,102 +1,104 @@
 <template>
-  <FormulateForm
-    class="login-form card block"
-    v-model="formValues"
-  >
+    <section class="card block">
 
-   <div class="block card">
-      <div class="card-header">
-        <h4 class="card-header-title is-4">Purchase Order Details</h4>
-        <span class="card-header-icon">
-          <b-icon icon="note-text-outline"></b-icon>
-        </span>
-      </div>
-    </div>
+         <!-- Policy Details -->
+        <div class="block card">
+        <div class="card-header">
+            <h4 class="card-header-title is-4">Purchase Order Details</h4>
+            <span class="card-header-icon">
+            <b-icon icon="note-text-outline"></b-icon>
+            </span>
+        </div>
+        </div>
 
-    <h2 class="form-title">Register</h2>
-    <p>
-      You can place any elements you want inside a form. The inputs themselves
-      can even be deeply nested.
-    </p>
-    <FormulateInput
-      name="name"
-      type="text"
-      label="Your name"
-      placeholder="Your name"
-      validation="required"
-    />
-    <FormulateInput
-      name="email"
-      type="email"
-      label="Email address"
-      placeholder="Email address"
-      validation="required|email"
-    />
-    <div class="double-wide">
-      <FormulateInput
-        name="password"
-        type="password"
-        label="Password"
-        placeholder="Your password"
-        validation="required"
-      />
-      <FormulateInput
-        name="password_confirm"
-        type="password"
-        label="Confirm your password"
-        placeholder="Confirm password"
-        validation="required|confirm"
-        validation-name="Confirmation"
-      />
-    </div>
-    <FormulateInput
-      type="submit"
-      label="Register"
-    />
-    <pre
-      class="code"
-      v-text="formValues"
-    />
-  </FormulateForm>
+        <div
+         :class="['block box']"
+         >
+
+        <div class="columns">
+            <div class="column is-one-third">
+                <b-field label="Purchase Order No.">
+                    <b-input v-model="purchaseOrderNumber"
+                    placeholder="    Purchase Order No."></b-input>
+                </b-field>
+            </div>
+
+             <div class="column is-one-third">
+                <b-field  label="Supplier Name" required="true">
+                    <b-input v-model="supplierName"
+                    placeholder="Enter supplier name here..."></b-input>
+                </b-field>
+            </div>
+
+
+            <div class="column is-one-third">
+
+        <b-field label="Supplier Email"
+        
+            >
+            <b-input type="email"
+                placeholder="supplier@example.co.zm"
+                maxlength="30">
+            </b-input>
+        </b-field>
+            </div>
+
+           
+
+           
+        </div>
+        
+        <div class="columns">
+
+             <div class="column is-one-third">
+
+             <b-field label="Issued Date">
+                <b-datepicker
+                    placeholder="<-- Click to select -->"
+                    :min-date="minDate"
+                    :max-date="maxDate">
+                </b-datepicker>
+            </b-field>
+                </div>
+
+
+            <div class="column is-third">
+                <b-field label="Created By"
+                   
+                    >
+                    <b-input placeholder="name..." maxlength="30"></b-input>
+                </b-field>
+            </div>
+
+            <div class="column is-third">
+                <b-field label="End Date">
+                    <b-input type="password"
+                        value="iwantmytreasure"
+                        password-reveal>
+                    </b-input>
+                </b-field>
+
+                
+            </div>
+        </div>
+
+        </div>
+
+
+        
+        
+    </section>
 </template>
 
 <script>
-export default {
-  data () {
-    return {
-      formValues: {}
+    export default {
+        data() {
+            const today = new Date()
+            return {
+                date: new Date(),
+                minDate: new Date(today.getFullYear() - 80, today.getMonth(), today.getDate()),
+                maxDate: new Date(today.getFullYear() + 18, today.getMonth(), today.getDate())
+            }
+        }
     }
-  }
-}
 </script>
-
-<style scoped>
-.login-form {
-  padding: 2em;
-  border: 1px solid #a8a8a8;
-  border-radius: .5em;
-  max-width: 500px;
-  box-sizing: border-box;
-}
-.form-title {
-  margin-top: 0;
-}
-.login-form::v-deep .formulate-input .formulate-input-element {
-  max-width: none;
-}
-@media (min-width: 420px) {
-  .double-wide {
-    display: flex;
-  }
-  .double-wide .formulate-input {
-    flex-grow: 1;
-    width: calc(50% - .5em);
-  }
-  .double-wide .formulate-input:first-child {
-    margin-right: .5em;
-  }
-  .double-wide .formulate-input:last-child {
-    margin-left: .5em;
-  }
-}
-</style>
