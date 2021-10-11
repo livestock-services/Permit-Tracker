@@ -1,53 +1,107 @@
 <template>
-  <section class="section">
-    <div class="columns is-mobile">
-      <card
-        title="Free"
-        icon="github"
-      >
-        Open source on <a href="https://github.com/buefy/buefy">
-          GitHub
-        </a>
-      </card>
+  <div class="container">
+    <div class="px-4 mt-6 columns">
+      <div class="column">
+        <h2 class="title is-size-2">Available Actions</h2>
+        <div class="box">
+          <b-field grouped group-multiline position="is-centered">
+            <b-button
+              v-for="({ name, icon, type, path }, index) in actions"
+              :key="index"
+              class="mx-2 my-4"
+              :type="type"
+              :icon-left="icon"
+              size="is-large"
+              @click="$router.push({ path })"
+              >{{ name  }}</b-button
+            >
+            <b-button
+              class="mx-2 my-4"
+              type="is-danger is-inverted"
+              icon-right="logout"
+              size="is-large"
+              @click="endSession"
+              >Log Out</b-button
+            >
+          </b-field>
+        </div>
 
-      <card
-        title="Responsive"
-        icon="cellphone-link"
-      >
-        <b class="has-text-grey">
-          Every
-        </b> component is responsive
-      </card>
+         <b-menu-list  type="is-success" size="is-medium">
+          <div class="welcome">
+            <h3>You are signed in as</h3>
+            <br />
+            <div class="names">
+              <!-- {{ this.$auth.user.email }} -->
+              
+              
+              
+             
+            </div>
+          </div>
+        </b-menu-list>
 
-      <card
-        title="Modern"
-        icon="alert-decagram"
-      >
-        Built with <a href="https://vuejs.org/">
-          Vue.js
-        </a> and <a href="http://bulma.io/">
-          Bulma
-        </a>
-      </card>
-
-      <card
-        title="Lightweight"
-        icon="arrange-bring-to-front"
-      >
-        No other internal dependency
-      </card>
+      </div>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
-import Card from '~/components/Card'
-
+// import {mapActions, mapGetters} from 'vuex'
 export default {
-  name: 'HomePage',
+  name: 'Dashboard',
 
-  components: {
-    Card
-  }
+  data() {
+    return {
+      actions: [
+        {
+          type: 'is-info  ',
+          icon: 'cash',
+          name: 'Manage Procurement',
+          path: '/policies/policies',
+        },
+
+         {
+          type: 'is-warning ',
+          icon: 'file-chart',
+          name: 'Manage Compliance',
+          path: '/reports/reports',
+        },
+
+        {
+          type: 'is-success ',
+          icon: 'finance',
+          name: 'Manage Finance',
+          path: '/clients/clients',
+        },
+        
+       
+
+        
+        
+      ],
+
+       isLoading: false,
+    }
+  },
+
+  computed: {
+    //  ...mapGetters('users', {
+    //   loading: 'loading',
+    //   Users: 'allUsers',
+   // }),
+  },
+
+  methods: {
+    //  ...mapActions('users', ['getAllUsers']),
+  },
+     
+
+   
 }
 </script>
+<style>
+.names{
+  color:cornflowerblue;
+  font-size: 1.2rem;
+}
+</style>
