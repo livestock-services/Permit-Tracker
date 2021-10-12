@@ -34,7 +34,7 @@
       <b-table-column
         v-slot="props"
         field="clientID"
-        label="Purchase Order No."
+        label="PFI No."
         sortable
       >
         {{ props.row.clientID }}
@@ -43,7 +43,7 @@
       <b-table-column
         v-slot="props"
         field="coverType"
-        label="Created By"
+        label="Sales Order No."
         sortable
       >
         {{ props.row.coverType }}
@@ -54,7 +54,7 @@
       <b-table-column
         v-slot="props"
         field="startDate"
-        label="Issued Date"
+        label="PFI Date Received from Procurement "
         sortable
       >
         {{ props.row.startDate }}
@@ -65,7 +65,7 @@
       <b-table-column
         v-slot="props"
         field="sumInsured"
-        label="Supplier"
+        label="Vet Office Permit"
         sortable
         
       >
@@ -76,7 +76,16 @@
       <b-table-column
         v-slot="props"
         field="proRata"
-        label="Supplier Email"
+        label="Purchase Order No."
+        sortable
+      >
+        {{ props.row.proRata }}
+      </b-table-column>
+
+       <b-table-column
+        v-slot="props"
+        field="proRata"
+        label="Date Sent to Compliance"
         sortable
       >
         {{ props.row.proRata }}
@@ -100,7 +109,7 @@
       </b-table-column>
 
       <template #empty>
-        <h4 class="is-size-4 has-text-centered">No Purchase Orders yet. &#x1F4DA;</h4>
+        <h4 class="is-size-4 has-text-centered">No Compliance Information yet. &#x1F4DC;</h4>
       </template>
     </b-table>
   </div>
