@@ -78,6 +78,26 @@
       </b-table-column>
 
       
+      <b-table-column
+        v-slot="props"
+        field="status"
+        label="Permit Status"
+        sortable
+        
+      >
+        <span
+          :class="[
+            'tag',
+            {
+              'is-success': props.row.status === 'Active',
+            },
+            {
+              'is-warning': props.row.status === 'Inactive',
+            },
+          ]"
+          >{{ props.row.status }}</span
+        >
+      </b-table-column>
 
 
       

@@ -23,6 +23,13 @@
                 </b-field>
             </div>
 
+            <div class="column is-one-third">
+                <b-field label="PFI No.">
+                    <b-input v-model="pfiNumber"
+                    placeholder="    PFI No."></b-input>
+                </b-field>
+            </div>
+
              <div class="column is-one-third">
                 <b-field  label="Supplier Name" required="true">
                     <b-input v-model="supplierName"
