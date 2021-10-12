@@ -43,12 +43,16 @@
         </b-field>
             </div>
 
+            
+
            
 
            
         </div>
         
-       
+       <div>
+                <upload></upload>
+            </div>
 
          <div class="buttons columns">
                 <div class="column is-one-third">
@@ -67,7 +71,9 @@
 </template>
 
 <script>
+import upload from '../upload/upload.vue'
     export default {
+  components: { upload },
         data() {
             const today = new Date()
             return {
