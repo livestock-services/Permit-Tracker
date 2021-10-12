@@ -22,7 +22,7 @@
              placeholder="example@gmail.com"
              type="email"
             maxlength="30"
-            icon-right="mail"
+            icon-right="mailbox"
            >
             </b-input>
          </b-field>

@@ -40,6 +40,10 @@
 
         </div>
 
+        <b-button type="is-info">
+            Submit
+        </b-button>
+
         
 
        

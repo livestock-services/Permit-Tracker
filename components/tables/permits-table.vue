@@ -54,7 +54,7 @@
       <b-table-column
         v-slot="props"
         field="startDate"
-        label="Issued Date "
+        label="Approved Date "
         sortable
       >
         {{ props.row.startDate }}
@@ -75,14 +75,35 @@
         {{ props.row.proRata }}
       </b-table-column>
 
-      
 
+     <b-table-column
+        v-slot="props"
+        field="status"
+        label="Permit Status"
+        sortable
+        
+      >
+        <span
+          :class="[
+            'tag',
+            {
+              'is-success': props.row.status === 'Active',
+            },
+            {
+              'is-warning': props.row.status === 'Inactive',
+            },
+          ]"
+          >{{ props.row.status }}</span
+        >
+      </b-table-column>
+
+     
 
       
 
       <b-table-column v-slot="props" label="Options">
         <span class="buttons">
-          <!-- <b-button type="is-secondary-outline" icon-left="eye">View</b-button> -->
+          <b-button type="is-secondary-outline" icon-left="eye">View</b-button> 
           <b-button
             type="is-secondary-outline"
             icon-left="cash-multiple"

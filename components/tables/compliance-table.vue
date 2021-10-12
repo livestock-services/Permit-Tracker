@@ -40,6 +40,15 @@
         {{ props.row.clientID }}
       </b-table-column>
 
+      <b-table-column
+        v-slot="props"
+        field="clientID"
+        label="Purchase Order No."
+        sortable
+      >
+        {{ props.row.clientID }}
+      </b-table-column>
+
       
       
       
@@ -55,23 +64,14 @@
 
      
 
-      <b-table-column
-        v-slot="props"
-        field="sumInsured"
-        label="Vet Office Permit"
-        sortable
-        
-      >
-       {{ currencyValue(props.row, 'sumInsured') }}
-        <!-- {{ props.row.sumInsured }} -->
-      </b-table-column>
+      
 
       
 
        <b-table-column
         v-slot="props"
         field="proRata"
-        label="Date Sent to Compliance"
+        label="Date Sent to Admin"
         sortable
       >
         {{ props.row.proRata }}
