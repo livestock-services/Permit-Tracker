@@ -40,14 +40,21 @@
         {{ props.row.clientID }}
       </b-table-column>
 
-      
+      <b-table-column
+        v-slot="props"
+        field="coverType"
+        label="Permit No."
+        sortable
+      >
+        {{ props.row.coverType }}
+      </b-table-column>
       
       
 
       <b-table-column
         v-slot="props"
         field="startDate"
-        label="PFI Date Received from Procurement "
+        label="Issued Date "
         sortable
       >
         {{ props.row.startDate }}
@@ -55,23 +62,14 @@
 
      
 
-      <b-table-column
-        v-slot="props"
-        field="sumInsured"
-        label="Vet Office Permit"
-        sortable
-        
-      >
-       {{ currencyValue(props.row, 'sumInsured') }}
-        <!-- {{ props.row.sumInsured }} -->
-      </b-table-column>
+      
 
       
 
        <b-table-column
         v-slot="props"
         field="proRata"
-        label="Date Sent to Compliance"
+        label="Authorization Body"
         sortable
       >
         {{ props.row.proRata }}
@@ -95,7 +93,7 @@
       </b-table-column>
 
       <template #empty>
-        <h4 class="is-size-4 has-text-centered">No Compliance Information yet. &#x1F4DC;</h4>
+        <h4 class="is-size-4 has-text-centered">No Permits yet. &#x1F4DB;</h4>
       </template>
     </b-table>
   </div>

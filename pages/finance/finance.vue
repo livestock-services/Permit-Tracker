@@ -1,7 +1,7 @@
 <template>
   <div class="finance">
    
-    <b-tabs type="is-toggle" expanded>
+    <b-tabs vertical position="is-left" type="is-toggle" expanded>
          <b-tab-item label="Add Finance Information" icon="plus is-inverted">
            
         </b-tab-item>

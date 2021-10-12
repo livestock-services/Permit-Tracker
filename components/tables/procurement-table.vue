@@ -31,7 +31,8 @@
       aria-page-label="Page"
       aria-current-label="Current Page"
     >
-      <b-table-column
+      
+       <b-table-column
         v-slot="props"
         field="clientID"
         label="PFI No."
@@ -40,14 +41,22 @@
         {{ props.row.clientID }}
       </b-table-column>
 
-      
+
+      <b-table-column
+        v-slot="props"
+        field="coverType"
+        label="Created By"
+        sortable
+      >
+        {{ props.row.coverType }}
+      </b-table-column>
       
       
 
       <b-table-column
         v-slot="props"
         field="startDate"
-        label="PFI Date Received from Procurement "
+        label="Issued Date"
         sortable
       >
         {{ props.row.startDate }}
@@ -58,7 +67,7 @@
       <b-table-column
         v-slot="props"
         field="sumInsured"
-        label="Vet Office Permit"
+        label="Supplier"
         sortable
         
       >
@@ -66,12 +75,19 @@
         <!-- {{ props.row.sumInsured }} -->
       </b-table-column>
 
-      
-
-       <b-table-column
+      <b-table-column
         v-slot="props"
         field="proRata"
-        label="Date Sent to Compliance"
+        label="Supplier Email"
+        sortable
+      >
+        {{ props.row.proRata }}
+      </b-table-column>
+
+      <b-table-column
+        v-slot="props"
+        field="proRata"
+        label="Status"
         sortable
       >
         {{ props.row.proRata }}
@@ -95,7 +111,7 @@
       </b-table-column>
 
       <template #empty>
-        <h4 class="is-size-4 has-text-centered">No Compliance Information yet. &#x1F4DC;</h4>
+        <h4 class="is-size-4 has-text-centered">No Purchase Orders yet. &#x1F4DA;</h4>
       </template>
     </b-table>
   </div>

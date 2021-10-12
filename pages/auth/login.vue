@@ -184,7 +184,7 @@ export default {
 }
 
 .form-card-2 {
-  height: 57vh;
+  height: 65vh;
   grid-row: 2/3;
   grid-column: 3/3;
   background: url('../../assets/images/LSC.jpg');
@@ -194,9 +194,9 @@ export default {
 
 .box{
     background-color: rgb(35, 87, 134);
-    padding-top: 5rem;
+    padding-top: 3rem;
     padding-bottom: 18rem;
-    padding-left: 20rem;
-    padding-right: 20rem;
+    padding-left: 12rem;
+    padding-right: 12rem;
 }
 </style>
