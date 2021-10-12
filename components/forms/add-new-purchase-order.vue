@@ -16,21 +16,21 @@
          >
 
         <div class="columns">
-            <div class="column is-one-third">
+            <div class="column is-one-quarter">
                 <b-field label="Purchase Order No.">
                     <b-input v-model="purchaseOrderNumber"
                     placeholder="    Purchase Order No."></b-input>
                 </b-field>
             </div>
 
-            <div class="column is-one-third">
+            <div class="column is-one-quarter">
                 <b-field label="PFI No.">
                     <b-input v-model="pfiNumber"
                     placeholder="    PFI No."></b-input>
                 </b-field>
             </div>
 
-             <div class="column is-one-third">
+             <div class="column is-one-quarter">
                 <b-field  label="Supplier Name" required="true">
                     <b-input v-model="supplierName"
                     placeholder="Enter supplier name here..."></b-input>
@@ -38,7 +38,7 @@
             </div>
 
 
-            <div class="column is-one-third">
+            <div class="column is-one-quarter">
 
         <b-field label="Supplier Email"
         

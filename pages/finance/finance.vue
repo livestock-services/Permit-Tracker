@@ -2,9 +2,6 @@
   <div class="finance">
    
     <b-tabs vertical position="is-left" type="is-toggle" expanded>
-         <b-tab-item label="Add Finance Information" icon="plus is-inverted">
-           
-        </b-tab-item>
 
         <b-tab-item label="View Finance Information" icon="finance">
             <finance-table></finance-table>

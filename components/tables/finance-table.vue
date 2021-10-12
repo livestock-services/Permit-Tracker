@@ -43,7 +43,7 @@
       <b-table-column
         v-slot="props"
         field="coverType"
-        label="Sales Order No."
+        label="Permit No."
         sortable
       >
         {{ props.row.coverType }}
@@ -54,7 +54,7 @@
       <b-table-column
         v-slot="props"
         field="startDate"
-        label="PFI Date Received from Procurement "
+        label="PFI Date Received from Compliance "
         sortable
       >
         {{ props.row.startDate }}
@@ -65,7 +65,7 @@
       <b-table-column
         v-slot="props"
         field="sumInsured"
-        label="Vet Office Permit"
+        label="Payment Status"
         sortable
         
       >
@@ -73,28 +73,7 @@
         <!-- {{ props.row.sumInsured }} -->
       </b-table-column>
 
-      <b-table-column
-        v-slot="props"
-        field="proRata"
-        label="Purchase Order No."
-        sortable
-      >
-        {{ props.row.proRata }}
-      </b-table-column>
 
-       <b-table-column
-        v-slot="props"
-        field="proRata"
-        label="Date Sent to Compliance"
-        sortable
-      >
-        {{ props.row.proRata }}
-      </b-table-column>
-
-      
-
-
-      
 
       <b-table-column v-slot="props" label="Options">
         <span class="buttons">
