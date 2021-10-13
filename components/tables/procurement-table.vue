@@ -34,63 +34,63 @@
       
        <b-table-column
         v-slot="props"
-        field="clientID"
+        field="pfiNumber"
         label="PFI No."
         sortable
       >
-        {{ props.row.clientID }}
+        {{ props.row.pfiNumber }}
       </b-table-column>
 
 
       <b-table-column
         v-slot="props"
-        field="coverType"
+        field="user"
         label="Created By"
         sortable
       >
-        {{ props.row.coverType }}
+        {{ props.row.user }}
       </b-table-column>
       
       
 
       <b-table-column
         v-slot="props"
-        field="startDate"
+        field="date"
         label="Issued Date"
         sortable
       >
-        {{ props.row.startDate }}
+        {{ props.row.date }}
       </b-table-column>
 
      
 
       <b-table-column
         v-slot="props"
-        field="sumInsured"
+        field="supplierName"
         label="Supplier"
         sortable
         
       >
-       {{ currencyValue(props.row, 'sumInsured') }}
+       {{ currencyValue(props.row.supplierName) }}
         <!-- {{ props.row.sumInsured }} -->
       </b-table-column>
 
       <b-table-column
         v-slot="props"
-        field="proRata"
+        field="supplierEmail"
         label="Supplier Email"
         sortable
       >
-        {{ props.row.proRata }}
+        {{ props.row.supplierEmail }}
       </b-table-column>
 
       <b-table-column
         v-slot="props"
-        field="proRata"
+        field="status"
         label="Status"
         sortable
       >
-        {{ props.row.proRata }}
+        {{ props.row.status }}
       </b-table-column>
 
       
@@ -111,7 +111,7 @@
       </b-table-column>
 
       <template #empty>
-        <h4 class="is-size-4 has-text-centered">No Purchase Orders yet. &#x1F4DA;</h4>
+        <h4 class="is-size-4 has-text-centered">No PFIs yet. &#x1F4DA;</h4>
       </template>
     </b-table>
   </div>
@@ -124,10 +124,15 @@
 import { mapActions, mapGetters } from 'vuex'
 //import PayDebitModal from '@/components/modals/pay-debit-modal'
 export default {
-  name: 'UnreceiptedDebitsTable',
+  name: 'ProcurementTable',
 
   data() {
+    
+      const current = new Date();
+      const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+     
     return {
+      date,
       isPaginated: true,
       currentPage: 1,
       perPage: 10,
@@ -161,6 +166,8 @@ export default {
    
 
     ...mapActions('policies', ['getAllPolicies','load', 'selectPolicy' ]),
+
+    
 
         currencyValue(policy, field) {
       switch (policy.currency) {

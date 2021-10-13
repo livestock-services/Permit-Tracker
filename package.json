@@ -14,7 +14,8 @@
     "core-js": "^3.15.1",
     "nuxt": "^2.15.7",
     "nuxt-buefy": "^0.4.8",
-    "vue-formulate-extended": "^1.1.1"
+    "vue-formulate-extended": "^1.1.1",
+    "vuex-map-fields": "^1.4.1"
   },
   "devDependencies": {}
 }

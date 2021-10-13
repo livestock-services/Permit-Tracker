@@ -11,6 +11,9 @@
         </div>
         </div>
 
+        <b-form
+        enctype="multipart/form-data" 
+        v-model="purchaseForm">
         <div
          :class="['block box']"
          >
@@ -18,21 +21,27 @@
         <div class="columns">
             <div class="column is-one-quarter">
                 <b-field label="Purchase Order No.">
-                    <b-input v-model="purchaseOrderNumber"
+                    <b-input 
+                    v-model="purchaseOrderNumber"
+                    type="number"
                     placeholder="    Purchase Order No."></b-input>
                 </b-field>
             </div>
 
             <div class="column is-one-quarter">
                 <b-field label="PFI No.">
-                    <b-input v-model="pfiNumber"
+                    <b-input
+                    v-model="pfiNumber"
+                    type="number"
                     placeholder="    PFI No."></b-input>
                 </b-field>
             </div>
 
              <div class="column is-one-quarter">
-                <b-field  label="Supplier Name" required="true">
-                    <b-input v-model="supplierName"
+                <b-field  label="Supplier Name" required="true"> 
+                    <b-input
+                    v-model="supplierName"
+                    type="text"
                     placeholder="Enter supplier name here..."></b-input>
                 </b-field>
             </div>
@@ -40,38 +49,34 @@
 
             <div class="column is-one-quarter">
 
-        <b-field label="Supplier Email"
-        
-            >
-            <b-input type="email"
+        <b-field label="Supplier Email" >
+            <b-input 
+                type="email"
+                v-model="supplierEmail"
                 placeholder="supplier@example.co.zm"
-                maxlength="30">
+                maxlength="50">
             </b-input>
         </b-field>
             </div>
-
-            
-
-           
-
-           
+    
         </div>
         
-       <div>
+            <div>
                 <upload></upload>
             </div>
 
          <div class="buttons columns">
                 <div class="column is-one-third">
-                    <b-button type="is-info" expanded>
+                    <b-button @click="onSubmit" type="is-info" expanded>
                         Submit
                     </b-button>
-                </div>
-            </div>
+        </div>
+        
+        </div>
 
         </div>
 
-
+        </b-form>
         
         
     </section>
@@ -88,6 +93,21 @@ import upload from '../upload/upload.vue'
                 minDate: new Date(today.getFullYear() - 80, today.getMonth(), today.getDate()),
                 maxDate: new Date(today.getFullYear() + 18, today.getMonth(), today.getDate())
             }
+        },
+        computed:{},
+
+        methods:{
+             async onSubmit() {
+     // this.$emit('submit', this.modal)
+     // await this.createIndividualClient()
+      this.$buefy.toast.open({
+        message: 'PFI Added Successfully!',
+        duration: 2000,
+        position: 'is-top',
+        type: 'is-success',
+      })
+     // this.$parent.close()
+    },
         }
     }
 </script>

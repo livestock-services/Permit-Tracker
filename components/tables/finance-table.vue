@@ -88,7 +88,7 @@
       </b-table-column>
 
       <template #empty>
-        <h4 class="is-size-4 has-text-centered">No Finance Information yet. &#x1F4DD;</h4>
+        <h4 class="is-size-4 has-text-centered">No Finance Information yet. &#x1F4CC;</h4>
       </template>
     </b-table>
   </div>
