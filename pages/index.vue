@@ -55,14 +55,14 @@ export default {
       actions: [
         {
           type: 'is-info  ',
-          icon: 'cash',
+          icon: 'cash-check',
           name: 'Manage Procurement',
           path: '/procurement/procurement',
         },
 
          {
           type: 'is-warning ',
-          icon: 'file-chart',
+          icon: 'file-star',
           name: 'Manage Compliance',
           path: '/compliance/compliance',
         },

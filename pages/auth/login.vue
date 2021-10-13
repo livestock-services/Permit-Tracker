@@ -175,7 +175,7 @@ export default {
   grid-row: 2/3;
   grid-column: 1/3;
   width: 100%;
-  background-color: rgba(247, 230, 216, 0.863);
+  background-color: rgba(240, 226, 217, 0.863);
 }
 
 .card-content {
