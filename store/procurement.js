@@ -6,6 +6,7 @@ import { ADD_PFI,SET_PFI, SET_LOADING } from '@/helpers/mutation-types'
 export const state = () => ({
     loading: false,
     all:[],
+    
     purchaseForm:{
         purchaseOrderNumber:null,
         pfiNumber:null,
@@ -21,6 +22,10 @@ export const getters = {
         return state.loading
     },
 
+    allPfis(state){
+        return state.all
+    }
+
 }
 
 export const mutations = {
@@ -29,7 +34,16 @@ export const mutations = {
     [SET_LOADING](state, loading) {
         state.loading = loading
     },
+    [SET_PFI](state, payload) {
+        state.all = payload
+    },
+
+    [ADD_PFI](state, payload){
+        state.pfis.push(payload)
+    }
 }
 
-export const actions = {}
+export const actions = {
+
+}
 
