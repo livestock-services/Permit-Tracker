@@ -4,12 +4,14 @@
             <b-upload v-model="dropFiles"
                 multiple
                 drag-drop>
+                
                 <section class="section">
                     <div class="content has-text-centered">
                         <p>
                             <b-icon
                                 icon="upload"
-                                size="is-large">
+                                size="is-large"
+                                type="is-dark">
                             </b-icon>
                         </p>
                         <p>Upload PFI document here</p>

@@ -12,8 +12,7 @@
         </div>
 
         <b-form
-        enctype="multipart/form-data" 
-        v-model="purchaseForm">
+        v-model="form">
         <div
          :class="['block box']"
          >
@@ -39,10 +38,14 @@
 
              <div class="column is-one-quarter">
                 <b-field  label="Supplier Name" required="true"> 
-                    <b-input
-                    v-model="supplierName"
-                    type="text"
-                    placeholder="Enter supplier name here..."></b-input>
+                    <b-select
+                     v-model="supplierName"
+                     
+                    placeholder="Enter supplier name here..." 
+                    :options="supplier.supplierName">
+                    
+                    
+                   ></b-select>
                 </b-field>
             </div>
 
@@ -58,12 +61,36 @@
             </b-input>
         </b-field>
             </div>
+
+            
+
+            
     
         </div>
         
-            <div>
-                <upload></upload>
+        <div class="columns">
+                <b-field expanded :type="receiptTypeState">
+              <template v-slot:label>
+                Invoice Type <span class="has-text-danger">*</span>
+              </template>
+              <b-select
+                v-model="supplierName"
+                placeholder="-- Please select a receipt type --"
+              >
+                <option
+                  v-for="(supplierName, index) in supplier"
+                  :key="index"
+                  :value="supplierName"
+                >
+                <li>
+                    {{ supplierName }}
+                </li>
+                  
+                </option>
+              </b-select>
+            </b-field>
             </div>
+          
 
          <div class="buttons columns">
                 <div class="column is-one-third">
@@ -83,29 +110,69 @@
 </template>
 
 <script>
-import upload from '../upload/upload.vue'
+
+import { mapFields } from 'vuex-map-fields'
+import { mapActions, mapGetters } from 'vuex'
+import { DateTime } from 'luxon'
+import cloneDeep from 'lodash/cloneDeep'
+
     export default {
-  components: { upload },
+        name: "purchaseOrder",
+        
         data() {
             const today = new Date()
+            
             return {
+                
                 date: new Date(),
                 minDate: new Date(today.getFullYear() - 80, today.getMonth(), today.getDate()),
                 maxDate: new Date(today.getFullYear() + 18, today.getMonth(), today.getDate())
             }
         },
-        computed:{},
+        
+         computed: {
+
+    ...mapGetters('procurement',{
+        supplier:'individualOptions'}),
+
+
+    ...mapFields('procurement', [
+      'form',
+      'form.purchaseOrderNumber',
+      'form.pfiNumber',
+      'form.supplierName',
+      'form.supplierEmail'
+      
+    ]),
+        },
 
         methods:{
+    
+    ...mapActions('procurement', ['addNewPfi']),
+
+
              async onSubmit() {
-     // this.$emit('submit', this.modal)
-     // await this.createIndividualClient()
-      this.$buefy.toast.open({
-        message: 'PFI Added Successfully!',
-        duration: 2000,
-        position: 'is-top',
-        type: 'is-success',
-      })
+                    try {
+                    await this.addNewPfi(); 
+                    
+                    this.$buefy.toast.open({
+                        message: 'PFI Added Successfully!',
+                        duration: 2000,
+                        position: 'is-top',
+                        type: 'is-success',
+                    })
+
+                    } catch (error) {
+                   
+                    
+                    this.$buefy.toast.open({
+                        message: 'Please Verify Your Details!',
+                        duration: 2000,
+                        position: 'is-top',
+                        type: 'is-danger',
+                    })
+                    }
+           
      // this.$parent.close()
     },
         }
