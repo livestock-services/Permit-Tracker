@@ -20,6 +20,9 @@
         <div class="columns">
             <div class="column is-one-quarter">
                 <b-field label="Purchase Order No.">
+                     <template v-slot:label>
+                        Purchase Order No. <span class="has-text-danger">*</span>
+                    </template>
                     <b-input 
                     v-model="purchaseOrderNumber"
                     type="number"
@@ -29,6 +32,9 @@
 
             <div class="column is-one-quarter">
                 <b-field label="PFI No.">
+                    <template v-slot:label>
+                        PFI No. <span class="has-text-danger">*</span>
+                    </template>
                     <b-input
                     v-model="pfiNumber"
                     type="number"
@@ -37,22 +43,46 @@
             </div>
 
              <div class="column is-one-quarter">
-                <b-field  label="Supplier Name" required="true"> 
-                    <b-select
-                     v-model="supplierName"
-                     
-                    placeholder="Enter supplier name here..." 
-                    :options="supplier.supplierName">
-                    
-                    
-                   ></b-select>
+                  <b-field label="Supplier Name.">
+                    <template v-slot:label>
+                        Supplier Name <span class="has-text-danger">*</span>
+                    </template>
+                    <b-input
+                    v-model="supplierName"
+                    type="text"
+                    placeholder=" Supplier Name"></b-input>
                 </b-field>
-            </div>
+             </div>
+
+               <!-- <b-field expanded :type="select">
+              <template v-slot:label>
+                Supplier Name <span class="has-text-danger">*</span>
+              </template>
+              <b-select
+                v-model="supplierName"
+                placeholder="-- Please select a Supplier --"
+              >
+                <option
+                  v-for="(supplierName, index) in supplier"
+                  :key="index"
+                  :value="supplierName"
+                >
+                <li>
+                    {{ supplierName }}
+                </li>
+                  
+                </option>
+              </b-select>
+            </b-field> -->
+            
 
 
             <div class="column is-one-quarter">
 
         <b-field label="Supplier Email" >
+             <template v-slot:label>
+                        Supplier Email <span class="has-text-danger">*</span>
+             </template>
             <b-input 
                 type="email"
                 v-model="supplierEmail"
@@ -68,28 +98,7 @@
     
         </div>
         
-        <div class="columns">
-                <b-field expanded :type="receiptTypeState">
-              <template v-slot:label>
-                Invoice Type <span class="has-text-danger">*</span>
-              </template>
-              <b-select
-                v-model="supplierName"
-                placeholder="-- Please select a receipt type --"
-              >
-                <option
-                  v-for="(supplierName, index) in supplier"
-                  :key="index"
-                  :value="supplierName"
-                >
-                <li>
-                    {{ supplierName }}
-                </li>
-                  
-                </option>
-              </b-select>
-            </b-field>
-            </div>
+       
           
 
          <div class="buttons columns">
@@ -117,7 +126,7 @@ import { DateTime } from 'luxon'
 import cloneDeep from 'lodash/cloneDeep'
 
     export default {
-        name: "purchaseOrder",
+        name: "Purchase Order",
         
         data() {
             const today = new Date()
@@ -131,10 +140,6 @@ import cloneDeep from 'lodash/cloneDeep'
         },
         
          computed: {
-
-    ...mapGetters('procurement',{
-        supplier:'individualOptions'}),
-
 
     ...mapFields('procurement', [
       'form',

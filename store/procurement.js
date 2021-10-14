@@ -19,12 +19,7 @@ export const state = () => ({
         supplierEmail:null
     },
 
-    individualOptions: {
-       
-        supplierNames:['Bayer Group', 'Virbac', 'Voemir', 'Zoer'],
-        
-        
-    },
+    
 })
 
 export const getters = {
@@ -38,9 +33,7 @@ export const getters = {
         return state.all
     },
 
-    individualOptions(state) {
-        return state.individualOptions
-    },
+   
 
 }
 
