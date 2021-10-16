@@ -133,7 +133,7 @@ import cloneDeep from 'lodash/cloneDeep'
             
             return {
                 
-                date: new Date(),
+                date: today.toDateString,
                 minDate: new Date(today.getFullYear() - 80, today.getMonth(), today.getDate()),
                 maxDate: new Date(today.getFullYear() + 18, today.getMonth(), today.getDate())
             }
@@ -158,6 +158,7 @@ import cloneDeep from 'lodash/cloneDeep'
 
              async onSubmit() {
                     try {
+                        
                     await this.addNewPfi(); 
                     
                     this.$buefy.toast.open({
@@ -178,7 +179,7 @@ import cloneDeep from 'lodash/cloneDeep'
                     })
                     }
            
-     // this.$parent.close()
+     
     },
         }
     }

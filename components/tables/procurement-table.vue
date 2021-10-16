@@ -62,7 +62,14 @@
         {{ props.row.date }}
       </b-table-column>
 
-     
+      <b-table-column
+       
+        field="date"
+        label="Issued Date"
+        sortable
+      >
+        {{ today }}
+      </b-table-column>
 
       <b-table-column
         v-slot="props"
@@ -105,10 +112,10 @@ export default {
   name: 'UnreceiptedDebitsTable',
 
   data() {  
-    
+    const today= new Date();
     
     return {
-      
+      today: new Date(today.getFullYear(), today.getMonth(), today.getDate(), today.getHours(), today.getMinutes(), today.getSeconds()),
       isPaginated: true,
       currentPage: 1,
       perPage: 10,

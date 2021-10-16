@@ -8,10 +8,6 @@ import { ADD_PFI,
          SET_LOADING 
         } from '@/helpers/mutation-types'
 
-        let d = new Date();
-
-      let  issuedDate = d.toDateString;
-
 export const state = () => ({
     loading: false,
     all:[],
@@ -21,7 +17,7 @@ export const state = () => ({
         pfiNumber:null,
         supplierName:null,
         supplierEmail:null,
-        issuedDate
+        
     },
 
     
@@ -89,12 +85,19 @@ export const actions = {
            
             //API REQUEST IS MADE AND RESULT IS STORED IN CONST
            const {data: allPfis} = await api.get(`/pfis/AllPfis`)
+
            
-           console.log(allPfis.data);
+            const nd = allPfis.data[0].date;
+
+            console.log(nd.toString());
+        
+            
+          
+           
             
            let d = new Date();
-
-           console.log(d.toString());
+           // c = Date(d.getFullYear(), d.getMonth(), d.getDate(),d.getHours(), d.getMinutes(), d.getSeconds())
+           console.log(d);
 
           
 
