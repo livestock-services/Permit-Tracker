@@ -8,6 +8,10 @@ import { ADD_PFI,
          SET_LOADING 
         } from '@/helpers/mutation-types'
 
+        let d = new Date();
+
+      let  issuedDate = d.toDateString;
+
 export const state = () => ({
     loading: false,
     all:[],
@@ -16,7 +20,8 @@ export const state = () => ({
         purchaseOrderNumber:null,
         pfiNumber:null,
         supplierName:null,
-        supplierEmail:null
+        supplierEmail:null,
+        issuedDate
     },
 
     
@@ -81,14 +86,25 @@ export const actions = {
             //ENABLE LOADING FEATURE WHILE API REQUEST IS BEING MADE
             commit(SET_LOADING, true)
 
+           
             //API REQUEST IS MADE AND RESULT IS STORED IN CONST
-           const allPfis = await api.get(`/pfis/AllPfis`)
+           const {data: allPfis} = await api.get(`/pfis/AllPfis`)
            
            console.log(allPfis.data);
+            
+           let d = new Date();
+
+           console.log(d.toString());
+
+          
+
+           console.log(allPfis);
+
 
            //RETRIEVED DATA IS COMMITTED TO THE MUTATION TO MAKE THE CHANGES EFFECTIVE
            commit(GET_ALL_PFIS, allPfis.data);
-
+            
+           
            //AFTER ALL ACTIONS HAVE BEEN PERFORMED, LOADING IS SET TO FALSE AND RESULTS ARE DISPLAYED
            commit(SET_LOADING, false);
 
@@ -103,12 +119,8 @@ export const actions = {
         try {
             commit(SET_LOADING, true);
 
-            const newPfi = cloneDeep(state.form);
-            newPfi.createdBy = this.$auth.user.toString()
-            newPfi.authorisedBy = this.$auth.user.toString()
-            newPfi.issuedDate = new Date();
-          
-            date = `${issuedDate.getDate()}/${issuedDate.getMonth()+1}/${issuedDate.getFullYear()}`;
+            const newPfi = state.form;
+           
            
             const response = await api.post(`/pfis/addNewPfi`, newPfi);
 
@@ -120,7 +132,7 @@ export const actions = {
 
         } catch (error) {
             commit(SET_LOADING, false);
-            this.$log.error(error.message);
+            this.log.error(error.message);
         }
     }
 }

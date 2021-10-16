@@ -1,4 +1,16 @@
 export default {
+  server: {
+    port: process.env.PORT || 3000,
+    host: process.env.HOST || 'localhost',
+  },
+
+  publicRuntimeConfig: {
+    baseURL: process.env.BASE_URL || 'http://localhost:3000',
+  },
+
+  // target: 'static',
+  target: 'server',
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'lsc-permit-tracker',
@@ -41,8 +53,27 @@ export default {
     '@nuxtjs/axios',
   ],
 
+   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
+   proxy: {
+    '/api/': {
+      target: process.env.NUXT_ENV_NEW_API_URL,
+      pathRewrite: { '^/api/': '' },
+    },
+  },
+
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    proxy: true,
+    // https: true,
+    baseURL: process.env.NUXT_ENV_NEW_API_URL,
+  },
+
+  pwa: {
+    manifest: {
+      lang: 'en'
+    }
+  },
+
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

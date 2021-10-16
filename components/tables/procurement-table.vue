@@ -25,7 +25,7 @@
       :pagination-position="paginationPosition"
       :default-sort-direction="defaultSortDirection"
       mobile-cards
-      default-sort="policyNumber"
+      default-sort="pfiNumber"
       aria-next-label="Next Page"
       aria-previous-label="Previous Page"
       aria-page-label="Page"
@@ -44,11 +44,11 @@
 
       <b-table-column
         v-slot="props"
-        field="user"
-        label="Created By"
+        field="purchaseOrderNumber"
+        label="Purchase Order Number"
         sortable
       >
-        {{ props.row.user }}
+        {{ props.row.purchaseOrderNumber }}
       </b-table-column>
       
       
@@ -71,7 +71,8 @@
         sortable
         
       >
-       {{ currencyValue(props.row.supplierName) }}
+       {{ props.row.supplierName }}
+       
         <!-- {{ props.row.sumInsured }} -->
       </b-table-column>
 
@@ -84,31 +85,8 @@
         {{ props.row.supplierEmail }}
       </b-table-column>
 
-      <b-table-column
-        v-slot="props"
-        field="status"
-        label="Status"
-        sortable
-      >
-        {{ props.row.status }}
-      </b-table-column>
-
-      
-
-
-      
-
-      <b-table-column v-slot="props" label="Options">
-        <span class="buttons">
-          <!-- <b-button type="is-secondary-outline" icon-left="eye">View</b-button> -->
-          <b-button
-            type="is-secondary-outline"
-            icon-left="cash-multiple"
-            @click="captureInvoice(props.row)"
-            >Capture Invoice</b-button
-          >
-        </span>
-      </b-table-column>
+    
+    
 
       <template #empty>
         <h4 class="is-size-4 has-text-centered">No PFIs yet. &#x1F4DA;</h4>
@@ -124,15 +102,13 @@
 import { mapActions, mapGetters } from 'vuex'
 //import PayDebitModal from '@/components/modals/pay-debit-modal'
 export default {
-  name: 'ProcurementTable',
+  name: 'UnreceiptedDebitsTable',
 
-  data() {
+  data() {  
     
-      const current = new Date();
-      const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
-     
+    
     return {
-      date,
+      
       isPaginated: true,
       currentPage: 1,
       perPage: 10,
@@ -143,20 +119,27 @@ export default {
       sortIconSize: 'is-small',
     }
   },
+
+
   computed: {
     
-   
+   ...mapGetters('procurement', {
+      loading: 'loading',
+      pfis: 'allPfis',
+    }),
     
     isEmpty() {
-      return 'empty'
+     return this.pfis.length === 0
     },
+
+    
 
     isNames() {
       return this.names
     },
     
     tableData() {
-      return this.isEmpty ? [] : this.policies
+      return this.isEmpty ? [] : this.pfis
     },
   },
 
@@ -165,26 +148,22 @@ export default {
   methods: {
    
 
-    ...mapActions('policies', ['getAllPolicies','load', 'selectPolicy' ]),
+    ...mapActions('procurement', ['getAllPfis','load' ]),
 
-    
+    formatDate({ date }){
+       var json = date;
 
-        currencyValue(policy, field) {
-      switch (policy.currency) {
-        case 'USD':
-          return this.$options.filters.currency_usd(policy[field])
+            var dateStr = JSON.parse(json);  
+            console.log(dateStr); // 2014-01-01T23:28:56.782Z
+                    
+            var date = new Date(dateStr);
+            console.log(date); 
 
-        default:
-          return this.$options.filters.currency(policy[field])
-      }
     },
 
-    restrictDecimal() {
-      this.totalPremium = this.totalPremium.match(/^\d+\.?\d{0,2}/)
-    },
 
     async load(){
-      await this.getAllPolicies();
+      await this.getAllPfis();
     },
 
 
