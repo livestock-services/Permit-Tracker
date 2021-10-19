@@ -17,10 +17,10 @@
 
         <b-tab-item label="Permits" icon="book-open-page-variant">
           <b-tabs vertical position="is-left" type="is-toggle" expanded>
-            <b-tab-item label="Add Permit" icon="plus-box-multiple">
+            <b-tab-item label="Add Permit Application" icon="plus-box-multiple">
               <add-permit></add-permit>
             </b-tab-item>
-            <b-tab-item label="View Permits" icon="eye-check-outline">
+            <b-tab-item label="View Permit Applications" icon="eye-check-outline">
               <permits-table></permits-table>
             </b-tab-item>
            

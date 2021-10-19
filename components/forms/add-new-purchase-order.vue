@@ -18,6 +18,37 @@
          >
 
         <div class="columns">
+
+            
+             <div class="column is-one-quarter">
+                  <b-field label="Supplier Name.">
+                    <template v-slot:label>
+                        Supplier Name <span class="has-text-danger">*</span>
+                    </template>
+                    <b-input
+                    v-model="supplierName"
+                    type="text"
+                    placeholder=" Supplier Name"></b-input>
+                </b-field>
+             </div>
+            
+
+
+            <div class="column is-one-quarter">
+
+                <b-field label="Supplier Email" >
+                    <template v-slot:label>
+                                Supplier Email <span class="has-text-danger">*</span>
+                    </template>
+                    <b-input 
+                        type="email"
+                        v-model="supplierEmail"
+                        placeholder="supplier@example.co.zm"
+                        maxlength="50">
+                    </b-input>
+                </b-field>
+            </div>
+
             <div class="column is-one-quarter">
                 <b-field label="Purchase Order No.">
                      <template v-slot:label>
@@ -42,55 +73,6 @@
                 </b-field>
             </div>
 
-             <div class="column is-one-quarter">
-                  <b-field label="Supplier Name.">
-                    <template v-slot:label>
-                        Supplier Name <span class="has-text-danger">*</span>
-                    </template>
-                    <b-input
-                    v-model="supplierName"
-                    type="text"
-                    placeholder=" Supplier Name"></b-input>
-                </b-field>
-             </div>
-
-               <!-- <b-field expanded :type="select">
-              <template v-slot:label>
-                Supplier Name <span class="has-text-danger">*</span>
-              </template>
-              <b-select
-                v-model="supplierName"
-                placeholder="-- Please select a Supplier --"
-              >
-                <option
-                  v-for="(supplierName, index) in supplier"
-                  :key="index"
-                  :value="supplierName"
-                >
-                <li>
-                    {{ supplierName }}
-                </li>
-                  
-                </option>
-              </b-select>
-            </b-field> -->
-            
-
-
-            <div class="column is-one-quarter">
-
-        <b-field label="Supplier Email" >
-             <template v-slot:label>
-                        Supplier Email <span class="has-text-danger">*</span>
-             </template>
-            <b-input 
-                type="email"
-                v-model="supplierEmail"
-                placeholder="supplier@example.co.zm"
-                maxlength="50">
-            </b-input>
-        </b-field>
-            </div>
 
             
 

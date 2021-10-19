@@ -49,7 +49,15 @@
         {{ props.row.coverType }}
       </b-table-column>
       
-      
+      <b-table-column
+        v-slot="props"
+        field="applicationDate"
+        label="Application Date "
+        sortable
+      >
+        {{ props.row.startDate }}
+      </b-table-column>
+
 
       <b-table-column
         v-slot="props"
@@ -99,19 +107,6 @@
 
      
 
-      
-
-      <b-table-column v-slot="props" label="Options">
-        <span class="buttons">
-          <b-button type="is-secondary-outline" icon-left="eye">View</b-button> 
-          <b-button
-            type="is-secondary-outline"
-            icon-left="cash-multiple"
-            @click="captureInvoice(props.row)"
-            >Capture Invoice</b-button
-          >
-        </span>
-      </b-table-column>
 
       <template #empty>
         <h4 class="is-size-4 has-text-centered">No Permits yet. &#x1F4DB;</h4>
@@ -130,7 +125,10 @@ export default {
   name: 'UnreceiptedDebitsTable',
 
   data() {
+
+    
     return {
+      status: 'Active',
       isPaginated: true,
       currentPage: 1,
       perPage: 10,

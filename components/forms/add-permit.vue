@@ -17,23 +17,30 @@
         <div class="box">
             <div class="columns is-right">
 
-            <div class="column is-one-third">
+            <div class="column is-one-quarter">
          <b-field label="Permit No." >
-            <b-input v-model="name"></b-input>
+            <b-input v-model="permitNumber"></b-input>
         </b-field>
 
             </div>
 
-            <div class="column is-one-third">
+            <div class="column is-one-quarter">
          <b-field label="PFI No." >
-            <b-input v-model="name"></b-input>
+            <b-input v-model="pfiNumber"></b-input>
         </b-field>
 
             </div>
 
-           <div class="column is-one-third">
+           <div class="column is-one-quarter">
          <b-field label="Authorization Body">
-            <b-input v-model="name"></b-input>
+            <b-input v-model="authBody"></b-input>
+        </b-field>
+
+            </div>
+
+             <div class="column is-one-quarter">
+         <b-field label="Application Date">
+            <b-input v-model="applicationDate"></b-input>
         </b-field>
 
             </div>
@@ -55,9 +62,10 @@
 
 <script>
     export default {
+        name: 'Permits Form',
         data() {
             return {
-                name: 'John Silver'
+                
             }
         }
     }

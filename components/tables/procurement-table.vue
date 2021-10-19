@@ -31,6 +31,26 @@
       aria-page-label="Page"
       aria-current-label="Current Page"
     >
+       <b-table-column
+        v-slot="props"
+        field="supplierName"
+        label="Supplier"
+        sortable
+        
+      >
+       {{ props.row.supplierName }}
+       
+        <!-- {{ props.row.sumInsured }} -->
+      </b-table-column>
+
+     <b-table-column
+        v-slot="props"
+        field="supplierEmail"
+        label="Supplier Email"
+        sortable
+      >
+        {{ props.row.supplierEmail }}
+      </b-table-column>
       
        <b-table-column
         v-slot="props"
@@ -71,26 +91,9 @@
         {{ today }}
       </b-table-column>
 
-      <b-table-column
-        v-slot="props"
-        field="supplierName"
-        label="Supplier"
-        sortable
-        
-      >
-       {{ props.row.supplierName }}
-       
-        <!-- {{ props.row.sumInsured }} -->
-      </b-table-column>
+     
 
-      <b-table-column
-        v-slot="props"
-        field="supplierEmail"
-        label="Supplier Email"
-        sortable
-      >
-        {{ props.row.supplierEmail }}
-      </b-table-column>
+     
 
     
     

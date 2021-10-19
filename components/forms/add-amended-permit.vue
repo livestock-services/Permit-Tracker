@@ -19,14 +19,14 @@
 
             <div class="column is-one-third">
          <b-field label="Permit No." >
-            <b-input v-model="name"></b-input>
+            <b-input v-model="permitNumber"></b-input>
         </b-field>
 
             </div>
 
             <div class="column is-one-third">
          <b-field label="PFI No." >
-            <b-input v-model="name"></b-input>
+            <b-input v-model="pfiNumber"></b-input>
         </b-field>
 
             </div>
@@ -40,7 +40,7 @@
         <div class="columns">
             <div class="column is-half">
                 <b-field label="Reason for Amendment">
-                    <b-input maxlength="200" type="textarea"></b-input>
+                    <b-input v-model="reasonForAmendment" maxlength="200" type="textarea"></b-input>
                 </b-field>
             </div>
             </div>
@@ -59,9 +59,11 @@
 
 <script>
     export default {
+        name: 'Permit Amendment',
+        
         data() {
             return {
-                name: 'John Silver'
+                
             }
         }
     }
