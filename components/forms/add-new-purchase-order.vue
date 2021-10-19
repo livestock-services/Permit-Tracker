@@ -42,6 +42,7 @@
                     </template>
                     <b-input 
                         type="email"
+                        :disabled="!supplierName"
                         v-model="supplierEmail"
                         placeholder="supplier@example.co.zm"
                         maxlength="50">
@@ -55,6 +56,7 @@
                         Purchase Order No. <span class="has-text-danger">*</span>
                     </template>
                     <b-input 
+                    :disabled="!supplierEmail"
                     v-model="purchaseOrderNumber"
                     type="number"
                     placeholder="    Purchase Order No."></b-input>
@@ -67,6 +69,7 @@
                         PFI No. <span class="has-text-danger">*</span>
                     </template>
                     <b-input
+                    :disabled="!purchaseOrderNumber"
                     v-model="pfiNumber"
                     type="number"
                     placeholder="    PFI No."></b-input>
@@ -85,7 +88,7 @@
 
          <div class="buttons columns">
                 <div class="column is-one-third">
-                    <b-button @click="onSubmit" type="is-info" expanded>
+                    <b-button :disabled="!pfiNumber" @click="onSubmit" type="is-info" expanded>
                         Submit
                     </b-button>
         </div>
@@ -135,12 +138,13 @@ import cloneDeep from 'lodash/cloneDeep'
 
         methods:{
     
-    ...mapActions('procurement', ['addNewPfi']),
+    ...mapActions('procurement', ['addNewPfi', 'load']),
 
 
              async onSubmit() {
                     try {
-                        
+      
+                   // await this.load();    
                     await this.addNewPfi(); 
                     
                     this.$buefy.toast.open({
@@ -149,6 +153,8 @@ import cloneDeep from 'lodash/cloneDeep'
                         position: 'is-top',
                         type: 'is-success',
                     })
+
+                        
 
                     } catch (error) {
                    

@@ -13,7 +13,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'lsc-permit-tracker',
+    title: 'LSC Permit Tracker',
     htmlAttrs: {
       lang: 'en'
     },
