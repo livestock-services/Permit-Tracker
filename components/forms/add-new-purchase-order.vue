@@ -12,7 +12,8 @@
         </div>
 
         <b-form
-        v-model="form">
+        v-model="form"
+        >
         <div
          :class="['block box']"
          >
@@ -136,6 +137,10 @@ import cloneDeep from 'lodash/cloneDeep'
     ]),
         },
 
+        created(){
+        // this.clearForm()
+        },
+
         methods:{
     
     ...mapActions('procurement', ['addNewPfi', 'load']),
@@ -146,7 +151,9 @@ import cloneDeep from 'lodash/cloneDeep'
       
                    // await this.load();    
                     await this.addNewPfi(); 
-                    
+
+                   
+
                     this.$buefy.toast.open({
                         message: 'PFI Added Successfully!',
                         duration: 2000,
@@ -154,8 +161,8 @@ import cloneDeep from 'lodash/cloneDeep'
                         type: 'is-success',
                     })
 
-                        
-
+                    this.clearForm();
+                    
                     } catch (error) {
                    
                     
@@ -169,6 +176,25 @@ import cloneDeep from 'lodash/cloneDeep'
            
      
     },
+
+    
+    clearForm() {
+     this.form = {
+        supplierName: null,
+        supplierEmail: null,
+        purchasOrderNumber: null,
+        pfiNumber: null,
+       
+      }
+
+      //this.reloadPage()
+     },
+
+ reloadPage() {
+  location.reload();
+}
+
+    
         }
     }
 </script>

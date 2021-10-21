@@ -82,7 +82,14 @@
         {{ props.row.date }}
       </b-table-column>
 
+       <b-table-column v-slot="props" field="status" label="PFI Status" sortable>
+
+          <span class="tag is-success">{{ props.row.status}}</span>
+
+      </b-table-column>
+
       
+
 
       <template #empty>
         <h4 class="is-size-4 has-text-centered">No PFIs yet. &#x1F4DA;</h4>

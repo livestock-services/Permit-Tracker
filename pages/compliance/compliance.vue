@@ -17,12 +17,25 @@
 
         <b-tab-item label="Permits" icon="book-open-page-variant">
           <b-tabs vertical position="is-left" type="is-toggle" expanded>
-            <b-tab-item label="Add Permit Application" icon="plus-box-multiple">
+
+            <b-tab-item label="Add Permit Application" icon="plus-box">
+              <add-permit-application></add-permit-application>
+            </b-tab-item>
+
+             <b-tab-item label="View Permit Applications" icon="eye-check">
+              <permits-application-table></permits-application-table>
+            </b-tab-item>
+
+            <b-tab-item label="Add Permit " icon="plus-box-multiple">
               <add-permit></add-permit>
             </b-tab-item>
-            <b-tab-item label="View Permit Applications" icon="eye-check-outline">
+  
+
+            <b-tab-item label="View Permits" icon="eye-check-outline">
               <permits-table></permits-table>
             </b-tab-item>
+
+
            
           </b-tabs>
         </b-tab-item>
@@ -42,13 +55,17 @@ import PermitsTable from '../../components/tables/permits-table.vue'
 import ComplianceTable from '../../components/tables/compliance-table.vue'
 import AddAmendedPermit from '~/components/forms/add-amended-permit.vue'
 import AmendedPermitTable from '~/components/tables/amended-permit-table.vue'
+import AddPermitApplication from '~/components/forms/add-permit-application.vue'
+import PermitsApplicationTable from '~/components/tables/permits-application-table.vue'
 export default {
  components:{
    AddPermit,
    AddAmendedPermit,
     PermitsTable,
+    PermitsApplicationTable,
     ComplianceTable,
-  AmendedPermitTable
+  AmendedPermitTable,
+  AddPermitApplication
  }
 }
 </script>
@@ -56,4 +73,5 @@ export default {
 <style>
 
  
-</style>
+</style>,
+  PermitsApplicationTable

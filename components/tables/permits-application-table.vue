@@ -42,29 +42,49 @@
 
       <b-table-column
         v-slot="props"
-        field="clientID"
-        label="Purchase Order No."
+        field="coverType"
+        label="Permit No."
         sortable
       >
-        {{ props.row.clientID }}
+        {{ props.row.coverType }}
       </b-table-column>
-
       
-      
-      
-
       <b-table-column
         v-slot="props"
-        field="startDate"
-        label="PFI Date Received from Procurement "
+        field="applicationDate"
+        label="Application Date "
         sortable
       >
         {{ props.row.startDate }}
       </b-table-column>
 
 
-      
       <b-table-column
+        v-slot="props"
+        field="startDate"
+        label="Approved Date "
+        sortable
+      >
+        {{ props.row.startDate }}
+      </b-table-column>
+
+     
+
+      
+
+      
+
+       <b-table-column
+        v-slot="props"
+        field="proRata"
+        label="Authorization Body"
+        sortable
+      >
+        {{ props.row.proRata }}
+      </b-table-column>
+
+
+     <b-table-column
         v-slot="props"
         field="status"
         label="Permit Status"
@@ -85,23 +105,11 @@
         >
       </b-table-column>
 
+     
 
-      
-
-      <b-table-column v-slot="props" label="Options">
-        <span class="buttons">
-          <!-- <b-button type="is-secondary-outline" icon-left="eye">View</b-button> -->
-          <b-button
-            type="is-secondary-outline"
-            icon-left="cash-multiple"
-            @click="captureInvoice(props.row)"
-            >Capture Invoice</b-button
-          >
-        </span>
-      </b-table-column>
 
       <template #empty>
-        <h4 class="is-size-4 has-text-centered">No Compliance Information yet. &#x1F4DC;</h4>
+        <h4 class="is-size-4 has-text-centered">No Permits yet. &#x1F4DB;</h4>
       </template>
     </b-table>
   </div>
@@ -117,7 +125,10 @@ export default {
   name: 'UnreceiptedDebitsTable',
 
   data() {
+
+    
     return {
+      status: 'Active',
       isPaginated: true,
       currentPage: 1,
       perPage: 10,
