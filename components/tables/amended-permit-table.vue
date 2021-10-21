@@ -33,46 +33,22 @@
     >
       <b-table-column
         v-slot="props"
-        field="clientID"
+        field="pfiNumber"
         label="PFI No."
         sortable
       >
-        {{ props.row.clientID }}
+        {{ props.row.pfiNumber }}
       </b-table-column>
-
-      <b-table-column
-        v-slot="props"
-        field="coverType"
-        label="Permit No."
-        sortable
-      >
-        {{ props.row.coverType }}
-      </b-table-column>
-      
-      
-
-      <b-table-column
-        v-slot="props"
-        field="startDate"
-        label="Issued Date "
-        sortable
-      >
-        {{ props.row.startDate }}
-      </b-table-column>
-
-     
-
-      
 
       
 
        <b-table-column
         v-slot="props"
-        field="proRata"
+        field="reasonForAmendment"
         label="Reason For Amendment"
         sortable
       >
-        {{ props.row.proRata }}
+        {{ props.row.reasonForAmendment}}
       </b-table-column>
 
       
@@ -111,10 +87,13 @@ export default {
   },
   computed: {
     
-   
+    ...mapGetters('compliance', {
+      loading: 'loading',
+      allAPAs: 'allAmendedPermitApplications',
+    }),
     
-    isEmpty() {
-      return 'empty'
+   isEmpty() {
+     return this.allAPAs.length === 0
     },
 
     isNames() {
@@ -122,7 +101,7 @@ export default {
     },
     
     tableData() {
-      return this.isEmpty ? [] : this.policies
+      return this.isEmpty ? [] : this.allAPAs
     },
   },
 
@@ -131,54 +110,14 @@ export default {
   methods: {
    
 
-    ...mapActions('policies', ['getAllPolicies','load', 'selectPolicy' ]),
-
-        currencyValue(policy, field) {
-      switch (policy.currency) {
-        case 'USD':
-          return this.$options.filters.currency_usd(policy[field])
-
-        default:
-          return this.$options.filters.currency(policy[field])
-      }
-    },
-
-    restrictDecimal() {
-      this.totalPremium = this.totalPremium.match(/^\d+\.?\d{0,2}/)
-    },
+    ...mapActions('compliance', ['getAllAmendedPermitApplications','load' ]),
 
     async load(){
-      await this.getAllPolicies();
+      await this.getAllAmendedPermitApplications();
     },
 
 
-    captureInvoice(policy) {
-       this.selectPolicy(policy)
-      setTimeout(() => {
-        this.$buefy.modal.open({
-          parent: this,
-          component: PayDebitModal,
-          hasModalCard: true,
-          trapFocus: true,
-          canCancel: ['x'],
-          destroyOnHide: true,
-          customClass: '',
-          onCancel: () => {
-            this.$buefy.toast.open({
-              message: `Payment cancelled!`,
-              duration: 5000,
-              position: 'is-top',
-              type: 'is-info',
-            })
-          },
-        })
-      }, 300)
-    },
-  }
-
- 
-
-  
+  }  
 }
 
   
