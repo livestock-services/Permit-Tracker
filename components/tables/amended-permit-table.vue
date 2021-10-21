@@ -40,8 +40,17 @@
         {{ props.row.pfiNumber }}
       </b-table-column>
 
-      
 
+        <b-table-column
+        v-slot="props"
+        field="date"
+        label="Date of Amendment"
+        sortable
+      >
+        {{ props.row.date}}
+      </b-table-column>
+
+      
        <b-table-column
         v-slot="props"
         field="reasonForAmendment"
@@ -50,9 +59,6 @@
       >
         {{ props.row.reasonForAmendment}}
       </b-table-column>
-
-      
-
 
       
 

@@ -3,13 +3,13 @@
    
     <b-tabs  type="is-toggle" expanded>
          
-         <b-tab-item label="Amended Permits" icon="book-edit">
+         <b-tab-item label="Amendments to Permit Applications" icon="book-edit">
           <b-tabs vertical position="is-left" type="is-toggle" expanded>
            
-            <b-tab-item label="Amended Permits" icon="plus-circle-multiple">
+            <b-tab-item label="Amend a Permit Application" icon="plus-circle-multiple">
               <add-amended-permit></add-amended-permit>
             </b-tab-item>
-            <b-tab-item label="Amended Permits" icon="eye-check">
+            <b-tab-item label="View Amended Permit Applications" icon="eye-check">
              <amended-permit-table></amended-permit-table>
             </b-tab-item>
           </b-tabs>

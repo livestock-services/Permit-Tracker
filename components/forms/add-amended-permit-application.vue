@@ -37,7 +37,7 @@
             </div>
             </div>
         
-        <b-button :disabled="!reasonForAmendment" @click="onSubmitApplication"  type="is-info">
+        <b-button :disabled="!reasonForAmendment" @click="onSubmit"  type="is-info">
             Submit
         </b-button>
        
@@ -58,8 +58,13 @@ import { mapActions, mapGetters } from 'vuex'
         name: 'Permit Amendment',
         
         data() {
+            const today = new Date()
+            
             return {
                 
+                date: today.toDateString,
+                minDate: new Date(today.getFullYear() - 80, today.getMonth(), today.getDate()),
+                maxDate: new Date(today.getFullYear() + 18, today.getMonth(), today.getDate())
             }
         },
 
@@ -83,35 +88,31 @@ import { mapActions, mapGetters } from 'vuex'
     ...mapActions('compliance', ['addNewAmendedPermitApplication', 'load']),
 
 
-             async onSubmitApplication() {
-                    try {
-      
-                   // await this.load();    
-                    await this.addNewAmendedPermitApplication();
-                   
+             async onSubmit() {
 
-                    this.$buefy.toast.open({
-                        message: 'Amended Permit Application Added Successfully!',
+                  try {
+                     await this.addNewAmendedPermitApplication();
+
+                     console.log("Clicked")
+
+                     this.clearForm();
+
+                      this.$buefy.toast.open({
+                        message: 'PFI Added Successfully!',
                         duration: 2000,
                         position: 'is-top',
                         type: 'is-success',
-                    })
-
-                   
-                    
-                    } catch (error) {
-                   
-                    
+                    }) 
+                  } catch (error) {
+                      
                     this.$buefy.toast.open({
                         message: 'Please Verify Your Details!',
                         duration: 2000,
                         position: 'is-top',
                         type: 'is-danger',
                     })
-                    }
-           
-     
-    },
+                  }
+                  },
 
     
     clearForm() {

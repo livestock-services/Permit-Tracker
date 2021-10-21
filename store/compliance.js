@@ -18,7 +18,8 @@ export const state = () => ({
     form:{
         
         pfiNumber:null,
-        reasonForAmendment:null
+        reasonForAmendment:null,
+
               
     },
 })
@@ -114,7 +115,7 @@ export const actions = {
 
             console.log(response.data);
 
-            commit(ADD_PFI, response.data);
+            commit(ADD_AMENDED_PERMIT_APPLICATION, response.data);
             
             commit(SET_LOADING, false);
 
