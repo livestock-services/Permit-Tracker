@@ -32,6 +32,7 @@
                     placeholder=" Supplier Name"></b-input>
                 </b-field>
              </div>
+             
             
 
 
@@ -60,6 +61,7 @@
                     :disabled="!supplierEmail"
                     v-model="purchaseOrderNumber"
                     type="number"
+                     maxlength="6"
                     placeholder="    Purchase Order No."></b-input>
                 </b-field>
             </div>
@@ -70,12 +72,15 @@
                         PFI No. <span class="has-text-danger">*</span>
                     </template>
                     <b-input
-                    :disabled="!purchaseOrderNumber"
+                    :disabled="!supplierEmail"
                     v-model="pfiNumber"
                     type="number"
+                    maxlength="10"
                     placeholder="    PFI No."></b-input>
                 </b-field>
             </div>
+
+            
 
 
             
@@ -129,10 +134,11 @@ import cloneDeep from 'lodash/cloneDeep'
 
     ...mapFields('procurement', [
       'form',
-      'form.purchaseOrderNumber',
-      'form.pfiNumber',
       'form.supplierName',
-      'form.supplierEmail'
+      'form.supplierEmail',
+      'form.purchaseOrderNumber',
+      'form.pfiNumber'  
+      
       
     ]),
         },

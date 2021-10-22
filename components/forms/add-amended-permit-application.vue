@@ -18,7 +18,7 @@
          >
 
         <div class="box">
-            <div class="columns is-right">
+            <div class="columns ">
 
 
             <div class="column is-one-third">

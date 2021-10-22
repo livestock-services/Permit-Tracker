@@ -35,7 +35,7 @@
         v-slot="props"
         field="supplierName"
         label="Supplier"
-        sortable
+        searchable
         
       >
        {{ props.row.supplierName }}
@@ -77,16 +77,23 @@
         v-slot="props"
         field="date"
         label="Issued Date"
-        sortable
+        searchable
       >
         {{ props.row.date }}
       </b-table-column>
 
        <b-table-column v-slot="props" field="status" label="PFI Status" sortable>
 
-          <span class="tag is-success">{{ props.row.status}}</span>
+          <span class="tag is-success">{{ props.row.status.procurement}}</span>
 
       </b-table-column>
+
+
+      
+
+
+      
+                
 
       
 
@@ -153,45 +160,13 @@ export default {
 
     ...mapActions('procurement', ['getAllPfis','load' ]),
 
-    formatDate({ date }){
-       var json = date;
-
-            var dateStr = JSON.parse(json);  
-            console.log(dateStr); // 2014-01-01T23:28:56.782Z
-                    
-            var date = new Date(dateStr);
-            console.log(date); 
-
-    },
-
+    
 
     async load(){
       await this.getAllPfis();
     },
 
 
-    captureInvoice(policy) {
-       this.selectPolicy(policy)
-      setTimeout(() => {
-        this.$buefy.modal.open({
-          parent: this,
-          component: PayDebitModal,
-          hasModalCard: true,
-          trapFocus: true,
-          canCancel: ['x'],
-          destroyOnHide: true,
-          customClass: '',
-          onCancel: () => {
-            this.$buefy.toast.open({
-              message: `Payment cancelled!`,
-              duration: 5000,
-              position: 'is-top',
-              type: 'is-info',
-            })
-          },
-        })
-      }, 300)
-    },
   }
 
  

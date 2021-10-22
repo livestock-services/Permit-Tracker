@@ -13,10 +13,11 @@ export const state = () => ({
     all:[],
     
     form:{
-        purchaseOrderNumber:null,
-        pfiNumber:null,
         supplierName:null,
         supplierEmail:null,
+        purchaseOrderNumber:null,
+        pfiNumber:null
+        
         
     },
 
@@ -86,22 +87,11 @@ export const actions = {
             //API REQUEST IS MADE AND RESULT IS STORED IN CONST
            const {data: allPfis} = await api.get(`/pfis/AllPfis`)
 
-           
-            const nd = allPfis.data[0].date;
+           const {data: allAmendedPermitApplications} = await api.get(`/comp/permits/allAmendedPermitApplications`)
 
-            console.log(nd.toString());
-        
-            
-          
-           
-            
-           let d = new Date();
-           // c = Date(d.getFullYear(), d.getMonth(), d.getDate(),d.getHours(), d.getMinutes(), d.getSeconds())
-           console.log(d);
-
-          
 
            console.log(allPfis);
+           console.log(allAmendedPermitApplications);
 
 
            //RETRIEVED DATA IS COMMITTED TO THE MUTATION TO MAKE THE CHANGES EFFECTIVE

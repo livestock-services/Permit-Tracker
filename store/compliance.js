@@ -63,6 +63,13 @@ export const actions = {
            const newLoad= await api.get(`/comp/permits/allAmendedPermitApplications`)
            // await dispatch('getInactivePolicies')
         console.log(newLoad.data)
+
+         //GET ALL PFI RECORDS FROM API
+         const {data: allPfis} = await api.get(`/pfis/AllPfis`)
+
+         console.log(allPfis);
+
+         
              commit(SET_ALL_AMENDED_PERMIT_APPLICATIONS, newLoad.data);
             //   ...getters.allPolicies,
             //   ...getters.inactivePolicies,
@@ -83,9 +90,11 @@ export const actions = {
             //API REQUEST IS MADE AND RESULT IS STORED IN CONST
            const {data: allAmendedPermitApplications} = await api.get(`/comp/permits/allAmendedPermitApplications`)
 
-          
 
-          
+           //GET ALL PFI RECORDS FROM API
+           const {data: allPfis} = await api.get(`/pfis/AllPfis`)
+
+           console.log(allPfis);
 
            console.log(allAmendedPermitApplications);
 

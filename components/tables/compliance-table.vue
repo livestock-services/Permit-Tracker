@@ -33,20 +33,20 @@
     >
       <b-table-column
         v-slot="props"
-        field="clientID"
+        field="pfiNumber"
         label="PFI No."
         sortable
       >
-        {{ props.row.clientID }}
+        {{ props.row.pfiNumber }}
       </b-table-column>
 
       <b-table-column
         v-slot="props"
-        field="clientID"
+        field="urchaseOrderNumber"
         label="Purchase Order No."
         sortable
       >
-        {{ props.row.clientID }}
+        {{ props.row.purchaseOrderNumber }}
       </b-table-column>
 
       
@@ -59,47 +59,21 @@
         label="PFI Date Received from Procurement "
         sortable
       >
-        {{ props.row.startDate }}
+        {{ props.row.date }}
       </b-table-column>
 
 
       
-      <b-table-column
-        v-slot="props"
-        field="status"
-        label="Permit Status"
-        sortable
-        
-      >
-        <span
-          :class="[
-            'tag',
-            {
-              'is-success': props.row.status === 'Active',
-            },
-            {
-              'is-warning': props.row.status === 'Inactive',
-            },
-          ]"
-          >{{ props.row.status }}</span
-        >
+      <b-table-column v-slot="props" field="status" label="PFI Status" sortable>
+
+         <span class="tag is-info">{{ props.row.status.compliance}}</span>
+
       </b-table-column>
 
 
       
 
-      <b-table-column v-slot="props" label="Options">
-        <span class="buttons">
-          <!-- <b-button type="is-secondary-outline" icon-left="eye">View</b-button> -->
-          <b-button
-            type="is-secondary-outline"
-            icon-left="cash-multiple"
-            @click="captureInvoice(props.row)"
-            >Capture Invoice</b-button
-          >
-        </span>
-      </b-table-column>
-
+      
       <template #empty>
         <h4 class="is-size-4 has-text-centered">No Compliance Information yet. &#x1F4DC;</h4>
       </template>
@@ -130,10 +104,13 @@ export default {
   },
   computed: {
     
+    ...mapGetters('procurement', {
+      loading: 'loading',
+      pfis: 'allPfis',
+    }),
    
-    
-    isEmpty() {
-      return 'empty'
+   isEmpty() {
+     return this.pfis.length === 0
     },
 
     isNames() {
@@ -141,7 +118,7 @@ export default {
     },
     
     tableData() {
-      return this.isEmpty ? [] : this.policies
+      return this.isEmpty ? [] : this.pfis
     },
   },
 
@@ -150,49 +127,16 @@ export default {
   methods: {
    
 
-    ...mapActions('policies', ['getAllPolicies','load', 'selectPolicy' ]),
+     ...mapActions('procurement', ['getAllPfis','load' ]),
 
-        currencyValue(policy, field) {
-      switch (policy.currency) {
-        case 'USD':
-          return this.$options.filters.currency_usd(policy[field])
 
-        default:
-          return this.$options.filters.currency(policy[field])
-      }
-    },
-
-    restrictDecimal() {
-      this.totalPremium = this.totalPremium.match(/^\d+\.?\d{0,2}/)
-    },
-
+       
     async load(){
-      await this.getAllPolicies();
+      await this.getAllPfis();
     },
 
 
-    captureInvoice(policy) {
-       this.selectPolicy(policy)
-      setTimeout(() => {
-        this.$buefy.modal.open({
-          parent: this,
-          component: PayDebitModal,
-          hasModalCard: true,
-          trapFocus: true,
-          canCancel: ['x'],
-          destroyOnHide: true,
-          customClass: '',
-          onCancel: () => {
-            this.$buefy.toast.open({
-              message: `Payment cancelled!`,
-              duration: 5000,
-              position: 'is-top',
-              type: 'is-info',
-            })
-          },
-        })
-      }, 300)
-    },
+   
   }
 
  
