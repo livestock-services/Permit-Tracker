@@ -77,7 +77,7 @@
 import { mapActions, mapGetters } from 'vuex'
 //import PayDebitModal from '@/components/modals/pay-debit-modal'
 export default {
-  name: 'UnreceiptedDebitsTable',
+  name: 'AmendedPermitApplicationsTable',
 
   data() {
     return {

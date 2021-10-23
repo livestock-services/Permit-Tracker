@@ -12,7 +12,7 @@
 
 
         <b-form
-        v-model="form" >
+        v-model="amendmentForm" >
             <div
          :class="['block box']"
          >
@@ -71,9 +71,9 @@ import { mapActions, mapGetters } from 'vuex'
          computed: {
 
     ...mapFields('compliance', [
-      'form',
-      'form.pfiNumber',
-      'form.reasonForAmendment'
+      'amendmentForm',
+      'amendmentForm.pfiNumber',
+      'amendmentForm.reasonForAmendment'
       
       
     ]),
@@ -98,7 +98,7 @@ import { mapActions, mapGetters } from 'vuex'
                      this.clearForm();
 
                       this.$buefy.toast.open({
-                        message: 'PFI Added Successfully!',
+                        message: 'Permit Application Amended Successfully!',
                         duration: 2000,
                         position: 'is-top',
                         type: 'is-success',
@@ -116,7 +116,7 @@ import { mapActions, mapGetters } from 'vuex'
 
     
     clearForm() {
-     this.form = {
+     this.amendmentForm = {
         pfiNumber:null,
         reasonForAmendment:null
        

@@ -37,16 +37,16 @@
         label="PFI No."
         sortable
       >
-        {{ props.row.clientID }}
+        {{ props.row.pfiNumber }}
       </b-table-column>
 
       <b-table-column
         v-slot="props"
-        field="coverType"
-        label="Permit No."
+        field="authBody"
+        label="Authorization Body"
         sortable
       >
-        {{ props.row.coverType }}
+        {{ props.row.authBody }}
       </b-table-column>
       
       <b-table-column
@@ -55,55 +55,20 @@
         label="Application Date "
         sortable
       >
-        {{ props.row.startDate }}
+        {{ props.row.date }}
       </b-table-column>
 
 
       <b-table-column
         v-slot="props"
-        field="startDate"
-        label="Approved Date "
+        field="permitApplicationAmount"
+        label="Permit Application Amount "
         sortable
       >
-        {{ props.row.startDate }}
+        {{ props.row.permitApplicationAmount }}
       </b-table-column>
 
      
-
-      
-
-      
-
-       <b-table-column
-        v-slot="props"
-        field="proRata"
-        label="Authorization Body"
-        sortable
-      >
-        {{ props.row.proRata }}
-      </b-table-column>
-
-
-     <b-table-column
-        v-slot="props"
-        field="status"
-        label="Permit Status"
-        sortable
-        
-      >
-        <span
-          :class="[
-            'tag',
-            {
-              'is-success': props.row.status === 'Active',
-            },
-            {
-              'is-warning': props.row.status === 'Inactive',
-            },
-          ]"
-          >{{ props.row.status }}</span
-        >
-      </b-table-column>
 
      
 
@@ -122,7 +87,7 @@
 import { mapActions, mapGetters } from 'vuex'
 //import PayDebitModal from '@/components/modals/pay-debit-modal'
 export default {
-  name: 'UnreceiptedDebitsTable',
+  name: 'PermitApplicationsTable',
 
   data() {
 
@@ -140,11 +105,14 @@ export default {
     }
   },
   computed: {
+
+  ...mapGetters('compliance', {
+      loading: 'loading',
+      allPAs: 'allPermitApplications',
+    }),
     
-   
-    
-    isEmpty() {
-      return 'empty'
+   isEmpty() {
+     return this.allPAs.length === 0
     },
 
     isNames() {
@@ -152,7 +120,7 @@ export default {
     },
     
     tableData() {
-      return this.isEmpty ? [] : this.policies
+      return this.isEmpty ? [] : this.allPAs
     },
   },
 
@@ -161,49 +129,14 @@ export default {
   methods: {
    
 
-    ...mapActions('policies', ['getAllPolicies','load', 'selectPolicy' ]),
-
-        currencyValue(policy, field) {
-      switch (policy.currency) {
-        case 'USD':
-          return this.$options.filters.currency_usd(policy[field])
-
-        default:
-          return this.$options.filters.currency(policy[field])
-      }
-    },
-
-    restrictDecimal() {
-      this.totalPremium = this.totalPremium.match(/^\d+\.?\d{0,2}/)
-    },
+    ...mapActions('compliance', ['getAllPermitApplications','load' ]),
 
     async load(){
-      await this.getAllPolicies();
+      await this.getAllPermitApplications();
     },
 
 
-    captureInvoice(policy) {
-       this.selectPolicy(policy)
-      setTimeout(() => {
-        this.$buefy.modal.open({
-          parent: this,
-          component: PayDebitModal,
-          hasModalCard: true,
-          trapFocus: true,
-          canCancel: ['x'],
-          destroyOnHide: true,
-          customClass: '',
-          onCancel: () => {
-            this.$buefy.toast.open({
-              message: `Payment cancelled!`,
-              duration: 5000,
-              position: 'is-top',
-              type: 'is-info',
-            })
-          },
-        })
-      }, 300)
-    },
+
   }
 
  
