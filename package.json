@@ -11,6 +11,8 @@
   "dependencies": {
     "@braid/vue-formulate": "^2.5.2",
     "@nuxtjs/axios": "^5.13.6",
+    "cleave": "^1.0.2",
+    "cleave.js": "^1.6.0",
     "core-js": "^3.15.1",
     "luxon": "^2.0.2",
     "nuxt": "^2.15.7",

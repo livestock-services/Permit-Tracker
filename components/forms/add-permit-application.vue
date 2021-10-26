@@ -18,7 +18,7 @@
          >
 
         <div class="box">
-            <div class="columns is-right">
+            <div class="columns ">
 
            
 
@@ -28,10 +28,11 @@
         </b-field>
 
             </div>
+            
 
            <div class="column is-one-third">
          <b-field label="Authorization Body">
-            <b-input :disbled="!pfiNumber" v-model="authBody"></b-input>
+            <b-input :disabled="!pfiNumber" v-model="authBody"></b-input>
         </b-field>
 
             </div>
@@ -39,8 +40,13 @@
 
             <div class="column is-one-third">
          <b-field label="Permit Application Amount">
-            <b-input :disbled="!authBody" v-model="permitApplicationAmount"></b-input>
+            <b-input
+             v-cleave="masks.numeral"
+             :disabled="!authBody"
+             v-model="permitApplicationAmount">
+             </b-input>
         </b-field>
+
 
             </div>
 
@@ -48,7 +54,7 @@
 
         </div>
 
-        <b-button :disbled="!permitApplicationAmount" type="is-info" @click="onSubmit">
+        <b-button :disabled="!permitApplicationAmount" type="is-info" @click="onSubmit">
             Submit
         </b-button>
 
@@ -65,17 +71,35 @@
 <script>
    import { mapFields } from 'vuex-map-fields'
    import { mapActions, mapGetters } from 'vuex'
+   import Cleave from 'cleave.js'
+
+    const cleave = {
+            name: 'cleave',
+            bind(el, binding) {
+                const input = el.querySelector('input')
+                input._vCleave = new Cleave(input, binding.value)
+            },
+            unbind(el) {
+                const input = el.querySelector('input')
+                input._vCleave.destroy()
+            }
+        }
     export default {
         name: 'Permit Application',
-        
+        directives: { cleave },
         data() {
-            const today = new Date()
+           
             
             return {
                 
-                date: today.toDateString,
-                minDate: new Date(today.getFullYear() - 80, today.getMonth(), today.getDate()),
-                maxDate: new Date(today.getFullYear() + 18, today.getMonth(), today.getDate())
+               masks: {
+                    
+          numeral: {
+              numeral: true,
+              numeralThousandsGroupStyle: 'thousand',
+              prefix: 'ZMW '
+          }
+             }
             }
         },
 
@@ -140,7 +164,9 @@
 
         reloadPage() {
         location.reload();
-        }
+        },
+
+
     }
     }
 </script>

@@ -5,13 +5,14 @@ import { getField, updateField } from 'vuex-map-fields'
 import { ADD_PFI,
          SET_ALL_PFIS, 
          GET_ALL_PFIS, 
-         SET_LOADING 
+         SET_LOADING,
+         SET_SELECTED_PFI 
         } from '@/helpers/mutation-types'
 
 export const state = () => ({
     loading: false,
     all:[],
-    
+    selectedPfi: null,
     form:{
         supplierName:null,
         supplierEmail:null,
@@ -30,6 +31,9 @@ export const getters = {
     loading(state) {
         return state.loading
     },
+    selectedPfi(state) {
+        return state.selectedPfi
+      },
 
     allPfis(state){
         return state.all
@@ -47,9 +51,13 @@ export const mutations = {
     },  
 
     //MUTATIONS FOR ADDING, SETTING AND GETTING PFIs
-    [ADD_PFI](state, newPfi){
-        state.all.push(newPfi)
+    [ADD_PFI](state, pfi){
+        state.all.push(pfi)
     },
+
+    [SET_SELECTED_PFI](state, pfi) {
+        state.selectedPfi = pfi
+      },
     [SET_ALL_PFIS](state, payload) {
         state.all = payload
     },
@@ -112,10 +120,10 @@ export const actions = {
         try {
             commit(SET_LOADING, true);
 
-            const newPfi = state.form;
+            const pfi = state.form;
            
            
-            const response = await api.post(`/pfis/addNewPfi`, newPfi);
+            const response = await api.post(`/pfis/addNewPfi`, pfi);
 
             console.log(response.data);
 
@@ -127,6 +135,16 @@ export const actions = {
             commit(SET_LOADING, false);
             this.log.error(error.message);
         }
-    }
+    },
+
+    selectPfi({ commit }, pfi) {
+        try {
+            commit(SET_SELECTED_PFI, pfi)
+            console.log(pfi)
+        } catch (error) {
+            console.log('Error')
+        }
+        
+      },
 }
 
