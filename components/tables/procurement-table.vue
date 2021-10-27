@@ -97,7 +97,7 @@
             type="is-secondary-outline"
             icon-left="cash-multiple"
             @click="captureReceipt(props.row)"
-            >Capture Receipt</b-button
+            >Preview</b-button
           >
         </span>
       </b-table-column>

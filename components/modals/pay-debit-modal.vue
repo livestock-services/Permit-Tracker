@@ -1,7 +1,8 @@
 <template>
   <div class="modal-card ">
     <header class="modal-card-head">
-      <h3 class="modal-card-title">Operation</h3>
+      <h3 class="modal-card-title">Supplier Snapshot</h3>
+     
       <button type="button" class="delete" @click="close"></button>
     </header>
     <section class="modal-card-body has-background-white">
@@ -9,28 +10,39 @@
       <div>
        <b-form class="form">
          <div class="columns">
-           <div class="column is-half">
-            <p placeholder="Supplier Name">
-              {{supplierName}}
+           <div  class="column is-half">
+             <h4> <span class="is-blue">  Supplier Name</span></h4>
+            <p >
+              {{pfi.supplierName}}
+              
             </p>
            </div>
          </div>
 
          <div class="columns">
-           <div class="column is-half">
-            <b-input placeholder="Supplier Email"></b-input>
+           <div  class="column is-half">
+              <h4> <span class="is-blue">  Supplier Email</span></h4>
+            <p  placeholder="Supplier Name">
+              {{pfi.supplierEmail}}
+            </p>
            </div>
          </div>
 
-         <div class="columns">
-           <div class="column is-half">
-            <b-input placeholder="Purchase Order Number"></b-input>
+        <div class="columns">
+           <div  class="column is-half">
+              <h4> <span class="is-blue">  Purchase Order Number</span></h4>
+            <p  placeholder="Supplier Name">
+              {{pfi.purchaseOrderNumber}}
+            </p>
            </div>
          </div>
 
-         <div class="columns">
-           <div class="column is-half">
-            <b-input placeholder="PFI Number"></b-input>
+        <div class="columns">
+           <div  class="column is-half">
+              <h4> <span class="is-blue">  PFI Number</span></h4>
+            <p  placeholder="Supplier Name">
+              {{pfi.pfiNumber}}
+            </p>
            </div>
          </div>
 
@@ -39,13 +51,13 @@
       </div>
     </section>
     <footer class="modal-card-foot">
-      <b-button label="Cancel" @click="close" />
-      <b-button
+      <b-button label="Close" @click="close" />
+      <!-- <b-button
         label="Submit"
         type="is-primary"
         icon-left="account"
         @click="onSubmit"
-      />
+      /> -->
     </footer>
   </div>
 </template>
@@ -102,10 +114,10 @@ export default {
 
     close() {
       this.$buefy.toast.open({
-        message: 'Operation cancelled...',
-        duration: 5000,
+        message: 'Supplier Snapshot closed.',
+        duration: 2000,
         position: 'is-top',
-        type: 'is-info',
+        type: 'is-warning ',
       })
       this.$parent.close()
     },
@@ -116,5 +128,8 @@ export default {
 <style scoped>
 .modal-width-auto {
   width: auto;
+}
+.is-blue{
+  color: blue;
 }
 </style>

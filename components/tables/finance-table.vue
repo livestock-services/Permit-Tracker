@@ -37,16 +37,16 @@
         label="PFI No."
         sortable
       >
-        {{ props.row.clientID }}
+        {{ props.row.pfiNumber }}
       </b-table-column>
 
       <b-table-column
         v-slot="props"
         field="coverType"
-        label="Permit No."
+        label="Authorization Body"
         sortable
       >
-        {{ props.row.coverType }}
+        {{ props.row.authBody }}
       </b-table-column>
       
       
@@ -54,38 +54,29 @@
       <b-table-column
         v-slot="props"
         field="startDate"
-        label="PFI Date Received from Compliance "
+        label="Date Received from Compliance "
         sortable
       >
-        {{ props.row.startDate }}
+        {{ props.row.date }}
+      </b-table-column>
+
+
+       <b-table-column
+        v-slot="props"
+        field="paymentStatus"
+        label="Payment Status"
+        sortable
+      >
+        {{ props.row.status }}
       </b-table-column>
 
      
 
-      <b-table-column
-        v-slot="props"
-        field="sumInsured"
-        label="Payment Status"
-        sortable
-        
-      >
-       {{ currencyValue(props.row, 'sumInsured') }}
-        <!-- {{ props.row.sumInsured }} -->
-      </b-table-column>
+      
 
 
 
-      <b-table-column v-slot="props" label="Options">
-        <span class="buttons">
-          <!-- <b-button type="is-secondary-outline" icon-left="eye">View</b-button> -->
-          <b-button
-            type="is-secondary-outline"
-            icon-left="cash-multiple"
-            @click="captureInvoice(props.row)"
-            >Capture Invoice</b-button
-          >
-        </span>
-      </b-table-column>
+     
 
       <template #empty>
         <h4 class="is-size-4 has-text-centered">No Finance Information yet. &#x1F4CC;</h4>
@@ -117,10 +108,13 @@ export default {
   },
   computed: {
     
-   
+  ...mapGetters('compliance', {
+      loading: 'loading',
+      allPAs: 'allPermitApplications',
+    }),
     
-    isEmpty() {
-      return 'empty'
+   isEmpty() {
+     return this.allPAs.length === 0
     },
 
     isNames() {
@@ -128,33 +122,17 @@ export default {
     },
     
     tableData() {
-      return this.isEmpty ? [] : this.policies
+      return this.isEmpty ? [] : this.allPAs
     },
   },
 
-  
 
   methods: {
    
-
-    ...mapActions('policies', ['getAllPolicies','load', 'selectPolicy' ]),
-
-        currencyValue(policy, field) {
-      switch (policy.currency) {
-        case 'USD':
-          return this.$options.filters.currency_usd(policy[field])
-
-        default:
-          return this.$options.filters.currency(policy[field])
-      }
-    },
-
-    restrictDecimal() {
-      this.totalPremium = this.totalPremium.match(/^\d+\.?\d{0,2}/)
-    },
+ ...mapActions('compliance', ['getAllPermitApplications','load' ]),
 
     async load(){
-      await this.getAllPolicies();
+      await this.getAllPermitApplications();
     },
 
 
