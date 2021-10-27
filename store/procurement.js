@@ -64,6 +64,8 @@ export const mutations = {
     [GET_ALL_PFIS](state, payload){
         state.all = payload
     },
+
+    
 }
 
 export const actions = {
@@ -100,7 +102,8 @@ export const actions = {
 
            console.log(allPfis);
            console.log(allAmendedPermitApplications);
-
+           
+           console.log(allPfis.data[0].status.compliance);
 
            //RETRIEVED DATA IS COMMITTED TO THE MUTATION TO MAKE THE CHANGES EFFECTIVE
            commit(GET_ALL_PFIS, allPfis.data);
@@ -142,7 +145,7 @@ export const actions = {
     selectPfi({ commit }, pfi) {
         try {
             commit(SET_SELECTED_PFI, pfi)
-            console.log(pfi)
+            console.log(pfi._id)
         } catch (error) {
             console.log('Error')
         }

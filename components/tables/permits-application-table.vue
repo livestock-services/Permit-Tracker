@@ -69,12 +69,35 @@
       </b-table-column>
 
      
+    
+
+
+     <b-table-column
+        v-slot="props"
+        field="permitStatus"
+        label="Permit Application Status"
+        sortable
+      >
+        <span
+          :class="[
+            'tag',
+            {
+              'is-success': props.row.permitStatus.approved ===  'Approved',
+            },
+            {
+              'is-warning': props.row.permitStatus.pending === 'Pending',
+            },
+          ]"
+          >{{ props.row.permitStatus.pending }}</span
+        >
+      </b-table-column>
+      
 
      
 
 
       <template #empty>
-        <h4 class="is-size-4 has-text-centered">No Permits yet. &#x1F4DB;</h4>
+        <h4 class="is-size-4 has-text-centered">No Permit Applications yet. &#x1F4DB;</h4>
       </template>
     </b-table>
   </div>

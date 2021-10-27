@@ -70,13 +70,17 @@
         {{ props.row.status }}
       </b-table-column>
 
-     
+      <b-table-column
+       
+        field="paymentStatus"
+        label="Options"
+        sortable
+      >
+        <b-button rounded type="is-info" class="btn is-small" @click="onApprove">Approve</b-button>
+      </b-table-column>
 
-      
+       
 
-
-
-     
 
       <template #empty>
         <h4 class="is-size-4 has-text-centered">No Finance Information yet. &#x1F4CC;</h4>
@@ -96,6 +100,7 @@ export default {
 
   data() {
     return {
+      lightMode: true,
       isPaginated: true,
       currentPage: 1,
       perPage: 10,
@@ -112,6 +117,12 @@ export default {
       loading: 'loading',
       allPAs: 'allPermitApplications',
     }),
+
+     ...mapGetters('finance', {
+      loading: 'loading',
+      allPAs: 'allPermitApplications',
+    }),
+
     
    isEmpty() {
      return this.allPAs.length === 0
@@ -130,10 +141,42 @@ export default {
   methods: {
    
  ...mapActions('compliance', ['getAllPermitApplications','load' ]),
+ 
+ ...mapActions('finance', ['getAllPermitApplications','load', 'approvePermitApplication' ]),
 
     async load(){
       await this.getAllPermitApplications();
     },
+
+    async onApprove(){
+      
+    await this.approvePermitApplication();
+
+       this.$buefy.toast.open({
+              message: `Payment Approved!`,
+              duration: 2000,
+              position: 'is-top',
+              type: 'is-success',
+            });  
+
+    },
+
+  // confirm(){
+     
+       
+  //        this.$buefy.dialog.confirm({
+  //                   message: 'Proceed to approve payment?',
+  //                   onConfirm: () => this.$buefy.toast.open({
+  //                     message: 'Payment confirmed!',
+  //                     duration: 1500,
+  //                     position: 'is-top',
+  //                     type: 'is-success'
+  //                   })
+  //               })        
+     
+
+          
+  //   },
 
 
     captureInvoice(policy) {

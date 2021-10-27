@@ -6,7 +6,8 @@ import {    ADD_PERMIT_APPLICATION,
             SET_ALL_PERMIT_APPLICATIONS,
             GET_ALL_PERMIT_APPLICATIONS,
             SET_LOADING,
-            SET_SELECTED_PERMIT_APPLICATION
+            SET_SELECTED_PERMIT_APPLICATION,
+            APPROVE_PERMIT_APPLICATION
         } from '@/helpers/mutation-types'
 
 export const state = () => ({
@@ -60,6 +61,12 @@ export const mutations = {
     [SET_SELECTED_PERMIT_APPLICATION](state, PA) {
         state.selectedPermitApplication = PA
       },
+
+      
+  [APPROVE_PERMIT_APPLICATION](state) {
+    state.selectedPermitApplication.permitStatus = 'Approved'
+
+  }
     
 }
 
@@ -121,6 +128,7 @@ export const actions = {
            
 
            console.log(allPermitApplications);
+           console.log(allPermitApplications.data[0]._id);
 
 
            //RETRIEVED DATA IS COMMITTED TO THE MUTATION TO MAKE THE CHANGES EFFECTIVE
@@ -135,5 +143,26 @@ export const actions = {
             this.$log.error(error.message)
         }
     },
+
+
+    async approvePermitApplication({ commit, state }) {
+        try {
+          commit(SET_LOADING, true)
+
+          commit(APPROVE_PERMIT_APPLICATION)
+         const {data: putResponse} = await api.put(`/comp/permits/allPermitApplications/${state.selectedPermitApplication.id}`, state.selectedPermitApplication)
+
+         console.log(putResponse);
+         
+          commit(SET_LOADING, false)
+        } catch (error) {
+          commit(SET_LOADING, false)
+          throw error
+        }
+      },
+    
+      
+    
+    
 }
 

@@ -166,6 +166,7 @@ export const mutations = {
         state.allPermitApplications = payload
     },
 
+    
      //---------------------------------------------------------------------------------------------------
 
 
@@ -325,8 +326,8 @@ export const actions = {
            const {data: allPermitApplications} = await api.get(`/comp/permits/allPermitApplications`)
 
            
-
            console.log(allPermitApplications);
+           console.log(allPermitApplications.data[0].pfiNumber);
 
 
            //RETRIEVED DATA IS COMMITTED TO THE MUTATION TO MAKE THE CHANGES EFFECTIVE
