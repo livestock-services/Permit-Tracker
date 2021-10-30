@@ -82,13 +82,13 @@
           :class="[
             'tag',
             {
-              'is-success': props.row.permitStatus.approved ===  'Approved',
+              'is-success': props.row.permitStatus ===  'Approved',
             },
             {
-              'is-warning': props.row.permitStatus.pending === 'Pending',
+              'is-warning': props.row.permitStatus === 'Pending',
             },
           ]"
-          >{{ props.row.permitStatus.pending }}</span
+          >{{ props.row.permitStatus }}</span
         >
       </b-table-column>
       

@@ -60,25 +60,48 @@
         {{ props.row.date }}
       </b-table-column>
 
-
        <b-table-column
         v-slot="props"
-        field="paymentStatus"
-        label="Payment Status"
+        field="permitApplicationAmount"
+        label="Permit Application Amount "
         sortable
       >
-        {{ props.row.status }}
+        {{ props.row.permitApplicationAmount }}
       </b-table-column>
 
       <b-table-column
-       
-        field="paymentStatus"
-        label="Options"
+        v-slot="props"
+        field="permitStatus"
+        label="Permit Application Status"
         sortable
       >
-        <b-button rounded type="is-info" class="btn is-small" @click="onApprove">Approve</b-button>
+        <span
+          :class="[
+            'tag',
+            {
+              'is-success': props.row.permitStatus ===  'Approved',
+            },
+            {
+              'is-warning': props.row.permitStatus === 'Pending',
+            },
+          ]"
+          >{{ props.row.permitStatus }}</span
+        >
       </b-table-column>
+      
 
+        
+     <b-table-column v-slot="props" label="Options">
+        <span class="buttons">
+          <!-- <b-button type="is-secondary-outline" icon-left="eye">View</b-button> -->
+          <b-button
+            type="is-secondary-outline"
+            icon-left="cash-multiple"
+            @click="captureReceipt(props.row)"
+            >Approve</b-button
+          >
+        </span>
+      </b-table-column>
        
 
 
@@ -94,7 +117,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-//import PayDebitModal from '@/components/modals/pay-debit-modal'
+import PermitAppModal from '@/components/modals/permitAppApproval.vue'
 export default {
   name: 'UnreceiptedDebitsTable',
 
@@ -115,17 +138,17 @@ export default {
     
   ...mapGetters('compliance', {
       loading: 'loading',
-      allPAs: 'allPermitApplications',
+      PAs: 'allPermitApplications',
     }),
 
      ...mapGetters('finance', {
       loading: 'loading',
-      allPAs: 'allPermitApplications',
+      PAs: 'allPermitApplications',
     }),
 
     
    isEmpty() {
-     return this.allPAs.length === 0
+     return this.PAs.length === 0
     },
 
     isNames() {
@@ -133,7 +156,7 @@ export default {
     },
     
     tableData() {
-      return this.isEmpty ? [] : this.allPAs
+      return this.isEmpty ? [] : this.PAs
     },
   },
 
@@ -142,15 +165,16 @@ export default {
    
  ...mapActions('compliance', ['getAllPermitApplications','load' ]),
  
- ...mapActions('finance', ['getAllPermitApplications','load', 'approvePermitApplication' ]),
+ ...mapActions('finance', ['getAllPermitApplications','load', 'selectPermitApplication' ]),
 
     async load(){
       await this.getAllPermitApplications();
     },
 
     async onApprove(){
-      
-    await this.approvePermitApplication();
+    
+   // this.selectPermitApplication () 
+    //await this.approvePermitApplication();
 
        this.$buefy.toast.open({
               message: `Payment Approved!`,
@@ -179,12 +203,12 @@ export default {
   //   },
 
 
-    captureInvoice(policy) {
-       this.selectPolicy(policy)
+    captureReceipt(PA) {
+      this.selectPermitApplication(PA)
       setTimeout(() => {
         this.$buefy.modal.open({
           parent: this,
-          component: PayDebitModal,
+          component: PermitAppModal,
           hasModalCard: true,
           trapFocus: true,
           canCancel: ['x'],
@@ -202,6 +226,7 @@ export default {
       }, 300)
     },
   }
+  
 
  
 

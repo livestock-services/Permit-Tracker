@@ -327,7 +327,7 @@ export const actions = {
 
            
            console.log(allPermitApplications);
-           console.log(allPermitApplications.data[0].pfiNumber);
+           console.log(allPermitApplications.data[0]._id);
 
 
            //RETRIEVED DATA IS COMMITTED TO THE MUTATION TO MAKE THE CHANGES EFFECTIVE

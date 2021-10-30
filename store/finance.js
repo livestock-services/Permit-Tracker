@@ -15,6 +15,16 @@ export const state = () => ({
 
     allPermitApplications:[],
 
+    permitApplicationForm:{
+        
+        pfiNumber:null,
+        authBody: null,
+        permitApplicationAmount:null,
+
+              
+    },
+     //----------
+
     selectedPermitApplication: null,
 })
 
@@ -58,15 +68,15 @@ export const mutations = {
      //---------------------------------------------------------------------------------------------------
     
 
-    [SET_SELECTED_PERMIT_APPLICATION](state, PA) {
-        state.selectedPermitApplication = PA
+    [SET_SELECTED_PERMIT_APPLICATION](state, newPermitApplication) {
+        state.selectedPermitApplication = newPermitApplication 
       },
 
       
-  [APPROVE_PERMIT_APPLICATION](state) {
-    state.selectedPermitApplication.permitStatus = 'Approved'
+    [APPROVE_PERMIT_APPLICATION](state, putResponse) {
+     state.selectedPermitApplication = putResponse
 
-  }
+     }
     
 }
 
@@ -126,7 +136,7 @@ export const actions = {
            const {data: allPermitApplications} = await api.get(`/comp/permits/allPermitApplications`)
 
            
-
+           
            console.log(allPermitApplications);
            console.log(allPermitApplications.data[0]._id);
 
@@ -144,13 +154,17 @@ export const actions = {
         }
     },
 
+     
 
-    async approvePermitApplication({ commit, state }) {
+      //APPROVE A PERMIT APPLCATION
+    async approvePermitApplication({ commit, state, newPA }) {
         try {
           commit(SET_LOADING, true)
+        
 
-          commit(APPROVE_PERMIT_APPLICATION)
-         const {data: putResponse} = await api.put(`/comp/permits/allPermitApplications/${state.selectedPermitApplication.id}`, state.selectedPermitApplication)
+         const {data: putResponse} = await api.put(`/comp/permits/allPermitApplications/:id`, newPA )
+        
+        commit(APPROVE_PERMIT_APPLICATION, newPA)
 
          console.log(putResponse);
          
@@ -159,6 +173,40 @@ export const actions = {
           commit(SET_LOADING, false)
           throw error
         }
+      },
+
+      //ADD NEW PERMIT APPLCATION TO ALL PERMIT APPLICATIONS
+     async addNewPermitApplication({ commit, state}){
+        try {
+            commit(SET_LOADING, true);
+
+            const newPA = state.permitApplicationForm;
+           
+           
+            const response = await api.post(`/comp/permits/addNewPermitApplication`, newPA);
+
+            console.log(response.data);
+
+            commit(ADD_PERMIT_APPLICATION, response.data);
+            
+            commit(SET_LOADING, false);
+
+        } catch (error) {
+            commit(SET_LOADING, false);
+            this.log.error(error.message);
+        }
+    },
+
+
+      selectPermitApplication ({ commit }, newPA) {
+        try {
+            
+            commit(SET_SELECTED_PERMIT_APPLICATION, newPA)
+            console.log(newPA._id)
+        } catch (error) {
+            console.log('Error')
+        }
+        
       },
     
       
