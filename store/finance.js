@@ -157,16 +157,18 @@ export const actions = {
      
 
       //APPROVE A PERMIT APPLCATION
-    async approvePermitApplication({ commit, state, newPA }) {
+    async approvePermitApplication({ state, commit }, newPA) {
         try {
-          commit(SET_LOADING, true)
-        
+          commit(SET_LOADING, true) 
+            const newPA = state.selectedPermitApplication
+       //  const newPA = rootGetters['finance/selectedPermitApplication'] 
+          console.log(newPA._id)
 
-         const {data: putResponse} = await api.put(`/comp/permits/allPermitApplications/:id`, newPA )
+         const {data: putResponse} = await api.put(`/comp/permits/allPermitApplications/${newPA._id}`, {newPA, permitStatus: "Approved"} )
         
-        commit(APPROVE_PERMIT_APPLICATION, newPA)
+         commit(APPROVE_PERMIT_APPLICATION, putResponse)
 
-         console.log(putResponse);
+          console.log(putResponse.data);
          
           commit(SET_LOADING, false)
         } catch (error) {

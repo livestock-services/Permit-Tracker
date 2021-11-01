@@ -173,7 +173,7 @@ export default {
 
     async onApprove(){
     
-   // this.selectPermitApplication () 
+    this.selectPermitApplication () 
     //await this.approvePermitApplication();
 
        this.$buefy.toast.open({

@@ -49,7 +49,7 @@
 
          <div class="columns">
            <div  class="column is-half">
-              <h4> <span class="is-blue">  Permit Application Amount</span></h4>
+              <h4> <span class="is-blue">  Permit Application Status</span></h4>
             <p  placeholder="Supplier Name">
              <span class="is-green"> {{PA.permitStatus}} </span>
             </p>
