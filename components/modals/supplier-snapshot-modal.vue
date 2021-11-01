@@ -129,7 +129,17 @@ export default {
 .modal-width-auto {
   width: auto;
 }
+
+
 .is-blue{
-  color: blue;
+  color: rgb(0, 118, 228);
+font-family:'Times New Roman', Times, serif;
+  font-size: 1.2rem;
+  
+}
+
+p{
+  font-size: 1.5rem;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 </style>

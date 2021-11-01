@@ -49,13 +49,14 @@
         {{ props.row.authBody }}
       </b-table-column>
       
-      <b-table-column
+
+       <b-table-column
         v-slot="props"
-        field="applicationDate"
-        label="Application Date "
-        sortable
+        field="date"
+        label="Application Date"
+        searchable
       >
-        {{ props.row.date }}
+        {{ props.row.date}}
       </b-table-column>
 
 

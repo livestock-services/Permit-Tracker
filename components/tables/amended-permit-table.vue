@@ -45,7 +45,7 @@
         v-slot="props"
         field="date"
         label="Date of Amendment"
-        sortable
+        searchable
       >
         {{ props.row.date}}
       </b-table-column>

@@ -31,6 +31,16 @@
       aria-page-label="Page"
       aria-current-label="Current Page"
     >
+
+     <!-- <b-table-column
+        v-slot="props"
+        field="supplierName"
+        label="Supplier Name"
+        searchable
+      >
+        {{ props.row.supplierName }}
+      </b-table-column> -->
+
       <b-table-column
         v-slot="props"
         field="clientID"
@@ -53,9 +63,9 @@
 
       <b-table-column
         v-slot="props"
-        field="startDate"
+        field="date"
         label="Date Received from Compliance "
-        sortable
+        searchable
       >
         {{ props.row.date }}
       </b-table-column>
@@ -97,6 +107,7 @@
           <b-button
             type="is-secondary-outline"
             icon-left="cash-multiple"
+            class="approve"
             @click="captureReceipt(props.row)"
             >Approve</b-button
           >
@@ -140,6 +151,8 @@ export default {
       loading: 'loading',
       PAs: 'allPermitApplications',
     }),
+
+     
 
      ...mapGetters('finance', {
       loading: 'loading',
@@ -244,5 +257,9 @@ export default {
 
 .content-area {
   grid-column: 2/3;
+}
+
+.approve{
+  background-color: rgb(223, 240, 231);
 }
 </style>

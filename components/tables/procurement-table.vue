@@ -84,7 +84,7 @@
 
        <b-table-column v-slot="props" field="status" label="PFI Status" sortable>
 
-          <span class="tag is-success">{{ props.row.status.procurement}}</span>
+          <span class="tag is-proc">{{ props.row.status.procurement}}</span>
 
       </b-table-column>
 
@@ -97,8 +97,9 @@
           <!-- <b-button type="is-secondary-outline" icon-left="eye">View</b-button> -->
           <b-button
             type="is-secondary-outline"
-            icon-left="cash-multiple"
+            icon-left="eye-check"
             @click="captureReceipt(props.row)"
+            class="preview"
             >Preview</b-button
           >
         </span>
@@ -122,7 +123,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-import PayDebitModal from '@/components/modals/pay-debit-modal'
+import SupplierSnapshotModal from '@/components/modals/supplier-snapshot-modal.vue'
 export default {
   name: 'UnreceiptedDebitsTable',
 
@@ -189,7 +190,7 @@ export default {
       setTimeout(() => {
         this.$buefy.modal.open({
           parent: this,
-          component: PayDebitModal,
+          component: SupplierSnapshotModal,
           hasModalCard: true,
           trapFocus: true,
           canCancel: ['x'],
@@ -220,6 +221,15 @@ export default {
 .grid {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
+}
+
+.is-proc{
+ background-color: rgb(78, 159, 252);
+ color: aliceblue;
+}
+
+.preview{
+  background-color: rgb(177, 219, 243);
 }
 
 .content-area {

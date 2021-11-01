@@ -75,7 +75,7 @@ export const mutations = {
       
     [APPROVE_PERMIT_APPLICATION](state, putResponse) {
      state.selectedPermitApplication = putResponse
-
+     state.selectedPermitApplication.permitStatus = "Approved"
      }
     
 }
@@ -135,8 +135,10 @@ export const actions = {
             //API REQUEST IS MADE AND RESULT IS STORED IN CONST
            const {data: allPermitApplications} = await api.get(`/comp/permits/allPermitApplications`)
 
-           
-           
+           const {data: allPfis} = await api.get(`/pfis/AllPfis`)
+           console.log(allPfis);
+
+
            console.log(allPermitApplications);
            console.log(allPermitApplications.data[0]._id);
 

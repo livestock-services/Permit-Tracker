@@ -31,6 +31,17 @@
       aria-page-label="Page"
       aria-current-label="Current Page"
     >
+
+    <b-table-column
+        v-slot="props"
+        field="supplierName"
+        label="Supplier Name"
+        searchable
+      >
+        {{ props.row.supplierName }}
+      </b-table-column>
+
+
       <b-table-column
         v-slot="props"
         field="pfiNumber"
@@ -66,7 +77,7 @@
       
       <b-table-column v-slot="props" field="status" label="PFI Status" sortable>
 
-         <span class="tag is-info">{{ props.row.status.compliance}}</span>
+         <span class="tag is-comp">{{ props.row.status.compliance}}</span>
 
       </b-table-column>
 
@@ -153,6 +164,10 @@ export default {
   grid-template-columns: 1fr 2fr 1fr;
 }
 
+.is-comp{
+  background-color: rgb(255, 201, 102);
+ 
+}
 .content-area {
   grid-column: 2/3;
 }
