@@ -3,7 +3,7 @@
   <div class="grid is-full-height pt-2">
 
     <div class="card-1 form-card-1">
-      <b-field
+     <FormulateForm
         #default="{ isLoading }"
         v-model="form"
         :class="['card-content']"
@@ -15,28 +15,40 @@
           <span class="is-blue">C</span> <br> <span class="is-green"> Permit Tracker.</span>
         </h1>
        
-
-        <b-field label="Email">
-            <b-input
-           
-             placeholder="example@gmail.com"
-             type="email"
-            maxlength="30"
-            icon-right="mailbox"
-           >
-            </b-input>
-         </b-field>
-
-
+      <div>
+       <FormulateInput
+          type="email"
+          name="email"
+          class="email "
+          label="Email"
+          validation="bail|required|email"
+          data-has-icons-left
+          
+        >
+          <template #suffix>
+            <span class="icon is-left">
+              <i class="mdi mdi-account"></i>
+            </span>
+          </template>
+        </FormulateInput>
+        </div>
        
-          <b-field label="Password">
-            <b-input type="password"
-               placeholder="Your Password..."
-                password-reveal>
-            </b-input>
 
-         </b-field>
       
+        <FormulateInput
+          type="password"
+          name="password"
+          label="Password"
+          validation="required"
+          data-has-icons-left
+          class="password is-full-width"
+        >
+          <template #suffix>
+            <span class="icon is-left">
+              <i class="mdi mdi-key"></i>
+            </span>
+          </template>
+        </FormulateInput>
 
         <b-button
           class="mt-4"
@@ -45,7 +57,6 @@
           tag="input"
           native-type="submit"
           value="Login"
-          @click="onLogin"
         />
         <b-loading :active="isLoading" is-full-page></b-loading>
       <!--
@@ -55,7 +66,8 @@
         </p>
 
         -->
-      </b-field>
+      </FormulateForm>
+  
     </div>
 
     <div class="card form-card-2"></div>
@@ -208,10 +220,10 @@ export default {
 }
 
 .box{
-    /* background-color: rgb(35, 87, 134); */
-    background: url('../../assets/images/p2.jpg');
-    padding-top: 6rem;
-    padding-bottom: 6rem;
+    background-color: rgb(35, 87, 134); 
+    /* background: url('../../assets/images/p2.jpg'); */
+    padding-top: 8rem;
+    padding-bottom: 12rem;
     padding-left: 18rem;
     padding-right: 18rem;
 }

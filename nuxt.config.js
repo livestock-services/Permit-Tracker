@@ -51,6 +51,8 @@ export default {
     'nuxt-buefy',
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+
+    '@nuxtjs/auth-next'
   ],
 
    // Axios module configuration (https://go.nuxtjs.dev/config-axios)
@@ -77,5 +79,43 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    extend(config, {}) {
+      config.node = {
+          fs: 'empty'
+      }
+  }
+  },
+
+  router: {
+    middleware: ['auth'],
+  },
+
+  auth: {
+    redirect: {
+      login: '/auth/login',
+      logout: '/auth/login',
+      callback: '/auth/login',
+      home: '/',
+    },
+
+    strategies: {
+      local: {
+        token: {
+          property: 'token',
+          global: true,
+         // required: true,
+          type: ''
+        },
+        user: {
+          property: false,
+          autoFetch: true
+        },
+        endpoints: {
+          login: { url: '/api/auth/login', method: 'post', propertyName:'token' },
+          logout: { url: '/api/auth/logout', method: 'get' },
+          user:false // { url: '/api/auth/user', method: 'get' }
+        }
+      }
+    }
   }
 }

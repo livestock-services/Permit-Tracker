@@ -2,6 +2,7 @@
   <div class="app-container">
 
     <div 
+     v-if="$auth.loggedIn"
    >
      <Navbar/>
     </div>

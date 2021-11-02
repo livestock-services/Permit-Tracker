@@ -87,7 +87,7 @@
             <h3>You are signed in as</h3>
             <br />
             <div class="names">
-              <!-- {{ this.$auth.user.email }} -->
+               {{ this.$auth.user.email }} 
                   
             </div>
           </div>

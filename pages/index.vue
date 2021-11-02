@@ -31,7 +31,7 @@
             <h3>You are signed in as</h3>
             <br />
             <div class="names">
-              <!-- {{ this.$auth.user.email }} -->
+               {{ this.$auth.user.email }} 
               
               
               
@@ -93,9 +93,29 @@ export default {
 
   methods: {
 
-    endSession(){
-     this.$router.push('/auth/login')
-    }
+       async endSession() {
+      await this.$buefy.dialog.confirm({
+        title: 'Log out',
+        message: 'Are you sure you want to <b>log out</b>?',
+        cancelText: 'Cancel',
+        confirmText: 'Yes',
+        type: 'is-warning',
+        hasIcon: true,
+        onConfirm: async () => {
+          
+          await this.$auth.logout()
+           
+          this.$buefy.toast.open({
+            duration: 3000,
+            message: 'Until next time, see you!',
+            position: 'is-top',
+            type: 'is-info',
+          })
+          this.$router.push({ path: '/auth/login' })
+          
+        },
+      })
+    },
     //  ...mapActions('users', ['getAllUsers']),
   },
      
