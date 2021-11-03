@@ -22,6 +22,7 @@ import FinanceTable from '~/components/tables/finance-table.vue'
 //import AddNewPurchaseOrder from '../../components/forms/add-new-purchase-order.vue'
 //import ComplianceTable from '../../components/tables/compliance-table.vue'
 export default {
+  // auth: 'guest',
  components:{
     
   FinanceTable

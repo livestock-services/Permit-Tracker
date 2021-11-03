@@ -18,6 +18,8 @@
 import AddNewPurchaseOrder from '../../components/forms/add-new-purchase-order.vue'
 import ProcurementTable from '../../components/tables/procurement-table.vue'
 export default {
+
+ 
  components:{
      AddNewPurchaseOrder,
      ProcurementTable

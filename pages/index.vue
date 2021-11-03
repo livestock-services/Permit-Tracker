@@ -107,9 +107,9 @@ export default {
            
           this.$buefy.toast.open({
             duration: 3000,
-            message: 'Until next time, see you!',
+            message: 'Until next time!',
             position: 'is-top',
-            type: 'is-info',
+            type: 'is-greeen',
           })
           this.$router.push({ path: '/auth/login' })
           
@@ -127,5 +127,10 @@ export default {
 .names{
   color:cornflowerblue;
   font-size: 1.2rem;
+}
+
+.is-greeen{
+  background-color: rgb(120, 206, 177);
+  color: whitesmoke;
 }
 </style>

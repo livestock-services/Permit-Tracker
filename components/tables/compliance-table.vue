@@ -165,7 +165,7 @@ export default {
 }
 
 .is-comp{
-  background-color: rgb(255, 201, 102);
+  background-color: rgb(255, 217, 168);
  
 }
 .content-area {

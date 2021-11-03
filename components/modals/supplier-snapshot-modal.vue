@@ -46,6 +46,15 @@
            </div>
          </div>
 
+         <div class="columns">
+           <div  class="column is-half">
+              <h4> <span class="is-blue">  Issued Date</span></h4>
+            <p  placeholder="Supplier Name">
+              {{pfi.date}}
+            </p>
+           </div>
+         </div>
+
        </b-form>
 
       </div>

@@ -80,7 +80,7 @@
 import { mapActions } from 'vuex'
 export default {
 
-   auth: 'guest',
+    auth: 'guest',
   data() {
     return {
       form: {
@@ -118,22 +118,12 @@ export default {
           console.log(response.data)
           this.$auth.setUser(user)
 
-          
+      
 
-          this.$buefy.toast.open({
-            message:`Logged In as ${this.$auth.user.email}!` ,
-            position:'is-bottom',
-            type:'is-success'})
-
-        
-       
-
-
-        
             
         this.$buefy.toast.open({
           duration: 3000,
-          message: 'Welcome back!',
+          message: 'Welcome!',
           position: 'is-top',
           type: 'is-success',
         })

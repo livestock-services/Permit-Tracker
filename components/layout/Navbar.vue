@@ -82,7 +82,7 @@
           ></b-menu-item>
         </b-menu-list>
 
-        <b-menu-list  type="is-success" size="is-medium">
+        <b-menu-list   type="is-success" size="is-medium">
           <div class="welcome">
             <h3>You are signed in as</h3>
             <br />
@@ -100,6 +100,9 @@
 </template>
 
 <script>
+
+import { mapGetters } from 'vuex'
+
 export default {
   data() {
     return {
@@ -133,7 +136,9 @@ export default {
     }
   },
 
-  computed: {},
+  computed: {
+    ...mapGetters(['isAuthenticated', 'loggedInUser'])
+  },
 
   methods: {
     pushRoute(path) {
@@ -155,9 +160,10 @@ export default {
           await this.$auth.logout()
           this.$buefy.toast.open({
             duration: 5000,
-            message: 'Until next time, see you!',
+            message: 'Until next time!',
             position: 'is-top',
-            type: 'is-primary',
+            type: 'is-greeen',
+            
           })
           this.$router.push({ path: '/auth/login' })
         },
@@ -182,6 +188,11 @@ export default {
 .names{
   color:purple;
   font-size: 1rem;
+}
+
+.is-greeen{
+  background-color: rgb(120, 206, 177);
+  color: whitesmoke;
 }
 
 .welcome{
