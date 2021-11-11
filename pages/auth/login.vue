@@ -218,7 +218,7 @@ export default {
   height: 60vh;
   grid-row: 2/3;
   grid-column: 3/3;
-  background: url('../../assets/images/LSC.jpg');
+  background: url('../../assets/images/LSC2.png');
   background-repeat: no-repeat;
   background-size: cover;
 }
