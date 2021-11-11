@@ -22,7 +22,7 @@
 
 
             <div class="column is-one-third">
-         <b-field label="PFI No." >
+         <b-field label="Permit No." >
             <b-input  v-model="pfiNumber"></b-input>
         </b-field>
 

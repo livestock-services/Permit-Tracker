@@ -34,7 +34,7 @@
       <b-table-column
         v-slot="props"
         field="pfiNumber"
-        label="PFI No."
+        label="Permit No."
         sortable
       >
         {{ props.row.pfiNumber }}

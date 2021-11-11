@@ -77,7 +77,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 export default {
 
     auth: 'guest',
@@ -93,9 +93,18 @@ export default {
       isFullPage: true,
     }
   },
-  methods: {
-  ...mapActions('user', ['getUser']),
 
+   computed: {
+     ...mapGetters('users', {
+        loading: 'loading',
+         Users: 'allUsers',
+    }),
+  },
+
+  methods: {
+   ...mapActions('user', ['getUser']),
+
+   ...mapActions('users', ['getAllUsers']),
 
   async onLogin(){
      this.$buefy.toast.open({
@@ -110,6 +119,7 @@ export default {
   
   },
     async loginUser(user) {
+
       try {
         const { data: response } = await this.$auth.loginWith('local', {
             data: this.form 
@@ -118,6 +128,7 @@ export default {
           console.log(response.data)
           this.$auth.setUser(user)
 
+         
       
 
             
@@ -130,6 +141,9 @@ export default {
   
 
         this.$router.push({ path: '/' })
+
+        await this.getAllUsers();
+
       } catch (error) {
         this.form.password = null
         const message = error.response

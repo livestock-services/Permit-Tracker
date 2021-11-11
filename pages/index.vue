@@ -28,13 +28,13 @@
 
          <b-menu-list  type="is-success" size="is-medium">
           <div class="welcome">
-            <h3>You are signed in as</h3>
+            <h3>Signed in as</h3>
             <br />
             <div class="names">
-               {{ this.$auth.user.email }} 
-              
-              
-              
+               {{ this.$auth.user.email }}, <br/>
+
+
+               
              
             </div>
           </div>
@@ -46,7 +46,7 @@
 </template>
 
 <script>
-// import {mapActions, mapGetters} from 'vuex'
+import {mapActions, mapGetters} from 'vuex'
 export default {
   name: 'Dashboard',
 
@@ -58,6 +58,7 @@ export default {
           icon: 'cash-check',
           name: 'Manage Procurement',
           path: '/procurement/procurement',
+          
         },
 
          {
@@ -72,6 +73,7 @@ export default {
           icon: 'finance',
           name: 'Manage Finance',
           path: '/finance/finance',
+          
         },
         
        
@@ -85,15 +87,27 @@ export default {
   },
 
   computed: {
-    //  ...mapGetters('users', {
-    //   loading: 'loading',
-    //   Users: 'allUsers',
-   // }),
+     ...mapGetters('users', {
+        loading: 'loading',
+         Users: 'allUsers',
+    }),
   },
 
   methods: {
 
+         ...mapActions('users', ['getAllUsers']),
+       
+    
+
+
        async endSession() {
+
+         await this.getAllUsers();
+         
+       
+
+
+
       await this.$buefy.dialog.confirm({
         title: 'Log out',
         message: 'Are you sure you want to <b>log out</b>?',

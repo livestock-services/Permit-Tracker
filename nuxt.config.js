@@ -94,10 +94,8 @@ export default {
 
   auth: {
     redirect: {
-      login: '/auth/login/admin',
-      login: '/auth/login/proc',
-      login: '/auth/login/comp',
-      login: '/auth/login/fin',
+      
+      login: '/auth/login',
       logout: '/auth/login',
       callback: '/auth/login',
       home: '/',
@@ -116,11 +114,8 @@ export default {
           autoFetch: true
         },
         endpoints: {
-          login: { url: '/api/auth/login/admin', method: 'post', propertyName:'token' },
-          login: { url: '/api/auth/login/proc', method: 'post', propertyName:'token' },
-          login: { url: '/api/auth/login/comp', method: 'post', propertyName:'token' },
-          login: { url: '/api/auth/login/fin', method: 'post', propertyName:'token' },
-          logout: { url: '/api/auth/finance/logout', method: 'get' },
+          login: { url: '/api/auth/login', method: 'post', propertyName:'token' },
+          logout: { url: '/api/auth/logout', method: 'get' },
           user:false // { url: '/api/auth/user', method: 'get' }
         }
       }
