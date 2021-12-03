@@ -53,6 +53,7 @@ export const actions = {
             const { data:fetchUsers } = await api.get(`/auth/allUsers`)
 
             console.log(fetchUsers.data)
+            console.log(fetchUsers.data.length)
 
            
          
@@ -65,67 +66,76 @@ export const actions = {
                 const name = fetchUsers.data[i].name
                 console.log(name)
 
-              switch (name) {
+                const email = fetchUsers.data[i].email
+                console.log(email)
+
+                const role = fetchUsers.data[i].role
+                console.log(role)
+
+
+                
+
+              switch (email) {
                
 
-                case 'Azwel Simwinga':
+                case 'azwels@livestock.co.zm':
 
                     console.log(fetchUsers.data[i].role.admin)
                       
                       break;
 
-                case  'Mutinta Chijoka':
+                case  'mutintac@livestock.co.zm':
 
                     console.log(fetchUsers.data[i].role.admin)
                       
                       break;
 
-                 case  'Euston Kazembe':
+                 case  'eustonk@livestock.co.zm':
 
                         console.log(fetchUsers.data[i].role.admin)
                           
                           break;
 
-                 case  'Kondwani Mwale':
+                 case  'kondwanim@livestock.co.zm':
 
                     console.log(fetchUsers.data[i].role.admin)
                       
                       break;
 
 
-                 case 'Jenny Emmerson':
+                 case 'jennye@livestock.co.zm':
 
                         console.log(fetchUsers.data[i].role.proc)
                          
                          break;
 
 
-                case 'Henry Beckett':
+                case 'henryb@livestock.co.zm':
 
                         console.log(fetchUsers.data[i].role.proc)
                             
                         break;
 
-                 case  'Gavin Gavinson':
+                 case  'gaving@livestock.co.zm':
 
                     console.log(fetchUsers.data[i].role.comp)
                       
                       break;
 
-                 case  'George M\'tonga':
+                 case  'georgem@livestock.co.zm':
 
                         console.log(fetchUsers.data[i].role.comp)
                           
                           break;
 
 
-                case  'Bob Gondwe':
+                case  'bobgm@livestock.co.zm':
 
                 console.log(fetchUsers.data[i].role.fin)
                     
                     break;
 
-                case  'Timothy K':
+                case  'timothyk@livestock.co.zm':
 
                     console.log(fetchUsers.data[i].role.fin)
                         

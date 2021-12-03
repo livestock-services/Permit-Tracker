@@ -20,30 +20,33 @@
         <div class="box">
             <div class="columns ">
 
-           
+            <div class="column is-one-third">
+         <b-field label="Supplier">
+            <b-input  v-model="supplierName"></b-input>
+        </b-field>
+
+            </div>
+
 
             <div class="column is-one-third">
          <b-field label="PFI No." >
-            <b-input v-model="pfiNumber"></b-input>
+            <b-input :disabled="!supplierName" v-model="pfiNumber"></b-input>
         </b-field>
 
             </div>
             
 
-           <div class="column is-one-third">
-         <b-field label="Authorization Body">
-            <b-input :disabled="!pfiNumber" v-model="authBody"></b-input>
-        </b-field>
+          
 
-            </div>
+            
 
 
             <div class="column is-one-third">
-         <b-field label="Permit Application Amount">
+         <b-field label="PFI Value">
             <b-input
-             v-cleave="masks.numeral"
-             :disabled="!authBody"
-             v-model="permitApplicationAmount">
+             v-cleave="masks.pfiValue"
+             :disabled="!pfiNumber"
+             v-model="pfiValue">
              </b-input>
         </b-field>
 
@@ -51,6 +54,74 @@
             </div>
 
             
+
+        </div>
+
+         <div class="columns ">
+
+           
+
+            <div class="column is-one-third">
+         <b-field label="Exchange Rate" >
+            <b-input :disabled="!pfiValue" v-model="exchangeRate"></b-input>
+        </b-field>
+
+            </div>
+            
+
+           <div class="column is-one-third">
+         <b-field label="Local Currency">
+            <b-input :disabled="!exchangeRate" v-model="localCurrency"></b-input>
+        </b-field>
+
+            </div>
+
+            
+
+
+           
+
+            
+
+        </div>
+
+    
+        <div class="columns">
+            <div class="column ">
+        
+
+         <b-field label="Market Authorized Fee">
+            
+
+            <b-radio-button v-model="radioButton"
+                native-value="Authorized Fee (1.5%)"
+                type="is-success is-light is-outlined">
+                <b-icon icon="check"></b-icon>
+                <span>{{radioButton}} </span>
+            </b-radio-button>
+
+            <b-radio-button v-model="radioButton2"
+                native-value="Non-Authorized Fee (5% + ZMW750.00)"
+                type="is-danger is-light is-outlined">
+                <b-icon icon="close"></b-icon>
+                <span>{{radioButton2}}</span>
+                
+            </b-radio-button>
+
+            
+        </b-field>
+
+        <div>
+                <b>Selection:</b>
+                <div > 
+                    {{ radioButton }}
+                </div>
+
+               
+               
+        </div>
+
+            </div>
 
         </div>
 
@@ -91,13 +162,24 @@
            
             
             return {
-                
+               radioButton1: {
+                   authFee:'1.5%'
+                   },
+
+               radioButton2:{
+                    nonAuthFee: '5% + ZMW 750.00'
+               },
                masks: {
                     
           numeral: {
               numeral: true,
               numeralThousandsGroupStyle: 'thousand',
               prefix: 'ZMW '
+          },
+          pfiValue: {
+              numeral: true,
+              numeralThousandsGroupStyle: 'thousand',
+              prefix: ' '
           }
              }
             }

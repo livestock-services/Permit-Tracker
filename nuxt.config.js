@@ -87,7 +87,7 @@ export default {
   },
 
   router: {
-    middleware: ['auth'],
+    middleware: ['auth', 'is-admin'],
   },
 
   

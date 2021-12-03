@@ -1,6 +1,11 @@
-export default function ({ store, redirect }) {
+export default function ({ $auth, store, redirect }) {
   // If user is authenticated
   if (store.state.auth.currentUser) {
-    return redirect('/')
+    if($auth.hasScope('admin')){
+ 
+      console.log('admin')
+      return redirect('/')
+    }
+  
   }
 }
