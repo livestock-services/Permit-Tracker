@@ -154,7 +154,7 @@ export default {
         message: 'Are you sure you want to <b>log out</b>?',
         cancelText: 'Cancel',
         confirmText: 'Yes',
-        type: 'is-primary',
+        type: 'is-warning',
         hasIcon: true,
         onConfirm: async () => {
           await this.$auth.logout()

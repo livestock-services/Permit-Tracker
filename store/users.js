@@ -197,12 +197,12 @@ export const actions = {
         try {
             commit(SET_LOADING, true)
 
-            // const selectedUser = state.user
+             const selectedUser = state.user
             // //  const newPA = rootGetters['finance/selectedPermitApplication'] 
             //    console.log(selectedUser)
 
 
-          //  const fetchUser = await api.get(`/auth/User/${selectedUser._id}`)
+            const fetchUser = await api.get(`/auth/User/${selectedUser._id}`)
             console.log(fetchUser.data)
 
             commit(SET_CURRENT_USER, fetchUser.data)

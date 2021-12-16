@@ -44,11 +44,12 @@ export const state = () => ({
      allPermitApplications:[],
     
     permitApplicationForm:{
-        
+        supplierName:null,
         pfiNumber:null,
-        authBody: null,
-        permitApplicationAmount:null,
-
+        pfiValue:null,
+        exchangeRate:null,
+        localCurrancy:null
+       
               
     },
      //-------------------------------------------------------------

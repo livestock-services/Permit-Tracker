@@ -12,7 +12,8 @@
         <h1 class="header center my-4">
           <span class="is-blue">L</span> 
           <span class="is-blue">S</span> 
-          <span class="is-blue">C</span> <br> <span class="is-green"> Permit Tracker.</span>
+          <span class="is-blue">C</span>
+          <span class="is-blue">S</span> <br> <span class="is-green"> Permit Tracker.</span>
         </h1>
        
       <div>
@@ -128,7 +129,7 @@ export default {
           console.log(response.data)
           this.$auth.setUser(user)
 
-         
+        
       
 
             
@@ -143,6 +144,7 @@ export default {
         this.$router.push({ path: '/' })
 
         await this.getAllUsers();
+        //   await this.getUser(form);
 
       } catch (error) {
         this.form.password = null
@@ -174,13 +176,15 @@ export default {
 
 .center {
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-  font-weight: 600;
+  font-weight: 700;
 }
 .is-blue {
   color: rgb(5, 105, 67);
+  font-size: 1.8rem;
 }
 .is-green {
   color: rgb(17, 158, 158);
+  font-size: 2.8rem;
 }
 .register {
   padding-left: 5rem;
@@ -202,7 +206,7 @@ export default {
 }
 
 .form-card-1 {
-    
+   height: 92vh;  
   grid-row: 2/3;
   grid-column: 1/3;
   width: 100%;
@@ -210,12 +214,12 @@ export default {
 }
 
 .card-content {
-  padding-top: 1rem;
+  padding-top: 7.5rem;
   width: auto;
 }
 
 .form-card-2 {
-  height: 60vh;
+  height: 92vh;
   grid-row: 2/3;
   grid-column: 3/3;
   background: url('../../assets/images/LSC2.png');
@@ -224,11 +228,11 @@ export default {
 }
 
 .box{
-    background-color: rgb(35, 87, 134); 
+    /*background-color: rgb(35, 87, 134); 
     /* background: url('../../assets/images/p2.jpg'); */
-    padding-top: 8rem;
-    padding-bottom: 12rem;
-    padding-left: 18rem;
-    padding-right: 18rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0rem;
+    padding-left: 1.5rem;
+    padding-right: 1rem;
 }
 </style>

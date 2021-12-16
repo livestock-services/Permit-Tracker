@@ -20,117 +20,129 @@
         <div class="box">
             <div class="columns ">
 
-            <div class="column is-one-third">
-         <b-field label="Supplier">
-            <b-input  v-model="supplierName"></b-input>
-        </b-field>
+                <div class="column is-one-quarter">
+            <b-field label="Supplier">
+                <b-input  v-model="supplierName"></b-input>
+            </b-field>
 
-            </div>
+                </div>
 
 
-            <div class="column is-one-third">
+            <div class="column is-one-quarter">
          <b-field label="PFI No." >
             <b-input :disabled="!supplierName" v-model="pfiNumber"></b-input>
         </b-field>
 
             </div>
             
+          <div  class="column is-one-quarter">
+                <b-field label="Currency">
+                    <b-select 
+                            :disabled="!pfiNumber"
+                            v-model="selectCurrency" 
+                            placeholder="Select Currency"
+                               > 
+                            <option value="USD">USD</option>
+                            <option value="EUR">EUR</option>
+                            <option value="ZAR">ZAR</option>
+                    </b-select>
+                </b-field>
+               
+              </div>
+          
+            <div  class="column is-one-quarter">
+                <b-field label="PFI Value">
+                    <b-input 
+                            :disabled="!pfiNumber"
+                            v-model="pfiValue" 
+                                id="n1"> 
+                    </b-input>
+                </b-field>
+               
+              </div>
+              
+               
+          </div>
+
+            
+          <div class="columns">
+
+             <div class="column is-one-quarter">
+                <b-field label="Exchange Rate">
+                    <b-input :disabled="!pfiValue" v-model="exchangeRate" id="n2"> </b-input>
+               </b-field>
+            
+               </div>
+               
+                <div class="column is-one-quarter">
+              <b-field label="Local Currency">
+                  <b-input disabled  v-model="result" v-cleave="masks.numeral" id="result" ></b-input>
+               </b-field>
+            
+               </div> 
+
+                
+                <div class="column is-one-quarter">
+              <b-field label="Market Authorized Fee">
+                  <b-input disabled v-model="marketAuthFee" v-cleave="masks.numeral" id="MA" ></b-input>
+               </b-field>
+            
+               </div> 
+
+                 <div class="column is-one-quarter">
+              <b-field label="Market Non-Authorized Fee">
+                  <b-input disabled v-model="marketNonAuthFee" v-cleave="masks.numeral" id="MNA" ></b-input>
+               </b-field>
+            
+               </div> 
+        
+          </div>
 
           
 
+         <div class="columns mx-4 mt-4">
+
+          <b-field>
+              <b-button class="mx-4" id="viewMA" value="Market Authorized Fee" type="is-info"  @click="marketAuthFee">
+                Market Authorized Fee
+             </b-button>
+          </b-field>
+
+          <b-field>
+              <b-button class="mx-4" id="viewMNA" value="Market Non-Authorized Fee" type="is-warning"  @click="marketNonAuthFee">
+                Market Non-Authorized Fee
+             </b-button>
+          </b-field>
+
+
+          
+
+
+
             
-
-
-            <div class="column is-one-third">
-         <b-field label="PFI Value">
-            <b-input
-             v-cleave="masks.pfiValue"
-             :disabled="!pfiNumber"
-             v-model="pfiValue">
-             </b-input>
-        </b-field>
-
-
-            </div>
-
-            
-
         </div>
 
-         <div class="columns ">
 
-           
-
-            <div class="column is-one-third">
-         <b-field label="Exchange Rate" >
-            <b-input :disabled="!pfiValue" v-model="exchangeRate"></b-input>
-        </b-field>
-
-            </div>
-            
-
-           <div class="column is-one-third">
-         <b-field label="Local Currency">
-            <b-input :disabled="!exchangeRate" v-model="localCurrency"></b-input>
-        </b-field>
-
-            </div>
-
-            
+        
 
 
            
 
-            
-
         </div>
 
-    
+
+<!--          
         <div class="columns">
-            <div class="column ">
-        
+          <div v-if="exchangeRate" class="column is-half">
+                <h2>Summary</h2>
+                <pre>Supplier Name: {{ supplierName }}</pre>
+                <pre>PFI No: {{ pfiNumber }}</pre>
+                <pre>PFI Value:{{selectCurrency}} {{ pfiValue }}</pre>
+                <pre>Exchange Rate: {{ exchangeRate }}</pre>
+                <pre>Local Currency: ZMW {{ result }}</pre>
+          </div>
+        </div> -->
 
-         <b-field label="Market Authorized Fee">
-            
-
-            <b-radio-button v-model="radioButton"
-                native-value="Authorized Fee (1.5%)"
-                type="is-success is-light is-outlined">
-                <b-icon icon="check"></b-icon>
-                <span>{{radioButton}} </span>
-            </b-radio-button>
-
-            <b-radio-button v-model="radioButton2"
-                native-value="Non-Authorized Fee (5% + ZMW750.00)"
-                type="is-danger is-light is-outlined">
-                <b-icon icon="close"></b-icon>
-                <span>{{radioButton2}}</span>
-                
-            </b-radio-button>
-
-            
-        </b-field>
-
-        <div>
-                <b>Selection:</b>
-                <div > 
-                    {{ radioButton }}
-                </div>
-
-               
-               
-        </div>
-
-            </div>
-
-        </div>
-
-        <b-button :disabled="!permitApplicationAmount" type="is-info" @click="onSubmit">
-            Submit
-        </b-button>
-
-        
-        </div>
         </div>
 
 
@@ -161,25 +173,21 @@
         data() {
            
             
-            return {
-               radioButton1: {
-                   authFee:'1.5%'
-                   },
 
-               radioButton2:{
-                    nonAuthFee: '5% + ZMW 750.00'
-               },
+            return {  
+               
                masks: {
                     
           numeral: {
               numeral: true,
+              numeralDecimalScale:2,
               numeralThousandsGroupStyle: 'thousand',
               prefix: 'ZMW '
           },
           pfiValue: {
               numeral: true,
               numeralThousandsGroupStyle: 'thousand',
-              prefix: ' '
+              prefix: 'USD '
           }
              }
             }
@@ -189,9 +197,12 @@
 
     ...mapFields('compliance', [
       'permitApplicationForm',
+      'permitApplicationForm.supplierName',
       'permitApplicationForm.pfiNumber',
-      'permitApplicationForm.authBody',
-      'permitApplicationForm.permitApplicationAmount'
+       'permitApplicationForm.pfiValue',
+      'permitApplicationForm.exchangeRate',
+      'permitApplicationForm.localCurrency',
+     
       
       
     ]),
@@ -201,10 +212,67 @@
         // this.clearForm()
         },
 
+        watch:{
+            localCurrency(){
+                const localCurrency = this.pfiValue * this.exchangeRate;
+
+            }
+        },
+
         methods:{
     
     ...mapActions('compliance', ['addNewPermitApplication', 'load']),
 
+            async marketAuthFee(){
+                var n1 = document.getElementById('n1').value;
+                var n2 = document.getElementById('n2').value;
+                var view = document.getElementById('viewMA').value;
+                var marketAuthFee = document.getElementById('MA').value;
+                var marketNonAuthFee = document.getElementById('MNA').value;
+
+               
+
+                if(view === 'Market Authorized Fee' ){
+                  var res =  document.getElementById('result').value= (n1*n2).toFixed(2);
+                  var ma =  document.getElementById('MA').value= (.015*(n1*n2)).toFixed(2);
+                 
+                  
+
+                    console.log(res);
+
+                  
+                }
+            },
+
+            
+            async marketNonAuthFee(){
+                var n1 = document.getElementById('n1').value;
+                var n2 = document.getElementById('n2').value;
+                 var view = document.getElementById('viewMNA').value;
+                var marketAuthFee = document.getElementById('MA').value;
+                var marketNonAuthFee = document.getElementById('MNA').value;
+
+               
+
+                if(view === 'Market Non-Authorized Fee' ){
+                  var res =  document.getElementById('result').value= (n1*n2).toFixed(2);
+                  var mna =  document.getElementById('MNA').value= ((.05*(n1*n2))+ 750.00).toFixed(2);
+                 
+                  
+
+                    console.log(res);
+
+                  
+                }
+
+            },
+
+            async validate (e) {
+                    var t = e.value;
+                    e.value = (t.indexOf(".") >= 0) 
+                    ? (t.substr(0, t.indexOf("."))
+                    + t.substr(t.indexOf("."), 3)) : t;
+             },
 
              async onSubmit() {
 
@@ -232,6 +300,7 @@
                   }
                   },
 
+                  
     
     clearForm() {
      this.permitApplicationForm= {

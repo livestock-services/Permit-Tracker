@@ -7,9 +7,7 @@
             <finance-table></finance-table>
         </b-tab-item>
 
-         <b-tab-item label="View Finance Information" icon="finance">
-            <card></card>
-        </b-tab-item>
+        
         
     </b-tabs>
 
