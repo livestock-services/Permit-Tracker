@@ -46,9 +46,12 @@ export const state = () => ({
     permitApplicationForm:{
         supplierName:null,
         pfiNumber:null,
+        selectCurrency:null,
         pfiValue:null,
         exchangeRate:null,
-        localCurrancy:null
+        feeType:null,
+        authBody:null,
+        permitPaper:null
        
               
     },

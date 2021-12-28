@@ -31,7 +31,16 @@
       aria-page-label="Page"
       aria-current-label="Current Page"
     >
-      <b-table-column
+     <b-table-column
+        v-slot="props"
+        field="clientID"
+        label="Supplier"
+        sortable
+      >
+        {{ props.row.supplierName }}
+      </b-table-column>
+
+       <b-table-column
         v-slot="props"
         field="clientID"
         label="PFI No."
@@ -39,6 +48,64 @@
       >
         {{ props.row.pfiNumber }}
       </b-table-column>
+
+      <b-table-column
+        v-slot="props"
+        field="clientID"
+        label="Currency"
+        sortable
+      >
+        {{ props.row.selectCurrency }}
+      </b-table-column>
+
+       <b-table-column
+        v-slot="props"
+        field="authBody"
+        label="PFI Value"
+        sortable
+        v-cleave="masks.pfiValue"
+      >
+        {{ props.row.pfiValue }}
+      </b-table-column>
+
+      <b-table-column
+        v-slot="props"
+        field="authBody"
+        label="Exchange Rate"
+        sortable
+      >
+        {{ props.row.exchangeRate }}
+      </b-table-column>
+
+      <b-table-column
+        v-slot="props"
+        field="authBody"
+        label="Local Currency (ZMW)"
+        sortable
+      >
+        {{ props.row.localCurrency }}
+      </b-table-column>
+
+      <b-table-column
+        v-slot="props"
+        field="authBody"
+        label="Market Authorized Fee (ZMW)"
+        sortable
+      >
+        {{ props.row.marketAuthFee }}
+      </b-table-column>
+
+      <b-table-column
+        v-slot="props"
+        field="authBody"
+        label="Non-Market Authorized Fee (ZMW)" 
+        sortable
+      >
+        {{ props.row.marketNonAuthFee }}
+
+        
+      </b-table-column>
+      
 
       <b-table-column
         v-slot="props"
@@ -53,7 +120,7 @@
        <b-table-column
         v-slot="props"
         field="date"
-        label="Application Date"
+        label="Date"
         searchable
       >
         {{ props.row.date}}
@@ -63,10 +130,10 @@
       <b-table-column
         v-slot="props"
         field="permitApplicationAmount"
-        label="Permit Application Amount "
+        label="Permit Paper "
         sortable
       >
-        {{ props.row.permitApplicationAmount }}
+        {{ props.row.permitApplicationPaper }}
       </b-table-column>
 
      
@@ -110,13 +177,44 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 //import PayDebitModal from '@/components/modals/pay-debit-modal'
+
+import Cleave from 'cleave.js'
+
+    const cleave = {
+            name: 'cleave',
+            bind(el, binding) {
+                const input = el.querySelector('input')
+                input._vCleave = new Cleave(input, binding.value)
+            },
+            unbind(el) {
+                const input = el.querySelector('input')
+                input._vCleave.destroy()
+            }
+        }
+
 export default {
   name: 'PermitApplicationsTable',
-
+  directives: { cleave },
   data() {
 
     
     return {
+
+       masks: {
+                    
+          numeral: {
+              numeral: true,
+              numeralDecimalScale:2,
+              numeralThousandsGroupStyle: 'thousand',
+              prefix: 'ZMW '
+          },
+          pfiValue: {
+              numeral: true,
+              numeralThousandsGroupStyle: 'thousand',
+             
+          }
+             },
+             
       status: 'Active',
       isPaginated: true,
       currentPage: 1,

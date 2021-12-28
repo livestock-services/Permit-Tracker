@@ -22,7 +22,7 @@
 
                 <div class="column is-one-quarter">
             <b-field label="Supplier">
-                <b-input  v-model="supplierName"></b-input>
+                <b-input  v-model="supplierName"  placeholder="Enter Supplier Name..."></b-input>
             </b-field>
 
                 </div>
@@ -30,7 +30,7 @@
 
             <div class="column is-one-quarter">
          <b-field label="PFI No." >
-            <b-input :disabled="!supplierName" v-model="pfiNumber"></b-input>
+            <b-input :disabled="!supplierName" v-model="pfiNumber"  placeholder="Enter PFI No..."></b-input>
         </b-field>
 
             </div>
@@ -43,6 +43,7 @@
                             placeholder="Select Currency"
                                > 
                             <option value="USD">USD</option>
+                            <option value="GBP">GBP</option>
                             <option value="EUR">EUR</option>
                             <option value="ZAR">ZAR</option>
                     </b-select>
@@ -55,7 +56,8 @@
                     <b-input 
                             :disabled="!pfiNumber"
                             v-model="pfiValue" 
-                                id="n1"> 
+                            
+                             placeholder="Enter PFI Value..."> 
                     </b-input>
                 </b-field>
                
@@ -69,57 +71,64 @@
 
              <div class="column is-one-quarter">
                 <b-field label="Exchange Rate">
-                    <b-input :disabled="!pfiValue" v-model="exchangeRate" id="n2"> </b-input>
+                    <b-input :disabled="!pfiValue" 
+                    v-model="exchangeRate" 
+                   
+                     placeholder="Enter Exchange Rate..." > </b-input>
                </b-field>
             
                </div>
                
                 <div class="column is-one-quarter">
-              <b-field label="Local Currency">
-                  <b-input disabled  v-model="result" v-cleave="masks.numeral" id="result" ></b-input>
-               </b-field>
+              <b-field label="Fee Type">
+                    <b-select 
+                            :disabled="!exchangeRate"
+                            v-model="feeType" 
+                            placeholder="Select Fee Type"
+                               > 
+                            <option value="Market Authorized">Market Authorized</option>
+                            <option value="Market Non-Authorized">Market Non-Authorized</option>
+                           
+                    </b-select>
+                </b-field>
             
                </div> 
 
                 
-                <div class="column is-one-quarter">
-              <b-field label="Market Authorized Fee">
-                  <b-input disabled v-model="marketAuthFee" v-cleave="masks.numeral" id="MA" ></b-input>
-               </b-field>
-            
-               </div> 
-
-                 <div class="column is-one-quarter">
-              <b-field label="Market Non-Authorized Fee">
-                  <b-input disabled v-model="marketNonAuthFee" v-cleave="masks.numeral" id="MNA" ></b-input>
-               </b-field>
-            
-               </div> 
+               
         
           </div>
 
-          
-
-         <div class="columns mx-4 mt-4">
-
-          <b-field>
-              <b-button class="mx-4" id="viewMA" value="Market Authorized Fee" type="is-info"  @click="marketAuthFee">
-                Market Authorized Fee
-             </b-button>
-          </b-field>
-
-          <b-field>
-              <b-button class="mx-4" id="viewMNA" value="Market Non-Authorized Fee" type="is-warning"  @click="marketNonAuthFee">
-                Market Non-Authorized Fee
-             </b-button>
-          </b-field>
 
 
-          
+        
+           <div class="columns">
 
-
-
+             <div class="column is-one-quarter">
+                <b-field label="Authorization Body">
+                    <b-input :disabled="!exchangeRate"
+                     v-model="authBody"  
+                     placeholder="Enter Authorization Body..."> </b-input>
+               </b-field>
             
+               </div>
+               
+                <div class="column is-one-quarter">
+              <b-field label="Permit Paper">
+                  <b-input :disabled="!exchangeRate" v-model="permitPaper" ></b-input>
+               </b-field>
+            
+               </div> 
+
+           </div>
+
+
+        <div v-if="exchangeRate" class="card box columns mx-2 mt-4">
+             <b-field>
+              <b-button class="mx-4" id="viewMNA" value="Market Non-Authorized Fee" type="is-success"  @click="onSubmit">
+             Submit
+             </b-button>
+          </b-field>
         </div>
 
 
@@ -187,7 +196,7 @@
           pfiValue: {
               numeral: true,
               numeralThousandsGroupStyle: 'thousand',
-              prefix: 'USD '
+             
           }
              }
             }
@@ -199,9 +208,12 @@
       'permitApplicationForm',
       'permitApplicationForm.supplierName',
       'permitApplicationForm.pfiNumber',
+       'permitApplicationForm.selectCurrency',
        'permitApplicationForm.pfiValue',
       'permitApplicationForm.exchangeRate',
-      'permitApplicationForm.localCurrency',
+      'permitApplicationForm.feeType',
+       'permitApplicationForm.authBody',
+       'permitApplicationForm.permitPaper',
      
       
       
@@ -223,49 +235,48 @@
     
     ...mapActions('compliance', ['addNewPermitApplication', 'load']),
 
-            async marketAuthFee(){
-                var n1 = document.getElementById('n1').value;
-                var n2 = document.getElementById('n2').value;
-                var view = document.getElementById('viewMA').value;
-                var marketAuthFee = document.getElementById('MA').value;
-                var marketNonAuthFee = document.getElementById('MNA').value;
+            // async marketAuthFee(){
+            //     var n1 = document.getElementById('n1').value;
+            //     var n2 = document.getElementById('n2').value;
+            //     var view = document.getElementById('viewMA').value;
+               
 
                
 
-                if(view === 'Market Authorized Fee' ){
-                  var res =  document.getElementById('result').value= (n1*n2).toFixed(2);
-                  var ma =  document.getElementById('MA').value= (.015*(n1*n2)).toFixed(2);
+            //     if(view === 'Market Authorized Fee' ){
+            //       var res =  document.getElementById('result').value= (n1*n2).toFixed(2);
+            //       var ma =  document.getElementById('MA').value= (.015*(n1*n2)).toFixed(2);
                  
                   
 
-                    console.log(res);
+                   // console.log(res);
 
                   
-                }
-            },
+            //     }
+            // },
 
             
-            async marketNonAuthFee(){
-                var n1 = document.getElementById('n1').value;
-                var n2 = document.getElementById('n2').value;
-                 var view = document.getElementById('viewMNA').value;
-                var marketAuthFee = document.getElementById('MA').value;
-                var marketNonAuthFee = document.getElementById('MNA').value;
-
+            // async marketNonAuthFee(){
+            //     var n1 = document.getElementById('n1').value;
+            //     var n2 = document.getElementById('n2').value;
+            //      var view = document.getElementById('viewMNA').value;
+               
                
 
-                if(view === 'Market Non-Authorized Fee' ){
-                  var res =  document.getElementById('result').value= (n1*n2).toFixed(2);
-                  var mna =  document.getElementById('MNA').value= ((.05*(n1*n2))+ 750.00).toFixed(2);
+            //     if(view === 'Market Non-Authorized Fee' ){
+            //        document.getElementById('result').value= (n1*n2).toFixed(2);
+            //        document.getElementById('MNA').value= ((.05*(n1*n2))+ 750.00).toFixed(2);
                  
                   
 
-                    console.log(res);
+            //      //   console.log(res);
 
                   
-                }
+            //     }
+                    
+            // },
 
-            },
+        
 
             async validate (e) {
                     var t = e.value;
@@ -277,7 +288,7 @@
              async onSubmit() {
 
                   try {
-                     await this.addNewPermitApplication();
+                    await this.addNewPermitApplication();
 
                      console.log("Clicked")
 
@@ -304,9 +315,15 @@
     
     clearForm() {
      this.permitApplicationForm= {
+         supplierName: null,
         pfiNumber:null,
+        selectCurrency:null,
+        pfiValue:null,
+        exchangeRate:null,
+        feeType:null,
         authBody:null,
-        permitApplicationAmount: null
+        permitPaper:null
+       
        
       }
 

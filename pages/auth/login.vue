@@ -1,5 +1,5 @@
 <template>
-<div class="box">
+<div class="box card form-card-2">
   <div class="grid is-full-height pt-2">
 
     <div class="card-1 form-card-1">
@@ -72,6 +72,8 @@
     </div>
 
     <div class="card form-card-2"></div>
+
+   
 
     </div>
   </div>
@@ -181,10 +183,12 @@ export default {
 .is-blue {
   color: rgb(5, 105, 67);
   font-size: 1.8rem;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 .is-green {
   color: rgb(17, 158, 158);
   font-size: 2.8rem;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 .register {
   padding-left: 5rem;
