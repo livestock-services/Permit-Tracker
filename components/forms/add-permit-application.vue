@@ -205,13 +205,13 @@
          computed: {
 
     ...mapFields('compliance', [
-      'permitApplicationForm',
-      'permitApplicationForm.supplierName',
-      'permitApplicationForm.pfiNumber',
+       'permitApplicationForm',
+       'permitApplicationForm.supplierName',
+       'permitApplicationForm.pfiNumber',
        'permitApplicationForm.selectCurrency',
        'permitApplicationForm.pfiValue',
-      'permitApplicationForm.exchangeRate',
-      'permitApplicationForm.feeType',
+       'permitApplicationForm.exchangeRate',
+       'permitApplicationForm.feeType',
        'permitApplicationForm.authBody',
        'permitApplicationForm.permitPaper',
      

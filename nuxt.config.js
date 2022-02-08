@@ -99,6 +99,7 @@ export default {
       logout: '/auth/login',
       callback: '/auth/login',
       home: '/',
+      procHome: '/procurement-index'
     },
 
     strategies: {
@@ -113,6 +114,7 @@ export default {
           property: false,
           autoFetch: true
         },
+
         endpoints: {
           login: { url: '/api/auth/login', method: 'post', propertyName:'token' },
           logout: { url: '/api/auth/logout', method: 'get' },

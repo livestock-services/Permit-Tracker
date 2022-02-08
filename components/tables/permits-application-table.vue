@@ -63,7 +63,7 @@
         field="authBody"
         label="PFI Value"
         sortable
-        v-cleave="masks.pfiValue"
+       
       >
         {{ props.row.pfiValue }}
       </b-table-column>
@@ -178,42 +178,17 @@
 import { mapActions, mapGetters } from 'vuex'
 //import PayDebitModal from '@/components/modals/pay-debit-modal'
 
-import Cleave from 'cleave.js'
 
-    const cleave = {
-            name: 'cleave',
-            bind(el, binding) {
-                const input = el.querySelector('input')
-                input._vCleave = new Cleave(input, binding.value)
-            },
-            unbind(el) {
-                const input = el.querySelector('input')
-                input._vCleave.destroy()
-            }
-        }
+        
 
 export default {
   name: 'PermitApplicationsTable',
-  directives: { cleave },
+ 
   data() {
 
     
     return {
 
-       masks: {
-                    
-          numeral: {
-              numeral: true,
-              numeralDecimalScale:2,
-              numeralThousandsGroupStyle: 'thousand',
-              prefix: 'ZMW '
-          },
-          pfiValue: {
-              numeral: true,
-              numeralThousandsGroupStyle: 'thousand',
-             
-          }
-             },
              
       status: 'Active',
       isPaginated: true,

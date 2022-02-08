@@ -55,6 +55,163 @@
       type="is-light"
       fullheight
       overlay
+      v-if="this.$auth.user.email === 'jennye@livestock.co.zm'"
+    >
+
+    
+      <b-menu class="menu" :activable="false">
+        <b-menu-list
+          v-for="({ label, items }, index) in menuListProc"
+          :key="index"
+          :label="label"
+        >
+          <b-menu-item
+            v-for="({ icon, itemLabel, link }, key) in items"
+            :key="key"
+            :icon="icon"
+            :label="itemLabel"
+            @click="pushRoute(link)"
+          ></b-menu-item>
+        </b-menu-list>
+
+        <!-- Account Actions -->
+        <b-menu-list label="Account Actions">
+          <b-menu-item
+            icon="cog"
+            label="Log out"
+            @click="endSession"
+          ></b-menu-item>
+        </b-menu-list>
+
+        <b-menu-list   type="is-success" size="is-medium">
+          <div class="welcome">
+            <h3>You are signed in as</h3>
+            <br />
+            <div class="names">
+               {{ this.$auth.user.email }} 
+                  
+            </div>
+          </div>
+        </b-menu-list>
+
+
+      </b-menu>
+    </b-sidebar>
+
+    <!-- COMPLIANCE SIDEBAR---------------------------------------------------- -->
+
+    <b-sidebar
+      v-model="sidebar"
+      class="is-hidden-mobile"
+      type="is-light"
+      fullheight
+      overlay
+      v-if="this.$auth.user.email === 'gaving@livestock.co.zm'"
+    >
+
+    
+      <b-menu class="menu" :activable="false">
+        <b-menu-list
+          v-for="({ label, items }, index) in menuListComp"
+          :key="index"
+          :label="label"
+        >
+          <b-menu-item
+            v-for="({ icon, itemLabel, link }, key) in items"
+            :key="key"
+            :icon="icon"
+            :label="itemLabel"
+            @click="pushRoute(link)"
+          ></b-menu-item>
+        </b-menu-list>
+
+        <!-- Account Actions -->
+        <b-menu-list label="Account Actions">
+          <b-menu-item
+            icon="cog"
+            label="Log out"
+            @click="endSession"
+          ></b-menu-item>
+        </b-menu-list>
+
+        <b-menu-list   type="is-success" size="is-medium">
+          <div class="welcome">
+            <h3>You are signed in as</h3>
+            <br />
+            <div class="names">
+               {{ this.$auth.user.email }} 
+                  
+            </div>
+          </div>
+        </b-menu-list>
+
+
+      </b-menu>
+    </b-sidebar>
+
+
+     <!-- FINANCE SIDEBAR---------------------------------------------------- -->
+
+    <b-sidebar
+      v-model="sidebar"
+      class="is-hidden-mobile"
+      type="is-light"
+      fullheight
+      overlay
+      v-if="this.$auth.user.email === 'timothyk@livestock.co.zm'"
+    >
+
+    
+      <b-menu class="menu" :activable="false">
+        <b-menu-list
+          v-for="({ label, items }, index) in menuListFin"
+          :key="index"
+          :label="label"
+        >
+          <b-menu-item
+            v-for="({ icon, itemLabel, link }, key) in items"
+            :key="key"
+            :icon="icon"
+            :label="itemLabel"
+            @click="pushRoute(link)"
+          ></b-menu-item>
+        </b-menu-list>
+
+        <!-- Account Actions -->
+        <b-menu-list label="Account Actions">
+          <b-menu-item
+            icon="cog"
+            label="Log out"
+            @click="endSession"
+          ></b-menu-item>
+        </b-menu-list>
+
+        <b-menu-list   type="is-success" size="is-medium">
+          <div class="welcome">
+            <h3>You are signed in as</h3>
+            <br />
+            <div class="names">
+               {{ this.$auth.user.email }} 
+                  
+            </div>
+          </div>
+        </b-menu-list>
+
+
+      </b-menu>
+    </b-sidebar>
+
+
+
+ <!-- COMPLIANCE SIDEBAR---------------------------------------------------- -->
+
+    <b-sidebar
+      v-model="sidebar"
+      class="is-hidden-mobile"
+      type="is-light"
+      fullheight
+      overlay
+     
     >
 
     
@@ -96,6 +253,9 @@
 
       </b-menu>
     </b-sidebar>
+
+
+
   </div>
 </template>
 
@@ -107,7 +267,9 @@ export default {
   data() {
     return {
       sidebar: false,
-      menuList: [
+
+
+         menuListProc: [
         {
           label: 'Dashboard',
           items: [{ icon: 'home', itemLabel: 'Dashboard', link: '/' }],
@@ -120,14 +282,60 @@ export default {
             
           ],
         },
+       
+      ],
+
+         menuListComp: [
         {
-          label: 'Finances',
+          label: 'Dashboard',
+          items: [{ icon: 'home', itemLabel: 'Dashboard', link: '/' }],
+        },
+        
+        {
+          label: 'Actions',
+          items: [
+            { icon: 'file-chart', itemLabel: 'Compliance', link: '/compliance/compliance' },
+          ],
+        },
+        
+      ],
+
+         menuListFin: [
+        {
+          label: 'Dashboard',
+          items: [{ icon: 'home', itemLabel: 'Dashboard', link: '/' }],
+        },
+        
+        
+        {
+          label: 'Actions',
+          items: [
+            { icon: 'finance', itemLabel: ' Finance', link: '/finance/finance' },
+          ],
+        },
+      ],
+      
+      menuList: [
+        {
+          label: 'Dashboard',
+          items: [{ icon: 'home', itemLabel: 'Dashboard', link: '/' }],
+        },
+        {
+          label: 'Procurement Dept',
+          items: [
+            { icon: 'cash',  itemLabel: 'Procurement', link: '/procurement/procurement' 
+             },
+            
+          ],
+        },
+        {
+          label: 'Compliance Dept',
           items: [
             { icon: 'file-chart', itemLabel: 'Compliance', link: '/compliance/compliance' },
           ],
         },
         {
-          label: 'Reports',
+          label: 'Finance Dept',
           items: [
             { icon: 'finance', itemLabel: ' Finance', link: '/finance/finance' },
           ],
