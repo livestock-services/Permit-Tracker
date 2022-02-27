@@ -50,6 +50,33 @@
                
  <!-- End of Procurement-----------============================= -->
 
+
+ <!--Button for Procurement-----------------------  -->
+
+            <b-button
+            v-if="this.$auth.user.email ==='henryb@livestock.co.zm'"
+            class="mx-2 my-4"
+            type="is-info"
+            size="is-large"
+            icon-left= "cash-check"
+            ico
+            @click="onProc">
+              Manage Procurement
+            </b-button>
+
+
+            <b-button
+              v-if="this.$auth.user.email === 'henryb@livestock.co.zm'" grouped group-multiline position="is-centered"
+              class="mx-2 my-4"
+              type="is-danger "
+              icon-right="logout"
+              size="is-large"
+              @click="endSession"
+              >Log Out</b-button>
+
+               
+ <!-- End of Procurement-----------============================= -->
+
 <!-- Button for Compliance------------------ -->
 
              <b-button
@@ -123,6 +150,7 @@
             type="is-info"
             size="is-large"
             icon-left= "cash-check"
+            path='/procurement/procurement'
             ico
             @click="onProc">
               Manage Procurement
@@ -134,6 +162,7 @@
             type="is-warning"
             size="is-large"
              icon-left="file-star"
+             path='/compliance/compliance'
             @click="onComp">
              Manage Compliance
             </b-button>
@@ -350,6 +379,66 @@
 
 
 <!-- End of Euston's Field-------------- -->
+
+<!---------------------------------------------Bally's Field----------------------------- -->
+<b-field v-if="this.$auth.user.email === 'dilipk@livestock.co.zm' " grouped group-multiline position="is-centered">
+            <!-- <b-button
+              v-for="({ name, icon, type, path, role }, index) in actions"
+              
+              :key="index"
+              class="mx-2 my-4"
+              :type="type"
+              :icon-left="icon"
+              :role="role"
+              size="is-large"
+              @click="$router.push({ path })"
+              >{{ name  }} </b-button
+            > -->
+
+            <b-button
+           
+            class="mx-2 my-4"
+            type="is-info"
+            size="is-large"
+            icon-left= "cash-check-alt"
+            ico
+            @click="onProc">
+              Manage Procurement
+            </b-button>
+
+            <b-button
+           
+            class="mx-2 my-4"
+            type="is-warning"
+            size="is-large"
+             icon-left="file-star"
+            @click="onComp">
+             Manage Compliance
+            </b-button>
+
+            <b-button
+           
+            class="mx-2 my-4"
+            type="is-success"
+            size="is-large"
+            icon-left="finance"
+            path='/finance/finance'
+            @click="onFin">
+              Manage Finance
+            </b-button>
+
+           
+            <b-button
+            
+              class="mx-2 my-4"
+              type="is-danger "
+              icon-right="logout"
+              size="is-large"
+              @click="endSession"
+              >Log Out</b-button
+            >
+          </b-field>
+
         </div>
 
          <b-menu-list  type="is-success" size="is-medium">
@@ -430,105 +519,9 @@ export default {
       },
 
        async onComp(){
-          const { data:fetchUsers } = await api.get(`/auth/allUsers`)
-          for(var i = 0; i < fetchUsers.data.length ; i++){
-
-            if(fetchUsers.data[i].email === this.$auth.user.email){
-                console.log( fetchUsers.data[i].email)
-
-                const name = fetchUsers.data[i].name
-                console.log(name)
-
-                const email = fetchUsers.data[i].email
-                console.log(email)
-
-                const role = fetchUsers.data[i].role
-                console.log(role)
-
-
-                
-
-              switch (email) {
-               
-
-                case 'azwels@livestock.co.zm':
-
-                    console.log(fetchUsers.data[i].role.admin)
-                    await this.$router.push('/compliance/compliance')
-                      
-                      break;
-
-                case  'mutintac@livestock.co.zm':
-
-                    console.log(fetchUsers.data[i].role.admin)
-                     await this.$router.push('/compliance/compliance') 
-                      break;
-
-                 case  'eustonk@livestock.co.zm':
-
-                        console.log(fetchUsers.data[i].role.admin)
-                         await this.$router.push('/compliance/compliance')  
-                          break;
-
-                 case  'kondwanim@livestock.co.zm':
-
-                    console.log(fetchUsers.data[i].role.admin)
-                     await this.$router.push('/compliance/compliance')  
-                      break;
-
-
-                 case 'jennye@livestock.co.zm':
-
-                        console.log(fetchUsers.data[i].role.proc)
-                         await this.$router.push('/procurement/procurement') 
-                         break;
-
-
-                case 'henryb@livestock.co.zm':
-
-                        console.log(fetchUsers.data[i].role.proc)
-                        await this.$router.push('/procurement/procurement')     
-                        break;
-
-                 case  'gaving@livestock.co.zm':
-
-                    console.log(fetchUsers.data[i].role.comp)
-                     await this.$router.push('/compliance/compliance')  
-                      break;
-
-                 case  'georgem@livestock.co.zm':
-
-                        console.log(fetchUsers.data[i].role.comp)
-                         await this.$router.push('/compliance/compliance')  
-                          break;
-
-
-                case  'bobgm@livestock.co.zm':
-
-                console.log(fetchUsers.data[i].role.fin)
-                 await this.$router.push('/finance/finance')    
-                    break;
-
-                case  'timothyk@livestock.co.zm':
-
-                    console.log(fetchUsers.data[i].role.fin)
-                     await this.$router.push('/finance/finance')    
-                        break;
-
-              
-                  default:
-                    console.log('Could not find any user')
-                      break;
-              } 
-                
-            
-                
-            }
-           
-
+          
         await this.$router.push('/compliance/compliance')
-      }
-      
+        
       },
 
       async onFin(){
@@ -536,12 +529,6 @@ export default {
       },
 
        async endSession() {
-
-         await this.getAllUsers();
-         
-       
-
-
 
       await this.$buefy.dialog.confirm({
         title: 'Log out',

@@ -65,7 +65,8 @@ export const state = () => ({
     permitForm:{
         
         pfiNumber:null,
-        reasonForAmendment:null,
+        permitNumber:null,
+        supplierName:null
 
               
     },

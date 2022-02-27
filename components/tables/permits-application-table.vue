@@ -31,14 +31,22 @@
       aria-page-label="Page"
       aria-current-label="Current Page"
     >
-     <b-table-column
+      <b-table-column
         v-slot="props"
         field="clientID"
         label="Supplier"
         sortable
       >
-        {{ props.row.supplierName }}
-      </b-table-column>
+
+        
+      
+      
+      
+      {{ props.row.supplierName }}
+
+
+       
+      </b-table-column> 
 
        <b-table-column
         v-slot="props"
@@ -46,7 +54,23 @@
         label="PFI No."
         sortable
       >
-        {{ props.row.pfiNumber }}
+
+       <span 
+      :class="[
+      
+          'tag',
+
+          {
+             'is-primary is-light':  props.row.pfiNumber,
+          },
+
+        
+      
+      
+      
+      ]">  {{ props.row.pfiNumber }} </span>  
+
+       
       </b-table-column>
 
       <b-table-column
@@ -55,7 +79,23 @@
         label="Currency"
         sortable
       >
-        {{ props.row.selectCurrency }}
+
+       <span 
+      :class="[
+      
+          'tag',
+
+          {
+             'is-success is-light': props.row.selectCurrency,
+          },
+
+        
+      
+      
+      
+      ]">     {{ props.row.selectCurrency }} </span>  
+
+      
       </b-table-column>
 
        <b-table-column
@@ -65,16 +105,47 @@
         sortable
        
       >
-        {{ props.row.pfiValue }}
+        <span 
+      :class="[
+      
+          'tag',
+
+          {
+             'is-primary is-light': props.row.pfiValue,
+          },
+
+        
+      
+      
+      
+      ]">    {{ (props.row.pfiValue).toFixed(2) }}</span>  
+
+      
+      
       </b-table-column>
 
       <b-table-column
         v-slot="props"
         field="authBody"
-        label="Exchange Rate"
+        label="Ex. Rate"
         sortable
       >
-        {{ props.row.exchangeRate }}
+
+        <span 
+      :class="[
+      
+          'tag',
+
+          {
+             'is-primary is-light':props.row.exchangeRate,
+          },
+
+        
+      
+      
+      
+      ]">  {{ (props.row.exchangeRate).toFixed(2) }} </span>  
+       
       </b-table-column>
 
       <b-table-column
@@ -83,25 +154,91 @@
         label="Local Currency (ZMW)"
         sortable
       >
-        {{ props.row.localCurrency }}
+
+       <span 
+      :class="[
+      
+          'tag',
+
+          {
+             'is-primary is-light':props.row.localCurrency,
+          },
+
+        
+      
+      
+      
+      ]">   {{ (props.row.localCurrency).toFixed(2) }} </span>  
+
+
+      </b-table-column>
+
+      <b-table-column
+        
+        v-slot="props"
+        field="authBody"
+        label="Market Auth Fee (ZMW)"
+        sortable
+      >
+      <span 
+      :class="[
+      
+          'tag',
+
+          {
+             'is-info is-light': props.row.marketAuthFee.toFixed(2),
+          },
+
+        
+      
+      
+      
+      ]">{{ (props.row.marketAuthFee).toFixed(2) }}</span>  
+      </b-table-column>
+
+        <b-table-column
+        
+        v-slot="props"
+        field="authBody"
+        label=" Fee Type"
+        sortable
+      >
+
+        <span
+          :class="[
+            'tag',
+            {
+              'is-info': props.row.feeType ===  'Market Authorized',
+            },
+            {
+              'is-danger': props.row.feeType === 'Market Non-Authorized',
+            },
+          ]"
+          > {{ props.row.feeType }} </span
+        >
+       
       </b-table-column>
 
       <b-table-column
         v-slot="props"
         field="authBody"
-        label="Market Authorized Fee (ZMW)"
+        label="Non-Market Auth Fee (ZMW)" 
         sortable
       >
-        {{ props.row.marketAuthFee }}
-      </b-table-column>
+        <span 
+      :class="[
+      
+          'tag',
 
-      <b-table-column
-        v-slot="props"
-        field="authBody"
-        label="Non-Market Authorized Fee (ZMW)" 
-        sortable
-      >
-        {{ props.row.marketNonAuthFee }}
+          {
+             'is-danger is-light': props.row.marketNonAuthFee.toFixed(2),
+          },
+
+        
+      
+      
+      
+      ]">{{ (props.row.marketNonAuthFee).toFixed(2) }}</span>  
 
         
       </b-table-column>
@@ -110,10 +247,24 @@
       <b-table-column
         v-slot="props"
         field="authBody"
-        label="Authorization Body"
+        label="Auth Body"
         sortable
       >
-        {{ props.row.authBody }}
+      <span 
+      :class="[
+      
+          'tag',
+
+          {
+             'is-primary is-light': props.row.authBody,
+          },
+
+        
+      
+      
+      
+      ]"> {{ props.row.authBody }} </span>  
+       
       </b-table-column>
       
 
@@ -123,18 +274,37 @@
         label="Date"
         searchable
       >
-        {{ props.row.date}}
+      
+      
+      {{ props.row.date}} 
+     
       </b-table-column>
 
 
-      <b-table-column
+      <!-- <b-table-column
         v-slot="props"
         field="permitApplicationAmount"
         label="Permit Paper "
         sortable
       >
-        {{ props.row.permitApplicationPaper }}
-      </b-table-column>
+
+      <span 
+      :class="[
+      
+          'tag',
+
+          {
+             'is-primary is-light': (props.row.permitPaper).toFixed(2),
+          },
+
+        
+      
+      
+      
+      ]"> {{ (props.row.permitPaper).toFixed(2) }} </span>  
+
+       
+      </b-table-column> -->
 
      
     

@@ -55,20 +55,22 @@ export default {
     '@nuxtjs/auth-next'
   ],
 
-   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
-   proxy: {
-    '/api/': {
-      target: process.env.NUXT_ENV_NEW_API_URL,
-      pathRewrite: { '^/api/': '' },
-    },
-  },
-
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     proxy: true,
     // https: true,
     baseURL: process.env.NUXT_ENV_NEW_API_URL,
   },
+  
+  // Axios module configuration (https://go.nuxtjs.dev/config-axios)
+  proxy: {
+    '/api/': {
+      target: process.env.NUXT_ENV_NEW_API_URL,
+      pathRewrite: { '^/api/': '' },
+    },
+  },
+
+  
 
   pwa: {
     manifest: {
@@ -99,7 +101,7 @@ export default {
       logout: '/auth/login',
       callback: '/auth/login',
       home: '/',
-      procHome: '/procurement-index'
+    
     },
 
     strategies: {

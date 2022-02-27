@@ -117,13 +117,10 @@ export default {
           type: 'is-success',
         })
   
-      // if(this.$auth.user.email === 'jennye@livestock.co.zm'){
-           this.$router.push({ path: '/procurement-index' })
-    //  }
+     
+ 
+     this.$router.push({ path: '/' })
 
-  //    else{
-    //     this.$router.push({ path: '/' })
-   //   }
        
   
   },
@@ -151,7 +148,7 @@ export default {
 
         this.$router.push({ path: '/' })
 
-        await this.getAllUsers();
+       // await this.getAllUsers();
         //   await this.getUser(form);
 
       } catch (error) {

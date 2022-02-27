@@ -31,13 +31,42 @@
       aria-page-label="Page"
       aria-current-label="Current Page"
     >
-      <b-table-column
+
+     <b-table-column
         v-slot="props"
-        field="clientID"
-        label="PFI No."
+        field="supplierName"
+        label="Supplier  "
         sortable
       >
-        {{ props.row.clientID }}
+        {{ props.row.supplierName }}
+      </b-table-column>
+
+
+
+       <b-table-column
+        v-slot="props"
+        field="pfiNumber"
+        label="PFI No."
+        sortable
+       
+      >
+        <span 
+      :class="[
+      
+          'tag',
+
+          {
+             'is-primary is-light': props.row.pfiNumber,
+          },
+
+        
+      
+      
+      
+      ]">    {{ props.row.pfiNumber }}</span>  
+
+      
+      
       </b-table-column>
 
       <b-table-column
@@ -46,66 +75,38 @@
         label="Permit No."
         sortable
       >
-        {{ props.row.coverType }}
-      </b-table-column>
+
+       <span 
+      :class="[
       
-      <b-table-column
-        v-slot="props"
-        field="applicationDate"
-        label="Application Date "
-        sortable
-      >
-        {{ props.row.startDate }}
-      </b-table-column>
+          'tag',
 
+          {
+             'is-info is-light': props.row.permitNumber,
+          },
 
-      <b-table-column
-        v-slot="props"
-        field="startDate"
-        label="Approved Date "
-        sortable
-      >
-        {{ props.row.startDate }}
-      </b-table-column>
-
-     
-
-      
-
-      
-
-       <b-table-column
-        v-slot="props"
-        field="proRata"
-        label="Authorization Body"
-        sortable
-      >
-        {{ props.row.proRata }}
-      </b-table-column>
-
-
-     <b-table-column
-        v-slot="props"
-        field="status"
-        label="Permit Status"
-        sortable
         
+      
+      
+      
+      ]">  {{ props.row.permitNumber }} </span>  
+
+       
+      </b-table-column>
+      
+     
+      <b-table-column
+        v-slot="props"
+        field="date"
+        label="Date"
+        searchable
       >
-        <span
-          :class="[
-            'tag',
-            {
-              'is-success': props.row.status === 'Active',
-            },
-            {
-              'is-warning': props.row.status === 'Inactive',
-            },
-          ]"
-          >{{ props.row.status }}</span
-        >
+      
+      
+      {{ props.row.date}} 
+     
       </b-table-column>
 
-     
 
 
       <template #empty>
@@ -141,10 +142,13 @@ export default {
   },
   computed: {
     
-   
+     ...mapGetters('compliance', {
+      loading: 'loading',
+      allPs: 'allPermits',
+    }),
     
-    isEmpty() {
-      return 'empty'
+   isEmpty() {
+     return this.allPs.length === 0
     },
 
     isNames() {
@@ -152,58 +156,24 @@ export default {
     },
     
     tableData() {
-      return this.isEmpty ? [] : this.policies
+      return this.isEmpty ? [] : this.allPs
     },
+
   },
+
+
 
   
 
   methods: {
    
 
-    ...mapActions('policies', ['getAllPolicies','load', 'selectPolicy' ]),
-
-        currencyValue(policy, field) {
-      switch (policy.currency) {
-        case 'USD':
-          return this.$options.filters.currency_usd(policy[field])
-
-        default:
-          return this.$options.filters.currency(policy[field])
-      }
-    },
-
-    restrictDecimal() {
-      this.totalPremium = this.totalPremium.match(/^\d+\.?\d{0,2}/)
-    },
+    ...mapActions('compliance', ['getAllPermits','load' ]),
 
     async load(){
-      await this.getAllPolicies();
+      await this.getAllPermits();
     },
 
-
-    captureInvoice(policy) {
-       this.selectPolicy(policy)
-      setTimeout(() => {
-        this.$buefy.modal.open({
-          parent: this,
-          component: PayDebitModal,
-          hasModalCard: true,
-          trapFocus: true,
-          canCancel: ['x'],
-          destroyOnHide: true,
-          customClass: '',
-          onCancel: () => {
-            this.$buefy.toast.open({
-              message: `Payment cancelled!`,
-              duration: 5000,
-              position: 'is-top',
-              type: 'is-info',
-            })
-          },
-        })
-      }, 300)
-    },
   }
 
  

@@ -74,7 +74,7 @@ export const actions = {
     async load({ commit }) {
         try {
             commit(SET_LOADING, true)
-           const newLoad= await api.get(`/pfis/AllPfis`)
+           const newLoad= await api.get(`/api/pfis/AllPfis`)
            // await dispatch('getInactivePolicies')
         console.log(newLoad.data)
              commit(SET_ALL_PFIS, newLoad.data);

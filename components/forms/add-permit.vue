@@ -21,36 +21,33 @@
             <div class="columns is-right">
 
             <div class="column is-one-quarter">
+            <b-field label="Supplier">
+                <b-input  v-model="supplierName"></b-input>
+            </b-field>
+
+            </div>
+
+            <div class="column is-one-quarter">
          <b-field label="Permit No." >
-            <b-input v-model="permitNumber"></b-input>
+            <b-input v-model="permitNumber" :disabled="!supplierName" ></b-input>
         </b-field>
 
             </div>
 
             <div class="column is-one-quarter">
          <b-field label="PFI No." >
-            <b-input v-model="pfiNumber"></b-input>
+            <b-input v-model="pfiNumber" :disabled="!permitNumber" ></b-input>
         </b-field>
 
             </div>
 
-           <div class="column is-one-quarter">
-         <b-field label="Authorization Body">
-            <b-input v-model="authBody"></b-input>
-        </b-field>
+          
 
-            </div>
-
-             <div class="column is-one-quarter">
-         <b-field label="Application Date">
-            <b-input v-model="applicationDate"></b-input>
-        </b-field>
-
-            </div>
+             
 
         </div>
 
-        <b-button type="is-info">
+        <b-button type="is-info" :disabled="!pfiNumber"   @click="onSubmit">
             Submit
         </b-button>
 
@@ -85,10 +82,10 @@
          computed: {
 
     ...mapFields('compliance', [
-      'permitForm',
+      'permitForm',  
+      'permitForm.permitNumber',
       'permitForm.pfiNumber',
-      'permitForm.authBody',
-      'permitForm.permitApplicationAmount'
+      'permitForm.supplierName'
       
       
     ]),
@@ -100,20 +97,20 @@
 
         methods:{
     
-    ...mapActions('compliance', ['addNewPermitApplication', 'load']),
+    ...mapActions('compliance', ['addNewPermit', 'load']),
 
 
              async onSubmit() {
 
                   try {
-                     await this.addNewPermitApplication();
+                     await this.addNewPermit();
 
                      console.log("Clicked")
 
                      this.clearForm();
 
                       this.$buefy.toast.open({
-                        message: 'Permit Application Added Successfully!',
+                        message: 'Permit Added Successfully!',
                         duration: 2000,
                         position: 'is-top',
                         type: 'is-success',
@@ -131,10 +128,11 @@
 
     
     clearForm() {
-     this.form = {
+     this.permitForm = {
+        supplierName: null,
         pfiNumber:null,
-        authBody:null,
-        permitApplicationAmount: null
+        permitNumber:null,
+       
        
       }
 

@@ -105,21 +105,22 @@
            <div class="columns">
 
              <div class="column is-one-quarter">
-                <b-field label="Authorization Body">
-                    <b-input :disabled="!exchangeRate"
-                     v-model="authBody"  
-                     placeholder="Enter Authorization Body..."> </b-input>
-               </b-field>
+            
+                <b-field label="Regulatory Body">
+                    <b-select 
+                            :disabled="!exchangeRate"
+                            v-model="authBody" 
+                            placeholder="Select Regulatory Body"
+                               > 
+                            <option value="ZAMRA">ZAMRA</option>
+                            <option value="ZEMA">ZEMA</option>
+                           
+                    </b-select>
+                </b-field>
             
                </div>
                
-                <div class="column is-one-quarter">
-              <b-field label="Permit Paper">
-                  <b-input :disabled="!exchangeRate" v-model="permitPaper" ></b-input>
-               </b-field>
-            
-               </div> 
-
+               
            </div>
 
 

@@ -64,7 +64,7 @@
 
 
       <template #empty>
-        <h4 class="is-size-4 has-text-centered">No Permits yet. &#x1F4DB;</h4>
+        <h4 class="is-size-4 has-text-centered">No Amended Permit Applications yet. &#x1F4DB;</h4>
       </template>
     </b-table>
   </div>

@@ -71,12 +71,74 @@
       </b-table-column>
 
        <b-table-column
+        
         v-slot="props"
-        field="permitApplicationAmount"
-        label="Permit Application Amount "
+        field="authBody"
+        label="Market Auth Fee (ZMW)"
         sortable
       >
-        {{ props.row.permitApplicationAmount }}
+      <span 
+      :class="[
+      
+          'tag',
+
+          {
+             'is-info is-light': props.row.marketAuthFee.toFixed(2),
+          },
+
+        
+      
+      
+      
+      ]">{{ (props.row.marketAuthFee).toFixed(2) }}</span>  
+      </b-table-column>
+
+       <b-table-column
+        
+        v-slot="props"
+        field="authBody"
+        label=" Fee Type"
+        sortable
+      >
+
+        <span
+          :class="[
+            'tag',
+            {
+              'is-info': props.row.feeType ===  'Market Authorized',
+            },
+            {
+              'is-danger': props.row.feeType === 'Market Non-Authorized',
+            },
+          ]"
+          > {{ props.row.feeType }} </span
+        >
+       
+      </b-table-column>
+
+
+            <b-table-column
+        v-slot="props"
+        field="authBody"
+        label="Non-Market Auth Fee (ZMW)" 
+        sortable
+      >
+        <span 
+      :class="[
+      
+          'tag',
+
+          {
+             'is-danger is-light': props.row.marketNonAuthFee.toFixed(2),
+          },
+
+        
+      
+      
+      
+      ]">{{ (props.row.marketNonAuthFee).toFixed(2) }}</span>  
+
+        
       </b-table-column>
 
       <b-table-column
