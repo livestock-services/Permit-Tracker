@@ -1,11 +1,11 @@
 export default {
   server: {
-    port: process.env.PORT || 3000,
-    host: process.env.HOST || 'localhost',
+    port: process.env.PORT ,
+    host: process.env.HOST ,
   },
 
   publicRuntimeConfig: {
-    baseURL: process.env.BASE_URL || 'http://localhost:3000',
+    baseURL: process.env.BASE_URL ,
   },
 
   // target: 'static',
