@@ -59,7 +59,7 @@ export default {
   axios: {
     proxy: true,
     // https: true,
-   // baseURL: process.env.NUXT_ENV_NEW_API_URL,
+    baseURL: process.env.NUXT_ENV_NEW_API_URL,
   },
   
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
@@ -94,7 +94,7 @@ export default {
   },
 
   router: {
-    middleware: ['auth', 'is-admin'],
+    middleware: ['auth'],
   },
 
   
