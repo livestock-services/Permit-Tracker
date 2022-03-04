@@ -4,9 +4,9 @@ export default {
     host: process.env.HOST ,
   },
 
-  publicRuntimeConfig: {
-    baseURL: process.env.BASE_URL ,
-  },
+  // publicRuntimeConfig: {
+  //   baseURL: process.env.BASE_URL ,
+  // },
 
   // target: 'static',
   target: 'server',
