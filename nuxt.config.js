@@ -4,9 +4,9 @@ export default {
     host: process.env.HOST || localhost,
   },
 
-  // publicRuntimeConfig: {
-  //   baseURL: process.env.BASE_URL ,
-  // },
+  publicRuntimeConfig: {
+    baseURL: process.env.BASE_URL || 'http://localhost:3000',
+  },
 
   // target: 'static',
   target: 'server',
@@ -59,7 +59,7 @@ export default {
   axios: {
     proxy: true,
     // https: true,
-    baseURL: process.env.NUXT_ENV_NEW_API_URL,
+    //  baseURL: process.env.NUXT_ENV_NEW_API_URL,
   },
   
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
