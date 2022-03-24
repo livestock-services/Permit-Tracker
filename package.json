@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
+    "dev": " nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
@@ -21,7 +21,10 @@
     "nuxt-buefy": "^0.4.8",
     "nuxtjs-multi-auth": "0.0.6",
     "vue-formulate-extended": "^1.1.1",
-    "vuex-map-fields": "^1.4.1"
+    "vuex-map-fields": "^1.4.1",
+    "vuex-persistedstate": "^4.1.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "cross-env": "^7.0.3"
+  }
 }

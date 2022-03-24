@@ -146,10 +146,10 @@ export default {
 
   computed: {
     
-   ...mapGetters('procurement', {
-      loading: 'loading',
-      pfis: 'allPfis',
-    }),
+    ...mapGetters('procurement', {
+        loading: 'loading',
+        pfis: 'allPfis',
+      }),
     
     isEmpty() {
      return this.pfis.length === 0
@@ -167,7 +167,7 @@ export default {
   },
 
   async created() {
-    await this.load()
+  //  await this.load()
     this.selectPfi(this.pfis[0])
   },
 

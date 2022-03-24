@@ -1,11 +1,11 @@
 export default {
   server: {
-    port: process.env.PORT || 3000 ,
+    port: process.env.PORT || 3005 ,
     host: process.env.HOST || localhost,
   },
 
   publicRuntimeConfig: {
-    baseURL: process.env.BASE_URL || 'http://localhost:3000',
+    baseURL: process.env.BASE_URL || 'http://localhost:3005',
   },
 
   // target: 'static',
@@ -35,6 +35,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    { src: '~/plugins/persistedState.client.js'}
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
