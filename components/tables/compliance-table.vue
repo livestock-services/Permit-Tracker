@@ -12,7 +12,7 @@
       </b-select>
 
       <div class="buttons">
-        <b-button icon-left="refresh" @click="load">Refresh</b-button>
+        <b-button type="is-warning" icon-left="refresh" @click="load">Refresh</b-button>
         
       </div>
     </b-field>
@@ -86,7 +86,20 @@
 
       
       <template #empty>
-        <h4 class="is-size-4 has-text-centered">No Compliance Information yet. &#x1F4DC;</h4>
+        <h4 class="is-size-4 has-text-centered">No Compliance Information yet. &#x1F4DC;. Click the 
+            <span
+          :class="[
+            'tag',
+            {
+              'is-warning': 'Refresh',
+            }
+            
+          ]"
+          >
+          
+          Refresh</span>
+          
+           button above to load your data.</h4>
       </template>
     </b-table>
   </div>

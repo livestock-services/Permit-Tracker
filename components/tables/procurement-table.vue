@@ -12,7 +12,7 @@
       </b-select>
 
       <div class="buttons">
-        <b-button icon-left="refresh" @click="load">Refresh</b-button>
+        <b-button type="is-info" icon-left="refresh" @click="load">Refresh</b-button>
         
       </div>
     </b-field>
@@ -112,7 +112,20 @@
 
 
       <template #empty>
-        <h4 class="is-size-4 has-text-centered">No PFIs yet. &#x1F4DA;</h4>
+        <h4 class="is-size-4 has-text-centered">No PFIs yet. &#x1F4DA;. Click the 
+            <span
+          :class="[
+            'tag',
+            {
+              'is-info': 'Refresh',
+            }
+            
+          ]"
+          >
+          
+          Refresh</span>
+          
+           button above to load your data</h4>
       </template>
     </b-table>
   </div>
@@ -135,9 +148,9 @@ export default {
       isPaginated: true,
       currentPage: 1,
       perPage: 10,
-      pageOptions: [10, 25, 50, 100],
+      pageOptions: [5, 10, 25, 50, 100],
       paginationPosition: 'bottom',
-      defaultSortDirection: 'asc',
+      defaultSortDirection: 'desc',
       sortIcon: 'arrow-up',
       sortIconSize: 'is-small',
     }
@@ -167,8 +180,8 @@ export default {
   },
 
   async created() {
-  //  await this.load()
-    this.selectPfi(this.pfis[0])
+   await this.load()
+    //this.selectPfi(this.pfis[0])
   },
 
   

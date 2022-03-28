@@ -39,9 +39,63 @@
 
         <div class="columns">
            <div  class="column is-half">
-              <h4> <span class="is-blue">  Permit Application Amount</span></h4>
+              <h4> <span class="is-blue">  Permit Fee Type</span></h4>
             <p  placeholder="Supplier Name">
-              {{PA.permitApplicationAmount}}
+
+              <span
+          :class="[
+            'tag',
+            {
+              'is-info': PA.feeType ===  'Market Authorized',
+            },
+            {
+              'is-danger': PA.feeType === 'Market Non-Authorized',
+            },
+          ]"
+          > {{PA.feeType}} </span
+        >
+
+              
+            </p>
+           </div>
+         </div>
+
+         <div class="columns">
+           <div  class="column is-half">
+              <h4> <span class="is-blue"> Market Authorization Fee</span></h4>
+            <p  placeholder="Supplier Name">
+              <span 
+                :class="[
+      
+                  'tag',
+
+                  {
+                    'is-info': PA.marketAuthFee,
+                  },
+        
+                  ]">{{ PA.marketAuthFee }}</span>  
+
+                    
+            </p>
+           </div>
+         </div>
+
+
+         <div class="columns">
+           <div  class="column is-half">
+              <h4> <span class="is-blue"> Market Non-Authorization Fee</span></h4>
+            <p  placeholder="Supplier Name">
+            <span 
+                :class="[
+      
+                  'tag',
+
+                  {
+                    'is-danger ': PA.marketNonAuthFee,
+                  },
+        
+                  ]">{{ PA.marketNonAuthFee }}</span>  
+
             </p>
            </div>
          </div>
@@ -51,7 +105,19 @@
            <div  class="column is-half">
               <h4> <span class="is-blue">  Permit Application Status</span></h4>
             <p  placeholder="Supplier Name">
-             <span class="is-green"> {{PA.permitStatus}} </span>
+
+               <span
+                :class="[
+                  'tag',
+                  {
+                    'is-success': PA.permitStatus ===  'Approved',
+                  },
+                  {
+                    'is-warning': PA.permitStatus === 'Pending',
+                  },
+                ]"
+                >{{PA.permitStatus}}</span>
+            
             </p>
            </div>
          </div>
@@ -62,10 +128,10 @@
       </div>
     </section>
     <footer class="modal-card-foot">
-      <b-button type="is-danger" label="Close" @click="close" />
+      <b-button type="is-warning" label="Close" @click="close" />
       <b-button
         label="Confirm"
-        type="is-info"
+        type="is-primary"
         icon-left="account"
         @click="onApprove"
       /> 

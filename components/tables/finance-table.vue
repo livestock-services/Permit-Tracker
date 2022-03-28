@@ -12,7 +12,7 @@
       </b-select>
 
       <div class="buttons">
-        <b-button icon-left="refresh" @click="load">Refresh</b-button>
+        <b-button type="is-success" icon-left="refresh" @click="load">Refresh</b-button>
         
       </div>
     </b-field>
@@ -179,7 +179,19 @@
 
 
       <template #empty>
-        <h4 class="is-size-4 has-text-centered">No Finance Information yet. &#x1F4CC;</h4>
+        <h4 class="is-size-4 has-text-centered">No Finance Information yet. &#x1F4CC;. Click the  
+          
+          <span
+          :class="[
+            'tag',
+            {
+              'is-success': 'Refresh',
+            }
+            
+          ]"
+          >
+          
+          Refresh</span> button above to load your data</h4>
       </template>
     </b-table>
   </div>

@@ -84,7 +84,7 @@ export const actions = {
             
         } catch (error) {
             commit(SET_LOADING, false);
-            this.$log.error(error.message)
+            this.$log.error("Could not get details. Please try again!")
         }
     },
  //GET ALL PFIS
@@ -114,7 +114,7 @@ export const actions = {
 
         } catch (error) {
             commit(SET_LOADING, false);
-            this.$log.error(error.message)
+            this.$log.error("Could not get details. Please try again!")
         }
     },
 
@@ -128,7 +128,7 @@ export const actions = {
            
             const response = await api.post(`/pfis/addNewPfi`, pfi);
 
-            console.log(response.data);
+         //   console.log(response.data);
 
             commit(ADD_PFI, response.data);
             
@@ -136,7 +136,7 @@ export const actions = {
 
         } catch (error) {
             commit(SET_LOADING, false);
-            this.log.error(error.message);
+            this.log.error("Could not add details. Please try again!");
         }
     },
 

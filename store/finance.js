@@ -119,7 +119,7 @@ export const actions = {
             
         } catch (error) {
             commit(SET_LOADING, false);
-            this.$log.error(error.message)
+            this.$log.error("Could not get details. Please try again!")
         }
     },
 
@@ -152,7 +152,7 @@ export const actions = {
 
         } catch (error) {
             commit(SET_LOADING, false);
-            this.$log.error(error.message)
+            this.$log.error("Could not get details. Please try again!")
         }
     },
 
@@ -197,7 +197,7 @@ export const actions = {
 
         } catch (error) {
             commit(SET_LOADING, false);
-            this.log.error(error.message);
+            this.log.error("Could not get details. Please try again!");
         }
     },
 
@@ -208,7 +208,7 @@ export const actions = {
             commit(SET_SELECTED_PERMIT_APPLICATION, newPA)
             console.log(newPA._id)
         } catch (error) {
-            console.log('Error')
+            console.log("Could not select details. Please try again!")
         }
         
       },

@@ -237,7 +237,7 @@ export const actions = {
             
         } catch (error) {
             commit(SET_LOADING, false);
-            this.$log.error(error.message)
+            this.$log.error("Could not get details. Please try again!")
         }
     },
 
@@ -282,7 +282,7 @@ export const actions = {
 
         } catch (error) {
             commit(SET_LOADING, false);
-            this.$log.error(error.message)
+            this.$log.error("Could not get details. Please try again!")
         }
     },
 
@@ -304,7 +304,7 @@ export const actions = {
 
         } catch (error) {
             commit(SET_LOADING, false);
-            this.log.error(error.message);
+            this.log.error("Could not add details. Please try again!");
         }
     },
 
@@ -344,7 +344,7 @@ export const actions = {
 
         } catch (error) {
             commit(SET_LOADING, false);
-            this.$log.error(error.message)
+            this.$log.error("Could not get details. Please try again!")
         }
     },
 
@@ -366,7 +366,7 @@ export const actions = {
 
         } catch (error) {
             commit(SET_LOADING, false);
-            this.log.error(error.message);
+            this.log.error("Could not add details. Please try again!");
         }
     },
      //---------------------------------------------------------------------------------------------------------------------------------------
@@ -405,7 +405,7 @@ export const actions = {
 
         } catch (error) {
             commit(SET_LOADING, false);
-            this.$log.error(error.message)
+            this.$log.error("Could not get details. Please try again!")
         }
     },
 
@@ -427,7 +427,7 @@ export const actions = {
 
         } catch (error) {
             commit(SET_LOADING, false);
-            this.log.error(error.message);
+            this.log.error("Could not add details. Please try again!");
         }
     }
      //---------------------------------------------------------------------------------------------------------------------------------------

@@ -12,7 +12,7 @@
       </b-select>
 
       <div class="buttons">
-        <b-button icon-left="refresh" @click="load">Refresh</b-button>
+        <b-button type="is-warning" icon-left="refresh" @click="load">Refresh</b-button>
         
       </div>
     </b-field>
@@ -118,7 +118,7 @@
       
       
       
-      ]">    {{ (props.row.pfiValue).toFixed(2) }}</span>  
+      ]">    {{ (props.row.pfiValue) }}</span>  
 
       
       
@@ -144,7 +144,7 @@
       
       
       
-      ]">  {{ (props.row.exchangeRate).toFixed(2) }} </span>  
+      ]">  {{ (props.row.exchangeRate) }} </span>  
        
       </b-table-column>
 
@@ -168,7 +168,7 @@
       
       
       
-      ]">   {{ (props.row.localCurrency).toFixed(2) }} </span>  
+      ]">   {{ (props.row.localCurrency) }} </span>  
 
 
       </b-table-column>
@@ -186,14 +186,14 @@
           'tag',
 
           {
-             'is-info is-light': props.row.marketAuthFee.toFixed(2),
+             'is-info is-light': props.row.marketAuthFee,
           },
 
         
       
       
       
-      ]">{{ (props.row.marketAuthFee).toFixed(2) }}</span>  
+      ]">{{ (props.row.marketAuthFee) }}</span>  
       </b-table-column>
 
         <b-table-column
@@ -231,14 +231,14 @@
           'tag',
 
           {
-             'is-danger is-light': props.row.marketNonAuthFee.toFixed(2),
+             'is-danger is-light': props.row.marketNonAuthFee,
           },
 
         
       
       
       
-      ]">{{ (props.row.marketNonAuthFee).toFixed(2) }}</span>  
+      ]">{{ (props.row.marketNonAuthFee) }}</span>  
 
         
       </b-table-column>
@@ -335,7 +335,18 @@
 
 
       <template #empty>
-        <h4 class="is-size-4 has-text-centered">No Permit Applications yet. &#x1F4DB;</h4>
+        <h4 class="is-size-4 has-text-centered">No Permit Applications yet. &#x1F4DB;. Click the 
+           <span
+          :class="[
+            'tag',
+            {
+              'is-success': 'Refresh',
+            }
+            
+          ]"
+          >
+          
+          Refresh</span> button above to load your data.</h4>
       </template>
     </b-table>
   </div>
