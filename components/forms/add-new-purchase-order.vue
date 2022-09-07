@@ -19,9 +19,16 @@
          >
 
         <div class="columns">
+             
+            <div class="column is-one-quarter">
+                  <b-field>
+                    
+                   <Autocomplete/>
+                </b-field>
+             </div>
 
             
-             <div class="column is-one-quarter">
+             <!-- <div class="column is-one-quarter">
                   <b-field label="Supplier Name.">
                     <template v-slot:label>
                         Supplier Name <span class="has-text-danger">*</span>
@@ -31,12 +38,12 @@
                     type="text"
                     placeholder=" Supplier Name"></b-input>
                 </b-field>
-             </div>
+             </div> -->
              
             
 
 
-            <div class="column is-one-quarter">
+            <!-- <div class="column is-one-quarter">
 
                 <b-field label="Supplier Email" >
                     <template v-slot:label>
@@ -50,7 +57,7 @@
                         maxlength="50">
                     </b-input>
                 </b-field>
-            </div>
+            </div> -->
 
             <div class="column is-one-quarter">
                 <b-field label="Purchase Order No.">
@@ -58,7 +65,7 @@
                         Purchase Order No. <span class="has-text-danger">*</span>
                     </template>
                     <b-input 
-                    :disabled="!supplierEmail"
+                    :disabled="!autocomplete"
                     v-model="purchaseOrderNumber"
                     type="number"
                      maxlength="6"
@@ -83,13 +90,17 @@
             
 
 
-            
+           
 
             
     
         </div>
         
-       
+        <div class="column is-one-quarter">
+                  <b-field>
+                   <Upload/>
+                </b-field>
+             </div>
           
 
          <div class="buttons columns">
@@ -115,92 +126,67 @@ import { mapFields } from 'vuex-map-fields'
 import { mapActions, mapGetters } from 'vuex'
 import { DateTime } from 'luxon'
 import cloneDeep from 'lodash/cloneDeep'
+import Autocomplete from '../autocomplete.vue'
+import Upload from '../upload/upload.vue'
 
     export default {
-        name: "Purchase Order",
-        
-        data() {
-            const today = new Date()
-            
-            return {
-                
-                date: today.toDateString,
-                minDate: new Date(today.getFullYear() - 80, today.getMonth(), today.getDate()),
-                maxDate: new Date(today.getFullYear() + 18, today.getMonth(), today.getDate())
+    name: "Purchase Order",
+    data() {
+        const today = new Date();
+        return {
+            date: today.toDateString,
+            minDate: new Date(today.getFullYear() - 80, today.getMonth(), today.getDate()),
+            maxDate: new Date(today.getFullYear() + 18, today.getMonth(), today.getDate())
+        };
+    },
+    computed: {
+        ...mapFields("procurement", [
+            "form",
+            "form.supplierName",
+            "form.supplierEmail",
+            "form.purchaseOrderNumber",
+            "form.pfiNumber"
+        ]),
+    },
+    created() {
+        // this.clearForm()
+    },
+    methods: {
+        ...mapActions("procurement", ["addNewPfi", "load"]),
+        async onSubmit() {
+            try {
+                // await this.load();    
+                await this.addNewPfi();
+                this.$buefy.toast.open({
+                    message: "PFI Added Successfully!",
+                    duration: 2000,
+                    position: "is-top",
+                    type: "is-success",
+                });
+                this.clearForm();
+            }
+            catch (error) {
+                this.$buefy.toast.open({
+                    message: "Please Verify Your Details!",
+                    duration: 2000,
+                    position: "is-top",
+                    type: "is-danger",
+                });
             }
         },
-        
-         computed: {
-
-    ...mapFields('procurement', [
-      'form',
-      'form.supplierName',
-      'form.supplierEmail',
-      'form.purchaseOrderNumber',
-      'form.pfiNumber'  
-      
-      
-    ]),
+        clearForm() {
+            this.form = {
+                supplierName: null,
+                supplierEmail: null,
+                purchasOrderNumber: null,
+                pfiNumber: null,
+            };
+            //this.reloadPage()
         },
-
-        created(){
-        // this.clearForm()
-        },
-
-        methods:{
-    
-    ...mapActions('procurement', ['addNewPfi', 'load']),
-
-
-             async onSubmit() {
-                    try {
-      
-                   // await this.load();    
-                    await this.addNewPfi(); 
-
-                   
-
-                    this.$buefy.toast.open({
-                        message: 'PFI Added Successfully!',
-                        duration: 2000,
-                        position: 'is-top',
-                        type: 'is-success',
-                    })
-
-                    this.clearForm();
-                    
-                    } catch (error) {
-                   
-                    
-                    this.$buefy.toast.open({
-                        message: 'Please Verify Your Details!',
-                        duration: 2000,
-                        position: 'is-top',
-                        type: 'is-danger',
-                    })
-                    }
-           
-     
-    },
-
-    
-    clearForm() {
-     this.form = {
-        supplierName: null,
-        supplierEmail: null,
-        purchasOrderNumber: null,
-        pfiNumber: null,
-       
-      }
-
-      //this.reloadPage()
-     },
-
- reloadPage() {
-  location.reload();
-}
-
-    
+        reloadPage() {
+            location.reload();
         }
-    }
+    },
+    components: { Upload }
+}
 </script>
