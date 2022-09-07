@@ -21,12 +21,37 @@
         data() {
             return {
                 data: [
-                    'MSD Air',
-                    'Virbac',
-                    'MSD Belgium',
-                    'Elanco',
-                    'Zoetis Belgium',
-                    'Zoetis Air'
+
+                'Antrovet',
+                'Biocheck',
+                'Boehringer Air',
+                'Boehringer Road',
+                'Bupo', 
+                'CVRL',
+                'DIAG air',              
+                'DIAG Road',
+                'Elanco Air',
+                'Elanco Road',
+                'Huvpharma',
+                'Kruuse',
+                'Kyron',
+                'Kyron Agri',
+                'MSD Air',
+                'MSD Butalex',
+                'MSD Imizol',
+                'MSD Nilzan',
+                'MSD Poultry',
+                'MSD Prondil',
+                'MSD Road',
+                'OBP',
+                'Prionics', 
+                'Schippers',
+                'Virbac',
+                'Zoetis Belgium', 
+                'Zoetis SA air',
+                'Zoetis SA road',
+
+
                 ],
                 name: '',
                 selected: null

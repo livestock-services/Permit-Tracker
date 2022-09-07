@@ -65,17 +65,17 @@ export default {
   },
   
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
-  proxy: {
-    '/api/': {
-      target: process.env.NUXT_ENV_NEW_API_URL,
-      pathRewrite: { '^/api/': '' },
-    },
+   proxy: {
+     '/api/': {
+       target: process.env.NUXT_ENV_NEW_API_URL,
+       pathRewrite: { '^/api/': '' },
+     },
 
-    // '/proc9000':{
-    //   target: `${process.env.BASE_URL}/procurement/procurement`,
-    //   pathRewrite: {'^/proc9000/': ''}
-    // }
-  },
+      // '/proc9000':{
+      //   target: `${process.env.BASE_URL}/procurement/procurement`,
+      //   pathRewrite: {'^/proc9000/': ''}
+      // }
+   },
 
   
 

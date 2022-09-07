@@ -21,10 +21,18 @@
         <div class="columns">
              
             <div class="column is-one-quarter">
-                  <b-field>
-                    
-                   <Autocomplete/>
-                </b-field>
+                <b-field label="Select a Supplier">
+            <b-autocomplete
+                
+                v-model="name"
+                :data="filteredDataArray"
+                placeholder="e.g. Zoetis, MSD, Elanco"
+                icon="magnify"
+                clearable
+                @select="option => selected = option">
+                <template #empty>No results found</template>
+            </b-autocomplete>
+        </b-field>
              </div>
 
             
@@ -65,7 +73,7 @@
                         Purchase Order No. <span class="has-text-danger">*</span>
                     </template>
                     <b-input 
-                    :disabled="!autocomplete"
+                    :disabled="!name"
                     v-model="purchaseOrderNumber"
                     type="number"
                      maxlength="6"
@@ -79,7 +87,7 @@
                         PFI No. <span class="has-text-danger">*</span>
                     </template>
                     <b-input
-                    :disabled="!supplierEmail"
+                    :disabled="!purchaseOrderNumber"
                     v-model="pfiNumber"
                     type="number"
                     maxlength="10"
@@ -102,6 +110,9 @@
                 </b-field>
              </div>
           
+             <p class="content"><b>Selected Supplier:</b> {{ selected }}</p>
+             <p class="content"><b>Purchase Order:</b> {{ purchaseOrderNumber }}</p>
+             <p class="content"><b>PFI Number:</b> {{ pfiNumber }}</p>
 
          <div class="buttons columns">
                 <div class="column is-one-third">
@@ -126,7 +137,7 @@ import { mapFields } from 'vuex-map-fields'
 import { mapActions, mapGetters } from 'vuex'
 import { DateTime } from 'luxon'
 import cloneDeep from 'lodash/cloneDeep'
-import Autocomplete from '../autocomplete.vue'
+
 import Upload from '../upload/upload.vue'
 
     export default {
@@ -134,9 +145,45 @@ import Upload from '../upload/upload.vue'
     data() {
         const today = new Date();
         return {
-            date: today.toDateString,
-            minDate: new Date(today.getFullYear() - 80, today.getMonth(), today.getDate()),
-            maxDate: new Date(today.getFullYear() + 18, today.getMonth(), today.getDate())
+            data: [
+
+                    'Antrovet',
+                    'Biocheck',
+                    'Boehringer Air',
+                    'Boehringer Road',
+                    'Bupo', 
+                    'CVRL',
+                    'DIAG air',              
+                    'DIAG Road',
+                    'Elanco Air',
+                    'Elanco Road',
+                    'Huvpharma',
+                    'Kruuse',
+                    'Kyron',
+                    'Kyron Agri',
+                    'MSD Air',
+                    'MSD Butalex',
+                    'MSD Imizol',
+                    'MSD Nilzan',
+                    'MSD Poultry',
+                    'MSD Prondil',
+                    'MSD Road',
+                    'OBP',
+                    'Prionics', 
+                    'Schippers',
+                    'Virbac',
+                    'Zoetis Belgium', 
+                    'Zoetis SA air',
+                    'Zoetis SA road'
+
+
+                    ],
+
+                name: '',
+                selected: null,
+                date: today.toDateString,
+                minDate: new Date(today.getFullYear() - 80, today.getMonth(), today.getDate()),
+                maxDate: new Date(today.getFullYear() + 18, today.getMonth(), today.getDate())
         };
     },
     computed: {
@@ -147,6 +194,15 @@ import Upload from '../upload/upload.vue'
             "form.purchaseOrderNumber",
             "form.pfiNumber"
         ]),
+
+        filteredDataArray() {
+                return this.data.filter((option) => {
+                    return option
+                        .toString()
+                        .toLowerCase()
+                        .indexOf(this.name.toLowerCase()) >= 0
+                })
+            }
     },
     created() {
         // this.clearForm()
