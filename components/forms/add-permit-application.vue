@@ -294,6 +294,7 @@
                      console.log("Clicked")
 
                      this.clearForm();
+                     this.showNotifications();
 
                       this.$buefy.toast.open({
                         message: 'Permit Application Added Successfully!',
@@ -328,12 +329,54 @@
        
       }
 
+      function showNotification () {
+        // create a new notification
+        const notification = new Notification('Livestock Services Permit Tracker', {
+            body: 'A new permit application was added.',
+            icon: './img/permit.png'
+        });
+
+        // close the notification after 10 seconds
+        setTimeout(() => {
+            notification.close();
+        }, 10 * 1000);
+
+        // navigate to a URL when clicked
+        // notification.addEventListener('click', () => {
+
+        //     window.open('http://localhost:3000/compliance/compliance', '_blank');
+        // });
+    }
+
+    // show an error message
+    const showError = () => {
+        const error = document.querySelector('.error');
+        error.style.display = 'block';
+        error.textContent = 'You blocked the notifications';
+    }
+
+    // check notification permission
+    let granted = false;
+
+    if (Notification.permission === 'granted') {
+        granted = true;
+    } else if (Notification.permission !== 'denied') {
+        let permission = Notification.requestPermission();
+        granted = permission === 'granted' ? true : false;
+    }
+
+    // show notification or error
+    granted ? showNotification() : showError();
+
+
       //this.reloadPage()
      },
 
         reloadPage() {
         location.reload();
         },
+
+        
 
 
     }
