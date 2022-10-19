@@ -55,7 +55,7 @@
       type="is-light"
       fullheight
       overlay
-      v-if="this.$auth.user.email === 'jennye@livestock.co.zm'"
+      v-if="this.$auth.user.email === 'jennyc@livestock.co.zm'"
     >
 
     

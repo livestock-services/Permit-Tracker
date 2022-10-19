@@ -98,7 +98,7 @@ export default {
       isPaginated: true,
       currentPage: 1,
       perPage: 10,
-      pageOptions: [10, 25, 50, 100],
+      pageOptions: [5, 10, 25, 50, 100],
       paginationPosition: 'bottom',
       defaultSortDirection: 'asc',
       sortIcon: 'arrow-up',
@@ -130,11 +130,13 @@ export default {
   methods: {
    
 
-    ...mapActions('compliance', ['getAllAmendedPermitApplications','load' ]),
+    ...mapActions('compliance', ['addNewAmendedPermitApplication', 'getAllAmendedPermitApplications','load' ]),
 
     async load(){
       await this.getAllAmendedPermitApplications();
     },
+
+    
 
 
   }  

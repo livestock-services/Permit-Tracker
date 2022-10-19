@@ -25,6 +25,7 @@
       :pagination-position="paginationPosition"
       :default-sort-direction="defaultSortDirection"
       mobile-cards
+      class="table"
       default-sort="policyNumber"
       aria-next-label="Next Page"
       aria-previous-label="Previous Page"
@@ -55,20 +56,7 @@
         sortable
       >
 
-       <span 
-      :class="[
-      
-          'tag',
-
-          {
-             'is-primary is-light':  props.row.pfiNumber,
-          },
-
-        
-      
-      
-      
-      ]">  {{ props.row.pfiNumber }} </span>  
+         {{ props.row.pfiNumber }}   
 
        
       </b-table-column>
@@ -433,5 +421,11 @@ export default {
 
 .content-area {
   grid-column: 2/3;
+}
+
+.table{
+  margin-right: 12rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
 }
 </style>

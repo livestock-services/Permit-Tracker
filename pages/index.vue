@@ -27,7 +27,7 @@
 <!--Button for Procurement-----------------------  -->
 
             <b-button
-            v-if="this.$auth.user.email ==='jennye@livestock.co.zm'"
+            v-if="this.$auth.user.email ==='jennyc@livestock.co.zm'"
             class="mx-2 my-4"
             type="is-info"
             size="is-large"
@@ -39,7 +39,7 @@
 
 
             <b-button
-              v-if="this.$auth.user.email === 'jennye@livestock.co.zm'" grouped group-multiline position="is-centered"
+              v-if="this.$auth.user.email === 'jennyc@livestock.co.zm'" grouped group-multiline position="is-centered"
               class="mx-2 my-4"
               type="is-danger "
               icon-right="logout"

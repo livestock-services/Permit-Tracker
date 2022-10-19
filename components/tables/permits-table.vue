@@ -38,7 +38,21 @@
         label="Supplier  "
         sortable
       >
-        {{ props.row.supplierName }}
+      <span 
+      :class="[
+      
+          'tag',
+
+          {
+             'is-primary is-light': props.row.supplierName,
+          },
+
+        
+      
+      
+      
+      ]">
+        {{ props.row.supplierName }} </span>
       </b-table-column>
 
 

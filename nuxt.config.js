@@ -58,24 +58,24 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    proxy: true,
+   // proxy: true,
   //  prefix: process.env.NUXT_ENV_NEW_API_URL
     // https: true,
      baseURL: process.env.NUXT_ENV_NEW_API_URL,
   },
   
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
-   proxy: {
-     '/api/': {
-       target: process.env.NUXT_ENV_NEW_API_URL,
-       pathRewrite: { '^/api/': '' },
-     },
+  //  proxy: {
+  //    '/api/': {
+  //      target: process.env.NUXT_ENV_NEW_API_URL,
+  //      pathRewrite: { '^/api/': '' },
+  //    },
 
-      // '/proc9000':{
-      //   target: `${process.env.BASE_URL}/procurement/procurement`,
-      //   pathRewrite: {'^/proc9000/': ''}
-      // }
-   },
+  //     // '/proc9000':{
+  //     //   target: `${process.env.BASE_URL}/procurement/procurement`,
+  //     //   pathRewrite: {'^/proc9000/': ''}
+  //     // }
+  //  },
 
   
 
@@ -125,8 +125,8 @@ export default {
         },
 
         endpoints: {
-          login: { url: '/api/auth/login', method: 'post', propertyName:'token' },
-          logout: { url: '/api/auth/logout', method: 'get' },
+          login: { url: '/auth/login', method: 'post', propertyName:'token' },
+          logout: { url: '/auth/logout', method: 'get' },
           user:false // { url: '/api/auth/user', method: 'get' }
         }
       }
