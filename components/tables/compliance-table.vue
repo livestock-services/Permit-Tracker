@@ -77,12 +77,41 @@
       
       <b-table-column v-slot="props" field="status" label="PFI Status" sortable>
 
-         <span class="tag is-comp">{{ props.row.status.compliance}}</span>
+         <span 
+         :class="[
+                  'tag',
+                  {
+                    'is-warning': props.row.status.compliance ===  'Received from Procurement, awaiting acknowledgement',
+                  },
+                  {
+                    'is-info': props.row.status.compliance === 'Acknowledged By Compliance ',
+                  },
+                  {
+                    'is-primary': props.row.status.compliance ===  'PA in motion, awaiting Finance Approval',
+                  },
+                  {
+                    'is-success': props.row.status.compliance === `PA approved, awaiting Permit from ${props.row.authBody}`,
+                  },
+                ]"
+         
+         
+         >{{ props.row.status.compliance}}</span>
 
       </b-table-column>
 
 
-      
+      <b-table-column v-slot="props" label="Options">
+        <span class="buttons">
+          <!-- <b-button type="is-secondary-outline" icon-left="eye">View</b-button> -->
+          <b-button
+            type="is-secondary-outline"
+            icon-left="eye-check"
+            @click="captureReceipt(props.row)"
+            class="preview is-warning is-light"
+            >Preview</b-button
+          >
+        </span>
+      </b-table-column>
 
       
       <template #empty>
@@ -110,7 +139,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-//import PayDebitModal from '@/components/modals/pay-debit-modal'
+import ComplianceSnapshotModal from '@/components/modals/compliance-snapshot-modal.vue'
 export default {
   name: 'UnreceiptedDebitsTable',
 
@@ -129,13 +158,15 @@ export default {
   computed: {
     
     ...mapGetters('procurement', {
-      loading: 'loading',
-      pfis: 'allPfis',
-    }),
-   
-   isEmpty() {
+        loading: 'loading',
+        pfis: 'allPfis',
+      }),
+    
+    isEmpty() {
      return this.pfis.length === 0
     },
+
+    
 
     isNames() {
       return this.names
@@ -146,21 +177,47 @@ export default {
     },
   },
 
+  async created() {
+   await this.load()
+    //this.selectPfi(this.pfis[0])
+  },
+
   
 
   methods: {
    
 
-     ...mapActions('procurement', ['getAllPfis','load' ]),
+    ...mapActions('procurement', ['getAllPfis','load', 'selectPfi' ]),
 
+    
 
-       
     async load(){
       await this.getAllPfis();
     },
 
 
-   
+    captureReceipt(pfi) {
+      this.selectPfi(pfi)
+      setTimeout(() => {
+        this.$buefy.modal.open({
+          parent: this,
+          component: ComplianceSnapshotModal,
+          hasModalCard: true,
+          trapFocus: true,
+          canCancel: ['x'],
+          destroyOnHide: true,
+          customClass: '',
+          onCancel: () => {
+            this.$buefy.toast.open({
+              message: `Payment cancelled!`,
+              duration: 5000,
+              position: 'is-top',
+              type: 'is-info',
+            })
+          },
+        })
+      }, 300)
+    },
   }
 
  

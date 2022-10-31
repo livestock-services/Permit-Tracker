@@ -111,7 +111,7 @@
       
       
       </b-table-column>
-
+<!-- 
       <b-table-column
         v-slot="props"
         field="authBody"
@@ -159,7 +159,7 @@
       ]">   {{ (props.row.localCurrency) }} </span>  
 
 
-      </b-table-column>
+      </b-table-column> -->
 
       <b-table-column
         
@@ -256,7 +256,7 @@
       </b-table-column>
       
 
-       <b-table-column
+       <!-- <b-table-column
         v-slot="props"
         field="date"
         label="Date"
@@ -266,7 +266,7 @@
       
       {{ props.row.date}} 
      
-      </b-table-column>
+      </b-table-column> -->
 
 
       <!-- <b-table-column
@@ -308,17 +308,30 @@
           :class="[
             'tag',
             {
-              'is-success': props.row.permitStatus ===  'Approved',
+              'is-success': props.row.permitStatus ===  'PA Approved, awaiting Permit from ZAMRA',
             },
             {
-              'is-warning': props.row.permitStatus === 'Pending',
+              'is-warning': props.row.permitStatus === 'PA in motion, awaiting Finance Approval',
             },
           ]"
           >{{ props.row.permitStatus }}</span
         >
       </b-table-column>
-      
 
+      <b-table-column v-slot="props" label="Options">
+        <span class="buttons">
+         
+          <b-button
+            type="is-secondary-outline"
+            icon-left="eye-check"
+            @click="captureReceipt(props.row)"
+            class="preview"
+            >View More</b-button
+          >
+        </span>
+      </b-table-column>
+      
+    
      
 
 
@@ -345,7 +358,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
-//import PayDebitModal from '@/components/modals/pay-debit-modal'
+import PASnapshotModal from '../modals/PA-snapshot-modal.vue'
 
 
         
@@ -395,13 +408,34 @@ export default {
   methods: {
    
 
-    ...mapActions('compliance', ['getAllPermitApplications','load' ]),
+    ...mapActions('compliance', ['getAllPermitApplications','load', 'selectPA' ]),
 
     async load(){
       await this.getAllPermitApplications();
     },
 
-
+    captureReceipt(allPA) {
+      this.selectPA(allPA)
+      setTimeout(() => {
+        this.$buefy.modal.open({
+          parent: this,
+          component: PASnapshotModal,
+          hasModalCard: true,
+          trapFocus: true,
+          canCancel: ['x'],
+          destroyOnHide: true,
+          customClass: '',
+          onCancel: () => {
+            this.$buefy.toast.open({
+              message: `Payment cancelled!`,
+              duration: 5000,
+              position: 'is-top',
+              type: 'is-info',
+            })
+          },
+        })
+      }, 300)
+    },
 
   }
 
@@ -427,5 +461,6 @@ export default {
   margin-right: 12rem;
   padding-top: 3rem;
   padding-bottom: 3rem;
+  padding-right: 8rem;
 }
 </style>

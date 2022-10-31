@@ -12,11 +12,15 @@ import {
          ADD_PERMIT_APPLICATION,
          SET_ALL_PERMIT_APPLICATIONS,
          GET_ALL_PERMIT_APPLICATIONS,
+         ACKNOWLEDGE_RECEIPT,
+         PUT_PA_IN_MOTION,
 
          ADD_PERMIT,
          SET_ALL_PERMITS,
          GET_ALL_PERMITS,
+         SET_SELECTED_PERMIT_APPLICATION,
          
+
 
         } from '@/helpers/mutation-types'
 
@@ -24,7 +28,7 @@ import {
 export const state = () => ({
     loading: false,
 
-
+    selectedPA: null,
     //--------------AMENDMENTS TO PERMIT APPLICATIONS------------
     allAmendedPermitApplications:[],
     
@@ -116,6 +120,10 @@ export const getters = {
     allPermitApplications(state){
         return state.allPermitApplications
     },
+
+    selectedPA(state) {
+        return state.selectedPA
+      },
     //-------------------------------------------------------------
 
 
@@ -161,14 +169,28 @@ export const mutations = {
 
 
       //--------------PERMIT APPLICATIONS-----------------------------------------------------------------
-    [ADD_PERMIT_APPLICATION](state, newPermitApplication){
-        state.allPermitApplications.push(newPermitApplication)
+    [ADD_PERMIT_APPLICATION](state, newPA){
+        state.allPermitApplications.push(newPA)
     },
     [SET_ALL_PERMIT_APPLICATIONS](state, payload) {
         state.allPermitApplications = payload
     },
     [GET_ALL_PERMIT_APPLICATIONS](state, payload){
         state.allPermitApplications = payload
+    },
+
+    [SET_SELECTED_PERMIT_APPLICATION](state, newPA) {
+        state.selectedPA = newPA
+      },
+
+    [ACKNOWLEDGE_RECEIPT](state, putResponse) {
+        state.selectedPermitApplication = putResponse
+        state.selectedPermitApplication.permitStatus = "Acknowledged By Compliance"
+    },
+
+    [PUT_PA_IN_MOTION](state, putResponse) {
+        state.selectedPermitApplication = putResponse
+        state.selectedPermitApplication.permitStatus = "PA in motion, awaiting Finance Approval"
     },
 
     
@@ -353,11 +375,10 @@ export const actions = {
         try {
             commit(SET_LOADING, true);
 
-            const newPermitApplication = state.permitApplicationForm;
+            const newPA = state.permitApplicationForm;
            
            
-            const response = await api.post(`/comp/permits/addNewPermitApplication`, newPermitApplication);
-
+            const response = await api.post(`/comp/permits/addNewPermitApplication`, newPA);
             console.log(response.data);
 
             commit(ADD_PERMIT_APPLICATION, response.data);
@@ -429,9 +450,61 @@ export const actions = {
             commit(SET_LOADING, false);
             this.log.error("Could not add details. Please try again!");
         }
-    }
+    },
      //---------------------------------------------------------------------------------------------------------------------------------------
+    //--------------------------Acknowledge Receipt-------------------------------------------------------//
 
+     //ACKNOWLEDGE RECEIPT
+     async onAcknowledgeReceipt({ state, commit }, newPA) {
+        try {
+          commit(SET_LOADING, true) 
+            const newPA = state.selectedPermitApplication
+       //  const newPA = rootGetters['finance/selectedPermitApplication'] 
+          console.log(newPA._id)
+
+         const {data: putResponse} = await api.put(`/comp/permits/allPermitApplications/${newPA._id}`, {newPA, permitStatus: "Approved"} )
+        
+         commit(ACKNOWLEDGE_RECEIPT, putResponse)
+
+          console.log(putResponse.data);
+         
+          commit(SET_LOADING, false)
+        } catch (error) {
+          commit(SET_LOADING, false)
+          throw error
+        }
+      },
+
+        //ACKNOWLEDGE RECEIPT
+     async putPaInMotion({ state, commit }, newPA) {
+        try {
+          commit(SET_LOADING, true) 
+            const newPA = state.selectedPermitApplication
+       //  const newPA = rootGetters['finance/selectedPermitApplication'] 
+          console.log(newPA._id)
+
+         const {data: putResponse} = await api.put(`/comp/permits/allPermitApplications/${newPA._id}`, {newPA, permitStatus: "Approved"} )
+        
+         commit(PUT_PA_IN_MOTION, putResponse)
+
+          console.log(putResponse.data);
+         
+          commit(SET_LOADING, false)
+        } catch (error) {
+          commit(SET_LOADING, false)
+          throw error
+        }
+      },
+
+      selectPA({ commit }, newPA) {
+        try {
+            commit(SET_SELECTED_PERMIT_APPLICATION, newPA)
+            console.log(newPA._id)
+        } catch (error) {
+            console.log('Error')
+        }
+        
+      },
 
 }
 

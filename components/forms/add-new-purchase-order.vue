@@ -75,8 +75,8 @@
                     <b-input 
                     :disabled="!name"
                     v-model="purchaseOrderNumber"
-                    type="number"
-                     maxlength="6"
+                    
+                     maxlength="25"
                     placeholder="    Purchase Order No."></b-input>
                 </b-field>
             </div>
@@ -89,8 +89,8 @@
                     <b-input
                     :disabled="!purchaseOrderNumber"
                     v-model="pfiNumber"
-                    type="number"
-                    maxlength="10"
+                    type="text"
+                    maxlength="25"
                     placeholder="    PFI No."></b-input>
                 </b-field>
             </div>
@@ -104,11 +104,11 @@
     
         </div>
         
-        <div class="column is-one-quarter">
+        <!-- <div class="column is-one-quarter">
                   <b-field>
                    <Upload/>
                 </b-field>
-             </div>
+             </div> -->
           
              <p class="content"><b>Selected Supplier:</b> {{ selected }}</p>
              <p class="content"><b>Purchase Order:</b> {{ purchaseOrderNumber }}</p>
