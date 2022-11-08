@@ -57,26 +57,26 @@
 
            <div class="columns">
              <div  class="column is-half">
-                <h4> <span class="is-blue"> PFI Date Received from Procurement</span></h4>
+                <h4> <span class="is-blue"> PFI Status</span></h4>
               <p  placeholder="Supplier Name">
                 <span
                 :class="[
                   'tag',
                   {
-                    'is-warning': pfi.status.compliance ===  'Received from Procurement, awaiting acknowledgement',
+                    'is-warning ': pfi.status ==='New PFI added, awaiting acknowledgement',
                   },
                   {
-                    'is-info': pfi.status.compliance === 'Acknowledged By Compliance ',
+                    'is-success': pfi.status === 'Acknowledged By Compliance',
                   },
                   {
-                    'is-primary': pfi.status.compliance ===  'PA in motion, awaiting Finance Approval',
+                    'is-primary': pfi.status ===  'PA in motion, awaiting Finance Approval',
                   },
                   {
-                    'is-success': pfi.status.compliance === `PA approved, awaiting Permit from ${pfi.authBody}`,
+                    'is-success': pfi.status === `PA approved, awaiting Permit from ${pfi.authBody}`,
                   },
                 ]"
                 
-                > {{pfi.status.compliance}} </span>
+                > {{pfi.status}} </span>
               </p>
              </div>
            </div>
@@ -86,7 +86,7 @@
         </div>
       </section>
       <footer class="modal-card-foot">
-        <b-button label="Acknowledge Receipt" class="is-success mx-2" @click="close" />
+        <b-button label="Acknowledge Receipt" class="is-success mx-2" @click="onAcknowledge" />
 
         <b-button label="Close" class="mx-2" @click="close" />
 
@@ -138,9 +138,10 @@
   
     methods: {
       ...mapActions('procurement', ['load', 'selectPfi']),
-  
+      ...mapActions('compliance',['acknowledgePfi'] ),
+
       async onSubmit() {
-        const msg = await Promise.resolve('Operation successul')
+        const msg = await Promise.resolve('Operation successfull')
         this.$buefy.toast.open({
           message: msg, // 'Operation successful',
           duration: 5000,
@@ -152,8 +153,8 @@
 
       async onAcknowledge() {
 
-    await this.onAcknowledgeReceipt();
-    const msg = await Promise.resolve('Permit Application Approved Successfully!')
+    await this.acknowledgePfi();
+    const msg = await Promise.resolve('Acknowledged Successfully!')
     this.$buefy.toast.open({
     message: msg, // 'Operation successful',
     duration: 5000,
@@ -165,7 +166,7 @@
   
       close() {
         this.$buefy.toast.open({
-          message: 'Supplier Snapshot closed.',
+          message: 'Compliance Snapshot closed.',
           duration: 2000,
           position: 'is-top',
           type: 'is-warning ',

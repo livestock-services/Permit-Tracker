@@ -46,6 +46,8 @@ export const state = () => ({
 
      //--------------PERMIT APPLICATIONS---------------------------
      allPermitApplications:[],
+
+     selectedPermitApplication: null,
     
     permitApplicationForm:{
         supplierName:null,
@@ -126,6 +128,9 @@ export const getters = {
       },
     //-------------------------------------------------------------
 
+    selectedPermitApplication(state) {
+        return state.selectedPermitApplication
+      },
 
 
 
@@ -184,8 +189,8 @@ export const mutations = {
       },
 
     [ACKNOWLEDGE_RECEIPT](state, putResponse) {
-        state.selectedPermitApplication = putResponse
-        state.selectedPermitApplication.permitStatus = "Acknowledged By Compliance"
+        state.selectedPA = putResponse
+        state.selectedPA.status = "Acknowledged By Compliance"
     },
 
     [PUT_PA_IN_MOTION](state, putResponse) {
@@ -455,14 +460,16 @@ export const actions = {
     //--------------------------Acknowledge Receipt-------------------------------------------------------//
 
      //ACKNOWLEDGE RECEIPT
-     async onAcknowledgeReceipt({ state, commit }, newPA) {
+     async acknowledgePfi({ state, commit,_,rootGetters }, newPA) {
         try {
           commit(SET_LOADING, true) 
-            const newPA = state.selectedPermitApplication
+            const newPA = rootGetters['procurement/selectedPfi']
+
+
        //  const newPA = rootGetters['finance/selectedPermitApplication'] 
           console.log(newPA._id)
 
-         const {data: putResponse} = await api.put(`/comp/permits/allPermitApplications/${newPA._id}`, {newPA, permitStatus: "Approved"} )
+         const {data: putResponse} = await api.put(`/comp/permits/acknowledgePfi/${newPA._id}`, {newPA, status: "Acknowledged By Compliance"} )
         
          commit(ACKNOWLEDGE_RECEIPT, putResponse)
 

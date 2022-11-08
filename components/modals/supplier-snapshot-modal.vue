@@ -13,26 +13,19 @@
            <div  class="column is-half">
              <h4> <span class="is-blue">  Supplier Name</span></h4>
             <p >
-              {{pfi.supplierName}}
+              <span class="tag is-primary is-light">  {{pfi.supplierName}} </span>
               
             </p>
            </div>
          </div>
 
-         <div class="columns">
-           <div  class="column is-half">
-              <h4> <span class="is-blue">  Supplier Email</span></h4>
-            <p  placeholder="Supplier Name">
-              {{pfi.supplierEmail}}
-            </p>
-           </div>
-         </div>
+       
 
         <div class="columns">
            <div  class="column is-half">
               <h4> <span class="is-blue">  Purchase Order Number</span></h4>
             <p  placeholder="Supplier Name">
-              {{pfi.purchaseOrderNumber}}
+              <span class="tag is-primary is-light">   {{pfi.purchaseOrderNumber}} </span>
             </p>
            </div>
          </div>
@@ -41,7 +34,7 @@
            <div  class="column is-half">
               <h4> <span class="is-blue">  PFI Number</span></h4>
             <p  placeholder="Supplier Name">
-              {{pfi.pfiNumber}}
+              <span class="tag is-primary is-light">{{pfi.pfiNumber}} </span>
             </p>
            </div>
          </div>
@@ -50,7 +43,27 @@
            <div  class="column is-half">
               <h4> <span class="is-blue">  Issued Date</span></h4>
             <p  placeholder="Supplier Name">
-              {{pfi.date}}
+              <span class="tag is-primary is-light"> {{pfi.date}} </span>
+            </p>
+           </div>
+         </div>
+
+         <div class="columns">
+           <div  class="column is-half">
+              <h4> <span class="is-blue"> PFI Status</span></h4>
+            <p  placeholder="PFI Status">
+              <span :class="[
+                
+                'tag',
+                {
+                    'is-warning': pfi.status ===  'New PFI added, awaiting acknowledgement',
+                  },
+                  {
+                    'is-success': pfi.status === 'Acknowledged By Compliance',
+                  },
+
+              ]"
+              > {{pfi.status}} </span>
             </p>
            </div>
          </div>

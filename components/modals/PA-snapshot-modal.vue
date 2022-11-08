@@ -155,12 +155,18 @@
 
         <b-button label="Close" class="mx-2" @click="close" />
 
-        <!-- <b-button
-          label="Submit"
-          type="is-primary"
-          icon-left="account"
-          @click="onSubmit"
-        /> -->
+        <b-tooltip type="is-success mx-2 "  label="Acknowledge Receipt">
+       <b-button
+        class="mx-2"
+        type="is-warning"
+        icon-left="nut"
+        @click="inGarage"
+      />
+      </b-tooltip>
+
+      
+
+      
       </footer>
     </div>
   </template>

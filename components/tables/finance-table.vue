@@ -50,14 +50,16 @@
         {{ props.row.pfiNumber }}
       </b-table-column>
 
-      <b-table-column
+      
+        <b-table-column
         v-slot="props"
         field="coverType"
-        label="Authorization Body"
+        label="Auth Body"
         sortable
       >
-        {{ props.row.authBody }}
+      <b-tooltip label="Authorization Body eg. ZAMRA, ZEMA etc"> {{ props.row.authBody }}</b-tooltip>
       </b-table-column>
+      
       
       
 
@@ -90,7 +92,7 @@
       
       
       
-      ]">{{ (props.row.marketAuthFee).toFixed(2) }}</span>  
+      ]">  <b-tooltip type="is-info is-light" label="Fee charged for drugs imported at the DG's discretion at 1.5% of the local currency + ZMW 100.00 permit fee"> {{ (props.row.marketAuthFee).toFixed(2) }} </b-tooltip></span>  
       </b-table-column>
 
        <b-table-column
@@ -136,7 +138,7 @@
       
       
       
-      ]">{{ (props.row.marketNonAuthFee).toFixed(2) }}</span>  
+      ]"><b-tooltip position="is-left" type="is-danger is-light" label="Fee charged for drugs imported at the DG's discretion at 5% of the local currency + ZMW 750.00 + ZMW 100.00 permit fee"> {{ (props.row.marketNonAuthFee).toFixed(2) }} </b-tooltip></span>  
 
         
       </b-table-column>

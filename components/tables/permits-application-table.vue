@@ -56,7 +56,7 @@
         sortable
       >
 
-         {{ props.row.pfiNumber }}   
+       <span class="tag is-peach "> {{ props.row.pfiNumber }}   </span>
 
        
       </b-table-column>
@@ -308,10 +308,10 @@
           :class="[
             'tag',
             {
-              'is-success': props.row.permitStatus ===  'PA Approved, awaiting Permit from ZAMRA',
+              'is-success': props.row.permitStatus ===  'PA Approved, awaiting Permit from ZAMRA' || props.row.permitStatus === 'Approved',
             },
             {
-              'is-warning': props.row.permitStatus === 'PA in motion, awaiting Finance Approval',
+              'is-warning': props.row.permitStatus === 'PA in motion, awaiting Finance Approval'|| props.row.permitStatus === 'Pending',
             },
           ]"
           >{{ props.row.permitStatus }}</span
@@ -320,14 +320,16 @@
 
       <b-table-column v-slot="props" label="Options">
         <span class="buttons">
-         
+          <b-tooltip type="is-success is-light mx-2 "  label="View More">
           <b-button
             type="is-secondary-outline"
             icon-left="eye-check"
             @click="captureReceipt(props.row)"
-            class="preview"
-            >View More</b-button
+            class="preview is-primary is-light"
+            ></b-button
           >
+
+          </b-tooltip>
         </span>
       </b-table-column>
       
@@ -341,7 +343,7 @@
           :class="[
             'tag',
             {
-              'is-success': 'Refresh',
+              'is-warning': 'Refresh',
             }
             
           ]"
@@ -458,9 +460,13 @@ export default {
 }
 
 .table{
-  margin-right: 12rem;
+ 
   padding-top: 3rem;
   padding-bottom: 3rem;
   padding-right: 8rem;
+}
+
+.is-peach{
+  background-color: peachpuff;
 }
 </style>

@@ -12,8 +12,9 @@
       </b-select>
 
       <div class="buttons">
-        <b-button type="is-info" icon-left="refresh" @click="load">Refresh</b-button>
-        
+        <b-button type="is-info" icon-left="refresh" @click="load"
+          >Refresh</b-button
+        >
       </div>
     </b-field>
     <b-table
@@ -31,36 +32,22 @@
       aria-page-label="Page"
       aria-current-label="Current Page"
     >
-       <b-table-column
+      <b-table-column
         v-slot="props"
         field="supplierName"
         label="Supplier"
         searchable
-        
       >
-       {{ props.row.supplierName }}
-       
+        {{ props.row.supplierName }}
+
         <!-- {{ props.row.sumInsured }} -->
       </b-table-column>
 
-     <b-table-column
-        v-slot="props"
-        field="supplierEmail"
-        label="Supplier Email"
-        sortable
-      >
-        {{ props.row.supplierEmail }}
-      </b-table-column>
       
-       <b-table-column
-        v-slot="props"
-        field="pfiNumber"
-        label="PFI No."
-        sortable
-      >
+
+      <b-table-column v-slot="props" field="pfiNumber" label="PFI No." sortable>
         {{ props.row.pfiNumber }}
       </b-table-column>
-
 
       <b-table-column
         v-slot="props"
@@ -70,8 +57,6 @@
       >
         {{ props.row.purchaseOrderNumber }}
       </b-table-column>
-      
-      
 
       <b-table-column
         v-slot="props"
@@ -82,17 +67,33 @@
         {{ props.row.date }}
       </b-table-column>
 
-       <b-table-column v-slot="props" field="status" label="PFI Status" sortable>
-
-          <span class="tag is-proc">{{ props.row.status.procurement}}</span>
-
+      <b-table-column v-slot="props" field="status" label="PFI Status" sortable>
+        <span
+          :class="[
+            'tag',
+            {
+              'is-warning':
+                props.row.status === 'New PFI added, awaiting acknowledgement',
+            },
+            {
+              'is-success': props.row.status === 'Acknowledged By Compliance',
+            },
+            {
+              'is-primary':
+                props.row.status === 'PA in motion, awaiting Finance Approval',
+            },
+            {
+              'is-success':
+                props.row.status ===
+                `PA approved, awaiting Permit from ${props.row.authBody}`,
+            },
+          ]"
+        >
+          {{ props.row.status }}</span
+        >
       </b-table-column>
 
-      
-
-
-      
-     <b-table-column v-slot="props" label="Options">
+      <b-table-column v-slot="props" label="Options">
         <span class="buttons">
           <!-- <b-button type="is-secondary-outline" icon-left="eye">View</b-button> -->
           <b-button
@@ -105,129 +106,102 @@
         </span>
       </b-table-column>
 
-      
-                
-
-      
-
-
       <template #empty>
-        <h4 class="is-size-4 has-text-centered">No PFIs yet. &#x1F4DA;. Click the 
-            <span
-          :class="[
-            'tag',
-            {
-              'is-info': 'Refresh',
-            }
-            
-          ]"
+        <h4 class="is-size-4 has-text-centered">
+          No PFIs yet. &#x1F4DA;. Click the
+          <span
+            :class="[
+              'tag',
+              {
+                'is-info': 'Refresh',
+              },
+            ]"
           >
-          
-          Refresh</span>
-          
-           button above to load your data</h4>
+            Refresh</span
+          >
+
+          button above to load your data
+        </h4>
       </template>
     </b-table>
   </div>
-
-  
 </template>
 
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
-import SupplierSnapshotModal from '@/components/modals/supplier-snapshot-modal.vue'
+import { mapActions, mapGetters } from "vuex";
+import SupplierSnapshotModal from "@/components/modals/supplier-snapshot-modal.vue";
 export default {
-  name: 'UnreceiptedDebitsTable',
+  name: "UnreceiptedDebitsTable",
 
-  data() {  
-  
-    
+  data() {
     return {
-
       isPaginated: true,
       currentPage: 1,
       perPage: 10,
       pageOptions: [5, 10, 25, 50, 100],
-      paginationPosition: 'bottom',
-      defaultSortDirection: 'desc',
-      sortIcon: 'arrow-up',
-      sortIconSize: 'is-small',
-    }
+      paginationPosition: "bottom",
+      defaultSortDirection: "desc",
+      sortIcon: "arrow-up",
+      sortIconSize: "is-small",
+    };
   },
 
-
   computed: {
-    
-    ...mapGetters('procurement', {
-        loading: 'loading',
-        pfis: 'allPfis',
-      }),
-    
-    isEmpty() {
-     return this.pfis.length === 0
-    },
+    ...mapGetters("procurement", {
+      loading: "loading",
+      pfis: "allPfis",
+    }),
 
-    
+    isEmpty() {
+      return this.pfis.length === 0;
+    },
 
     isNames() {
-      return this.names
+      return this.names;
     },
-    
+
     tableData() {
-      return this.isEmpty ? [] : this.pfis
+      return this.isEmpty ? [] : this.pfis;
     },
   },
 
   async created() {
-   await this.load()
+    await this.load();
     //this.selectPfi(this.pfis[0])
   },
 
-  
-
   methods: {
-   
+    ...mapActions("procurement", ["getAllPfis", "load", "selectPfi"]),
 
-    ...mapActions('procurement', ['getAllPfis','load', 'selectPfi' ]),
-
-    
-
-    async load(){
+    async load() {
       await this.getAllPfis();
     },
 
-
     captureReceipt(pfi) {
-      this.selectPfi(pfi)
+      this.selectPfi(pfi);
       setTimeout(() => {
         this.$buefy.modal.open({
           parent: this,
           component: SupplierSnapshotModal,
           hasModalCard: true,
           trapFocus: true,
-          canCancel: ['x'],
+          canCancel: ["x"],
           destroyOnHide: true,
-          customClass: '',
+          customClass: "",
           onCancel: () => {
             this.$buefy.toast.open({
               message: `Payment cancelled!`,
               duration: 5000,
-              position: 'is-top',
-              type: 'is-info',
-            })
+              position: "is-top",
+              type: "is-info",
+            });
           },
-        })
-      }, 300)
+        });
+      }, 300);
     },
-  }
-
- 
-
-  
-}
-
-  
+  },
+};
 </script>
 
 <style scoped>
@@ -236,12 +210,12 @@ export default {
   grid-template-columns: 1fr 2fr 1fr;
 }
 
-.is-proc{
- background-color: rgb(78, 159, 252);
- color: aliceblue;
+.is-proc {
+  background-color: rgb(78, 159, 252);
+  color: aliceblue;
 }
 
-.preview{
+.preview {
   background-color: rgb(177, 219, 243);
 }
 
