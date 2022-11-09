@@ -110,10 +110,10 @@
                 :class="[
                   'tag',
                   {
-                    'is-success': PA.permitStatus ===  'Approved',
+                    'is-success ': PA.permitStatus ===  `PA approved, awaiting Permit from ${PA.authBody}`,
                   },
                   {
-                    'is-warning': PA.permitStatus === 'Pending',
+                    'is-warning ': PA.permitStatus === 'PA in motion, awaiting Finance Approval',
                   },
                 ]"
                 >{{PA.permitStatus}}</span>
@@ -184,12 +184,25 @@ export default {
       const msg = await Promise.resolve('Permit Application Approved Successfully!')
       this.$buefy.toast.open({
         message: msg, // 'Operation successful',
-        duration: 5000,
+        duration: 2500,
         position: 'is-top',
-        type: 'is-info',
+        type: 'is-success is-light',
       })
       this.$parent.close()
+      this.showNotifications();
     },
+
+   
+    showNotifications(){
+   const notification = new Notification("Permit Application Approved Successfully .", {
+       body: "Check with the respective authorization body for receipt of permit",
+        icon: "../img/LSC.jpg",
+      
+
+    }); 
+ },
+
+ 
 
     close() {
       this.$buefy.toast.open({

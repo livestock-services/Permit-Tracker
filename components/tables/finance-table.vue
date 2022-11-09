@@ -44,20 +44,20 @@
       <b-table-column
         v-slot="props"
         field="clientID"
-        label="PFI No."
+        label="Supplier"
         sortable
       >
-        {{ props.row.pfiNumber }}
+        {{ props.row.supplierName }}
       </b-table-column>
 
       
         <b-table-column
         v-slot="props"
         field="coverType"
-        label="Auth Body"
+        label="PFI No."
         sortable
       >
-      <b-tooltip label="Authorization Body eg. ZAMRA, ZEMA etc"> {{ props.row.authBody }}</b-tooltip>
+      <b-tooltip label="PFI No."> {{ props.row.pfiNumber }}</b-tooltip>
       </b-table-column>
       
       
@@ -138,7 +138,7 @@
       
       
       
-      ]"><b-tooltip position="is-left" type="is-danger is-light" label="Fee charged for drugs imported at the DG's discretion at 5% of the local currency + ZMW 750.00 + ZMW 100.00 permit fee"> {{ (props.row.marketNonAuthFee).toFixed(2) }} </b-tooltip></span>  
+      ]"><b-tooltip position="is-top" type="is-danger is-light" label="Fee charged for drugs imported at the DG's discretion at 5% of the local currency + ZMW 750.00 + ZMW 100.00 permit fee"> {{ (props.row.marketNonAuthFee).toFixed(2) }} </b-tooltip></span>  
 
         
       </b-table-column>
@@ -153,10 +153,10 @@
           :class="[
             'tag',
             {
-              'is-success': props.row.permitStatus ===  'Approved',
+              'is-success': props.row.permitStatus ===  `PA Approved, awaiting Permit from ${props.row.authBody}`,
             },
             {
-              'is-warning': props.row.permitStatus === 'Pending',
+              'is-warning': props.row.permitStatus === 'PA in motion, awaiting Finance Approval',
             },
           ]"
           >{{ props.row.permitStatus }}</span

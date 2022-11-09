@@ -127,14 +127,9 @@
                 <span
                 :class="[
                   'tag',
+                 
                   {
-                    'is-warning': PA.permitStatus ===  'Received from Procurement, awaiting acknowledgement',
-                  },
-                  {
-                    'is-info': PA.permitStatus === 'Acknowledged By Compliance ',
-                  },
-                  {
-                    'is-primary': PA.permitStatus ===  'PA in motion, awaiting Finance Approval',
+                    'is-warning': PA.permitStatus ===  'PA in motion, awaiting Finance Approval',
                   },
                   {
                     'is-success': PA.permitStatus === `PA approved, awaiting Permit from ${PA.authBody}`,
@@ -151,20 +146,9 @@
         </div>
       </section>
       <footer class="modal-card-foot">
-        <b-button label="Acknowledge Receipt" class="is-success mx-2" @click="close" />
+       <b-button v-if="PA.permitStatus !== 'PA in motion, awaiting Finance Approval'" icon-left="handshake" label="Acknowledge Receipt of Permit" class="is-success mx-2" @click="receivePermit" /> 
 
         <b-button label="Close" class="mx-2" @click="close" />
-
-        <b-tooltip type="is-success mx-2 "  label="Acknowledge Receipt">
-       <b-button
-        class="mx-2"
-        type="is-warning"
-        icon-left="nut"
-        @click="inGarage"
-      />
-      </b-tooltip>
-
-      
 
       
       </footer>
@@ -232,7 +216,12 @@
     type: 'is-info',
     })
     this.$parent.close()
+    
     },
+
+    
+      
+
   
       close() {
         this.$buefy.toast.open({

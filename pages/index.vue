@@ -510,6 +510,28 @@ export default {
     }),
   },
 
+  async created(){
+    function showNotifications(){
+   const notification = new Notification("Welcome to your LSCS Permit Tracker dashboard.", {
+       body: "This section gives an overview of all your vehicles. More details are in the Fleet section.",
+        icon: "litmas3.png",
+      
+
+    }); 
+ }
+
+ if (Notification.permission === "granted") {
+     showNotifications();
+ } else if(Notification.permission !== "denied") {
+     Notification.requestPermission().then(permission =>{
+         if (permission === "granted") {
+             showNotifications();
+         }
+      
+     })
+ }
+  },
+
   methods: {
 
          ...mapActions('users', ['getAllUsers']),

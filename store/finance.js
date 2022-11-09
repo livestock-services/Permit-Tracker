@@ -75,7 +75,7 @@ export const mutations = {
       
     [APPROVE_PERMIT_APPLICATION](state, putResponse) {
      state.selectedPermitApplication = putResponse
-     state.selectedPermitApplication.permitStatus = "Approved"
+     state.selectedPermitApplication.permitStatus = `PA Approved, awaiting Permit from ${state.selectedPermitApplication.authBody}`
      }
     
 }
@@ -166,7 +166,7 @@ export const actions = {
        //  const newPA = rootGetters['finance/selectedPermitApplication'] 
           console.log(newPA._id)
 
-         const {data: putResponse} = await api.put(`/comp/permits/allPermitApplications/${newPA._id}`, {newPA, permitStatus: "Approved"} )
+         const {data: putResponse} = await api.put(`/comp/permits/allPermitApplications/${newPA._id}`, {newPA, permitStatus: `PA Approved, awaiting Permit from ${newPA.authBody}`} )
         
          commit(APPROVE_PERMIT_APPLICATION, putResponse)
 

@@ -283,7 +283,18 @@
                 type: "is-danger",
                 });
             }
+
+            this.showNotifications();
             },
+
+            showNotifications(){
+   const notification = new Notification("Permit Application Added Successfully .", {
+       body: "PA in motion, awaiting Finance Approval",
+        icon: "../forms/img/LSC.jpg",
+      
+
+    }); 
+ },
             clearForm() {
             this.permitApplicationForm = {
                 supplierName: null,

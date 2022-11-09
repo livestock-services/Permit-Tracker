@@ -232,7 +232,7 @@
       </b-table-column>
       
 
-      <b-table-column
+      <!-- <b-table-column
         v-slot="props"
         field="authBody"
         label="Auth Body"
@@ -253,7 +253,7 @@
       
       ]"> {{ props.row.authBody }} </span>  
        
-      </b-table-column>
+      </b-table-column> -->
       
 
        <!-- <b-table-column
@@ -308,7 +308,10 @@
           :class="[
             'tag',
             {
-              'is-success': props.row.permitStatus ===  'PA Approved, awaiting Permit from ZAMRA' || props.row.permitStatus === 'Approved',
+              'is-info': props.row.permitStatus ===  `Permit received from ${props.row.authBody}` || props.row.permitStatus === 'Approved',
+            },
+            {
+              'is-success': props.row.permitStatus ===  `PA Approved, awaiting Permit from ${props.row.authBody}` || props.row.permitStatus === 'Approved',
             },
             {
               'is-warning': props.row.permitStatus === 'PA in motion, awaiting Finance Approval'|| props.row.permitStatus === 'Pending',
@@ -415,6 +418,8 @@ export default {
     async load(){
       await this.getAllPermitApplications();
     },
+
+   
 
     captureReceipt(allPA) {
       this.selectPA(allPA)

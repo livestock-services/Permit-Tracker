@@ -19,14 +19,7 @@
              </div>
            </div>
   
-           <div class="columns">
-             <div  class="column is-half">
-                <h4> <span class="is-blue">  Supplier Email</span></h4>
-              <p  placeholder="Supplier Name">
-                <span class="tag is-primary is-light">  {{pfi.supplierEmail}} </span>
-              </p>
-             </div>
-           </div>
+           
   
           <div class="columns">
              <div  class="column is-half">
@@ -86,7 +79,7 @@
         </div>
       </section>
       <footer class="modal-card-foot">
-        <b-button label="Acknowledge Receipt" class="is-success mx-2" @click="onAcknowledge" />
+        <b-button v-if="pfi.status !== 'Acknowledged By Compliance'" label="Acknowledge Receipt" class="is-success mx-2" @click="onAcknowledge" />
 
         <b-button label="Close" class="mx-2" @click="close" />
 
