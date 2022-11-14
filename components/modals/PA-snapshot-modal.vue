@@ -127,7 +127,9 @@
                 <span
                 :class="[
                   'tag',
-                 
+                  {
+                    'is-info':    PA.permitStatus ===  `Permit received from ${PA.authBody}`,
+                  },
                   {
                     'is-warning': PA.permitStatus ===  'PA in motion, awaiting Finance Approval',
                   },
@@ -146,7 +148,8 @@
         </div>
       </section>
       <footer class="modal-card-foot">
-       <b-button v-if="PA.permitStatus !== 'PA in motion, awaiting Finance Approval'" icon-left="handshake" label="Acknowledge Receipt of Permit" class="is-success mx-2" @click="receivePermit" /> 
+       <b-button  icon-left="handshake" label="Acknowledge Receipt of Permit" class="is-success mx-2" @click="onReceivePermit" /> 
+       
 
         <b-button label="Close" class="mx-2" @click="close" />
 
@@ -192,7 +195,7 @@
     
   
     methods: {
-      ...mapActions('compliance', ['load', 'selectPA']),
+      ...mapActions('compliance', ['load', 'receivePermit', 'selectPA']),
   
       async onSubmit() {
         const msg = await Promise.resolve('Operation successful')
@@ -205,19 +208,21 @@
         this.$parent.close()
       },
 
-      async onAcknowledge() {
+  
 
-    await this.onAcknowledgeReceipt();
-    const msg = await Promise.resolve('Permit Application Approved Successfully!')
-    this.$buefy.toast.open({
-    message: msg, // 'Operation successful',
-    duration: 5000,
-    position: 'is-top',
-    type: 'is-info',
-    })
-    this.$parent.close()
-    
-    },
+          async onReceivePermit() {
+
+      await this.receivePermit();
+      const msg = await Promise.resolve('Permit received Successfully!')
+      this.$buefy.toast.open({
+      message: msg, // 'Operation successful',
+      duration: 2000,
+      position: 'is-bottom',
+      type: 'is-success',
+      })
+      this.$parent.close()
+
+      },
 
     
       

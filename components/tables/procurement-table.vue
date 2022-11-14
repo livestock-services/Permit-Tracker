@@ -67,6 +67,7 @@
         {{ props.row.date }}
       </b-table-column>
 
+      
       <b-table-column v-slot="props" field="status" label="PFI Status" sortable>
         <span
           :class="[
@@ -151,10 +152,12 @@ export default {
     ...mapGetters("procurement", {
       loading: "loading",
       pfis: "allPfis",
+      allPAs: 'allPermitApplications',
     }),
 
     isEmpty() {
       return this.pfis.length === 0;
+      
     },
 
     isNames() {

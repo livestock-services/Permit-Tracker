@@ -14,6 +14,7 @@ import {
          GET_ALL_PERMIT_APPLICATIONS,
          ACKNOWLEDGE_RECEIPT,
          PUT_PA_IN_MOTION,
+         RECEIVE_PERMIT,
 
          ADD_PERMIT,
          SET_ALL_PERMITS,
@@ -196,6 +197,11 @@ export const mutations = {
     [PUT_PA_IN_MOTION](state, putResponse) {
         state.selectedPermitApplication = putResponse
         state.selectedPermitApplication.permitStatus = "PA in motion, awaiting Finance Approval"
+    },
+
+    [RECEIVE_PERMIT](state, putResponse) {
+        state.selectedPermitApplication = putResponse
+        state.selectedPermitApplication.permitStatus = `Received permit from ${state.selectedPermitApplication.authBody}`
     },
 
     
@@ -493,6 +499,29 @@ export const actions = {
          const {data: putResponse} = await api.put(`/comp/permits/allPermitApplications/${newPA._id}`, {newPA, permitStatus: "Approved"} )
         
          commit(PUT_PA_IN_MOTION, putResponse)
+
+          console.log(putResponse.data);
+         
+          commit(SET_LOADING, false)
+        } catch (error) {
+          commit(SET_LOADING, false)
+          throw error
+        }
+      },
+
+           //ACKNOWLEDGE RECEIPT
+     async receivePermit({ state, commit,_,rootGetters }, RP) {
+        try {
+          commit(SET_LOADING, true) 
+         // const newPA = state.selectedPA
+
+
+        const RP = rootGetters['compliance/selectedPA'] 
+          console.log(RP._id)
+
+         const {data: putResponse} = await api.put(`/comp/permits/receivePermit/${RP._id}`, {RP, permitStatus: `Permit received from ${RP.authBody}`} )
+        
+         commit(RECEIVE_PERMIT, putResponse)
 
           console.log(putResponse.data);
          
