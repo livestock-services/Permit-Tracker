@@ -12,6 +12,10 @@
         <b-tab-item label="View Permit Applications" icon="eye-check">
               <permits-application-table></permits-application-table>
         </b-tab-item>
+
+        <b-tab-item label="View Permit Applications" icon="eye-check">
+              <Calendar/>
+        </b-tab-item>
         
     </b-tabs>
 
@@ -22,6 +26,7 @@
 import AddNewPurchaseOrder from '../../components/forms/add-new-purchase-order.vue'
 import ProcurementTable from '../../components/tables/procurement-table.vue'
 import PermitsApplicationTable from '~/components/tables/permits-application-table.vue'
+import Calendar from '~/components/calendar.vue'
 
 export default {
   middleware: 'is-admin',
@@ -29,7 +34,8 @@ export default {
  components:{
      AddNewPurchaseOrder,
      ProcurementTable,
-     PermitsApplicationTable
+     PermitsApplicationTable,
+     Calendar
  }
 }
 </script>
