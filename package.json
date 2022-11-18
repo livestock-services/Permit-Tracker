@@ -13,6 +13,7 @@
     "@braid/vue-formulate": "^2.5.3",
     "@nuxtjs/auth-next": "5.0.0-1624817847.21691f1",
     "@nuxtjs/axios": "^5.13.6",
+    "@syncfusion/ej2-vue-schedule": "^20.3.57",
     "cleave": "^1.0.2",
     "cleave.js": "^1.6.0",
     "core-js": "^3.15.1",
