@@ -513,7 +513,7 @@ export default {
   async created(){
     function showNotifications(){
    const notification = new Notification("Welcome to your LSCS Permit Tracker dashboard.", {
-       body: "This section gives an overview of all your vehicles. More details are in the Fleet section.",
+       body: "This section gives an overview of the available actions .",
         icon: "litmas3.png",
       
 
