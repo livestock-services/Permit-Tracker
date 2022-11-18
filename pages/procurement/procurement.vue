@@ -13,7 +13,7 @@
               <permits-application-table></permits-application-table>
         </b-tab-item>
 
-        <b-tab-item label="View Permit Applications" icon="eye-check">
+        <b-tab-item label="Reminders" icon="clock-outline">
               <Calendar/>
         </b-tab-item>
         

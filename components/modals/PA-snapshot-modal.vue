@@ -148,7 +148,7 @@
         </div>
       </section>
       <footer class="modal-card-foot">
-       <b-button v-if="this.$auth.user.email !== 'jennyc@livestock.co.zm'" icon-left="handshake" label="Acknowledge Receipt of Permit" class="is-success mx-2" @click="onReceivePermit" /> 
+       <b-button v-if="this.$auth.user.email !== 'jennyc@livestock.co.zm' && PA.permitStatus ==`PA Approved, awaiting Permit from ${PA.authBody}`" icon-left="handshake" label="Acknowledge Receipt of Permit" class="is-success mx-2" @click="onReceivePermit" /> 
        
 
         <b-button label="Close" class="mx-2" @click="close" />
