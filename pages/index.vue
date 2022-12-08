@@ -27,7 +27,7 @@
 <!--Button for Procurement-----------------------  -->
 
             <b-button
-            v-if="this.$auth.user.email ==='jennyc@livestock.co.zm'"
+            v-if="this.$auth.user.email ==='procurement@livestock.co.zm'"
             class="mx-2 my-4"
             type="is-info"
             size="is-large"
@@ -39,7 +39,7 @@
 
 
             <b-button
-              v-if="this.$auth.user.email === 'jennyc@livestock.co.zm'" grouped group-multiline position="is-centered"
+              v-if="this.$auth.user.email === 'procurement@livestock.co.zm'" grouped group-multiline position="is-centered"
               class="mx-2 my-4"
               type="is-danger "
               icon-right="logout"
@@ -51,36 +51,11 @@
  <!-- End of Procurement-----------============================= -->
 
 
- <!--Button for Procurement-----------------------  -->
-
-            <b-button
-            v-if="this.$auth.user.email ==='henryb@livestock.co.zm'"
-            class="mx-2 my-4"
-            type="is-info"
-            size="is-large"
-            icon-left= "cash-check"
-            ico
-            @click="onProc">
-              Manage Procurement
-            </b-button>
-
-
-            <b-button
-              v-if="this.$auth.user.email === 'henryb@livestock.co.zm'" grouped group-multiline position="is-centered"
-              class="mx-2 my-4"
-              type="is-danger "
-              icon-right="logout"
-              size="is-large"
-              @click="endSession"
-              >Log Out</b-button>
-
-               
- <!-- End of Procurement-----------============================= -->
 
 <!-- Button for Compliance------------------ -->
 
              <b-button
-            v-if="this.$auth.user.email ==='gaving@livestock.co.zm'"
+            v-if="this.$auth.user.email ==='compliance@livestock.co.zm'"
             class="mx-2 my-4"
             type="is-warning"
             size="is-large"
@@ -91,7 +66,7 @@
 
 
              <b-button
-              v-if="this.$auth.user.email ===  'gaving@livestock.co.zm'" grouped group-multiline position="is-centered"
+              v-if="this.$auth.user.email ===  'compliance@livestock.co.zm'" grouped group-multiline position="is-centered"
               class="mx-2 my-4"
               type="is-danger "
               icon-right="logout"
@@ -104,7 +79,7 @@
 
 <!-- Button for Finance----------------------------------- -->
              <b-button
-            v-if="this.$auth.user.email ==='timothyk@livestock.co.zm'"
+            v-if="this.$auth.user.email ==='finance@livestock.co.zm'"
             class="mx-2 my-4"
             type="is-success"
             size="is-large"
@@ -116,7 +91,7 @@
 
 
              <b-button
-              v-if="this.$auth.user.email === 'timothyk@livestock.co.zm'" grouped group-multiline position="is-centered"
+              v-if="this.$auth.user.email === 'finance@livestock.co.zm'" grouped group-multiline position="is-centered"
               class="mx-2 my-4"
               type="is-danger "
               icon-right="logout"
@@ -129,8 +104,8 @@
 
 
           </b-field>
-<!-- Azwel's Field----------------------------------------- -->
-           <b-field v-if="this.$auth.user.email === 'azwels@livestock.co.zm' " grouped group-multiline position="is-centered">
+<!-- Admin's Field----------------------------------------- -->
+           <b-field v-if="this.$auth.user.email === 'itsupport@livestock.co.zm' " grouped group-multiline position="is-centered">
             <!-- <b-button
               v-for="({ name, icon, type, path, role }, index) in actions"
               
@@ -190,254 +165,10 @@
             >
           </b-field>
 
-<!--End of Azwel's Field----------------------------  -->
+<!--End of Admin's Field----------------------------  -->
 
 
 
-<!-- Kondwani's Field-------------------------------- -->
-<b-field v-if="this.$auth.user.email === 'kondwanim@livestock.co.zm' " grouped group-multiline position="is-centered">
-            <!-- <b-button
-              v-for="({ name, icon, type, path, role }, index) in actions"
-              
-              :key="index"
-              class="mx-2 my-4"
-              :type="type"
-              :icon-left="icon"
-              :role="role"
-              size="is-large"
-              @click="$router.push({ path })"
-              >{{ name  }} </b-button
-            > -->
-
-            <b-button
-           
-            class="mx-2 my-4"
-            type="is-info"
-            size="is-large"
-            icon-left= "cash-check"
-            ico
-            @click="onProc">
-              Manage Procurement
-            </b-button>
-
-            <b-button
-           
-            class="mx-2 my-4"
-            type="is-warning"
-            size="is-large"
-             icon-left="file-star"
-            @click="onComp">
-             Manage Compliance
-            </b-button>
-
-            <b-button
-           
-            class="mx-2 my-4"
-            type="is-success"
-            size="is-large"
-            icon-left="finance"
-            path='/finance/finance'
-            @click="onFin">
-              Manage Finance
-            </b-button>
-
-           
-            <b-button
-            
-              class="mx-2 my-4"
-              type="is-danger "
-              icon-right="logout"
-              size="is-large"
-              @click="endSession"
-              >Log Out</b-button
-            >
-          </b-field>
-<!-- End of Kondwani's Field--------------------------------- -->
-
-<!-- Mutinta's Field--------------------------- -->
-<b-field v-if="this.$auth.user.email === 'mutintac@livestock.co.zm' " grouped group-multiline position="is-centered">
-            <!-- <b-button
-              v-for="({ name, icon, type, path, role }, index) in actions"
-              
-              :key="index"
-              class="mx-2 my-4"
-              :type="type"
-              :icon-left="icon"
-              :role="role"
-              size="is-large"
-              @click="$router.push({ path })"
-              >{{ name  }} </b-button
-            > -->
-
-            <b-button
-           
-            class="mx-2 my-4"
-            type="is-info"
-            size="is-large"
-            icon-left= "cash-check"
-            ico
-            @click="onProc">
-              Manage Procurement
-            </b-button>
-
-            <b-button
-           
-            class="mx-2 my-4"
-            type="is-warning"
-            size="is-large"
-             icon-left="file-star"
-            @click="onComp">
-             Manage Compliance
-            </b-button>
-
-            <b-button
-           
-            class="mx-2 my-4"
-            type="is-success"
-            size="is-large"
-            icon-left="finance"
-            path='/finance/finance'
-            @click="onFin">
-              Manage Finance
-            </b-button>
-
-           
-            <b-button
-            
-              class="mx-2 my-4"
-              type="is-danger "
-              icon-right="logout"
-              size="is-large"
-              @click="endSession"
-              >Log Out</b-button
-            >
-          </b-field>
-
-<!-- End of Mutinta's Field------------------------>
-
-
-
-<!-- Euston's Field----------------------------- -->
-
-<b-field v-if="this.$auth.user.email === 'eustonk@livestock.co.zm' " grouped group-multiline position="is-centered">
-            <!-- <b-button
-              v-for="({ name, icon, type, path, role }, index) in actions"
-              
-              :key="index"
-              class="mx-2 my-4"
-              :type="type"
-              :icon-left="icon"
-              :role="role"
-              size="is-large"
-              @click="$router.push({ path })"
-              >{{ name  }} </b-button
-            > -->
-
-            <b-button
-           
-            class="mx-2 my-4"
-            type="is-info"
-            size="is-large"
-            icon-left= "cash-check-alt"
-            ico
-            @click="onProc">
-              Manage Procurement
-            </b-button>
-
-            <b-button
-           
-            class="mx-2 my-4"
-            type="is-warning"
-            size="is-large"
-             icon-left="file-star"
-            @click="onComp">
-             Manage Compliance
-            </b-button>
-
-            <b-button
-           
-            class="mx-2 my-4"
-            type="is-success"
-            size="is-large"
-            icon-left="finance"
-            path='/finance/finance'
-            @click="onFin">
-              Manage Finance
-            </b-button>
-
-           
-            <b-button
-            
-              class="mx-2 my-4"
-              type="is-danger "
-              icon-right="logout"
-              size="is-large"
-              @click="endSession"
-              >Log Out</b-button
-            >
-          </b-field>
-
-
-<!-- End of Euston's Field-------------- -->
-
-<!---------------------------------------------Bally's Field----------------------------- -->
-<b-field v-if="this.$auth.user.email === 'dilipk@livestock.co.zm' " grouped group-multiline position="is-centered">
-            <!-- <b-button
-              v-for="({ name, icon, type, path, role }, index) in actions"
-              
-              :key="index"
-              class="mx-2 my-4"
-              :type="type"
-              :icon-left="icon"
-              :role="role"
-              size="is-large"
-              @click="$router.push({ path })"
-              >{{ name  }} </b-button
-            > -->
-
-            <b-button
-           
-            class="mx-2 my-4"
-            type="is-info"
-            size="is-large"
-            icon-left= "cash-check-alt"
-            ico
-            @click="onProc">
-              Manage Procurement
-            </b-button>
-
-            <b-button
-           
-            class="mx-2 my-4"
-            type="is-warning"
-            size="is-large"
-             icon-left="file-star"
-            @click="onComp">
-             Manage Compliance
-            </b-button>
-
-            <b-button
-           
-            class="mx-2 my-4"
-            type="is-success"
-            size="is-large"
-            icon-left="finance"
-            path='/finance/finance'
-            @click="onFin">
-              Manage Finance
-            </b-button>
-
-           
-            <b-button
-            
-              class="mx-2 my-4"
-              type="is-danger "
-              icon-right="logout"
-              size="is-large"
-              @click="endSession"
-              >Log Out</b-button
-            >
-          </b-field>
 
         </div>
 
@@ -458,7 +189,7 @@
   </div>
 </template>
 
-|| 'kondwanim@livestock.co.zm' || 'azwels@livestock.co.zm' || 'mutintac@livestock.co.zm' || 'eustonk@livestock.co.zm'
+|| 'kondwanim@livestock.co.zm' || 'itsupport@livestock.co.zm' || 'mutintac@livestock.co.zm' || 'eustonk@livestock.co.zm'
 <script>
 import {mapActions, mapGetters} from 'vuex'
 import { api } from '@/helpers/axios-instance'

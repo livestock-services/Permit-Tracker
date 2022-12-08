@@ -1,7 +1,7 @@
 <template>
   <div class="compliance">
    
-    <b-tabs  type="is-toggle" expanded>
+    <b-tabs class="is-aqua" type="is-toggle" expanded>
          
          <b-tab-item label="Amendments to Permit Applications" icon="book-edit">
           <b-tabs vertical position="is-left" type="is-toggle" expanded>
@@ -18,13 +18,13 @@
         <b-tab-item label="Permits" icon="book-open-page-variant">
           <b-tabs vertical position="is-left" type="is-toggle" expanded>
 
-            <b-tab-item label="Add Permit Application" icon="plus-box">
+            <!-- <b-tab-item label="Add Permit Application" icon="plus-box">
               <add-permit-application></add-permit-application>
-            </b-tab-item>
+            </b-tab-item> -->
 
-             <b-tab-item label="View Permit Applications" icon="eye-check">
+              <!-- <b-tab-item label="View Permit Applications" icon="eye-check">
               <permits-application-table></permits-application-table>
-            </b-tab-item>
+            </b-tab-item>  -->
 
             <b-tab-item label="Add Permit " icon="plus-box-multiple">
               <add-permit></add-permit>
@@ -40,7 +40,7 @@
           </b-tabs>
         </b-tab-item>
 
-        <b-tab-item label="View Compliance Information" icon="handshake">
+        <b-tab-item label="Log Viewer" icon="eye-check">
             <compliance-table></compliance-table>
         </b-tab-item>
         
@@ -71,7 +71,9 @@ export default {
 </script>
 
 <style>
-
+.is-aqua{
+  background-color: rgb(218, 243, 243)
+}
  
 </style>,
-  PermitsApplicationTable
+  

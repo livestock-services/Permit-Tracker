@@ -24,6 +24,7 @@ import {
 
 
         } from '@/helpers/mutation-types'
+import { Date } from 'core-js'
 
 
 export const state = () => ({
@@ -470,12 +471,16 @@ export const actions = {
         try {
           commit(SET_LOADING, true) 
             const newPA = rootGetters['procurement/selectedPfi']
+            const updatedDate = new Date()
 
+            const newDate = updatedDate.toLocaleDateString();
 
        //  const newPA = rootGetters['finance/selectedPermitApplication'] 
           console.log(newPA._id)
 
-         const {data: putResponse} = await api.put(`/comp/permits/acknowledgePfi/${newPA._id}`, {newPA, status: "Acknowledged By Compliance"} )
+          console.log(newDate);
+
+         const {data: putResponse} = await api.put(`/comp/permits/acknowledgePfi/${newPA._id}`, {newPA, status: "Acknowledged By Compliance", date:newDate} )
         
          commit(ACKNOWLEDGE_RECEIPT, putResponse)
 
@@ -489,14 +494,40 @@ export const actions = {
       },
 
         //ACKNOWLEDGE RECEIPT
-     async putPaInMotion({ state, commit }, newPA) {
+     async putPaInMotion({ state, commit,_,rootGetters }, newPA) {
         try {
           commit(SET_LOADING, true) 
-            const newPA = state.selectedPermitApplication
-       //  const newPA = rootGetters['finance/selectedPermitApplication'] 
-          console.log(newPA._id)
+          const newPA = rootGetters['procurement/selectedPfi']
+          const updatedDate = new Date()
 
-         const {data: putResponse} = await api.put(`/comp/permits/allPermitApplications/${newPA._id}`, {newPA, permitStatus: "Approved"} )
+          const newDate = updatedDate.toLocaleDateString();
+          console.log(newDate);
+
+         const {data: putResponse} = await api.put(`/comp/permits/acknowledgePfi/${newPA._id}`, {newPA, status: "PA in motion, awaiting Finance Approval" , date: newDate } )
+        
+         commit(PUT_PA_IN_MOTION, putResponse)
+
+          console.log(putResponse.data);
+         
+          commit(SET_LOADING, false)
+        } catch (error) {
+          commit(SET_LOADING, false)
+          throw error
+        }
+      },
+
+      
+        //ACKNOWLEDGE RECEIPT
+     async approvePA({ state, commit,_,rootGetters }, newPA) {
+        try {
+          commit(SET_LOADING, true) 
+          const newPA = rootGetters['procurement/selectedPfi']
+          const updatedDate = new Date()
+
+          const newDate = updatedDate.toLocaleDateString();
+          console.log(newDate);
+
+         const {data: putResponse} = await api.put(`/comp/permits/acknowledgePfi/${newPA._id}`, {newPA, status: "PA approved, awaiting Permit" , date: newDate } )
         
          commit(PUT_PA_IN_MOTION, putResponse)
 

@@ -41,7 +41,7 @@
   
            <div class="columns">
              <div  class="column is-half">
-                <h4> <span class="is-blue"> PFI Date Received from Procurement</span></h4>
+                <h4> <span class="is-blue"> Current Status was updated on this date </span></h4>
               <p  placeholder="Supplier Name">
                 <span class="tag is-primary is-light"> {{pfi.date}} </span>
               </p>
@@ -50,22 +50,22 @@
 
            <div class="columns">
              <div  class="column is-half">
-                <h4> <span class="is-blue"> PFI Status</span></h4>
+                <h4> <span class="is-blue"> Current Status</span></h4>
               <p  placeholder="Supplier Name">
                 <span
                 :class="[
                   'tag',
                   {
-                    'is-warning ': pfi.status ==='New PFI added, awaiting acknowledgement',
+                    'is-warning is-light ': pfi.status ==='New PFI added, awaiting acknowledgement',
                   },
                   {
-                    'is-success': pfi.status === 'Acknowledged By Compliance',
+                    'is-success is-light': pfi.status === 'Acknowledged By Compliance',
                   },
                   {
-                    'is-primary': pfi.status ===  'PA in motion, awaiting Finance Approval',
+                    'is-warning': pfi.status ===  'PA in motion, awaiting Finance Approval',
                   },
                   {
-                    'is-success': pfi.status === `PA approved, awaiting Permit from ${pfi.authBody}`,
+                    'is-success': pfi.status === `PA approved, awaiting Permit`,
                   },
                 ]"
                 
@@ -78,8 +78,91 @@
   
         </div>
       </section>
+    
       <footer class="modal-card-foot">
-        <b-button v-if="pfi.status !== 'Acknowledged By Compliance'" label="Acknowledge Receipt" class="is-success mx-2" @click="onAcknowledge" />
+
+        <b-tooltip type="is-primary is-light"> 
+          <b-button class="is-primary is-light mx-2 " 
+          icon-left="" @click="click" /> 
+        </b-tooltip>
+
+     <b-tooltip label="Acknowledge Receipt" position="is-top" type="is-blue"> 
+      <b-button 
+      v-model="acknowledgePfi" 
+      v-if="pfi.status ==='New PFI added, awaiting acknowledgement'  &&
+          this.$auth.user.email === 'compliance@livestock.co.zm'" 
+      class="is-blue mx-2 ml-4" 
+      icon-left="check"
+      label="Acknowledge Receipt" 
+      @click="onAcknowledge" /> 
+    </b-tooltip>
+    
+     <b-tooltip label="Put PA in motion" position="is-top" icon-left="handshake"> 
+        <b-button
+          v-model="putPAinMotion" 
+          v-if="pfi.status ==='Acknowledged By Compliance' &&
+          this.$auth.user.email !== 'finance@livestock.co.zm'" 
+          class="is-warning is-light mx-2" 
+          icon-left="handshake" 
+          label="Put Permit Application in motion"
+          @click="onPutPaInMotion" />
+      </b-tooltip>
+        
+     <b-tooltip label="Approve PA" position="is-top" type="is-success is-light" icon-left="money">
+     <b-button
+        v-model="approvePA"
+        v-if="pfi.status ==='PA in motion, awaiting Finance Approval' &&
+         this.$auth.user.email === 'finance@livestock.co.zm'"
+        type="is-success"
+        icon-left="cash"
+        label="Approve Permit Application"
+        @click="onApprovePA"
+      />
+      
+    </b-tooltip>
+
+    <b-tooltip label="Approve PA" position="is-top" type="is-success is-light" icon-left="money">
+     <b-button
+        v-model="approvePA"
+        v-if="pfi.status ==='PA in motion, awaiting Finance Approval' &&
+         this.$auth.user.email === 'itsupport@livestock.co.zm'"
+        type="is-success"
+        icon-left="cash"
+        label="Approve Permit Application"
+        @click="onApprovePA"
+      />
+      
+    </b-tooltip>
+
+    
+
+    <b-tooltip label="Receive Permit" type="is-coral" position="is-top" icon-left="money">
+     <b-button
+        v-model="receivePermit"
+        v-if="pfi.status=== 'PA approved, awaiting Permit' 
+        &&  this.$auth.user.email === 'compliance@livestock.co.zm'"
+        class="mx-2"
+        type="is-greenAccent"
+        icon-left="book"
+        label="Receive Permit"
+        @click="onReceivePermit"
+      />
+      
+    </b-tooltip>
+
+    <b-tooltip label="Receive Permit" type="is-coral" position="is-top" icon-left="money">
+     <b-button
+        v-model="receivePermit"
+        v-if="pfi.status=== 'PA approved, awaiting Permit'
+        &&  this.$auth.user.email === 'itsupport@livestock.co.zm'"
+        class="mx-2"
+        type="is-greenAccent"
+        icon-left="book"
+        label="Receive Permit"
+        @click="onReceivePermit"
+      />
+      
+    </b-tooltip>
 
         <b-button label="Close" class="mx-2" @click="close" />
 
@@ -122,6 +205,7 @@
       loading() {
         return this.pfiLoading 
       },
+      
   
     },
   
@@ -131,7 +215,7 @@
   
     methods: {
       ...mapActions('procurement', ['load', 'selectPfi']),
-      ...mapActions('compliance',['acknowledgePfi'] ),
+      ...mapActions('compliance',['acknowledgePfi','approvePA', 'receivePermit', 'putPaInMotion', 'selectPA'] ),
 
       async onSubmit() {
         const msg = await Promise.resolve('Operation successfull')
@@ -153,6 +237,30 @@
     duration: 5000,
     position: 'is-top',
     type: 'is-info',
+    })
+    this.$parent.close()
+    },
+
+    async onPutPaInMotion(){
+      await this.putPaInMotion();
+    const msg = await Promise.resolve('Permit Application is being processed for approval by Finance.')
+    this.$buefy.toast.open({
+    message: msg, // 'Operation successful',
+    duration: 5000,
+    position: 'is-top',
+    type: 'is-info is-light',
+    })
+    this.$parent.close()
+    },
+
+    async onApprovePA(){
+      await this.approvePA();
+    const msg = await Promise.resolve('Permit Application has been approved by Finance.')
+    this.$buefy.toast.open({
+    message: msg, // 'Operation successful',
+    duration: 5000,
+    position: 'is-top',
+    type: 'is-greenAccent',
     })
     this.$parent.close()
     },
@@ -181,6 +289,10 @@
   font-family:'Times New Roman', Times, serif;
     font-size: 1.2rem;
     
+  }
+
+  .is-greenAccent{
+    background-color: rgb(179, 245, 103)
   }
 
   .is-comp{

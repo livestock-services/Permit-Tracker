@@ -41,7 +41,7 @@
 
          <div class="columns">
            <div  class="column is-half">
-              <h4> <span class="is-blue">  Issued Date</span></h4>
+              <h4> <span class="is-blue"> Current Status was updated on this date </span></h4>
             <p  placeholder="Supplier Name">
               <span class="tag is-primary is-light"> {{pfi.date}} </span>
             </p>
@@ -50,16 +50,16 @@
 
          <div class="columns">
            <div  class="column is-half">
-              <h4> <span class="is-blue"> PFI Status</span></h4>
-            <p  placeholder="PFI Status">
+              <h4> <span class="is-blue"> Current Status</span></h4>
+            <p  placeholder="Current Status">
               <span :class="[
                 
                 'tag',
                 {
-                    'is-warning': pfi.status ===  'New PFI added, awaiting acknowledgement',
+                    'is-warning is-light': pfi.status ===  'New PFI added, awaiting acknowledgement',
                   },
                   {
-                    'is-success': pfi.status === 'Acknowledged By Compliance',
+                    'is-success is-light': pfi.status === 'Acknowledged By Compliance',
                   },
 
               ]"

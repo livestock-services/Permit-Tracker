@@ -55,58 +55,7 @@
       type="is-light"
       fullheight
       overlay
-      v-if="this.$auth.user.email === 'jennyc@livestock.co.zm'"
-    >
-
-    
-      <b-menu class="menu" :activable="false">
-        <b-menu-list
-          v-for="({ label, items }, index) in menuListProc"
-          :key="index"
-          :label="label"
-        >
-          <b-menu-item
-            v-for="({ icon, itemLabel, link }, key) in items"
-            :key="key"
-            :icon="icon"
-            :label="itemLabel"
-            @click="pushRoute(link)"
-          ></b-menu-item>
-        </b-menu-list>
-
-        <!-- Account Actions -->
-        <b-menu-list label="Account Actions">
-          <b-menu-item
-            icon="cog"
-            label="Log out"
-            @click="endSession"
-          ></b-menu-item>
-        </b-menu-list>
-
-        <b-menu-list   type="is-success" size="is-medium">
-          <div class="welcome">
-            <h3>You are signed in as</h3>
-            <br />
-            <div class="names">
-               {{ this.$auth.user.email }} 
-                  
-            </div>
-          </div>
-        </b-menu-list>
-
-
-      </b-menu>
-    </b-sidebar>
-
-
-
-  <b-sidebar
-      v-model="sidebar"
-      class="is-hidden-mobile"
-      type="is-light"
-      fullheight
-      overlay
-      v-if="this.$auth.user.email === 'henryb@livestock.co.zm'"
+      v-if="this.$auth.user.email === 'procurement@livestock.co.zm'"
     >
 
     
@@ -159,7 +108,7 @@
       type="is-light"
       fullheight
       overlay
-      v-if="this.$auth.user.email === 'gaving@livestock.co.zm'"
+      v-if="this.$auth.user.email === 'compliance@livestock.co.zm'"
     >
 
     
@@ -211,7 +160,7 @@
       type="is-light"
       fullheight
       overlay
-      v-if="this.$auth.user.email === 'timothyk@livestock.co.zm'"
+      v-if="this.$auth.user.email === 'finance@livestock.co.zm'"
     >
 
     

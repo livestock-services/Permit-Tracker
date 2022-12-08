@@ -5,17 +5,17 @@
         <b-tab-item label="Add New Purchase Order" icon="plus-circle-multiple ">
             <add-new-purchase-order></add-new-purchase-order>
         </b-tab-item>
-        <b-tab-item label="View PFIs" icon="book-open">
+        <b-tab-item label="Log Viewer" icon="book-open">
             <procurement-table></procurement-table>
         </b-tab-item>
 
-        <b-tab-item label="View Permit Applications" icon="eye-check">
+        <!-- <b-tab-item label="View Permit Applications" icon="eye-check">
               <permits-application-table></permits-application-table>
-        </b-tab-item>
+        </b-tab-item> -->
 
-        <b-tab-item label="Reminders" icon="clock-outline">
+        <!-- <b-tab-item label="Reminders" icon="clock-outline">
               <Calendar/>
-        </b-tab-item>
+        </b-tab-item> -->
         
     </b-tabs>
 

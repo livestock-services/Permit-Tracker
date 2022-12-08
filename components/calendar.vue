@@ -1,6 +1,6 @@
 <template>
   <div>
-        <ejs-schedule height="550px">
+        <ejs-schedule height="570px">
 
 
         </ejs-schedule>

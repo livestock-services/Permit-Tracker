@@ -114,7 +114,7 @@
                         PFI No. <span class="has-text-danger">*</span>
                     </template>
                     <b-input
-                    :disabled="!purchaseOrderNumber"
+                   
                     v-model="pfiNumber"
                     type="text"
                     maxlength="25"

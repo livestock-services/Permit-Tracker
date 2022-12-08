@@ -61,32 +61,33 @@
       <b-table-column
         v-slot="props"
         field="date"
-        label="Issued Date"
+        label="Current Status was updated on this date "
         searchable
       >
         {{ props.row.date }}
       </b-table-column>
 
       
-      <b-table-column v-slot="props" field="status" label="PFI Status" sortable>
+      <b-table-column v-slot="props" field="status" label="Current Status" sortable>
         <span
           :class="[
             'tag',
             {
-              'is-warning':
+              'is-warning is-light':
                 props.row.status === 'New PFI added, awaiting acknowledgement',
             },
             {
-              'is-success': props.row.status === 'Acknowledged By Compliance',
+              'is-success is-light': props.row.status === 'Acknowledged By Compliance',
             },
             {
-              'is-primary':
+              'is-warning':
                 props.row.status === 'PA in motion, awaiting Finance Approval',
             },
             {
               'is-success':
                 props.row.status ===
-                `PA approved, awaiting Permit from ${props.row.authBody}`,
+                'PA approved, awaiting Permit' || props.row.status ===
+                'PA Approved, awaiting Permit',
             },
           ]"
         >
