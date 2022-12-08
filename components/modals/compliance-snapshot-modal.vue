@@ -67,6 +67,9 @@
                   {
                     'is-success': pfi.status === `PA approved, awaiting Permit`,
                   },
+                  {
+                    'is-pink': pfi.status === `Permit received`,
+                  },
                 ]"
                 
                 > {{pfi.status}} </span>
@@ -91,6 +94,17 @@
       v-model="acknowledgePfi" 
       v-if="pfi.status ==='New PFI added, awaiting acknowledgement'  &&
           this.$auth.user.email === 'compliance@livestock.co.zm'" 
+      class="is-blue mx-2 ml-4" 
+      icon-left="check"
+      label="Acknowledge Receipt" 
+      @click="onAcknowledge" /> 
+    </b-tooltip>
+
+    <b-tooltip label="Acknowledge Receipt" position="is-top" type="is-blue"> 
+      <b-button 
+      v-model="acknowledgePfi" 
+      v-if="pfi.status ==='New PFI added, awaiting acknowledgement'  &&
+          this.$auth.user.email === 'itsupport@livestock.co.zm'" 
       class="is-blue mx-2 ml-4" 
       icon-left="check"
       label="Acknowledge Receipt" 
@@ -264,6 +278,21 @@
     })
     this.$parent.close()
     },
+
+        async onReceivePermit() {
+
+    await this.receivePermit();
+    const msg = await Promise.resolve('Permit received Successfully!')
+    this.$buefy.toast.open({
+    message: msg, // 'Operation successful',
+    duration: 2000,
+    position: 'is-bottom',
+    type: 'is-success',
+    })
+    this.$parent.close()
+
+    },
+
   
       close() {
         this.$buefy.toast.open({
@@ -290,6 +319,10 @@
     font-size: 1.2rem;
     
   }
+
+  .is-pink{
+  background-color: rgb(248, 173, 219);
+}
 
   .is-greenAccent{
     background-color: rgb(179, 245, 103)

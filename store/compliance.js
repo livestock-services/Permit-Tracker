@@ -546,11 +546,13 @@ export const actions = {
           commit(SET_LOADING, true) 
          // const newPA = state.selectedPA
 
+         const RP = rootGetters['procurement/selectedPfi']
+         const updatedDate = new Date()
 
-        const RP = rootGetters['compliance/selectedPA'] 
-          console.log(RP._id)
+         const newDate = updatedDate.toLocaleDateString();
+         console.log(newDate);
 
-         const {data: putResponse} = await api.put(`/comp/permits/receivePermit/${RP._id}`, {RP, permitStatus: `Permit received from ${RP.authBody}`} )
+         const {data: putResponse} = await api.put(`/comp/permits/acknowledgePfi/${RP._id}`, {RP, status: `Permit received`, date:newDate } )
         
          commit(RECEIVE_PERMIT, putResponse)
 

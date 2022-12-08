@@ -89,6 +89,11 @@
                 'PA approved, awaiting Permit' || props.row.status ===
                 'PA Approved, awaiting Permit',
             },
+
+            {
+              'is-pink':
+                props.row.status === 'Permit received' 
+            },
           ]"
           >{{ props.row.status }}</span
         >
@@ -223,6 +228,10 @@ export default {
 
 .is-peach{
   background-color: peachpuff;
+}
+
+.is-pink{
+  background-color: rgb(248, 173, 219);
 }
 
 .is-green{

@@ -62,6 +62,11 @@
                     'is-success is-light': pfi.status === 'Acknowledged By Compliance',
                   },
 
+                  {
+                    'is-pink': pfi.status === `Permit received`,
+                  },
+                  
+
               ]"
               > {{pfi.status}} </span>
             </p>
@@ -152,6 +157,9 @@ export default {
   width: auto;
 }
 
+.is-pink{
+  background-color: rgb(248, 173, 219);
+}
 
 .is-blue{
   color: rgb(0, 118, 228);
