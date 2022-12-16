@@ -13,7 +13,7 @@
              <div  class="column is-half">
                <h4> <span class="is-blue">  Supplier Name</span></h4>
               <p >
-                <span class="tag is-primary is-light"> {{pfi.supplierName}} </span>
+                <span class="tag is-info is-light"> {{pfi.supplierName}} </span>
                 
               </p>
              </div>
@@ -25,7 +25,7 @@
              <div  class="column is-half">
                 <h4> <span class="is-blue">  Purchase Order Number</span></h4>
               <p  placeholder="Supplier Name">
-                <span class="tag is-primary is-light">{{pfi.purchaseOrderNumber}} </span>
+                <span class="tag is-green ">{{pfi.purchaseOrderNumber}}, created on {{pfi.stageOneDate}}</span>
               </p>
              </div>
            </div>
@@ -34,7 +34,7 @@
              <div  class="column is-half">
                 <h4> <span class="is-blue">  PFI Number</span></h4>
               <p  placeholder="Supplier Name">
-                <span class="tag is-primary is-light"> {{pfi.pfiNumber}} </span>
+                <span class="tag is-peach "> {{pfi.pfiNumber}}, created on {{pfi.stageOneDate}} </span>
               </p>
              </div>
            </div>
@@ -43,10 +43,24 @@
              <div  class="column is-half">
                 <h4> <span class="is-blue"> Current Status was updated on this date </span></h4>
               <p  placeholder="Supplier Name">
-                <span class="tag is-primary is-light"> {{pfi.date}} </span>
+                <span class="tag is-info is-light"> {{pfi.date}} </span>
               </p>
              </div>
            </div>
+
+           <div class="columns">
+             <div  class="column is-half">
+                <h4> <span class="is-blue"> Status Log  </span></h4>
+              <p  placeholder="Supplier Name">
+                <span class="tag is-warning is-light">New PFI added, awaiting acknowledgement:  {{pfi.stageOneDate}} </span>
+                <span class="tag is-success is-light">Acknowledged By Compliance:  {{pfi.stageTwoDate}} </span>
+                <span class="tag is-warning">PA in motion, awaiting Finance Approval:  {{pfi.stageThreeDate}} </span>
+                <span class="tag is-success">PA approved, awaiting Permit:  {{pfi.stageFourDate}} </span>
+                <span class="tag is-pink">Permit received:  {{pfi.stageFiveDate}} </span>
+              </p>
+             </div>
+           </div>
+
 
            <div class="columns">
              <div  class="column is-half">
@@ -274,7 +288,7 @@
     message: msg, // 'Operation successful',
     duration: 5000,
     position: 'is-top',
-    type: 'is-greenAccent',
+    type: 'is-success is-light',
     })
     this.$parent.close()
     },
@@ -314,7 +328,7 @@
   
   
   .is-blue{
-    color: rgb(0, 118, 228);
+    color: rgb(10, 103, 55);
   font-family:'Times New Roman', Times, serif;
     font-size: 1.2rem;
     
@@ -327,6 +341,15 @@
   .is-greenAccent{
     background-color: rgb(179, 245, 103)
   }
+
+  .is-peach{
+  background-color: peachpuff;
+}
+
+
+.is-green{
+  background-color: rgb(200, 244, 134)
+}
 
   .is-comp{
   background-color: rgb(255, 217, 168);

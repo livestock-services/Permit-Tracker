@@ -25,19 +25,37 @@
            <div  class="column is-half">
               <h4> <span class="is-blue">  Purchase Order Number</span></h4>
             <p  placeholder="Supplier Name">
-              <span class="tag is-primary is-light">   {{pfi.purchaseOrderNumber}} </span>
+              <span class="tag is-primary is-light">   {{pfi.purchaseOrderNumber}}, created on {{pfi.date}} </span>
             </p>
            </div>
          </div>
 
         <div class="columns">
-           <div  class="column is-half">
+           <div class="column is-half">
               <h4> <span class="is-blue">  PFI Number</span></h4>
             <p  placeholder="Supplier Name">
-              <span class="tag is-primary is-light">{{pfi.pfiNumber}} </span>
+              <span  class="tag is-primary is-light">{{pfi.pfiNumber}}, created on {{pfi.date}} </span>
+
+
             </p>
+
+            <b-input v-if="pfi.status === 'New PFI added, awaiting acknowledgement'" v-model="pfiNumber" placeholder="Enter PFI here..."></b-input>
            </div>
          </div>
+
+
+         <div class="columns">
+             <div  class="column is-half">
+                <h4> <span class="is-blue"> Status Log  </span></h4>
+              <p  placeholder="Supplier Name">
+                <span class="tag is-warning is-light">New PFI added, awaiting acknowledgement:  {{pfi.stageOneDate}} </span>
+                <span class="tag is-success is-light">Acknowledged By Compliance:  {{pfi.stageTwoDate}} </span>
+                <span class="tag is-warning">PA in motion, awaiting Finance Approval:  {{pfi.stageThreeDate}} </span>
+                <span class="tag is-success">PA approved, awaiting Permit:  {{pfi.stageFourDate}} </span>
+                <span class="tag is-primary">Permit received:  {{pfi.stageFiveDate}} </span>
+              </p>
+             </div>
+           </div>
 
          <div class="columns">
            <div  class="column is-half">
@@ -79,12 +97,13 @@
     </section>
     <footer class="modal-card-foot">
       <b-button label="Close" @click="close" />
-      <!-- <b-button
-        label="Submit"
-        type="is-primary"
+     <b-button
+        v-if="pfi.status === 'New PFI added, awaiting acknowledgement'"
+        label="Update"
+        type="is-info"
         icon-left="account"
         @click="onSubmit"
-      /> -->
+      /> 
     </footer>
   </div>
 </template>

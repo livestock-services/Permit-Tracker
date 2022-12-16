@@ -40,7 +40,7 @@
           </b-tabs>
         </b-tab-item>
 
-        <b-tab-item label="Log Viewer" icon="eye-check">
+        <b-tab-item label="View Permit Pipeline" icon="eye-check">
             <compliance-table></compliance-table>
         </b-tab-item>
         

@@ -260,6 +260,8 @@ export const actions = {
          console.log(allPfis);
 
          
+
+         
              commit(SET_ALL_AMENDED_PERMIT_APPLICATIONS, amendLoad.data);
 
              commit(SET_ALL_PERMIT_APPLICATIONS, permitApplicationsLoad.data);
@@ -480,9 +482,16 @@ export const actions = {
 
           console.log(newDate);
 
-         const {data: putResponse} = await api.put(`/comp/permits/acknowledgePfi/${newPA._id}`, {newPA, status: "Acknowledged By Compliance", date:newDate} )
+         const {data: putResponse} = await api.put(`/comp/permits/acknowledgePfi/${newPA._id}`, {newPA, status: "Acknowledged By Compliance", stageTwoDate:newDate, date:newDate} )
         
+        let  updatedStatus = putResponse.data;
+
+         console.log(updatedStatus);
+
+         console.log(newPA);
+
          commit(ACKNOWLEDGE_RECEIPT, putResponse)
+        
 
           console.log(putResponse.data);
          
@@ -503,7 +512,7 @@ export const actions = {
           const newDate = updatedDate.toLocaleDateString();
           console.log(newDate);
 
-         const {data: putResponse} = await api.put(`/comp/permits/acknowledgePfi/${newPA._id}`, {newPA, status: "PA in motion, awaiting Finance Approval" , date: newDate } )
+         const {data: putResponse} = await api.put(`/comp/permits/acknowledgePfi/${newPA._id}`, {newPA, status: "PA in motion, awaiting Finance Approval" , stageThreeDate: newDate, date:newDate } )
         
          commit(PUT_PA_IN_MOTION, putResponse)
 
@@ -527,7 +536,7 @@ export const actions = {
           const newDate = updatedDate.toLocaleDateString();
           console.log(newDate);
 
-         const {data: putResponse} = await api.put(`/comp/permits/acknowledgePfi/${newPA._id}`, {newPA, status: "PA approved, awaiting Permit" , date: newDate } )
+         const {data: putResponse} = await api.put(`/comp/permits/acknowledgePfi/${newPA._id}`, {newPA, status: "PA approved, awaiting Permit" , stageFourDate: newDate, date:newDate } )
         
          commit(PUT_PA_IN_MOTION, putResponse)
 
@@ -552,7 +561,7 @@ export const actions = {
          const newDate = updatedDate.toLocaleDateString();
          console.log(newDate);
 
-         const {data: putResponse} = await api.put(`/comp/permits/acknowledgePfi/${RP._id}`, {RP, status: `Permit received`, date:newDate } )
+         const {data: putResponse} = await api.put(`/comp/permits/acknowledgePfi/${RP._id}`, {RP, status: `Permit received`, stageFiveDate:newDate, date:newDate } )
         
          commit(RECEIVE_PERMIT, putResponse)
 

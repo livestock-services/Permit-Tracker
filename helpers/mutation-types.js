@@ -35,7 +35,48 @@ export const GET_ALL_PFIS = 'GET_ALL_PFIS'
 //----------------------------------------------------------------------------------------------------------------------
 
 
+//--------------------------------------- NEWLY ADDED PFIS AWAITING ACKNOWLEDGEMENT------------------------------------------------------------------
 
+export const SET_SELECTED_NEW_PFI_AWAITING_ACKNOWLEDGMENT  = 'SET_SELECTED_NEW_PFI_AWAITING_ACKNOWLEDGMENT '
+export const SET_ALL_PFIS_AWAITING_ACKNOWLEDGEMENT = 'SET_ALL_PFIS_AWAITING_ACKNOWLEDGEMENT'
+export const GET_ALL_PFIS_AWAITING_ACKNOWLEDGEMENT = 'GET_ALL_PFIS_AWAITING_ACKNOWLEDGEMENT'
+
+//----------------------------------------------------------------------------------------------------------------------
+
+
+//--------------------------------------- PFIS ACKNOWLEDGED_BY_COMPLIANCE------------------------------------------------------------------
+
+export const SET_SELECTED_PFI_ACKNOWLEDGED_BY_COMPLIANCE  = 'SET_SELECTED_PFI_ACKNOWLEDGED_BY_COMPLIANCE'
+export const SET_ALL_PFIS_ACKNOWLEDGED_BY_COMPLIANCE = 'SET_ALL_PFIS_ACKNOWLEDGED_BY_COMPLIANCE'
+export const GET_ALL_PFIS_ACKNOWLEDGED_BY_COMPLIANCE = 'GET_ALL_PFIS_ACKNOWLEDGED_BY_COMPLIANCE'
+
+//----------------------------------------------------------------------------------------------------------------------
+
+
+//--------------------------------------- PA_IN_MOTION_AWAITING_FINANCE_APPROVAL------------------------------------------------------------------
+
+export const SET_SELECTED_PA_IN_MOTION_AWAITING_FINANCE_APPROVAL  = 'SET_SELECTED_PA_IN_MOTION_AWAITING_FINANCE_APPROVAL'
+export const SET_ALL_PAs_IN_MOTION_AWAITING_FINANCE_APPROVAL = 'SET_ALL_PAs_IN_MOTION_AWAITING_FINANCE_APPROVAL'
+export const GET_ALL_PAs_IN_MOTION_AWAITING_FINANCE_APPROVAL = 'GET_ALL_PAs_IN_MOTION_AWAITING_FINANCE_APPROVAL'
+
+//----------------------------------------------------------------------------------------------------------------------
+
+//--------------------------------------- PAs_APPROVED_AWAITING_PERMIT------------------------------------------------------------------
+
+export const SET_SELECTED_PA_APPROVED_AWAITING_PERMIT  = 'SET_SELECTED_PA_APPROVED_AWAITING_PERMIT'
+export const SET_ALL_PAs_APPROVED_AWAITING_PERMIT = 'SET_ALL_PAs_APPROVED_AWAITING_PERMIT'
+export const GET_ALL_PAs_APPROVED_AWAITING_PERMIT = 'GET_ALL_PAs_APPROVED_AWAITING_PERMIT'
+
+//----------------------------------------------------------------------------------------------------------------------
+
+
+//--------------------------------------- PERMITS RECEIVED------------------------------------------------------------------
+
+export const SET_SELECTED_PERMIT_RECEIVED  = 'SET_SELECTED_PERMIT_RECEIVED'
+export const SET_ALL_PERMITS_RECEIVED = 'SET_ALL_PERMITS_RECEIVED'
+export const GET_ALL_PERMITS_RECEIVED = 'GET_ALL_PERMITS_RECEIVED'
+
+//----------------------------------------------------------------------------------------------------------------------
 
 
 

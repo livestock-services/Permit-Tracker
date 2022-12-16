@@ -6,18 +6,53 @@ import { ADD_PFI,
          SET_ALL_PFIS, 
          GET_ALL_PFIS, 
          SET_LOADING,
-         SET_SELECTED_PFI 
+         SET_SELECTED_PFI ,
+
+         SET_SELECTED_NEW_PFI_AWAITING_ACKNOWLEDGMENT,
+         SET_ALL_PFIS_AWAITING_ACKNOWLEDGEMENT,
+         GET_ALL_PFIS_AWAITING_ACKNOWLEDGEMENT,
+
+         SET_SELECTED_PFI_ACKNOWLEDGED_BY_COMPLIANCE,
+         SET_ALL_PFIS_ACKNOWLEDGED_BY_COMPLIANCE,
+         GET_ALL_PFIS_ACKNOWLEDGED_BY_COMPLIANCE,
+
+         SET_SELECTED_PA_IN_MOTION_AWAITING_FINANCE_APPROVAL,
+         SET_ALL_PAs_IN_MOTION_AWAITING_FINANCE_APPROVAL,
+         GET_ALL_PAs_IN_MOTION_AWAITING_FINANCE_APPROVAL,
+
+         SET_SELECTED_PA_APPROVED_AWAITING_PERMIT,
+         SET_ALL_PAs_APPROVED_AWAITING_PERMIT,
+         GET_ALL_PAs_APPROVED_AWAITING_PERMIT,
+
+         SET_SELECTED_PERMIT_RECEIVED,
+         SET_ALL_PERMITS_RECEIVED,
+         GET_ALL_PERMITS_RECEIVED
+
+
         } from '@/helpers/mutation-types'
 
 export const state = () => ({
     loading: false,
     all:[],
+    allNewPfisAwaitingAcknowledgement:[],
+    allPfisAcknowledgedByCompliance:[],
+    allPAsInMotionAwaitingFinanceApproval:[],
+    allPAsApprovedAwaitingPermit:[],
+    allPermitsReceived:[],
+
+    selectedPfiAwaitingAcknowledgement:null,
+    selectedPfiAcknowledgedByCompliance:null,
+    selectedPaInMotionAwaitingFinanceApproval:null,
+    selectedPaApprovedAwaitingPermit:null,
+    selectedPermitReceived:null,
+
     selectedPfi: null,
     form:{
         supplierName:null,
         supplierEmail:null,
         purchaseOrderNumber:null,
-        pfiNumber:null
+        pfiNumber:null,
+        
         
         
     },
@@ -38,6 +73,58 @@ export const getters = {
     allPfis(state){
         return state.all
     },
+
+    allNewPfisAwaitingAcknowledgement(state){
+        return state.allNewPfisAwaitingAcknowledgement
+    },
+
+    allPfisAcknowledgedByCompliance(state){
+        return state.allPfisAcknowledgedByCompliance
+    },
+
+    allPAsInMotionAwaitingFinanceApproval(state){
+        return state.allPAsInMotionAwaitingFinanceApproval
+    },
+
+    allPAsApprovedAwaitingPermit(state){
+        return state.allPAsApprovedAwaitingPermit
+    },
+
+    allPermitsReceived(state){
+        return state.allPermitsReceived
+    },
+
+
+
+
+
+      selectedPfiAwaitingAcknowledgement(state) {
+        return state.selectedPfiAwaitingAcknowledgement
+      },
+
+      selectedPfiAcknowledgedByCompliance(state) {
+        return state.selectedPfiAcknowledgedByCompliance
+      },
+
+
+      selectedPfiAwaitingAcknowledgement(state) {
+        return state.selectedPfiAwaitingAcknowledgement
+      },
+
+
+      selectedPaInMotionAwaitingFinanceApproval(state) {
+        return state.selectedPaInMotionAwaitingFinanceApproval
+      },
+
+
+      selectedPaApprovedAwaitingPermit(state) {
+        return state.selectedPaApprovedAwaitingPermit
+      },
+
+      selectedPermitReceived(state) {
+        return state.selectedPermitReceived
+      },
+
 
    
 
@@ -64,6 +151,65 @@ export const mutations = {
     [GET_ALL_PFIS](state, payload){
         state.all = payload
     },
+
+
+    [SET_SELECTED_NEW_PFI_AWAITING_ACKNOWLEDGMENT](state, pfi) {
+        state.selectedPfiAwaitingAcknowledgement = pfi
+      },
+    [SET_ALL_PFIS_AWAITING_ACKNOWLEDGEMENT](state, payload) {
+        state.allNewPfisAwaitingAcknowledgement = payload
+    },
+    [GET_ALL_PFIS_AWAITING_ACKNOWLEDGEMENT](state, payload){
+        state.allNewPfisAwaitingAcknowledgement = payload
+    },
+
+
+    [SET_SELECTED_PFI_ACKNOWLEDGED_BY_COMPLIANCE](state, pfi) {
+        state.selectedPfiAcknowledgedByCompliance = pfi
+      },
+    [SET_ALL_PFIS_ACKNOWLEDGED_BY_COMPLIANCE](state, payload) {
+        state.allPfisAcknowledgedByCompliance = payload
+    },
+    [GET_ALL_PFIS_ACKNOWLEDGED_BY_COMPLIANCE](state, payload){
+        state.allPfisAcknowledgedByCompliance = payload
+    },
+
+
+
+    [SET_SELECTED_PA_IN_MOTION_AWAITING_FINANCE_APPROVAL](state, pfi) {
+        state.selectedPaInMotionAwaitingFinanceApproval = pfi
+      },
+    [SET_ALL_PAs_IN_MOTION_AWAITING_FINANCE_APPROVAL](state, payload) {
+        state.allPAsInMotionAwaitingFinanceApproval = payload
+    },
+    [GET_ALL_PAs_IN_MOTION_AWAITING_FINANCE_APPROVAL](state, payload){
+        state.allPAsInMotionAwaitingFinanceApproval = payload
+    },
+
+
+    [SET_SELECTED_PA_APPROVED_AWAITING_PERMIT](state, pfi) {
+        state.selectedPaApprovedAwaitingPermit = pfi
+      },
+    [SET_ALL_PAs_APPROVED_AWAITING_PERMIT](state, payload) {
+        state.allPAsApprovedAwaitingPermit = payload
+    },
+    [GET_ALL_PAs_APPROVED_AWAITING_PERMIT](state, payload){
+        state.allPAsApprovedAwaitingPermit = payload
+    },
+
+
+    [SET_SELECTED_PERMIT_RECEIVED](state, pfi) {
+        state.selectedPermitReceived = pfi
+      },
+    [SET_ALL_PERMITS_RECEIVED](state, payload) {
+        state.allPermitsReceived = payload
+    },
+    [GET_ALL_PERMITS_RECEIVED](state, payload){
+        state.allPermitsReceived = payload
+    },
+
+
+
 
     
 }
@@ -99,15 +245,63 @@ export const actions = {
 
            const {data: allAmendedPermitApplications} = await api.get(`/comp/permits/allAmendedPermitApplications`)
 
+           const pfiLength = allPfis.data.length;
 
-           console.log(allPfis);
-           console.log(allAmendedPermitApplications);
+         console.log(pfiLength);
+
+        //  const filteredPFIs = allPfis.data.filter(fp =>
+        //     fp)
+         
+           //--------FILTER TO GET DATA BASED ON LOGGED IN USER -----------------//
+         const filteredPfiAwaitingAcknowledgement = allPfis.data.filter( ap => 
+          ap.status ==='New PFI added, awaiting acknowledgement'
+         );
+
+         const filteredPfiAcknowledgedByCompliance = allPfis.data.filter( bp => 
+            bp.status ==='Acknowledged By Compliance'
+           );
+
            
-           console.log(allPfis.data[0].status.compliance);
+           const filteredPaInMotionAwaitingFinanceApproval = allPfis.data.filter( cp => 
+            cp.status ==='PA in motion, awaiting Finance Approval'
+           );
+
+           
+           const filteredPaApprovedAwaitingPermit = allPfis.data.filter( dp => 
+            dp.status ==='PA approved, awaiting Permit'
+           );
+
+           const filteredPermitReceived = allPfis.data.filter( ep => 
+            ep.status ==='Permit received'
+           );
+  
+
+
+         console.log(filteredPfiAwaitingAcknowledgement.length);
+
+         console.log(filteredPfiAcknowledgedByCompliance.length);
+
+         console.log(filteredPaInMotionAwaitingFinanceApproval.length);
+
+         console.log(filteredPaApprovedAwaitingPermit.length);
+
+         console.log(filteredPermitReceived.length);
+
+
+          
 
            //RETRIEVED DATA IS COMMITTED TO THE MUTATION TO MAKE THE CHANGES EFFECTIVE
            commit(GET_ALL_PFIS, allPfis.data);
+
+           commit(GET_ALL_PFIS_AWAITING_ACKNOWLEDGEMENT, filteredPfiAwaitingAcknowledgement);
+
+           commit(GET_ALL_PFIS_ACKNOWLEDGED_BY_COMPLIANCE, filteredPfiAcknowledgedByCompliance);
+
+           commit(GET_ALL_PAs_IN_MOTION_AWAITING_FINANCE_APPROVAL, filteredPaInMotionAwaitingFinanceApproval);
             
+           commit(GET_ALL_PAs_APPROVED_AWAITING_PERMIT, filteredPaApprovedAwaitingPermit);
+
+           commit(GET_ALL_PERMITS_RECEIVED, filteredPermitReceived);
            
            //AFTER ALL ACTIONS HAVE BEEN PERFORMED, LOADING IS SET TO FALSE AND RESULTS ARE DISPLAYED
            commit(SET_LOADING, false);
@@ -124,7 +318,7 @@ export const actions = {
             commit(SET_LOADING, true);
 
             const pfi = state.form;
-           
+            
            
             const response = await api.post(`/pfis/addNewPfi`, pfi);
 

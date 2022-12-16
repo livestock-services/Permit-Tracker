@@ -242,3 +242,151 @@
               >Log Out</b-button
             >
           </b-field>
+
+
+//////////---------------------------S T A T S---------------------------------/////
+
+ <div class="box2">
+          <b-field 
+         
+            v-if="this.$auth.user.email === 'itsupport@livestock.co.zm'"
+            grouped
+            group-multiline
+            position="is-centered"
+            class="my-4"
+          >
+       
+            <div class="card calf-card ml-5 card-body">
+              <div class="card-body">
+                <a class="navbar-item" href="/">
+                  <b-icon icon="cow" size="is-medium" type="is-info "> </b-icon>
+                </a>
+
+                <span
+                  ><span class="text-calf-count mb-2">
+                    <countTo
+                      :startVal="startVal"
+                      :endVal="pfis.length"
+                      :duration="6000"
+                    ></countTo></span
+                  ><span class="text-calf">Total</span></span
+                >
+                <br />
+                <!-- <span class="text-bull"> <countTo :startVal='startVal' :endVal='Bulls' :duration='3000'></countTo> Bulls</span><br>
+     <span class="text-cow"> <countTo :startVal='startVal' :endVal='Cows' :duration='3000'></countTo> Cows</span><br>
+     <span class="text-heifer"> <countTo :startVal='startVal' :endVal='Heifers' :duration='3000'></countTo> Heifers</span><br>
+     <span class="text-calves"> <countTo :startVal='startVal' :endVal='Calves' :duration='3000'></countTo> Calves</span> -->
+              </div>
+            </div>
+
+            <div class="card calf-card ml-5 card-body">
+              <div class="card-body">
+                <a class="navbar-item" href="/">
+                  <b-icon icon="cow" size="is-medium" type="is-info "> </b-icon>
+                </a>
+
+                <span
+                  ><span class="text-calf-count mb-2">
+                    <countTo
+                      :startVal="startVal"
+                      :endVal="pfis.length"
+                      :duration="6000"
+                    ></countTo></span
+                  ><span class="text-calf "> <br/> New PFIs added, awaiting acknowledgement</span></span
+                >
+                <br />
+                <!-- <span class="text-bull"> <countTo :startVal='startVal' :endVal='Bulls' :duration='3000'></countTo> Bulls</span><br>
+     <span class="text-cow"> <countTo :startVal='startVal' :endVal='Cows' :duration='3000'></countTo> Cows</span><br>
+     <span class="text-heifer"> <countTo :startVal='startVal' :endVal='Heifers' :duration='3000'></countTo> Heifers</span><br>
+     <span class="text-calves"> <countTo :startVal='startVal' :endVal='Calves' :duration='3000'></countTo> Calves</span> -->
+              </div>
+            </div>
+
+            <div class="card calf-card ml-5 card-body">
+              <div class="card-body">
+                <a class="navbar-item" href="/">
+                  <b-icon icon="cow" size="is-medium" type="is-info "> </b-icon>
+                </a>
+
+                <span
+                  ><span class="text-calf-count mb-2">
+                    <countTo
+                      :startVal="startVal"
+                      :endVal="pfis.length"
+                      :duration="6000"
+                    ></countTo></span
+                  ><span class="text-calf "> <br/> PFIs Acknowledged By Compliance</span></span
+                >
+                <br />
+                <!-- <span class="text-bull"> <countTo :startVal='startVal' :endVal='Bulls' :duration='3000'></countTo> Bulls</span><br>
+     <span class="text-cow"> <countTo :startVal='startVal' :endVal='Cows' :duration='3000'></countTo> Cows</span><br>
+     <span class="text-heifer"> <countTo :startVal='startVal' :endVal='Heifers' :duration='3000'></countTo> Heifers</span><br>
+     <span class="text-calves"> <countTo :startVal='startVal' :endVal='Calves' :duration='3000'></countTo> Calves</span> -->
+              </div>
+            </div>
+
+            
+
+            </b-field>
+
+            
+            <b-field
+            v-if="this.$auth.user.email === 'itsupport@livestock.co.zm'"
+            grouped
+            group-multiline
+            position="is-centered"
+            class="my-4"
+          >
+            
+            <div class="card calf-card ml-5 card-body">
+              <div class="card-body">
+                <a class="navbar-item" href="/">
+                  <b-icon icon="cow" size="is-medium" type="is-info "> </b-icon>
+                </a>
+
+                <span
+                  ><span class="text-calf-count mb-2">
+                    <countTo
+                      :startVal="startVal"
+                      :endVal="pfis.length"
+                      :duration="6000"
+                    ></countTo></span
+                  ><span class="text-calf "> <br/> Permit Applications approved, awaiting Permits</span></span
+                >
+                <br />
+                <!-- <span class="text-bull"> <countTo :startVal='startVal' :endVal='Bulls' :duration='3000'></countTo> Bulls</span><br>
+     <span class="text-cow"> <countTo :startVal='startVal' :endVal='Cows' :duration='3000'></countTo> Cows</span><br>
+     <span class="text-heifer"> <countTo :startVal='startVal' :endVal='Heifers' :duration='3000'></countTo> Heifers</span><br>
+     <span class="text-calves"> <countTo :startVal='startVal' :endVal='Calves' :duration='3000'></countTo> Calves</span> -->
+              </div>
+            </div>
+
+
+            <div class="card calf-card ml-5 card-body">
+              <div class="card-body">
+                <a class="navbar-item" href="/">
+                  <b-icon icon="cow" size="is-medium" type="is-info "> </b-icon>
+                </a>
+
+                <span
+                  ><span class="text-calf-count mb-2">
+                    <countTo
+                      :startVal="startVal"
+                      :endVal="pfis.length"
+                      :duration="6000"
+                    ></countTo></span
+                  ><span class="text-calf "> <br/> Permits received</span></span
+                >
+                <br />
+                <!-- <span class="text-bull"> <countTo :startVal='startVal' :endVal='Bulls' :duration='3000'></countTo> Bulls</span><br>
+     <span class="text-cow"> <countTo :startVal='startVal' :endVal='Cows' :duration='3000'></countTo> Cows</span><br>
+     <span class="text-heifer"> <countTo :startVal='startVal' :endVal='Heifers' :duration='3000'></countTo> Heifers</span><br>
+     <span class="text-calves"> <countTo :startVal='startVal' :endVal='Calves' :duration='3000'></countTo> Calves</span> -->
+              </div>
+            </div>
+
+            </b-field>
+
+
+          <!--End of Admin's Field----------------------------  -->
+        </div>

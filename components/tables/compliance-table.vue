@@ -38,7 +38,7 @@
         label="Supplier Name"
         searchable
       >
-        {{ props.row.supplierName }}
+      <span class="tag is-info is-light ">   {{ props.row.supplierName }} </span>
       </b-table-column>
 
       <b-table-column v-slot="props" field="pfiNumber" label="PFI No." sortable>
@@ -60,7 +60,7 @@
         label="Current Status was updated on this date  "
         searchable
       >
-        {{ props.row.date }}
+      <span class="tag is-info is-light ">  {{ props.row.date }} </span>
       </b-table-column>
 
       <b-table-column v-slot="props" field="status" label="Current Status" sortable>
