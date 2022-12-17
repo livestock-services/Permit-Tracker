@@ -52,7 +52,7 @@ export const state = () => ({
         supplierEmail:null,
         purchaseOrderNumber:null,
         pfiNumber:null,
-        
+
         
         
     },
@@ -318,6 +318,8 @@ export const actions = {
             commit(SET_LOADING, true);
 
             const pfi = state.form;
+
+            
             
            
             const response = await api.post(`/pfis/addNewPfi`, pfi);

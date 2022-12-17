@@ -587,7 +587,7 @@ export const actions = {
          const newDate = updatedDate.toLocaleDateString();
          console.log(newDate);
 
-         const {data: putResponse} = await api.put(`/comp/permits/acknowledgePfi/${RP._id}`, {RP, pfiDate:newDate } )
+         const {data: putResponse} = await api.put(`/comp/permits/acknowledgePfi/${RP._id}`, {RP, pfiNumber:pfiDate, pfiDate:newDate } )
         
          commit(RECEIVE_PERMIT, putResponse)
 
