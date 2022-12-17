@@ -34,7 +34,7 @@
            <div class="column is-half">
               <h4> <span class="is-blue">  PFI Number</span></h4>
             <p  placeholder="Supplier Name">
-              <span  class="tag is-primary is-light">{{pfi.pfiNumber}}, created on {{pfi.date}} </span>
+              <span  class="tag is-primary is-light">{{pfi.pfiNumber}}, created on {{pfi.pfiDate}} </span>
 
 
             </p>
@@ -102,7 +102,7 @@
         label="Update"
         type="is-info"
         icon-left="account"
-        @click="onSubmit"
+        @click="onUpdate"
       /> 
     </footer>
   </div>
@@ -146,8 +146,10 @@ export default {
 
   methods: {
     ...mapActions('procurement', ['load', 'selectPfi']),
+    ...mapActions('compliance',['onUpdate'] ),
 
-    async onSubmit() {
+    async onUpdate() {
+      await this.onUpdate();
       const msg = await Promise.resolve('Operation successul')
       this.$buefy.toast.open({
         message: msg, // 'Operation successful',
