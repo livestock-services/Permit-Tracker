@@ -115,7 +115,7 @@
 
         </b-tooltip> -->
 
-        <b-tooltip label="Preview">
+        <b-tooltip label="View more">
           
           <b-button
             type="is-secondary-outline"

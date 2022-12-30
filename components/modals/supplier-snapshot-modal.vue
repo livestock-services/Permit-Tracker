@@ -94,7 +94,7 @@
        </b-form>
 
        <pre>
-        {{ pfiNumber }}
+       Updated PFI Number: {{ pfiNumber }}
        </pre>
 
       </div>
@@ -165,7 +165,7 @@ export default {
         message: msg, // 'Operation successful',
         duration: 5000,
         position: 'is-top',
-        type: 'is-info is-light',
+        type: 'is-info',
       })
 
       this.clearForm()

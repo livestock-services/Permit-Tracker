@@ -251,7 +251,7 @@ import Upload from '../upload/upload.vue'
                 // await this.load();    
                 await this.addNewPfi();
                 this.$buefy.toast.open({
-                    message: "PFI Added Successfully!",
+                    message: "New Record Added Successfully!",
                     duration: 2000,
                     position: "is-top",
                     type: "is-success",

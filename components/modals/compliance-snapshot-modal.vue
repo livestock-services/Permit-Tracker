@@ -36,7 +36,7 @@
               <p  placeholder="Supplier Name">
                
 
-                <span class="tag is-peach "> {{pfi.pfiNumber}}, created on {{pfi.pfiDate}} </span>
+                <span class="tag is-peach "> {{pfi.pfiNumber}}, created on  {{pfi.pfiDate}} </span>
               </p>
              </div>
            </div>
