@@ -34,7 +34,9 @@
              <div  class="column is-half">
                 <h4> <span class="is-blue">  PFI Number</span></h4>
               <p  placeholder="Supplier Name">
-                <span class="tag is-peach "> {{pfi.pfiNumber}}, created on {{pfi.stageOneDate}} </span>
+               
+
+                <span class="tag is-peach "> {{pfi.pfiNumber}}, created on {{pfi.pfiDate}} </span>
               </p>
              </div>
            </div>
@@ -107,7 +109,7 @@
       <b-button 
       v-model="acknowledgePfi" 
       v-if="pfi.status ==='New PFI added, awaiting acknowledgement'  &&
-          this.$auth.user.email === 'compliance@livestock.co.zm'" 
+          this.$auth.user.email === 'compliance@livestock.co.zm' && pfi.pfiNumber != isNullOrUndefined" 
       class="is-blue mx-2 ml-4" 
       icon-left="check"
       label="Acknowledge Receipt" 
@@ -118,12 +120,36 @@
       <b-button 
       v-model="acknowledgePfi" 
       v-if="pfi.status ==='New PFI added, awaiting acknowledgement'  &&
-          this.$auth.user.email === 'itsupport@livestock.co.zm'" 
+          this.$auth.user.email === 'itsupport@livestock.co.zm'  && pfi.pfiNumber != isNullOrUndefined " 
       class="is-blue mx-2 ml-4" 
       icon-left="check"
       label="Acknowledge Receipt" 
       @click="onAcknowledge" /> 
     </b-tooltip>
+
+
+  
+      <b-button
+      v-model="acknowledgePfi" 
+      v-if="pfi.status ==='New PFI added, awaiting acknowledgement'  &&
+          this.$auth.user.email === 'compliance@livestock.co.zm' && pfi.pfiNumber == isNullOrUndefined" 
+      class="mx-2 ml-4" 
+      icon-left="alert"
+      type="is-danger"
+      label="You need a PFI to acknowledge receipt" 
+      /> 
+
+    
+      <b-button
+      v-model="acknowledgePfi" 
+      v-if="pfi.status ==='New PFI added, awaiting acknowledgement'  &&
+          this.$auth.user.email === 'itsupport@livestock.co.zm'  && pfi.pfiNumber == isNullOrUndefined " 
+      class=" mx-2 ml-4" 
+      icon-left="alert"
+      type="is-danger"
+      label="You need a PFI to acknowledge receipt"
+       /> 
+ 
     
      <b-tooltip label="Put PA in motion" position="is-top" icon-left="handshake"> 
         <b-button
@@ -206,7 +232,8 @@
   
   <script>
   
-  import { mapActions, mapGetters } from 'vuex'
+  import { isNullOrUndefined } from '@syncfusion/ej2-base'
+import { mapActions, mapGetters } from 'vuex'
   export default {
     name: 'OperationModal',
   

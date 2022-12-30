@@ -60,13 +60,13 @@
           value="Login"
         />
         <b-loading :active="isLoading" is-full-page></b-loading>
-      <!--
-        <p>
-          Not Registered? Sign up
-          <nuxt-link to="/auth/register">here</nuxt-link>
-        </p>
+      
+        <!-- <p>
+         Reset Password
+          <nuxt-link to="/auth/reset-password">here</nuxt-link>
+        </p> -->
 
-        -->
+        
       </FormulateForm>
   
     </div>

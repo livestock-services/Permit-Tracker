@@ -8,7 +8,7 @@
     <section class="modal-card-body has-background-white">
       <!-- Modal Content -->
       <div>
-       <b-form class="form">
+       <b-form v-model="form" class="form">
          <div class="columns">
            <div  class="column is-half">
              <h4> <span class="is-blue">  Supplier Name</span></h4>
@@ -93,6 +93,10 @@
 
        </b-form>
 
+       <pre>
+        {{ pfiNumber }}
+       </pre>
+
       </div>
     </section>
     <footer class="modal-card-foot">
@@ -102,7 +106,7 @@
         label="Update"
         type="is-info"
         icon-left="account"
-        @click="onUpdate"
+        @click="onUpdatePfi"
       /> 
     </footer>
   </div>
@@ -110,6 +114,7 @@
 
 <script>
 
+import { mapFields } from 'vuex-map-fields'
 import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'OperationModal',
@@ -134,6 +139,11 @@ export default {
       pfiLoading: 'loading',
     }),
 
+    ...mapFields("compliance", [
+            "form",
+            "form.pfiNumber"
+        ]),
+
     loading() {
       return this.pfiLoading 
     },
@@ -148,16 +158,19 @@ export default {
     ...mapActions('procurement', ['load', 'selectPfi']),
     ...mapActions('compliance',['onUpdate'] ),
 
-    async onUpdate() {
+    async onUpdatePfi() {
       await this.onUpdate();
-      const msg = await Promise.resolve('Operation successul')
+      const msg = await Promise.resolve('PFI Added!')
       this.$buefy.toast.open({
         message: msg, // 'Operation successful',
         duration: 5000,
         position: 'is-top',
-        type: 'is-info',
+        type: 'is-info is-light',
       })
+
+      this.clearForm()
       this.$parent.close()
+      
     },
 
     close() {
@@ -169,6 +182,14 @@ export default {
       })
       this.$parent.close()
     },
+
+    clearForm() {
+            this.form = {
+                
+                pfiNumber: null,
+            };
+            //this.reloadPage()
+        },
   },
 }
 </script>

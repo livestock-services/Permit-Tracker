@@ -47,13 +47,13 @@ export const state = () => ({
     selectedPermitReceived:null,
 
     selectedPfi: null,
+
     form:{
         supplierName:null,
         supplierEmail:null,
         purchaseOrderNumber:null,
         pfiNumber:null,
-
-        
+        date:newDate().toLocaleDateString() 
         
     },
 
@@ -319,9 +319,10 @@ export const actions = {
 
             const pfi = state.form;
 
-            
-            
+          
            
+            console.log(pfi.date)
+            
             const response = await api.post(`/pfis/addNewPfi`, pfi);
 
          //   console.log(response.data);

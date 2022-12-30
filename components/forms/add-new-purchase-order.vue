@@ -143,7 +143,7 @@
 
          <div class="buttons columns">
                 <div class="column is-one-third">
-                    <b-button :disabled="!pfiNumber" @click="onSubmit" type="is-info" expanded>
+                    <b-button  @click="onSubmit" type="is-info" expanded>
                         Submit
                     </b-button>
 

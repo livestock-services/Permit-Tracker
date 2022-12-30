@@ -78,6 +78,10 @@ export const state = () => ({
 
               
     },
+
+    form:{
+        pfiNumber:null
+    }
      //-------------------------------------------------------------
 
 })
@@ -480,6 +484,8 @@ export const actions = {
        //  const newPA = rootGetters['finance/selectedPermitApplication'] 
           console.log(newPA._id)
 
+          console.log(newPA.pfiNumber)
+
           console.log(newDate);
 
          const {data: putResponse} = await api.put(`/comp/permits/acknowledgePfi/${newPA._id}`, {newPA, status: "Acknowledged By Compliance", stageTwoDate:newDate, date:newDate} )
@@ -501,6 +507,46 @@ export const actions = {
           throw error
         }
       },
+
+      //--------------------------Acknowledge Receipt-------------------------------------------------------//
+
+     //ADD PFI 
+     async onUpdate({ state, commit,_,rootGetters }, newPA) {
+        try {
+          commit(SET_LOADING, true) 
+            const newPA = rootGetters['procurement/selectedPfi']
+            const updatedDate = new Date()
+            const updatedForm = state.form
+            const updatedPfi = updatedForm.pfiNumber
+
+            const newDate = updatedDate.toLocaleDateString();
+            console.log(updatedPfi);
+       //  const newPA = rootGetters['finance/selectedPermitApplication'] 
+          console.log(newPA._id)
+
+          console.log(newDate);
+
+         const {data: putResponse} = await api.put(`/comp/permits/acknowledgePfi/${newPA._id}`, {newPA, pfiNumber: updatedPfi, pfiDate:newDate, date:newDate} )
+        
+        let  updatedStatus = putResponse.data;
+
+         console.log(updatedStatus);
+
+         console.log(newPA);
+
+         commit(ACKNOWLEDGE_RECEIPT, putResponse)
+        
+
+          console.log(putResponse.data);
+         
+          commit(SET_LOADING, false)
+        } catch (error) {
+          commit(SET_LOADING, false)
+          throw error
+        }
+      },
+
+
 
         //ACKNOWLEDGE RECEIPT
      async putPaInMotion({ state, commit,_,rootGetters }, newPA) {
@@ -575,30 +621,7 @@ export const actions = {
       },
 
 
-              //ACKNOWLEDGE RECEIPT
-     async onUpdate({ state, commit,_,rootGetters }, RP) {
-        try {
-          commit(SET_LOADING, true) 
-         // const newPA = state.selectedPA
 
-         const RP = rootGetters['procurement/selectedPfi']
-         const updatedDate = new Date()
-
-         const newDate = updatedDate.toLocaleDateString();
-         console.log(newDate);
-
-         const {data: putResponse} = await api.put(`/comp/permits/acknowledgePfi/${RP._id}`, {RP, pfiNumber:pfiDate, pfiDate:newDate } )
-        
-         commit(RECEIVE_PERMIT, putResponse)
-
-          console.log(putResponse.data);
-         
-          commit(SET_LOADING, false)
-        } catch (error) {
-          commit(SET_LOADING, false)
-          throw error
-        }
-      },
 
       selectPA({ commit }, newPA) {
         try {
