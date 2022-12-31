@@ -53,7 +53,7 @@ export const state = () => ({
         supplierEmail:null,
         purchaseOrderNumber:null,
         pfiNumber:null,
-        date:newDate().toLocaleDateString() 
+        
         
     },
 
