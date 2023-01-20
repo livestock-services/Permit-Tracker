@@ -38,7 +38,7 @@
                         <option value="DIAG Road">DIAG Road</option>
                         <option value="Elanco Air">Elanco Air</option>
                         <option value="Elanco Road">Elanco Road</option>
-                        <option value= "Antrovet">Antrovet</option>
+                      
                         <option value="Huvpharma">Huvpharma</option>
                         <option value="Kruuse">Kruuse</option>
                         <option value="Kyron">Kyron</option>
@@ -52,6 +52,7 @@
                         <option value="MSD Road">MSD Road</option>
                         <option value="OBP">OBP</option>
                         <option value="Prionics">Prionics</option>
+                        <option value="Provimi">Provimi</option>
                         <option value="Schippers">Schippers</option>
                         <option value="Virbac">Virbac</option>
                         <option value="Zoetis Belgium">Zoetis Belgium</option>
@@ -206,7 +207,8 @@ import Upload from '../upload/upload.vue'
                     'MSD Prondil',
                     'MSD Road',
                     'OBP',
-                    'Prionics', 
+                    'Prionics',
+                    'Provimi', 
                     'Schippers',
                     'Virbac',
                     'Zoetis Belgium', 

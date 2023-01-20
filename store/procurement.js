@@ -53,7 +53,7 @@ export const state = () => ({
         supplierEmail:null,
         purchaseOrderNumber:null,
         pfiNumber:null,
-        
+      
         
     },
 
@@ -248,6 +248,8 @@ export const actions = {
            const pfiLength = allPfis.data.length;
 
          console.log(pfiLength);
+
+      
 
         //  const filteredPFIs = allPfis.data.filter(fp =>
         //     fp)

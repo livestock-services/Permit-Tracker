@@ -304,6 +304,10 @@ export const actions = {
             //API REQUEST IS MADE AND RESULT IS STORED IN CONST
            const {data: allAmendedPermitApplications} = await api.get(`/comp/permits/allAmendedPermitApplications`)
 
+          
+            
+
+            
 
            //GET ALL PFI RECORDS FROM API
            const {data: allPfis} = await api.get(`/pfis/AllPfis`)
@@ -479,7 +483,9 @@ export const actions = {
             const newPA = rootGetters['procurement/selectedPfi']
             const updatedDate = new Date()
 
-            const newDate = updatedDate.toLocaleDateString();
+            const newDate = updatedDate.toLocaleDateString('en-GB');
+
+            console.log(newDate)
 
        //  const newPA = rootGetters['finance/selectedPermitApplication'] 
           console.log(newPA._id)
@@ -519,7 +525,7 @@ export const actions = {
             const updatedForm = state.form
             const updatedPfi = updatedForm.pfiNumber
 
-            const newDate = updatedDate.toLocaleDateString();
+            const newDate = updatedDate.toLocaleDateString('en-GB');
             console.log(updatedPfi);
        //  const newPA = rootGetters['finance/selectedPermitApplication'] 
           console.log(newPA._id)
@@ -555,7 +561,7 @@ export const actions = {
           const newPA = rootGetters['procurement/selectedPfi']
           const updatedDate = new Date()
 
-          const newDate = updatedDate.toLocaleDateString();
+          const newDate = updatedDate.toLocaleDateString('en-GB');
           console.log(newDate);
 
          const {data: putResponse} = await api.put(`/comp/permits/acknowledgePfi/${newPA._id}`, {newPA, status: "PA in motion, awaiting Finance Approval" , stageThreeDate: newDate, date:newDate } )
@@ -579,7 +585,7 @@ export const actions = {
           const newPA = rootGetters['procurement/selectedPfi']
           const updatedDate = new Date()
 
-          const newDate = updatedDate.toLocaleDateString();
+          const newDate = updatedDate.toLocaleDateString('en-GB');
           console.log(newDate);
 
          const {data: putResponse} = await api.put(`/comp/permits/acknowledgePfi/${newPA._id}`, {newPA, status: "PA approved, awaiting Permit" , stageFourDate: newDate, date:newDate } )
@@ -604,7 +610,7 @@ export const actions = {
          const RP = rootGetters['procurement/selectedPfi']
          const updatedDate = new Date()
 
-         const newDate = updatedDate.toLocaleDateString();
+         const newDate = updatedDate.toLocaleDateString('en-GB');
          console.log(newDate);
 
          const {data: putResponse} = await api.put(`/comp/permits/acknowledgePfi/${RP._id}`, {RP, status: `Permit received`, stageFiveDate:newDate, date:newDate } )

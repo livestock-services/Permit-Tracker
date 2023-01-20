@@ -93,7 +93,7 @@
 
        </b-form>
 
-       <pre>
+       <pre v-if="this.$auth.user.email === 'procurement@livestock.co.zm' || this.$auth.user.email === 'itsupport@livestock.co.zm'">
        Updated PFI Number: {{ pfiNumber }}
        </pre>
 

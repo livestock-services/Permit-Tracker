@@ -118,7 +118,7 @@
 
       <template #empty>
         <h4 class="is-size-4 has-text-centered">
-          No Compliance Information yet. &#x1F4DC;. Click the
+          No Records yet. &#x1F4DC;. Click the
           <span
             :class="[
               'tag',
