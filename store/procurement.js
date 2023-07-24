@@ -3,6 +3,13 @@ import _ from 'lodash'
 import { getField, updateField } from 'vuex-map-fields'
 
 import { ADD_PFI,
+        ADD_NEW_SUPPLIER,
+        GET_ALL_SUPPLIERS,
+
+        ADD_NEW_SUPPLIERS_TO_LIST,
+        REMOVE_ALL_SUPPLIERS_FROM_LIST,
+
+
          SET_ALL_PFIS, 
          GET_ALL_PFIS, 
          SET_LOADING,
@@ -34,6 +41,7 @@ import { ADD_PFI,
 export const state = () => ({
     loading: false,
     all:[],
+    allSuppliers:[],
     allNewPfisAwaitingAcknowledgement:[],
     allPfisAcknowledgedByCompliance:[],
     allPAsInMotionAwaitingFinanceApproval:[],
@@ -57,6 +65,10 @@ export const state = () => ({
         
     },
 
+    supplierForm:{
+        supplierName:null
+    }
+
     
 })
 
@@ -72,6 +84,10 @@ export const getters = {
 
     allPfis(state){
         return state.all
+    },
+
+    allSuppliers(state){
+        return state.allSuppliers
     },
 
     allNewPfisAwaitingAcknowledgement(state){
@@ -142,16 +158,30 @@ export const mutations = {
         state.all.push(pfi)
     },
 
+    [ADD_NEW_SUPPLIER](state, supplier){
+        state.allSuppliers.push(supplier)
+    },
+
     [SET_SELECTED_PFI](state, pfi) {
         state.selectedPfi = pfi
       },
-    [SET_ALL_PFIS](state, payload) {
+    [GET_ALL_PFIS](state, payload) {
         state.all = payload
     },
-    [GET_ALL_PFIS](state, payload){
-        state.all = payload
+    [GET_ALL_SUPPLIERS](state, payload){
+        state.allSuppliers = payload
     },
 
+    [ADD_NEW_SUPPLIERS_TO_LIST](state, payload){
+        state.allSuppliers.push(payload)
+    },
+
+    [REMOVE_ALL_SUPPLIERS_FROM_LIST](state, payload){
+        state.allSuppliers = payload
+    },
+
+  
+    
 
     [SET_SELECTED_NEW_PFI_AWAITING_ACKNOWLEDGMENT](state, pfi) {
         state.selectedPfiAwaitingAcknowledgement = pfi
@@ -233,6 +263,66 @@ export const actions = {
             this.$log.error("Could not get details. Please try again!")
         }
     },
+
+
+    async getAllSuppliers({ state, commit,_,rootGetters }) {
+        try {
+            commit(SET_LOADING, true)
+
+            const {data: response} = await api.get(`/pfis/allSuppliers`)
+
+            const allSupps = response.data;
+
+
+            console.log(allSupps.length);
+
+
+          
+
+
+            let filteredSuppliersList = ["Your Suppliers List:"];
+
+        
+ 
+            for(let i =0; i < allSupps.length; i++){
+
+            console.log(allSupps.length)
+
+            let suppliersList =  rootGetters['procurement/allSuppliers']
+            console.log(suppliersList);
+            
+            commit(REMOVE_ALL_SUPPLIERS_FROM_LIST, filteredSuppliersList);
+         
+
+          //  console.log(filteredCattle[i].purchasedEarTagID); 
+
+            
+            commit(ADD_NEW_SUPPLIERS_TO_LIST, allSupps[i].supplierName);
+
+            console.log(allSupps[i]);
+
+
+            }
+           
+ 
+          console.log(filteredSuppliersList);
+          
+          
+
+           // await dispatch('getInactivePolicies')
+        console.log(allSupps.data)
+             commit(GET_ALL_SUPPLIERS, allSupps.data);
+            //   ...getters.allPolicies,
+            //   ...getters.inactivePolicies,
+            commit(SET_LOADING, false);
+            
+        } catch (error) {
+            commit(SET_LOADING, false);
+            this.$log.error("Could not get details. Please try again!")
+        }
+    },
+
+
  //GET ALL PFIS
     async getAllPfis({ commit }){
         try {
@@ -242,6 +332,8 @@ export const actions = {
            
             //API REQUEST IS MADE AND RESULT IS STORED IN CONST
            const {data: allPfis} = await api.get(`/pfis/AllPfis`)
+
+           
 
            const {data: allAmendedPermitApplications} = await api.get(`/comp/permits/allAmendedPermitApplications`)
 
@@ -330,6 +422,31 @@ export const actions = {
          //   console.log(response.data);
 
             commit(ADD_PFI, response.data);
+            
+            commit(SET_LOADING, false);
+
+        } catch (error) {
+            commit(SET_LOADING, false);
+            this.log.error("Could not add details. Please try again!");
+        }
+    },
+
+     //ADD NEW PFI TO ALL PFIs
+     async addNewSupplier({ commit, state}){
+        try {
+            commit(SET_LOADING, true);
+
+            const supplier = state.supplierForm;
+
+          
+           
+            console.log(supplier.supplierName)
+            
+            const response = await api.post(`/pfis/addNewSupplier`, supplier);
+
+            console.log(response.data);
+
+            commit(ADD_NEW_SUPPLIER, response.data);
             
             commit(SET_LOADING, false);
 

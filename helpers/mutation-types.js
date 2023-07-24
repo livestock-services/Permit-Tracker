@@ -28,9 +28,14 @@ export const CACHE_USER = 'CACHE_USER'
 
 //--------------------------------------- PROCUREMENT------------------------------------------------------------------
 export const ADD_PFI = 'ADD_PFI'
+export const ADD_NEW_SUPPLIER = 'ADD_NEW_SUPPLIER'
 export const SET_SELECTED_PFI  = 'SET_SELECTED_PFI '
 export const SET_ALL_PFIS = 'SET_ALL_PFIS'
 export const GET_ALL_PFIS = 'GET_ALL_PFIS'
+export const GET_ALL_SUPPLIERS = 'GET_ALL_SUPPLIERS'
+
+export const  ADD_NEW_SUPPLIERS_TO_LIST = ' ADD_NEW_SUPPLIERS_TO_LIST'
+export const REMOVE_ALL_SUPPLIERS_FROM_LIST = 'REMOVE_ALL_SUPPLIERS_FROM_LIST'
 
 //----------------------------------------------------------------------------------------------------------------------
 

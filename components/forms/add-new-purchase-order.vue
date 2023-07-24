@@ -64,36 +64,25 @@
              </div>
 
             
-             <!-- <div class="column is-one-quarter">
-                  <b-field label="Supplier Name.">
-                    <template v-slot:label>
-                        Supplier Name <span class="has-text-danger">*</span>
-                    </template>
-                    <b-input
-                    v-model="supplierName"
-                    type="text"
-                    placeholder=" Supplier Name"></b-input>
-                </b-field>
-             </div> -->
-             
+         <div class="columns">
+                    
+                    <div  class="column is-three-quarters">
+                      <h5 class="my-2">Suppliers List</h5>    
+                  <b-autocomplete
+                  rounded
+                  
+                  :data="allSupps"
+                  placeholder="select a supplier from the list"
+                  icon="magnify"
+                  clearable
+                  @select="option => selected = option">
+  
+                  <template #empty>No results found</template>
+              </b-autocomplete>
+  
             
-
-
-            <!-- <div class="column is-one-quarter">
-
-                <b-field label="Supplier Email" >
-                    <template v-slot:label>
-                                Supplier Email <span class="has-text-danger">*</span>
-                    </template>
-                    <b-input 
-                        type="email"
-                        :disabled="!supplierName"
-                        v-model="supplierEmail"
-                        placeholder="supplier@example.co.zm"
-                        maxlength="50">
-                    </b-input>
-                </b-field>
-            </div> -->
+                    </div>
+                  </div>
 
             <div class="column is-one-quarter">
                 <b-field label="Purchase Order No.">
@@ -170,11 +159,9 @@
 </template>
 
 <script>
-
+import { computed } from "vue";
 import { mapFields } from 'vuex-map-fields'
 import { mapActions, mapGetters } from 'vuex'
-import { DateTime } from 'luxon'
-import cloneDeep from 'lodash/cloneDeep'
 
 import Upload from '../upload/upload.vue'
 
@@ -182,41 +169,17 @@ import Upload from '../upload/upload.vue'
     name: "Purchase Order",
     data() {
         const today = new Date();
+
+    
         return {
-            data: [
-
-                    'Antrovet',
-                    'Biocheck',
-                    'Boehringer Air',
-                    'Boehringer Road',
-                    'Bupo', 
-                    'CVRL',
-                    'DIAG air',              
-                    'DIAG Road',
-                    'Elanco Air',
-                    'Elanco Road',
-                    'Huvpharma',
-                    'Kruuse',
-                    'Kyron',
-                    'Kyron Agri',
-                    'MSD Air',
-                    'MSD Butalex',
-                    'MSD Imizol',
-                    'MSD Nilzan',
-                    'MSD Poultry',
-                    'MSD Prondil',
-                    'MSD Road',
-                    'OBP',
-                    'Prionics',
-                    'Provimi', 
-                    'Schippers',
-                    'Virbac',
-                    'Zoetis Belgium', 
-                    'Zoetis SA air',
-                    'Zoetis SA road'
 
 
-                    ],
+            data:[
+
+            computed(()=>this.allSupps),
+
+            ],
+           
 
                 name: '',
                 selected: null,
@@ -234,6 +197,10 @@ import Upload from '../upload/upload.vue'
             "form.pfiNumber"
         ]),
 
+        ...mapGetters('procurement', {
+            allSupps:'allSuppliers'
+             }),
+
         filteredDataArray() {
                 return this.data.filter((option) => {
                     return option
@@ -247,7 +214,7 @@ import Upload from '../upload/upload.vue'
         // this.clearForm()
     },
     methods: {
-        ...mapActions("procurement", ["addNewPfi", "load"]),
+        ...mapActions("procurement", ["addNewPfi","getAllSuppliers", "load"]),
         async onSubmit() {
             try {
                 // await this.load();    
