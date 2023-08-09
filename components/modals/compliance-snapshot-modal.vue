@@ -1,7 +1,7 @@
 <template>
     <div class="modal-card ">
       <header class="modal-card-head">
-        <h3 class="modal-card-title">Supplier Snapshot</h3>
+        <h3 class="modal-card-title">Permit Snapshot</h3>
        
         <button type="button" class="delete" @click="close"></button>
       </header>
@@ -40,6 +40,243 @@
               </p>
              </div>
            </div>
+
+
+           <div v-if="pfi.status === 'New PFI added, awaiting acknowledgement'">
+
+
+                            <div  class="columns">
+                            <div  class="column is-half">
+                                <h4> <span class="is-blue">  &#128336; between PO &#x2192; PFI</span></h4>
+                              <p  placeholder="Supplier Name">
+                              
+
+                                <span class="tag is-peach "> {{ daysElapsed }} days</span>
+                              </p>
+                            </div>
+                          </div>  
+
+                          <div v-if="pfi.status === 'New PFI added, awaiting acknowledgement'" class="columns">
+                            <div  class="column is-half">
+                                <h4> <span class="is-blue">  &#128336; between PFI Creation &#x2192; PFI Acknowledgement</span></h4>
+                              <p  placeholder="Supplier Name">
+                              
+
+                                <span class="tag is-peach "> {{ daysElapsed1 }} days</span>
+                              </p>
+                            </div>
+                          </div>  
+
+                          
+
+
+           </div>
+
+
+
+                        <div v-if="pfi.status === 'Acknowledged By Compliance'">
+
+
+                                  <div  class="columns">
+                                  <div  class="column is-half">
+                                      <h4> <span class="is-blue">  &#128336; between PO &#x2192; PFI</span></h4>
+                                    <p  placeholder="Supplier Name">
+                                    
+
+                                      <span class="tag is-peach "> {{ daysElapsed }} days</span>
+                                    </p>
+                                  </div>
+                                  </div>  
+
+                                  <div class="columns">
+                                  <div  class="column is-half">
+                                      <h4> <span class="is-blue">  &#128336; between PFI Creation &#x2192; PFI Acknowledgement</span></h4>
+                                    <p  placeholder="Supplier Name">
+                                    
+
+                                      <span class="tag is-peach "> {{ daysElapsed1 }} days</span>
+                                    </p>
+                                  </div>
+                                  </div>  
+
+                                  
+                                 
+
+                        </div>
+
+
+                        <div v-if="pfi.status === 'PA in motion, awaiting Finance Approval'">
+
+
+                                  <div  class="columns">
+                                  <div  class="column is-half">
+                                      <h4> <span class="is-blue">  &#128336; between PO &#x2192; PFI</span></h4>
+                                    <p  placeholder="Supplier Name">
+                                    
+
+                                      <span class="tag is-peach "> {{ daysElapsed }} days</span>
+                                    </p>
+                                  </div>
+                                  </div>  
+
+                                  <div class="columns">
+                                  <div  class="column is-half">
+                                      <h4> <span class="is-blue">  &#128336; between PFI Creation &#x2192; PFI Acknowledgement</span></h4>
+                                    <p  placeholder="Supplier Name">
+                                    
+
+                                      <span class="tag is-peach "> {{ daysElapsed1 }} days</span>
+                                    </p>
+                                  </div>
+                                  </div>  
+
+                                  <div  class="columns">
+                                  <div  class="column is-half">
+                                      <h4> <span class="is-blue">  &#128336; between PFI Acknowledgement &#x2192; PA Creation</span></h4>
+                                    <p  placeholder="Supplier Name">
+                                    
+
+                                      <span class="tag is-peach "> {{ daysElapsed2 }} days</span>
+                                    </p>
+                                  </div>
+                                  </div>  
+
+                                 
+
+                                 
+
+
+                      </div>
+
+
+
+                          <div v-if="pfi.status === 'PA approved, awaiting Permit'">
+
+
+                                    <div  class="columns">
+                                    <div  class="column is-half">
+                                        <h4> <span class="is-blue">  &#128336; between PO &#x2192; PFI</span></h4>
+                                      <p  placeholder="Supplier Name">
+                                      
+
+                                        <span class="tag is-peach "> {{ daysElapsed }} days</span>
+                                      </p>
+                                    </div>
+                                    </div>  
+
+                                    <div  class="columns">
+                                    <div  class="column is-half">
+                                        <h4> <span class="is-blue">  &#128336; between PFI Creation &#x2192; PFI Acknowledgement</span></h4>
+                                      <p  placeholder="Supplier Name">
+                                      
+
+                                        <span class="tag is-peach "> {{ daysElapsed1 }} days</span>
+                                      </p>
+                                    </div>
+                                    </div>  
+
+                                    <div  class="columns">
+                                    <div  class="column is-half">
+                                        <h4> <span class="is-blue">  &#128336; between PFI Acknowledgement &#x2192; PA Creation</span></h4>
+                                      <p  placeholder="Supplier Name">
+                                      
+
+                                        <span class="tag is-peach "> {{ daysElapsed2 }} days</span>
+                                      </p>
+                                    </div>
+                                    </div>  
+
+                                    <div  class="columns">
+                                    <div  class="column is-half">
+                                        <h4> <span class="is-blue">  &#128336; between PA Creation &#x2192; PA Approval</span></h4>
+                                      <p  placeholder="Supplier Name">
+                                      
+
+                                        <span class="tag is-peach "> {{ daysElapsed3 }} days</span>
+                                      </p>
+                                    </div>
+                                    </div>  
+
+
+
+                          </div>
+
+
+                          <div v-if="pfi.status === 'Permit received'" >
+
+
+                                      <div  class="columns">
+                                      <div  class="column is-half">
+                                          <h4> <span class="is-blue">  &#128336; between PO &#x2192; PFI</span></h4>
+                                        <p  placeholder="Supplier Name">
+                                        
+
+                                          <span class="tag is-peach "> {{ daysElapsed }} days</span>
+                                        </p>
+                                      </div>
+                                      </div>  
+
+                                      <div  class="columns">
+                                      <div  class="column is-half">
+                                          <h4> <span class="is-blue">  &#128336; between PFI Creation &#x2192; PFI Acknowledgement</span></h4>
+                                        <p  placeholder="Supplier Name">
+                                        
+
+                                          <span class="tag is-peach "> {{ daysElapsed1 }} days</span>
+                                        </p>
+                                      </div>
+                                      </div>  
+
+                                      <div  class="columns">
+                                      <div  class="column is-half">
+                                          <h4> <span class="is-blue">  &#128336; between PFI Acknowledgement &#x2192; PA Creation</span></h4>
+                                        <p  placeholder="Supplier Name">
+                                        
+
+                                          <span class="tag is-peach "> {{ daysElapsed2 }} days</span>
+                                        </p>
+                                      </div>
+                                      </div>  
+
+                                      <div  class="columns">
+                                      <div  class="column is-half">
+                                          <h4> <span class="is-blue">  &#128336; between PA Creation &#x2192; PA Approval</span></h4>
+                                        <p  placeholder="Supplier Name">
+                                        
+
+                                          <span class="tag is-peach "> {{ daysElapsed3 }} days</span>
+                                        </p>
+                                      </div>
+                                      </div>  
+
+                                      <div  class="columns">
+                                      <div  class="column is-half">
+                                          <h4> <span class="is-blue">  &#128336; between PA Approval &#x2192; Permit Receipt</span></h4>
+                                        <p  placeholder="Supplier Name">
+                                        
+
+                                          <span class="tag is-peach "> {{ daysElapsed4 }} days</span>
+                                        </p>
+                                      </div>
+                                      </div>  
+
+
+                                      <div class="columns">
+                                      <div  class="column is-half">
+                                          <h4> <span class="is-blue">  &#128336; between PO &#x2192; Permit Receipt</span></h4>
+                                        <p  placeholder="Supplier Name">
+                                        
+
+                                          <span class="tag is-peach "> {{ daysElapsed4 }} days</span>
+                                        </p>
+                                      </div>
+                                    </div>  
+
+
+                            </div>
+
+
+
   
            <div class="columns">
              <div  class="column is-half">
@@ -100,10 +337,7 @@
     
       <footer class="modal-card-foot">
 
-        <b-tooltip type="is-primary is-light"> 
-          <b-button class="is-primary is-light mx-2 " 
-          icon-left="" @click="click" /> 
-        </b-tooltip>
+       
 
      <b-tooltip label="Acknowledge Receipt" position="is-top" type="is-blue"> 
       <b-button 
@@ -162,18 +396,7 @@
           @click="onPutPaInMotion" />
       </b-tooltip>
         
-     <b-tooltip label="Approve PA" position="is-top" type="is-success is-light" icon-left="money">
-     <b-button
-        v-model="approvePA"
-        v-if="pfi.status ==='PA in motion, awaiting Finance Approval' &&
-         this.$auth.user.email === 'finance@livestock.co.zm'"
-        type="is-success"
-        icon-left="cash"
-        label="Approve Permit Application"
-        @click="onApprovePA"
-      />
-      
-    </b-tooltip>
+     
 
     <b-tooltip label="Approve PA" position="is-top" type="is-success is-light" icon-left="money">
      <b-button
@@ -234,11 +457,18 @@
   
   import { isNullOrUndefined } from '@syncfusion/ej2-base'
 import { mapActions, mapGetters } from 'vuex'
+import { computed } from 'vue';
   export default {
     name: 'OperationModal',
   
      data() {
+
+   
+      
+
       return {
+
+      
         isFullPage: true,
         form: {
           supplierName: null,
@@ -254,6 +484,11 @@ import { mapActions, mapGetters } from 'vuex'
     computed: {
        ...mapGetters('procurement', {
         pfi: 'selectedPfi',
+        daysElapsed:'daysElapsed',
+        daysElapsed1:'daysElapsed1',
+        daysElapsed2:'daysElapsed2',
+        daysElapsed3:'daysElapsed3',
+        daysElapsed4:'daysElapsed4',
         pfiLoading: 'loading',
       }),
   

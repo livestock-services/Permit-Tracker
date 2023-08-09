@@ -20,57 +20,16 @@
 
         <div class="columns">
              
-            <div class="column is-one-quarter">
-                <b-field label="Select a Supplier">
-                        <b-select
-                        
-                        v-model="supplierName"
-                        placeholder="Select Supplier"
-                    >
-
-                    <option value= "Antrovet">Antrovet</option>
-                        <option value="Biocheck">Biocheck</option>
-                        <option value="Boehringer Air">Boehringer Air</option>
-                        <option value="Boehringer Road">Boehringer Road</option>
-                        <option value= "Bupo">Bupo</option>
-                        <option value="CVRL">CVRL</option>
-                        <option value="DIAG Air">DIAG Air</option>
-                        <option value="DIAG Road">DIAG Road</option>
-                        <option value="Elanco Air">Elanco Air</option>
-                        <option value="Elanco Road">Elanco Road</option>
-                      
-                        <option value="Huvpharma">Huvpharma</option>
-                        <option value="Kruuse">Kruuse</option>
-                        <option value="Kyron">Kyron</option>
-                        <option value="Kyron Agri">Kyron Agri</option>
-                        <option value="MSD Air">MSD Air</option>
-                        <option value="MSD Butalex">MSD Butalex</option>
-                        <option value="MSD Imizol">MSD Imizol</option>
-                        <option value="MSD Nilzan">MSD Nilzan</option>
-                        <option value="MSD Poultry">MSD Poultry</option>
-                        <option value="MSD Prondil">MSD Prondil</option>
-                        <option value="MSD Road">MSD Road</option>
-                        <option value="OBP">OBP</option>
-                        <option value="Prionics">Prionics</option>
-                        <option value="Provimi">Provimi</option>
-                        <option value="Schippers">Schippers</option>
-                        <option value="Virbac">Virbac</option>
-                        <option value="Zoetis Belgium">Zoetis Belgium</option>
-                        <option value="Zoetis SA Air">Zoetis SA Air</option>
-                        <option value="Zoetis SA Road">Zoetis SA Road</option>
-                
-                    </b-select>
-                    </b-field>
-             </div>
+           
 
             
          <div class="columns">
                     
-                    <div  class="column is-three-quarters">
+                    <div  class="column is-full">
                       <h5 class="my-2">Suppliers List</h5>    
                   <b-autocomplete
                   rounded
-                  
+                  v-model="supplierName"
                   :data="allSupps"
                   placeholder="select a supplier from the list"
                   icon="magnify"
@@ -201,18 +160,16 @@ import Upload from '../upload/upload.vue'
             allSupps:'allSuppliers'
              }),
 
-        filteredDataArray() {
-                return this.data.filter((option) => {
-                    return option
-                        .toString()
-                        .toLowerCase()
-                        .indexOf(this.name.toLowerCase()) >= 0
-                })
-            }
+             filteredDataArray() {
+      return this.data.filter((option) => {
+        return option.toString().toLowerCase().indexOf(this.name.toLowerCase()) >= 0;
+      });
+    }
+
     },
-    created() {
-        // this.clearForm()
-    },
+     created() {
+    this.getAllSuppliers(); // Fetch the suppliers from the database on component creation
+  },
     methods: {
         ...mapActions("procurement", ["addNewPfi","getAllSuppliers", "load"]),
         async onSubmit() {

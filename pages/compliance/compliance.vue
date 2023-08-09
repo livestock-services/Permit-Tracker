@@ -2,6 +2,10 @@
   <div class="compliance">
    
     <b-tabs class="is-aqua" type="is-toggle" expanded>
+
+      <b-tab-item label="View Permit Pipeline" icon="eye-check">
+            <compliance-table></compliance-table>
+        </b-tab-item>
          
          <b-tab-item label="Amendments to Permit Applications" icon="book-edit">
           <b-tabs vertical position="is-left" type="is-toggle" expanded>
@@ -26,9 +30,9 @@
               <permits-application-table></permits-application-table>
             </b-tab-item>  -->
 
-            <b-tab-item label="Add Permit " icon="plus-box-multiple">
+            <!-- <b-tab-item label="Add Permit " icon="plus-box-multiple">
               <add-permit></add-permit>
-            </b-tab-item>
+            </b-tab-item> -->
   
 
             <b-tab-item label="View Permits" icon="eye-check-outline">
@@ -40,9 +44,7 @@
           </b-tabs>
         </b-tab-item>
 
-        <b-tab-item label="View Permit Pipeline" icon="eye-check">
-            <compliance-table></compliance-table>
-        </b-tab-item>
+       
         
     </b-tabs>
 

@@ -9,6 +9,12 @@ import { ADD_PFI,
         ADD_NEW_SUPPLIERS_TO_LIST,
         REMOVE_ALL_SUPPLIERS_FROM_LIST,
 
+        UPDATE_DAYS_ELAPSED,
+        UPDATE_DAYS_ELAPSED_1,
+        UPDATE_DAYS_ELAPSED_2,
+        UPDATE_DAYS_ELAPSED_3,
+        UPDATE_DAYS_ELAPSED_4,
+
 
          SET_ALL_PFIS, 
          GET_ALL_PFIS, 
@@ -33,7 +39,8 @@ import { ADD_PFI,
 
          SET_SELECTED_PERMIT_RECEIVED,
          SET_ALL_PERMITS_RECEIVED,
-         GET_ALL_PERMITS_RECEIVED
+         GET_ALL_PERMITS_RECEIVED,
+         GET_ALL_PERMITS_RECEIVED_BY_PROCUREMENT
 
 
         } from '@/helpers/mutation-types'
@@ -47,6 +54,7 @@ export const state = () => ({
     allPAsInMotionAwaitingFinanceApproval:[],
     allPAsApprovedAwaitingPermit:[],
     allPermitsReceived:[],
+    allPermitsReceivedByProc:[],
 
     selectedPfiAwaitingAcknowledgement:null,
     selectedPfiAcknowledgedByCompliance:null,
@@ -55,6 +63,13 @@ export const state = () => ({
     selectedPermitReceived:null,
 
     selectedPfi: null,
+
+    daysElapsed:null,
+    daysElapsed1:null,
+    daysElapsed2:null,
+    daysElapsed3:null,
+    daysElapsed4:null,
+
 
     form:{
         supplierName:null,
@@ -110,7 +125,9 @@ export const getters = {
         return state.allPermitsReceived
     },
 
-
+    allPermitsReceivedByProc(state){
+        return state.allPermitsReceivedByProc
+    },
 
 
 
@@ -139,6 +156,25 @@ export const getters = {
 
       selectedPermitReceived(state) {
         return state.selectedPermitReceived
+      },
+
+      daysElapsed(state){
+        return state.daysElapsed
+      },
+
+      daysElapsed1(state){
+        return state.daysElapsed1
+      },
+
+      daysElapsed2(state){
+        return state.daysElapsed2
+      },
+
+      daysElapsed3(state){
+        return state.daysElapsed3
+      },
+      daysElapsed4(state){
+        return state.daysElapsed4
       },
 
 
@@ -238,6 +274,31 @@ export const mutations = {
         state.allPermitsReceived = payload
     },
 
+    [GET_ALL_PERMITS_RECEIVED_BY_PROCUREMENT](state, payload){
+        state.allPermitsReceivedByProc = payload
+    },
+
+    [UPDATE_DAYS_ELAPSED](state, payload){
+        state.daysElapsed = payload
+    },
+
+    [UPDATE_DAYS_ELAPSED_1](state, payload){
+        state.daysElapsed1 = payload
+    },
+
+    [UPDATE_DAYS_ELAPSED_2](state, payload){
+        state.daysElapsed2 = payload
+    },
+
+    [UPDATE_DAYS_ELAPSED_3](state, payload){
+        state.daysElapsed3 = payload
+    },
+
+    [UPDATE_DAYS_ELAPSED_4](state, payload){
+        state.daysElapsed4 = payload
+    },
+
+
 
 
 
@@ -311,7 +372,7 @@ export const actions = {
 
            // await dispatch('getInactivePolicies')
         console.log(allSupps.data)
-             commit(GET_ALL_SUPPLIERS, allSupps.data);
+             commit(GET_ALL_SUPPLIERS, filteredSuppliersList);
             //   ...getters.allPolicies,
             //   ...getters.inactivePolicies,
             commit(SET_LOADING, false);
@@ -368,6 +429,15 @@ export const actions = {
            const filteredPermitReceived = allPfis.data.filter( ep => 
             ep.status ==='Permit received'
            );
+
+           const filteredPermitsReceivedByProc = allPfis.data.filter( fp=>
+            fp.status ==='Permit received by Procurement'
+           )
+            
+
+           const filteredPFIs = allPfis.data.filter( fPfis=>
+            fPfis.status !=='Permit received by Procurement'
+           )
   
 
 
@@ -379,13 +449,13 @@ export const actions = {
 
          console.log(filteredPaApprovedAwaitingPermit.length);
 
-         console.log(filteredPermitReceived.length);
+         console.log(filteredPermitsReceivedByProc.length);
 
-
+            console.log(filteredPFIs)
           
 
            //RETRIEVED DATA IS COMMITTED TO THE MUTATION TO MAKE THE CHANGES EFFECTIVE
-           commit(GET_ALL_PFIS, allPfis.data);
+           commit(GET_ALL_PFIS, filteredPFIs);
 
            commit(GET_ALL_PFIS_AWAITING_ACKNOWLEDGEMENT, filteredPfiAwaitingAcknowledgement);
 
@@ -395,7 +465,9 @@ export const actions = {
             
            commit(GET_ALL_PAs_APPROVED_AWAITING_PERMIT, filteredPaApprovedAwaitingPermit);
 
-           commit(GET_ALL_PERMITS_RECEIVED, filteredPermitReceived);
+           commit(GET_ALL_PERMITS_RECEIVED, filteredPermitsReceivedByProc);
+
+           commit(GET_ALL_PERMITS_RECEIVED_BY_PROCUREMENT, filteredPermitsReceivedByProc);
            
            //AFTER ALL ACTIONS HAVE BEEN PERFORMED, LOADING IS SET TO FALSE AND RESULTS ARE DISPLAYED
            commit(SET_LOADING, false);
@@ -415,7 +487,7 @@ export const actions = {
 
           
            
-            console.log(pfi.date)
+        
             
             const response = await api.post(`/pfis/addNewPfi`, pfi);
 
@@ -460,6 +532,187 @@ export const actions = {
 
     selectPfi({ commit }, pfi) {
         try {
+            
+            
+
+
+              function parseDate(dateStr) {
+                const dateParts = dateStr.split("/");
+                // new Date(year, monthIndex, day)
+                return new Date(dateParts[2], dateParts[1] - 1, dateParts[0]);
+              }
+
+             
+
+
+
+              // Let's assume the variable 'option' represents the current case
+                const option = pfi.status;
+
+                switch (option) {
+                case 'New PFI added, awaiting acknowledgement':
+                    const startDateStr = pfi.pfiDate;
+                        const endDateStr = pfi.stageOneDate;
+                        
+                        function calculateDaysElapsed(startDateStr, endDateStr) {
+                            const startDate = parseDate(startDateStr);
+                            const endDate = parseDate(endDateStr);
+                        
+                            // Calculate the difference between the two dates in milliseconds
+                            const timeDiff = endDate.getTime() - startDate.getTime();
+                        
+                            // Convert the difference to days
+                            const daysElapsed = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+                        
+                            return daysElapsed;
+                        }
+                        
+                        
+                        const daysElapsed = calculateDaysElapsed(startDateStr, endDateStr);
+                        console.log("Number of days elapsed:", daysElapsed);
+
+                        commit(UPDATE_DAYS_ELAPSED, daysElapsed);
+                    break;
+
+
+
+
+
+                case 'Acknowledged By Compliance':
+                    const startDateStr1 = pfi.stageOneDate;
+                    const endDateStr1 = pfi.stageTwoDate;
+                    
+                    function calculateDaysElapsed1(startDateStr1, endDateStr1) {
+                        const startDate = parseDate(startDateStr1);
+                        const endDate = parseDate(endDateStr1);
+                    
+                        // Calculate the difference between the two dates in milliseconds
+                        const timeDiff = endDate.getTime() - startDate.getTime();
+                    
+                        // Convert the difference to days
+                        const daysElapsed1 = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+                    
+                        return daysElapsed1;
+                    }
+                    
+                    
+                    const daysElapsed1 = calculateDaysElapsed1(startDateStr1, endDateStr1);
+                    console.log("Number of days elapsed:", daysElapsed1);
+
+                    commit(UPDATE_DAYS_ELAPSED_1, daysElapsed1);
+                    break;
+
+
+
+                case 'PA in motion, awaiting Finance Approval':
+                    const startDateStr2 = pfi.stageTwoDate;
+                    const endDateStr2 = pfi.stageThreeDate;
+                    
+                    function calculateDaysElapsed2(startDateStr2, endDateStr2) {
+                        const startDate = parseDate(startDateStr2);
+                        const endDate = parseDate(endDateStr2);
+                    
+                        // Calculate the difference between the two dates in milliseconds
+                        const timeDiff = endDate.getTime() - startDate.getTime();
+                    
+                        // Convert the difference to days
+                        const daysElapsed2 = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+                    
+                        return daysElapsed2;
+                    }
+                    
+                    
+                    const daysElapsed2 = calculateDaysElapsed2(startDateStr2, endDateStr2);
+                    console.log("Number of days elapsed:", daysElapsed2);
+
+                    commit(UPDATE_DAYS_ELAPSED_2, daysElapsed2);
+
+                    break;
+
+
+
+
+
+                case 'PA approved, awaiting Permit':
+                    const startDateStr3 = pfi.stageThreeDate;
+                    const endDateStr3 = pfi.stageFourDate;
+
+
+                    console.log(startDateStr3);
+                    console.log(endDateStr3);
+
+
+                    
+                    let initialDaysElapsed = 0;
+
+                    commit(UPDATE_DAYS_ELAPSED_3, initialDaysElapsed);
+                    
+                    function calculateDaysElapsed3(startDateStr3, endDateStr3) {
+                        const startDate = parseDate(startDateStr3);
+                        const endDate = parseDate(endDateStr3);
+
+                        
+                    console.log(startDate);
+                    console.log(endDate);
+
+
+                    
+                        // Calculate the difference between the two dates in milliseconds
+                        const timeDiff = endDate.getTime() - startDate.getTime();
+
+                        console.log(timeDiff);
+                      
+                    
+                        // Convert the difference to days
+                        const daysElapsed3 = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+
+                        console.log(daysElapsed3 );
+                    
+                        return daysElapsed3;
+                    }
+                    
+                    
+                    const daysElapsed3 = calculateDaysElapsed3(startDateStr3, endDateStr3);
+                    console.log("Number of days elapsed:", daysElapsed3);
+
+                    commit(UPDATE_DAYS_ELAPSED_3, daysElapsed3);
+                    break;
+
+                case 'Permit received':
+                    const startDateStr4 = pfi.pfiDate;
+                    const endDateStr4 = pfi.stageFiveDate;
+                    
+                    function calculateDaysElapsed4(startDateStr4, endDateStr4) {
+                        const startDate = parseDate(startDateStr4);
+                        const endDate = parseDate(endDateStr4);
+                    
+                        // Calculate the difference between the two dates in milliseconds
+                        const timeDiff = endDate.getTime() - startDate.getTime();
+                    
+                        // Convert the difference to days
+                        const daysElapsed4 = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+                    
+                        return daysElapsed4;
+                    }
+                    
+                    
+                    const daysElapsed4 = calculateDaysElapsed4(startDateStr4, endDateStr4);
+                    console.log("Number of days elapsed:", daysElapsed4);
+
+                    commit(UPDATE_DAYS_ELAPSED_4, daysElapsed4);
+
+                    break;
+
+                default:
+                    console.log("Invalid option selected.");
+                }
+
+
+             
+              
+
+
+                
             commit(SET_SELECTED_PFI, pfi)
             console.log(pfi._id)
         } catch (error) {

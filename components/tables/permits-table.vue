@@ -96,14 +96,14 @@
           'tag',
 
           {
-             'is-info is-light': props.row.permitNumber,
+             'is-info is-light': props.row.purchaseOrderNumber,
           },
 
         
       
       
       
-      ]">  {{ props.row.permitNumber }} </span>  
+      ]">  {{ props.row.purchaseOrderNumber }} </span>  
 
        
       </b-table-column>
@@ -118,6 +118,18 @@
       
       
       {{ props.row.date}} 
+     
+      </b-table-column>
+
+      <b-table-column
+        v-slot="props"
+        field="status"
+        label="Status"
+        searchable
+      >
+      
+      
+     <span class="tag is-pink"> {{ props.row.status}}  </span>
      
       </b-table-column>
 
@@ -175,9 +187,9 @@ export default {
       allPs: 'allPermits',
     }),
     
-   isEmpty() {
-     return this.allPs.length === 0
-    },
+  //  isEmpty() {
+  //    return this.allPs.length === 0
+  //   },
 
     isNames() {
       return this.names
@@ -220,5 +232,9 @@ export default {
 
 .content-area {
   grid-column: 2/3;
+}
+
+.is-pink{
+  background-color: rgb(248, 173, 219);
 }
 </style>

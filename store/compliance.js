@@ -15,6 +15,7 @@ import {
          ACKNOWLEDGE_RECEIPT,
          PUT_PA_IN_MOTION,
          RECEIVE_PERMIT,
+         RECEIVE_PERMIT_BY_PROCUREMENT,
 
          ADD_PERMIT,
          SET_ALL_PERMITS,
@@ -207,6 +208,11 @@ export const mutations = {
     [RECEIVE_PERMIT](state, putResponse) {
         state.selectedPermitApplication = putResponse
         state.selectedPermitApplication.permitStatus = `Received permit from ${state.selectedPermitApplication.authBody}`
+    },
+
+    [RECEIVE_PERMIT_BY_PROCUREMENT](state, putResponse) {
+        state.selectedPermitApplication = putResponse
+        state.selectedPermitApplication.permitStatus = `Received permit By Procurment`
     },
 
     
@@ -431,16 +437,24 @@ export const actions = {
             commit(SET_LOADING, true)
 
            
-            //API REQUEST IS MADE AND RESULT IS STORED IN CONST
-           const {data: allPermits} = await api.get(`/comp/permits/allPermits`)
+        //     //API REQUEST IS MADE AND RESULT IS STORED IN CONST
+        //    const {data: allPermits} = await api.get(`/comp/permits/allPermits`)
+
+           const {data: allPfis} = await api.get(`/pfis/AllPfis`)
+
+           console.log(allPfis.data);
+
+           const allNewPermits = allPfis.data.filter( a=>
+            a.status ==='Permit received by Procurement'
+           )
 
            
 
-           console.log(allPermits);
+           console.log(allNewPermits);
 
 
            //RETRIEVED DATA IS COMMITTED TO THE MUTATION TO MAKE THE CHANGES EFFECTIVE
-           commit(GET_ALL_PERMITS, allPermits.data);
+           commit(GET_ALL_PERMITS, allNewPermits);
             
            
            //AFTER ALL ACTIONS HAVE BEEN PERFORMED, LOADING IS SET TO FALSE AND RESULTS ARE DISPLAYED
@@ -616,6 +630,31 @@ export const actions = {
          const {data: putResponse} = await api.put(`/comp/permits/acknowledgePfi/${RP._id}`, {RP, status: `Permit received`, stageFiveDate:newDate, date:newDate } )
         
          commit(RECEIVE_PERMIT, putResponse)
+
+          console.log(putResponse.data);
+         
+          commit(SET_LOADING, false)
+        } catch (error) {
+          commit(SET_LOADING, false)
+          throw error
+        }
+      },
+
+             //ACKNOWLEDGE RECEIPT
+     async receivePermitByProcurement({ state, commit,_,rootGetters }, RP) {
+        try {
+          commit(SET_LOADING, true) 
+         // const newPA = state.selectedPA
+
+         const RP = rootGetters['procurement/selectedPfi']
+         const updatedDate = new Date()
+
+         const newDate = updatedDate.toLocaleDateString('en-GB');
+         console.log(newDate);
+
+         const {data: putResponse} = await api.put(`/comp/permits/acknowledgePfi/${RP._id}`, {RP, status: `Permit received by Procurement`, stageFiveDate:newDate, date:newDate } )
+        
+         commit(RECEIVE_PERMIT_BY_PROCUREMENT, putResponse)
 
           console.log(putResponse.data);
          

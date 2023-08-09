@@ -37,6 +37,13 @@ export const GET_ALL_SUPPLIERS = 'GET_ALL_SUPPLIERS'
 export const  ADD_NEW_SUPPLIERS_TO_LIST = ' ADD_NEW_SUPPLIERS_TO_LIST'
 export const REMOVE_ALL_SUPPLIERS_FROM_LIST = 'REMOVE_ALL_SUPPLIERS_FROM_LIST'
 
+
+export const UPDATE_DAYS_ELAPSED  ='UPDATE_DAYS_ELAPSED'
+export const UPDATE_DAYS_ELAPSED_1 ='UPDATE_DAYS_ELAPSED_1'
+export const UPDATE_DAYS_ELAPSED_2 ='UPDATE_DAYS_ELAPSED_2'
+export const UPDATE_DAYS_ELAPSED_3 ='UPDATE_DAYS_ELAPSED_3'
+export const UPDATE_DAYS_ELAPSED_4 ='UPDATE_DAYS_ELAPSED_4'
+
 //----------------------------------------------------------------------------------------------------------------------
 
 
@@ -83,6 +90,15 @@ export const GET_ALL_PERMITS_RECEIVED = 'GET_ALL_PERMITS_RECEIVED'
 
 //----------------------------------------------------------------------------------------------------------------------
 
+//--------------------------------------- PERMITS RECEIVED------------------------------------------------------------------
+
+export const SET_SELECTED_PERMIT_RECEIVED_BY_PROCUREMENT  = 'SET_SELECTED_PERMIT_RECEIVED_BY_PROCUREMENT'
+export const SET_ALL_PERMITS_RECEIVED_BY_PROCUREMENT = 'SET_ALL_PERMITS_RECEIVED_BY_PROCUREMENT'
+export const GET_ALL_PERMITS_RECEIVED_BY_PROCUREMENT = 'GET_ALL_PERMITS_RECEIVED_BY_PROCUREMENT'
+
+//----------------------------------------------------------------------------------------------------------------------
+
+
 
 
 // ----------------------------------------COMPLIANCE---------------------------------------------------------------------
@@ -102,6 +118,7 @@ export const  APPROVE_PERMIT_APPLICATION = ' APPROVE_PERMIT_APPLICATION'
 export const ACKNOWLEDGE_RECEIPT = 'ACKNOWLEDGE_RECEIPT'
 export const PUT_PA_IN_MOTION = 'PUT_PA_IN_MOTION'
 export const RECEIVE_PERMIT = 'RECEIVE_PERMIT'
+export const RECEIVE_PERMIT_BY_PROCUREMENT = 'RECEIVE_PERMIT_BY_PROCUREMENT'
 //PERMITS
 export const ADD_PERMIT = 'ADD_PERMIT'
 export const SET_ALL_PERMITS = 'SET_ALL_PERMITS'
