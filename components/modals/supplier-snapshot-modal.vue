@@ -43,6 +43,12 @@
            </div>
          </div>
 
+         <div>
+          <h3> <span class="tag is-success"> Timeline at Each Stage</span></h3>
+        </div>
+
+
+
          
          <div v-if="pfi.status === 'New PFI added, awaiting acknowledgement'">
 
@@ -224,7 +230,7 @@
             <p  placeholder="Supplier Name">
             
 
-              <span class="tag is-peach "> {{ daysElapsed1 }} days</span>
+              <span class="tag is-peach "> {{ daysElapsed }} days</span>
             </p>
           </div>
           </div>  
@@ -235,7 +241,7 @@
             <p  placeholder="Supplier Name">
             
 
-              <span class="tag is-peach "> {{ daysElapsed2 }} days</span>
+              <span class="tag is-peach "> {{ daysElapsed1 }} days</span>
             </p>
           </div>
           </div>  
@@ -246,7 +252,7 @@
             <p  placeholder="Supplier Name">
             
 
-              <span class="tag is-peach "> {{ daysElapsed3 }} days</span>
+              <span class="tag is-peach "> {{ daysElapsed2 }} days</span>
             </p>
           </div>
           </div>  
@@ -257,7 +263,7 @@
             <p  placeholder="Supplier Name">
             
 
-              <span class="tag is-peach "> {{ daysElapsed4 }} days</span>
+              <span class="tag is-peach "> {{ daysElapsed3 }} days</span>
             </p>
           </div>
           </div>  
@@ -265,7 +271,7 @@
 
           <div class="columns">
           <div  class="column is-half">
-              <h4> <span class="is-blue">  &#128336; between PO &#x2192; Permit Receipt</span></h4>
+              <h4> <span class="is-blue">  &#128336; from Start &#x2192; Finish </span></h4>
             <p  placeholder="Supplier Name">
             
 

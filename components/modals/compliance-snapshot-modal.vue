@@ -41,6 +41,9 @@
              </div>
            </div>
 
+          <div>
+          <h3> <span class="tag is-success"> Timeline at Each Stage</span></h3>
+          </div>
 
            <div v-if="pfi.status === 'New PFI added, awaiting acknowledgement'">
 

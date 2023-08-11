@@ -679,7 +679,7 @@ export const actions = {
                     break;
 
                 case 'Permit received':
-                    const startDateStr4 = pfi.pfiDate;
+                    const startDateStr4 = pfi.stageOneDate;
                     const endDateStr4 = pfi.stageFiveDate;
                     
                     function calculateDaysElapsed4(startDateStr4, endDateStr4) {

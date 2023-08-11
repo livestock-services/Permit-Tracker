@@ -19,7 +19,7 @@
         </b-tab-item>
 
 
-        <b-tab-item label="Add New Supplier" icon="plus-circle-multiple ">
+        <b-tab-item label="Add New Supplier" icon="truck ">
             <add-supplier></add-supplier>
         </b-tab-item>
 
