@@ -46,6 +46,18 @@
             <div class="column is-one-quarter">
                 <b-field label="Purchase Order No.">
                      <template v-slot:label>
+                        Extra Details <span class="has-text-danger">*</span>
+                    </template>
+                    <b-input 
+                    :disabled="!supplierName"
+                    v-model="supplierComment"
+                    placeholder="extra details..."></b-input>
+                </b-field>
+            </div>
+
+            <div class="column is-one-quarter">
+                <b-field label="Purchase Order No.">
+                     <template v-slot:label>
                         Purchase Order No. <span class="has-text-danger">*</span>
                     </template>
                     <b-input 
@@ -87,6 +99,7 @@
              </div> -->
           
              <p class="content"><b>Selected Supplier:</b> {{ supplierName }}</p>
+             <p class="content"><b>Extar Details/Comments:</b> {{ supplierComment }}</p>
              <p class="content"><b>Purchase Order:</b> {{ purchaseOrderNumber }}</p>
              <p class="content"><b>PFI Number:</b> {{ pfiNumber }}</p>
 
@@ -151,7 +164,7 @@ import Upload from '../upload/upload.vue'
         ...mapFields("procurement", [
             "form",
             "form.supplierName",
-            "form.supplierEmail",
+            "form.supplierComment",
             "form.purchaseOrderNumber",
             "form.pfiNumber"
         ]),
@@ -196,7 +209,7 @@ import Upload from '../upload/upload.vue'
         clearForm() {
             this.form = {
                 supplierName: null,
-                supplierEmail: null,
+                supplierComment: null,
                 purchasOrderNumber: null,
                 pfiNumber: null,
             };

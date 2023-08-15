@@ -40,7 +40,10 @@ import { ADD_PFI,
          SET_SELECTED_PERMIT_RECEIVED,
          SET_ALL_PERMITS_RECEIVED,
          GET_ALL_PERMITS_RECEIVED,
-         GET_ALL_PERMITS_RECEIVED_BY_PROCUREMENT
+         GET_ALL_PERMITS_RECEIVED_BY_PROCUREMENT,
+
+         DELETE_SELECTED_PFI,
+         
 
 
         } from '@/helpers/mutation-types'
@@ -49,6 +52,7 @@ export const state = () => ({
     loading: false,
     all:[],
     allSuppliers:[],
+    deleteError: null,
     allNewPfisAwaitingAcknowledgement:[],
     allPfisAcknowledgedByCompliance:[],
     allPAsInMotionAwaitingFinanceApproval:[],
@@ -73,7 +77,7 @@ export const state = () => ({
 
     form:{
         supplierName:null,
-        supplierEmail:null,
+        supplierComment:null,
         purchaseOrderNumber:null,
         pfiNumber:null,
       
@@ -298,7 +302,13 @@ export const mutations = {
         state.daysElapsed4 = payload
     },
 
-
+    [DELETE_SELECTED_PFI](state, putResponse) {
+        const index = state.all.findIndex(newPA => newPA._id === putResponse);
+    if (index !== -1) {
+      state.all.splice(index, 1);
+    }
+    state.deleteError = null;
+    },
 
 
 
@@ -527,6 +537,39 @@ export const actions = {
             this.log.error("Could not add details. Please try again!");
         }
     },
+
+
+    async onDeletePFI({ state, commit,_,rootGetters }, pfi) {
+        try {
+          commit(SET_LOADING, true) 
+            const newPA = rootGetters['procurement/selectedPfi']
+          
+            
+
+          console.log(newPA._id)
+
+        
+
+         const {data: putResponse} = await api.delete(`/pfis/allPfis/${newPA._id}`)
+        
+        let  deletedPfi = putResponse.data;
+
+        
+
+         console.log(newPA);
+
+         commit(DELETE_SELECTED_PFI, deletedPfi)
+        
+
+          console.log(deletedPfi);
+         
+          commit(SET_LOADING, false)
+        } catch (error) {
+          commit(SET_LOADING, false)
+          throw error
+        }
+      },
+
 
     
 

@@ -14,6 +14,20 @@
              <h4> <span class="is-blue">  Supplier Name</span></h4>
             <p >
               <span class="tag is-primary is-light">  {{pfi.supplierName}} </span>
+
+              
+              
+            </p>
+           </div>
+         </div>
+
+         <div class="columns">
+           <div  class="column is-half">
+             <h4> <span class="is-blue">  Extra Details</span></h4>
+            <p >
+              <span class="tag is-primary is-light">  {{pfi.supplierComment }} </span>
+
+              <b-input v-if="pfi.status === 'New PFI added, awaiting acknowledgement'" v-model="supplierComment" placeholder="Enter Comments here..."></b-input>
               
             </p>
            </div>
@@ -27,6 +41,8 @@
             <p  placeholder="Supplier Name">
               <span class="tag is-primary is-light">   {{pfi.purchaseOrderNumber}}, created on {{pfi.date}} </span>
             </p>
+
+            <b-input v-if="pfi.status === 'New PFI added, awaiting acknowledgement'" v-model="purchaseOrderNumber" placeholder="Enter PO here..."></b-input>
            </div>
          </div>
 
@@ -392,6 +408,14 @@
         @click="onUpdatePfi"
       /> 
 
+      <b-button
+        v-if="pfi.status === 'New PFI added, awaiting acknowledgement'"
+        label="Delete"
+        type="is-danger"
+        icon-left="delete"
+        @click="onDeletePfi"
+      /> 
+
       <b-tooltip label="Approve PA" position="is-top" type="is-success is-light" icon-left="money">
      <b-button
         v-model="approvePA"
@@ -445,7 +469,9 @@ export default {
 
     ...mapFields("compliance", [
             "form",
-            "form.pfiNumber"
+            "form.supplierComment",
+            "form.pfiNumber",
+            "form.purchaseOrderNumber"
         ]),
 
     loading() {
@@ -459,11 +485,9 @@ export default {
   
 
   methods: {
-    ...mapActions('procurement', ['load', 'selectPfi']),
-    ...mapActions('compliance',['onUpdate'] ),
 
-    ...mapActions('procurement', ['load', 'selectPfi']),
-      ...mapActions('compliance',['acknowledgePfi','approvePA', 'receivePermit','receivePermitByProcurement', 'putPaInMotion', 'selectPA'] ),
+    ...mapActions('procurement', ['load', 'selectPfi', 'onDeletePFI']),
+      ...mapActions('compliance',['acknowledgePfi','approvePA', 'receivePermit','receivePermitByProcurement', 'putPaInMotion', 'selectPA', 'onUpdate'] ),
 
     async onUpdatePfi() {
       await this.onUpdate();
@@ -473,6 +497,21 @@ export default {
         duration: 5000,
         position: 'is-top',
         type: 'is-info',
+      })
+
+      this.clearForm()
+      this.$parent.close()
+      
+    },
+
+    async onDeletePfi() {
+      await this.onDeletePFI();
+      const msg = await Promise.resolve('PFI Deleted!')
+      this.$buefy.toast.open({
+        message: msg, // 'Operation successful',
+        duration: 5000,
+        position: 'is-top',
+        type: 'is-danger',
       })
 
       this.clearForm()
@@ -519,8 +558,8 @@ this.$parent.close()
 
     clearForm() {
             this.form = {
-                
-                pfiNumber: null,
+              // supplierComment:null,
+              //   pfiNumber: null,
             };
             //this.reloadPage()
         },

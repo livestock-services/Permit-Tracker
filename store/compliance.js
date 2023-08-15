@@ -21,6 +21,7 @@ import {
          SET_ALL_PERMITS,
          GET_ALL_PERMITS,
          SET_SELECTED_PERMIT_APPLICATION,
+
          
 
 
@@ -81,7 +82,9 @@ export const state = () => ({
     },
 
     form:{
-        pfiNumber:null
+        supplierComment:null,
+        pfiNumber:null,
+        purchaseOrderNumber:null
     }
      //-------------------------------------------------------------
 
@@ -214,6 +217,8 @@ export const mutations = {
         state.selectedPermitApplication = putResponse
         state.selectedPermitApplication.permitStatus = `Received permit By Procurment`
     },
+
+
 
     
      //---------------------------------------------------------------------------------------------------
@@ -536,17 +541,23 @@ export const actions = {
           commit(SET_LOADING, true) 
             const newPA = rootGetters['procurement/selectedPfi']
             const updatedDate = new Date()
-            const updatedForm = state.form
-            const updatedPfi = updatedForm.pfiNumber
+            const updatedForm = state.form;
+            const updatedPfi = updatedForm.pfiNumber;
+            const updatedPO = updatedForm.purchaseOrderNumber;
+            const updatedSupplierComment = updatedForm.supplierComment;
 
             const newDate = updatedDate.toLocaleDateString('en-GB');
             console.log(updatedPfi);
+            console.log(updatedPO);
+            console.log(updatedSupplierComment);
+
+
        //  const newPA = rootGetters['finance/selectedPermitApplication'] 
           console.log(newPA._id)
 
           console.log(newDate);
 
-         const {data: putResponse} = await api.put(`/comp/permits/acknowledgePfi/${newPA._id}`, {newPA, pfiNumber: updatedPfi, pfiDate:newDate, date:newDate} )
+         const {data: putResponse} = await api.put(`/comp/permits/acknowledgePfi/${newPA._id}`, {newPA, supplierComment:updatedSupplierComment,  purchaseOrderNumber: updatedPO, pfiNumber: updatedPfi, pfiDate:newDate, date:newDate} )
         
         let  updatedStatus = putResponse.data;
 
@@ -665,6 +676,8 @@ export const actions = {
         }
       },
 
+        //ADD PFI 
+ 
 
 
 

@@ -124,6 +124,8 @@ export const ADD_PERMIT = 'ADD_PERMIT'
 export const SET_ALL_PERMITS = 'SET_ALL_PERMITS'
 export const GET_ALL_PERMITS = 'GET_ALL_PERMITS'
 
+export const DELETE_SELECTED_PFI = 'DELETE_SELECTED_PFI'
+
 //--------------------------------------------------------------------------------------------------------------------------
 
 

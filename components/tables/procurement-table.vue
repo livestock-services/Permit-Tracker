@@ -44,7 +44,9 @@
         <!-- {{ props.row.sumInsured }} -->
       </b-table-column>
 
-      
+      <b-table-column v-slot="props" field="supplierComment" label="Extra Details" sortable>
+        <span class="tag is-peach "> {{ props.row.supplierComment }} </span>
+      </b-table-column>
 
       <b-table-column v-slot="props" field="pfiNumber" label="PFI No." sortable>
         <span class="tag is-peach "> {{ props.row.pfiNumber }} </span>
