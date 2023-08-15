@@ -13,6 +13,7 @@ import {
          SET_ALL_PERMIT_APPLICATIONS,
          GET_ALL_PERMIT_APPLICATIONS,
          ACKNOWLEDGE_RECEIPT,
+         UPDATE_SELECTED_PFI,
          PUT_PA_IN_MOTION,
          RECEIVE_PERMIT,
          RECEIVE_PERMIT_BY_PROCUREMENT,
@@ -82,7 +83,6 @@ export const state = () => ({
     },
 
     form:{
-        supplierComment:null,
         pfiNumber:null,
         purchaseOrderNumber:null
     }
@@ -202,6 +202,11 @@ export const mutations = {
         state.selectedPA = putResponse
         state.selectedPA.status = "Acknowledged By Compliance"
     },
+
+    [UPDATE_SELECTED_PFI](state, payload) {
+        state.selectedPA = payload
+      },
+    
 
     [PUT_PA_IN_MOTION](state, putResponse) {
         state.selectedPermitApplication = putResponse
@@ -541,23 +546,34 @@ export const actions = {
           commit(SET_LOADING, true) 
             const newPA = rootGetters['procurement/selectedPfi']
             const updatedDate = new Date()
-            const updatedForm = state.form;
-            const updatedPfi = updatedForm.pfiNumber;
-            const updatedPO = updatedForm.purchaseOrderNumber;
-            const updatedSupplierComment = updatedForm.supplierComment;
+            
+            let pfiCopySupplierComment = newPA.supplierComment
+            let pfiCopyPO = newPA.purchaseOrderNumber;
+            let pfiCopyPFI = newPA.pfiNumber;
+
+
+            
 
             const newDate = updatedDate.toLocaleDateString('en-GB');
-            console.log(updatedPfi);
-            console.log(updatedPO);
-            console.log(updatedSupplierComment);
-
+            console.log(pfiCopyPFI);
+            console.log(pfiCopyPO);
 
        //  const newPA = rootGetters['finance/selectedPermitApplication'] 
           console.log(newPA._id)
 
           console.log(newDate);
 
-         const {data: putResponse} = await api.put(`/comp/permits/acknowledgePfi/${newPA._id}`, {newPA, supplierComment:updatedSupplierComment,  purchaseOrderNumber: updatedPO, pfiNumber: updatedPfi, pfiDate:newDate, date:newDate} )
+         const {data: putResponse} = await api.put(`/comp/permits/acknowledgePfi/${newPA._id}`, {
+            
+            newPA,
+            supplierComment: `${pfiCopySupplierComment}`,
+            purchaseOrderNumber: `${pfiCopyPO}`,
+            pfiNumber: `${pfiCopyPFI}`,
+            pfiDate:newDate,
+            date:newDate
+
+
+             })
         
         let  updatedStatus = putResponse.data;
 
@@ -565,7 +581,7 @@ export const actions = {
 
          console.log(newPA);
 
-         commit(ACKNOWLEDGE_RECEIPT, putResponse)
+         commit(UPDATE_SELECTED_PFI, putResponse)
         
 
           console.log(putResponse.data);

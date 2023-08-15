@@ -14,8 +14,6 @@
              <h4> <span class="is-blue">  Supplier Name</span></h4>
             <p >
               <span class="tag is-primary is-light">  {{pfi.supplierName}} </span>
-
-              
               
             </p>
            </div>
@@ -26,9 +24,7 @@
              <h4> <span class="is-blue">  Extra Details</span></h4>
             <p >
               <span class="tag is-primary is-light">  {{pfi.supplierComment }} </span>
-
-              <b-input v-if="pfi.status === 'New PFI added, awaiting acknowledgement'" v-model="supplierComment" placeholder="Enter Comments here..."></b-input>
-              
+              <b-input v-if="pfi.status === 'New PFI added, awaiting acknowledgement'" v-model="pfi.supplierComment" placeholder="Enter comments here..."></b-input>
             </p>
            </div>
          </div>
@@ -42,7 +38,7 @@
               <span class="tag is-primary is-light">   {{pfi.purchaseOrderNumber}}, created on {{pfi.date}} </span>
             </p>
 
-            <b-input v-if="pfi.status === 'New PFI added, awaiting acknowledgement'" v-model="purchaseOrderNumber" placeholder="Enter PO here..."></b-input>
+            <b-input v-if="pfi.status === 'New PFI added, awaiting acknowledgement'" v-model="pfi.purchaseOrderNumber" placeholder="Enter PO here..."></b-input>
            </div>
          </div>
 
@@ -55,7 +51,7 @@
 
             </p>
 
-            <b-input v-if="pfi.status === 'New PFI added, awaiting acknowledgement'" v-model="pfiNumber" placeholder="Enter PFI here..."></b-input>
+            <b-input v-if="pfi.status === 'New PFI added, awaiting acknowledgement'" v-model="pfi.pfiNumber" placeholder="Enter PFI here..."></b-input>
            </div>
          </div>
 
@@ -439,24 +435,55 @@
 
 import { mapFields } from 'vuex-map-fields'
 import { mapActions, mapGetters } from 'vuex'
+import {_, cloneDeep } from 'lodash';
+
 export default {
   name: 'OperationModal',
 
    data() {
     return {
       isFullPage: true,
-      form: {
-        supplierName: null,
-        supplierEmail: null,
-        purchaseOrderNumber: null,
-        pfiNumber: null,
-        
-      },
+      
      
     }
   },
 
   computed: {
+
+          supplierComment:{
+              get () {
+                  return cloneDeep(this.$store.state.form.supplierComment)
+                  },
+
+                  set (value) {
+                cloneDeep(this.$store.commit('UPDATE_SELECTED_PFI', value))
+             },
+             
+           },
+
+            purchaseOrderNumber:{
+              get () {
+                  return cloneDeep(this.$store.state.form.purchaseOrderNumber)
+                  },
+
+                  set (value) {
+                cloneDeep(this.$store.commit('UPDATE_SELECTED_PFI', value))
+             },
+             
+           },
+
+           pfiNumber:{
+              get () {
+                  return cloneDeep(this.$store.state.form.pfiNumber)
+                  },
+
+                  set (value) {
+                cloneDeep(this.$store.commit('UPDATE_SELECTED_PFI', value))
+             },
+             
+           },
+
+
      ...mapGetters('procurement', {
       pfi: 'selectedPfi',
       pfiLoading: 'loading',
@@ -469,7 +496,6 @@ export default {
 
     ...mapFields("compliance", [
             "form",
-            "form.supplierComment",
             "form.pfiNumber",
             "form.purchaseOrderNumber"
         ]),
@@ -491,7 +517,7 @@ export default {
 
     async onUpdatePfi() {
       await this.onUpdate();
-      const msg = await Promise.resolve('PFI Added!')
+      const msg = await Promise.resolve('Record Updated!')
       this.$buefy.toast.open({
         message: msg, // 'Operation successful',
         duration: 5000,
@@ -506,7 +532,7 @@ export default {
 
     async onDeletePfi() {
       await this.onDeletePFI();
-      const msg = await Promise.resolve('PFI Deleted!')
+      const msg = await Promise.resolve('Record Deleted!')
       this.$buefy.toast.open({
         message: msg, // 'Operation successful',
         duration: 5000,
@@ -558,8 +584,9 @@ this.$parent.close()
 
     clearForm() {
             this.form = {
-              // supplierComment:null,
-              //   pfiNumber: null,
+              supplierComment:null,
+              pfiNumber: null,
+              purchaseOrderNumber:null
             };
             //this.reloadPage()
         },

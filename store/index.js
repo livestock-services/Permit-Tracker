@@ -1,6 +1,6 @@
 export const state = () => ({})
 
-
+export const strict = false;
 
 export const getters = {
     isAuthenticated(state) {
