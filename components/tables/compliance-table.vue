@@ -31,6 +31,7 @@
       aria-previous-label="Previous Page"
       aria-page-label="Page"
       aria-current-label="Current Page"
+      debounce-search="1200"
     >
       <b-table-column
         v-slot="props"
@@ -39,6 +40,10 @@
         searchable
       >
       <span class="tag is-info is-light ">   {{ props.row.supplierName }} </span>
+      </b-table-column>
+
+      <b-table-column v-slot="props" field="supplierComment" label="Extra Details" sortable>
+        <span class="tag is-peach ">  {{ props.row.supplierComment }} </span>
       </b-table-column>
 
       <b-table-column v-slot="props" field="pfiNumber" label="PFI No." sortable>
@@ -68,6 +73,11 @@
         
           :class="[
             'tag',
+
+            {
+              'is-info':
+                props.row.status === 'New record added',
+            },
             {
               'is-warning is-light':
                 props.row.status ===

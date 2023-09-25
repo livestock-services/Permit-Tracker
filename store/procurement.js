@@ -20,6 +20,10 @@ import { ADD_PFI,
          GET_ALL_PFIS, 
          SET_LOADING,
          SET_SELECTED_PFI ,
+         
+         SET_SELECTED_NEW_RECORD_ADDED,
+         SET_ALL_NEW_RECORDS_ADDED,
+         GET_ALL_NEW_RECORDS_ADDED,
 
          SET_SELECTED_NEW_PFI_AWAITING_ACKNOWLEDGMENT,
          SET_ALL_PFIS_AWAITING_ACKNOWLEDGEMENT,
@@ -52,6 +56,7 @@ export const state = () => ({
     loading: false,
     all:[],
     allSuppliers:[],
+    allNewRecordsAdded:[],
     deleteError: null,
     allNewPfisAwaitingAcknowledgement:[],
     allPfisAcknowledgedByCompliance:[],
@@ -60,6 +65,7 @@ export const state = () => ({
     allPermitsReceived:[],
     allPermitsReceivedByProc:[],
 
+    selectedNewRecordAdded:null,
     selectedPfiAwaitingAcknowledgement:null,
     selectedPfiAcknowledgedByCompliance:null,
     selectedPaInMotionAwaitingFinanceApproval:null,
@@ -80,6 +86,8 @@ export const state = () => ({
         supplierComment:null,
         purchaseOrderNumber:null,
         pfiNumber:null,
+        pfiComments:null,
+        pfiComplianceComments:null
       
         
     },
@@ -107,6 +115,10 @@ export const getters = {
 
     allSuppliers(state){
         return state.allSuppliers
+    },
+
+    allNewRecordsAdded(state){
+        return state.allNewRecordsAdded
     },
 
     allNewPfisAwaitingAcknowledgement(state){
@@ -220,7 +232,17 @@ export const mutations = {
         state.allSuppliers = payload
     },
 
-  
+    
+    
+    [SET_SELECTED_NEW_RECORD_ADDED](state, pfi) {
+        state.selectedNewRecordAdded = pfi
+      },
+    [SET_ALL_NEW_RECORDS_ADDED](state, payload) {
+        state.allNewRecordsAdded = payload
+    },
+    [GET_ALL_NEW_RECORDS_ADDED](state, payload){
+        state.allNewRecordsAdded= payload
+    },
     
 
     [SET_SELECTED_NEW_PFI_AWAITING_ACKNOWLEDGMENT](state, pfi) {
@@ -365,8 +387,6 @@ export const actions = {
             commit(REMOVE_ALL_SUPPLIERS_FROM_LIST, filteredSuppliersList);
          
 
-          //  console.log(filteredCattle[i].purchasedEarTagID); 
-
             
             commit(ADD_NEW_SUPPLIERS_TO_LIST, allSupps[i].supplierName);
 
@@ -418,6 +438,11 @@ export const actions = {
         //     fp)
          
            //--------FILTER TO GET DATA BASED ON LOGGED IN USER -----------------//
+
+           const filteredRecordsAdded = allPfis.data.filter( apb => 
+            apb.status ==='New record added'
+           );
+
          const filteredPfiAwaitingAcknowledgement = allPfis.data.filter( ap => 
           ap.status ==='New PFI added, awaiting acknowledgement'
          );
@@ -450,6 +475,7 @@ export const actions = {
            )
   
 
+         console.log(filteredRecordsAdded.length);
 
          console.log(filteredPfiAwaitingAcknowledgement.length);
 
@@ -466,6 +492,8 @@ export const actions = {
 
            //RETRIEVED DATA IS COMMITTED TO THE MUTATION TO MAKE THE CHANGES EFFECTIVE
            commit(GET_ALL_PFIS, filteredPFIs);
+
+           commit(GET_ALL_NEW_RECORDS_ADDED, filteredRecordsAdded);
 
            commit(GET_ALL_PFIS_AWAITING_ACKNOWLEDGEMENT, filteredPfiAwaitingAcknowledgement);
 
@@ -594,7 +622,7 @@ export const actions = {
 
                 switch (option) {
                 case 'New PFI added, awaiting acknowledgement':
-                    const startDateStr = pfi.pfiDate;
+                    const startDateStr = pfi.newRecordAddedDate;
                         const endDateStr = pfi.stageOneDate;
                         
                         function calculateDaysElapsed(startDateStr, endDateStr) {

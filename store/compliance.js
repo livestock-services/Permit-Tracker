@@ -498,6 +498,49 @@ export const actions = {
         }
     },
      //---------------------------------------------------------------------------------------------------------------------------------------
+      //--------------------------Mark As Ready For Use-------------------------------------------------------//
+
+     //ACKNOWLEDGE RECEIPT
+     async markAsReadyForUse({ state, commit,_,rootGetters }, newPA) {
+      try {
+        commit(SET_LOADING, true) 
+          const newPA = rootGetters['procurement/selectedPfi']
+          const updatedDate = new Date()
+
+          const newDate = updatedDate.toLocaleDateString('en-GB');
+
+          console.log(newDate)
+
+     //  const newPA = rootGetters['finance/selectedPermitApplication'] 
+        console.log(newPA._id)
+
+        console.log(newPA.pfiNumber)
+
+        console.log(newDate);
+
+       const {data: putResponse} = await api.put(`/comp/permits/acknowledgePfi/${newPA._id}`, {newPA, status: "New PFI added, awaiting acknowledgement", stageOneDate:newDate, date:newDate} )
+      
+      let  updatedStatus = putResponse.data;
+
+       console.log(updatedStatus);
+
+       console.log(newPA);
+
+       commit(ACKNOWLEDGE_RECEIPT, putResponse)
+      
+
+        console.log(putResponse.data);
+       
+        commit(SET_LOADING, false)
+      } catch (error) {
+        commit(SET_LOADING, false)
+        throw error
+      }
+    },
+
+
+
+
     //--------------------------Acknowledge Receipt-------------------------------------------------------//
 
      //ACKNOWLEDGE RECEIPT
@@ -550,6 +593,7 @@ export const actions = {
             let pfiCopySupplierComment = newPA.supplierComment
             let pfiCopyPO = newPA.purchaseOrderNumber;
             let pfiCopyPFI = newPA.pfiNumber;
+            let pfiCopyComplianceComments = newPA.pfiComplianceComments;
 
 
             
@@ -569,6 +613,7 @@ export const actions = {
             supplierComment: `${pfiCopySupplierComment}`,
             purchaseOrderNumber: `${pfiCopyPO}`,
             pfiNumber: `${pfiCopyPFI}`,
+            pfiComplianceComments: `${pfiCopyComplianceComments}`,
             pfiDate:newDate,
             date:newDate
 

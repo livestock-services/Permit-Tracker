@@ -46,6 +46,14 @@ export const UPDATE_DAYS_ELAPSED_4 ='UPDATE_DAYS_ELAPSED_4'
 
 //----------------------------------------------------------------------------------------------------------------------
 
+//--------------------------------------- NEWLY ADDED RECORDS------------------------------------------------------------------
+
+export const SET_SELECTED_NEW_RECORD_ADDED  = 'SET_SELECTED_NEW_RECORD_ADDED '
+export const SET_ALL_NEW_RECORDS_ADDED = 'SET_ALL_NEW_RECORDS_ADDED'
+export const GET_ALL_NEW_RECORDS_ADDED = 'GET_ALL_NEW_RECORDS_ADDED'
+
+//----------------------------------------------------------------------------------------------------------------------
+
 
 //--------------------------------------- NEWLY ADDED PFIS AWAITING ACKNOWLEDGEMENT------------------------------------------------------------------
 

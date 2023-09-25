@@ -83,6 +83,10 @@
                 </b-field>
             </div>
 
+           
+
+            
+
             
 
 
@@ -90,6 +94,40 @@
 
             
     
+        </div>
+
+
+        <div class="columns">
+            <div class="column is-one-quarter">
+                <b-field label="PFI No.">
+                    <template v-slot:label>
+                      Procurement Comments. <span class="has-text-success">*</span>
+                    </template>
+                    <b-input
+                   
+                    v-model="pfiComments"
+                    type="text"
+                    maxlength="2500"
+                    placeholder="Comments"></b-input>
+                </b-field>
+            </div>
+        </div>
+
+
+        <div v-if="this.$auth.user.email === 'itsupport@livestock.co.zm' || this.$auth.user.email === 'compliance@livestock.co.zm'" class="columns">
+            <div class="column is-one-quarter">
+                <b-field label="PFI No.">
+                    <template v-slot:label>
+                       Compliance Comments. <span class="has-text-success">*</span>
+                    </template>
+                    <b-input
+                   
+                    v-model="pfiComplianceComments"
+                    type="text"
+                    maxlength="2500"
+                    placeholder="Comments"></b-input>
+                </b-field>
+            </div>
         </div>
         
         <!-- <div class="column is-one-quarter">
@@ -102,6 +140,8 @@
              <p class="content"><b>Extar Details/Comments:</b> {{ supplierComment }}</p>
              <p class="content"><b>Purchase Order:</b> {{ purchaseOrderNumber }}</p>
              <p class="content"><b>PFI Number:</b> {{ pfiNumber }}</p>
+             <p class="content"><b>Comments:</b> {{ pfiComments }}</p>
+           
 
          <div class="buttons columns">
                 <div class="column is-one-third">
@@ -112,13 +152,7 @@
                     
                  </div>
 
-                 <!-- <div class="column is-one-third">
-                    <b-button @click="onSave" type="is-success" expanded>
-                        Save
-                    </b-button>
-
-                    
-                 </div> -->
+                 
         
         </div>
 
@@ -166,7 +200,9 @@ import Upload from '../upload/upload.vue'
             "form.supplierName",
             "form.supplierComment",
             "form.purchaseOrderNumber",
-            "form.pfiNumber"
+            "form.pfiNumber",
+            "form.pfiComments",
+            "form.pfiComplianceComments"
         ]),
 
         ...mapGetters('procurement', {
@@ -212,6 +248,8 @@ import Upload from '../upload/upload.vue'
                 supplierComment: null,
                 purchasOrderNumber: null,
                 pfiNumber: null,
+                pfiComments:null,
+                pfiComplianceComments:null
             };
             //this.reloadPage()
         },

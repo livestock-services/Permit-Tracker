@@ -24,7 +24,7 @@
              <h4> <span class="is-blue">  Extra Details</span></h4>
             <p >
               <span class="tag is-primary is-light">  {{pfi.supplierComment }} </span>
-              <b-input v-if="pfi.status === 'New PFI added, awaiting acknowledgement'" v-model="pfi.supplierComment" placeholder="Enter comments here..."></b-input>
+              <b-input v-if="pfi.status === 'New record added'" v-model="pfi.supplierComment" placeholder="Enter comments here..."></b-input>
             </p>
            </div>
          </div>
@@ -38,7 +38,7 @@
               <span class="tag is-primary is-light">   {{pfi.purchaseOrderNumber}}, created on {{pfi.date}} </span>
             </p>
 
-            <b-input v-if="pfi.status === 'New PFI added, awaiting acknowledgement'" v-model="pfi.purchaseOrderNumber" placeholder="Enter PO here..."></b-input>
+            <b-input v-if="pfi.status === 'New record added'" v-model="pfi.purchaseOrderNumber" placeholder="Enter PO here..."></b-input>
            </div>
          </div>
 
@@ -51,10 +51,37 @@
 
             </p>
 
-            <b-input v-if="pfi.status === 'New PFI added, awaiting acknowledgement'" v-model="pfi.pfiNumber" placeholder="Enter PFI here..."></b-input>
+            <b-input v-if="pfi.status === 'New record added'" v-model="pfi.pfiNumber" placeholder="Enter PFI here..."></b-input>
            </div>
          </div>
 
+
+         <div class="columns">
+           <div class="column is-half">
+              <h4> <span class="is-blue">  Procurement Comments(If any) </span></h4>
+           
+            
+              <span class="tag is-peach "> {{ pfi.pfiComments }} </span>
+
+            <b-input v-if="pfi.status === 'New record added'" v-model="pfi.pfiComments" placeholder="Comments..."></b-input>
+           </div>
+         </div>
+
+
+         <div class="columns">
+             <div  class="column is-half">
+                <h4> <span class="is-blue">Compliance Comments(If any)</span></h4>
+              <p  placeholder="Supplier Name">
+               
+
+                <span v-if="!isNullOrUndefined" class="tag is-peach "> {{ pfi.pfiComplianceComments }} </span>
+
+                <b-input v-if="this.$auth.user.email === 'itsupport@livestock.co.zm' || this.$auth.user.email === 'compliance@livestock.co.zm'" v-model="pfi.pfiComplianceComments" placeholder="Enter comments here..."></b-input>
+
+
+              </p>
+             </div>
+           </div>
          <div>
           <h3> <span class="tag is-success"> Timeline at Each Stage</span></h3>
         </div>
@@ -62,12 +89,15 @@
 
 
          
-         <div v-if="pfi.status === 'New PFI added, awaiting acknowledgement'">
+        
+        <div v-if="pfi.status === 'New PFI added, awaiting acknowledgement'">
 
 
 <div  class="columns">
 <div  class="column is-half">
-    <h4> <span class="is-blue">  &#128336; between PO &#x2192; PFI</span></h4>
+  <b-tooltip type="is-dark" multilined label="This is the time taken for all necessary details to be avaiiable before the PFI can be worked on">
+  <h4> <span class="is-blue">  &#128336; between new record marked as ready for use  &#x2192; complete PFI Creation</span></h4>
+  </b-tooltip>    
   <p  placeholder="Supplier Name">
   
 
@@ -76,16 +106,6 @@
 </div>
 </div>  
 
-<div v-if="pfi.status === 'New PFI added, awaiting acknowledgement'" class="columns">
-<div  class="column is-half">
-    <h4> <span class="is-blue">  &#128336; between PFI Creation &#x2192; PFI Acknowledgement</span></h4>
-  <p  placeholder="Supplier Name">
-  
-
-    <span class="tag is-peach "> {{ daysElapsed1 }} days</span>
-  </p>
-</div>
-</div>  
 
 
 
@@ -99,7 +119,9 @@
 
       <div  class="columns">
       <div  class="column is-half">
-          <h4> <span class="is-blue">  &#128336; between PO &#x2192; PFI</span></h4>
+  <b-tooltip type="is-dark" multilined label="This is the time taken for all necessary details to be avaiiable before the PFI can be worked on">
+  <h4> <span class="is-blue">  &#128336; between new record marked as ready for use  &#x2192; complete PFI Creation</span></h4>
+  </b-tooltip>    
         <p  placeholder="Supplier Name">
         
 
@@ -110,7 +132,9 @@
 
       <div class="columns">
       <div  class="column is-half">
-          <h4> <span class="is-blue">  &#128336; between PFI Creation &#x2192; PFI Acknowledgement</span></h4>
+         <b-tooltip multilined type="is-dark" label="This is the time taken from the PFI being added and awaiting acknowledgement to the time when Compliance acknowledge receipt of the PFI">
+             <h4> <span class="is-blue">  &#128336; between complete PFI Creation &#x2192; PFI Acknowledgement</span></h4>
+         </b-tooltip>
         <p  placeholder="Supplier Name">
         
 
@@ -130,7 +154,9 @@
 
       <div  class="columns">
       <div  class="column is-half">
-          <h4> <span class="is-blue">  &#128336; between PO &#x2192; PFI</span></h4>
+  <b-tooltip type="is-dark" multilined label="This is the time taken for all necessary details to be avaiiable before the PFI can be worked on">
+  <h4> <span class="is-blue">  &#128336; between new record marked as ready for use  &#x2192; complete PFI Creation</span></h4>
+  </b-tooltip>    
         <p  placeholder="Supplier Name">
         
 
@@ -141,7 +167,9 @@
 
       <div class="columns">
       <div  class="column is-half">
-          <h4> <span class="is-blue">  &#128336; between PFI Creation &#x2192; PFI Acknowledgement</span></h4>
+         <b-tooltip multilined type="is-dark" label="This is the time taken from the PFI being added and awaiting acknowledgement to the time when Compliance acknowledge receipt of the PFI">
+             <h4> <span class="is-blue">  &#128336; between complete PFI Creation &#x2192; PFI Acknowledgement</span></h4>
+         </b-tooltip>
         <p  placeholder="Supplier Name">
         
 
@@ -152,7 +180,11 @@
 
       <div  class="columns">
       <div  class="column is-half">
-          <h4> <span class="is-blue">  &#128336; between PFI Acknowledgement &#x2192; PA Creation</span></h4>
+         <b-tooltip multilined type="is-dark" label="This is the time taken from when the PFI was acknowledged by Compliance to when the Permit Application was made and put in motion">
+
+           <h4> <span class="is-blue">  &#128336; between PFI Acknowledgement &#x2192; PA Creation</span></h4>
+
+         </b-tooltip>
         <p  placeholder="Supplier Name">
         
 
@@ -175,7 +207,9 @@
 
         <div  class="columns">
         <div  class="column is-half">
-            <h4> <span class="is-blue">  &#128336; between PO &#x2192; PFI</span></h4>
+  <b-tooltip type="is-dark" multilined label="This is the time taken for all necessary details to be avaiiable before the PFI can be worked on">
+  <h4> <span class="is-blue">  &#128336; between new record marked as ready for use  &#x2192; complete PFI Creation</span></h4>
+  </b-tooltip>    
           <p  placeholder="Supplier Name">
           
 
@@ -186,7 +220,9 @@
 
         <div  class="columns">
         <div  class="column is-half">
-            <h4> <span class="is-blue">  &#128336; between PFI Creation &#x2192; PFI Acknowledgement</span></h4>
+           <b-tooltip multilined type="is-dark" label="This is the time taken from the PFI being added and awaiting acknowledgement to the time when Compliance acknowledge receipt of the PFI">
+               <h4> <span class="is-blue">  &#128336; between complete PFI Creation &#x2192; PFI Acknowledgement</span></h4>
+           </b-tooltip>
           <p  placeholder="Supplier Name">
           
 
@@ -197,7 +233,11 @@
 
         <div  class="columns">
         <div  class="column is-half">
-            <h4> <span class="is-blue">  &#128336; between PFI Acknowledgement &#x2192; PA Creation</span></h4>
+           <b-tooltip multilined type="is-dark" label="This is the time taken from when the PFI was acknowledged by Compliance to when the Permit Application was made and put in motion">
+
+             <h4> <span class="is-blue">  &#128336; between PFI Acknowledgement &#x2192; PA Creation</span></h4>
+
+           </b-tooltip>
           <p  placeholder="Supplier Name">
           
 
@@ -208,7 +248,9 @@
 
         <div  class="columns">
         <div  class="column is-half">
-            <h4> <span class="is-blue">  &#128336; between PA Creation &#x2192; PA Approval</span></h4>
+            <b-tooltip multilined type="is-dark" label="This is the time taken from when the permit application was made and put in motion to the time it was approved by Finance and awaiting the actual permit">
+                <h4> <span class="is-blue">  &#128336; between PA Creation &#x2192; PA Approval</span></h4>
+            </b-tooltip>
           <p  placeholder="Supplier Name">
           
 
@@ -225,75 +267,90 @@
 <div v-if="pfi.status === 'Permit received'" >
 
 
-          <div  class="columns">
-          <div  class="column is-half">
-              <h4> <span class="is-blue">  &#128336; between PO &#x2192; PFI</span></h4>
-            <p  placeholder="Supplier Name">
-            
+<div  class="columns">
+<div  class="column is-half">
+<b-tooltip type="is-dark" multilined label="This is the time taken for all necessary details to be avaiiable before the PFI can be worked on">
+<h4> <span class="is-blue">  &#128336; between new record marked as ready for use  &#x2192; complete PFI Creation</span></h4>
+</b-tooltip>    
+  <p  placeholder="Supplier Name">
+  
 
-              <span class="tag is-peach "> {{ daysElapsed }} days</span>
-            </p>
-          </div>
-          </div>  
+    <span class="tag is-peach "> {{ daysElapsed }} days</span>
+  </p>
+</div>
+</div>  
 
-          <div  class="columns">
-          <div  class="column is-half">
-              <h4> <span class="is-blue">  &#128336; between PFI Creation &#x2192; PFI Acknowledgement</span></h4>
-            <p  placeholder="Supplier Name">
-            
+<div  class="columns">
+<div  class="column is-half">
+   <b-tooltip multilined type="is-dark" label="This is the time taken from the PFI being added and awaiting acknowledgement to the time when Compliance acknowledge receipt of the PFI">
+       <h4> <span class="is-blue">  &#128336; between complete PFI Creation &#x2192; PFI Acknowledgement</span></h4>
+   </b-tooltip>
+  <p  placeholder="Supplier Name">
+  
 
-              <span class="tag is-peach "> {{ daysElapsed }} days</span>
-            </p>
-          </div>
-          </div>  
+    <span class="tag is-peach "> {{ daysElapsed1 }} days</span>
+  </p>
+</div>
+</div>  
 
-          <div  class="columns">
-          <div  class="column is-half">
-              <h4> <span class="is-blue">  &#128336; between PFI Acknowledgement &#x2192; PA Creation</span></h4>
-            <p  placeholder="Supplier Name">
-            
+<div  class="columns">
+<div  class="column is-half">
+   <b-tooltip multilined type="is-dark" label="This is the time taken from when the PFI was acknowledged by Compliance to when the Permit Application was made and put in motion">
 
-              <span class="tag is-peach "> {{ daysElapsed1 }} days</span>
-            </p>
-          </div>
-          </div>  
+     <h4> <span class="is-blue">  &#128336; between PFI Acknowledgement &#x2192; PA Creation</span></h4>
 
-          <div  class="columns">
-          <div  class="column is-half">
-              <h4> <span class="is-blue">  &#128336; between PA Creation &#x2192; PA Approval</span></h4>
-            <p  placeholder="Supplier Name">
-            
+   </b-tooltip>
+  <p  placeholder="Supplier Name">
+  
 
-              <span class="tag is-peach "> {{ daysElapsed2 }} days</span>
-            </p>
-          </div>
-          </div>  
+    <span class="tag is-peach "> {{ daysElapsed2 }} days</span>
+  </p>
+</div>
+</div>  
 
-          <div  class="columns">
-          <div  class="column is-half">
-              <h4> <span class="is-blue">  &#128336; between PA Approval &#x2192; Permit Receipt</span></h4>
-            <p  placeholder="Supplier Name">
-            
+<div  class="columns">
+<div  class="column is-half">
+    <b-tooltip multilined type="is-dark" label="This is the time taken from when the permit application was made and put in motion to the time it was approved by Finance and awaiting the actual permit">
+        <h4> <span class="is-blue">  &#128336; between PA Creation &#x2192; PA Approval</span></h4>
+    </b-tooltip>
+  <p  placeholder="Supplier Name">
+  
 
-              <span class="tag is-peach "> {{ daysElapsed3 }} days</span>
-            </p>
-          </div>
-          </div>  
+    <span class="tag is-peach "> {{ daysElapsed3 }} days</span>
+  </p>
+</div>
+</div>  
+
+<div  class="columns">
+<div  class="column is-half">
+    <b-tooltip multilined type="is-dark" label="This is the time taken from when the permit application was approved by Finance and awaiting permit to the time when the permit was actually received">
+      <h4> <span class="is-blue">  &#128336; between PA Approval &#x2192; Permit Receipt</span></h4>
+    </b-tooltip>
+  <p  placeholder="Supplier Name">
+  
+
+    <span class="tag is-peach "> {{ daysElapsed4 }} days</span>
+  </p>
+</div>
+</div>  
 
 
-          <div class="columns">
-          <div  class="column is-half">
-              <h4> <span class="is-blue">  &#128336; from Start &#x2192; Finish </span></h4>
-            <p  placeholder="Supplier Name">
-            
+<div class="columns">
+<div  class="column is-half">
+   <b-tooltip multilined type="is-dark" label="This is the total time taken from the start of the process to when the permit was received">
+    <h4> <span class="is-blue">  &#128336; between new record marked as ready for use  &#x2192; Permit Receipt</span></h4>
+   </b-tooltip>
+  <p  placeholder="Supplier Name">
+  
 
-              <span class="tag is-peach "> {{ daysElapsed4 }} days</span>
-            </p>
-          </div>
-        </div>  
+    <span class="tag is-peach "> {{ daysElapsed4 }} days</span>
+  </p>
+</div>
+</div>  
 
 
 </div>
+
 
 
 
@@ -301,6 +358,7 @@
              <div  class="column is-half">
                 <h4> <span class="is-blue"> Status Log  </span></h4>
               <p  placeholder="Supplier Name">
+                <span class="tag is-warning is-light">New Record added:  {{pfi.newRecordAddedDate}} </span>
                 <span class="tag is-warning is-light">New PFI added, awaiting acknowledgement:  {{pfi.stageOneDate}} </span>
                 <span class="tag is-success is-light">Acknowledged By Compliance:  {{pfi.stageTwoDate}} </span>
                 <span class="tag is-warning">PA in motion, awaiting Finance Approval:  {{pfi.stageThreeDate}} </span>
@@ -354,7 +412,7 @@
     </section>
     <footer class="modal-card-foot">
 
-      <b-tooltip label="Approve PA" position="is-top" type="is-success is-light" icon-left="money">
+      <b-tooltip multilined label="Approve PA" position="is-top" type="is-success is-light" icon-left="money">
      <b-button
         v-model="approvePA"
         v-if="pfi.status ==='PA in motion, awaiting Finance Approval' &&
@@ -367,9 +425,29 @@
       
     </b-tooltip>
 
+    <b-tooltip  label="Mark As Ready For Use when all neccesary details are present" multilined position="is-top" type="is-dark"> 
+      <b-button 
+      v-model="markAsReadyForUse" 
+      v-if="pfi.status ==='New record added' && this.$auth.user.email === 'itsupport@livestock.co.zm' && pfi.pfiNumber != isNullOrUndefined" 
+      class="is-success mx-2 ml-4" 
+      icon-left="check"
+      label="Mark As Ready For Use" 
+      @click="onMarkAsReadyForUse" /> 
+    </b-tooltip>
+
+    <b-tooltip  label="Mark As Ready For Use when all neccesary details are present" multilined position="is-top" type="is-dark"> 
+      <b-button 
+      v-model="markAsReadyForUse" 
+      v-if="pfi.status ==='New record added' && this.$auth.user.email === 'procurement@livestock.co.zm' && pfi.pfiNumber != isNullOrUndefined" 
+      class="is-blue mx-2 ml-4" 
+      icon-left="check"
+      label="Mark As Ready For Use" 
+      @click="onMarkAsReadyForUse" /> 
+    </b-tooltip>
+
     
 
-      <b-tooltip label="Approve PA" position="is-top" type="is-success is-light" icon-left="money">
+      <b-tooltip multilined label="Approve PA" position="is-top" type="is-success is-light" icon-left="money">
      <b-button
         v-model="approvePA"
         v-if="pfi.status ==='Permit received' &&
@@ -383,7 +461,7 @@
     </b-tooltip>
 
 
-    <b-tooltip label="Approve PA" position="is-top" type="is-success is-light" icon-left="money">
+    <b-tooltip multilined label="Approve PA" position="is-top" type="is-success is-light" icon-left="money">
      <b-button
         v-model="approvePA"
         v-if="pfi.status ==='PA in motion, awaiting Finance Approval' &&
@@ -397,7 +475,7 @@
     </b-tooltip>
 
     <b-button
-        v-if="pfi.status === 'New PFI added, awaiting acknowledgement'"
+        v-if="pfi.status === 'New record added' && ( this.$auth.user.email === 'procurement@livestock.co.zm' || this.$auth.user.email === 'itsupport@livestock.co.zm')"
         label="Update"
         type="is-info"
         icon-left="account"
@@ -405,14 +483,14 @@
       /> 
 
       <b-button
-        v-if="pfi.status === 'New PFI added, awaiting acknowledgement'"
+        v-if="pfi.status === 'New record added'&& ( this.$auth.user.email === 'procurement@livestock.co.zm' || this.$auth.user.email === 'itsupport@livestock.co.zm')"
         label="Delete"
         type="is-danger"
         icon-left="delete"
         @click="onDeletePfi"
       /> 
 
-      <b-tooltip label="Approve PA" position="is-top" type="is-success is-light" icon-left="money">
+      <b-tooltip multilined label="Approve PA" position="is-top" type="is-success is-light" icon-left="money">
      <b-button
         v-model="approvePA"
         v-if="pfi.status ==='Permit received' &&
@@ -483,6 +561,17 @@ export default {
              
            },
 
+           pfiComments:{
+              get () {
+                  return cloneDeep(this.$store.state.form.pfiComments)
+                  },
+
+                  set (value) {
+                cloneDeep(this.$store.commit('UPDATE_SELECTED_PFI', value))
+             },
+             
+           },
+
 
      ...mapGetters('procurement', {
       pfi: 'selectedPfi',
@@ -513,9 +602,23 @@ export default {
   methods: {
 
     ...mapActions('procurement', ['load', 'selectPfi', 'onDeletePFI']),
-      ...mapActions('compliance',['acknowledgePfi','approvePA', 'receivePermit','receivePermitByProcurement', 'putPaInMotion', 'selectPA', 'onUpdate'] ),
+      ...mapActions('compliance',['markAsReadyForUse','approvePA', 'receivePermit','receivePermitByProcurement', 'putPaInMotion', 'selectPA', 'onUpdate'] ),
 
-    async onUpdatePfi() {
+    
+      async onMarkAsReadyForUse() {
+
+      await this.markAsReadyForUse();
+      const msg = await Promise.resolve('Mark As Ready For Use!')
+      this.$buefy.toast.open({
+      message: msg, // 'Operation successful',
+      duration: 5000,
+      position: 'is-top',
+      type: 'is-info',
+      })
+      this.$parent.close()
+      },
+    
+      async onUpdatePfi() {
       await this.onUpdate();
       const msg = await Promise.resolve('Record Updated!')
       this.$buefy.toast.open({

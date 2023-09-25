@@ -201,10 +201,27 @@
             >
               <countTo
                 :startVal="startVal"
-                :endVal="pfiStage1.length + pfiStage2.length + pfiStage3.length + pfiStage4.length + pfiStage5.length"
+                :endVal="pfiStage0.length + pfiStage1.length + pfiStage2.length + pfiStage3.length + pfiStage4.length + pfiStage5.length"
                 :duration="6000"
               ></countTo>
               Total Records
+            </b-button>
+
+
+            <b-button
+              class="mx-2 my-4"
+              type="is-info is-light"
+              size="is-medium"
+              icon-left="arrow-right"
+              path="/compliance/compliance"
+              @click=""
+            >
+            <countTo
+                :startVal="startVal"
+                :endVal="pfiStage0.length"
+                :duration="6000"
+              ></countTo>
+              New Records Added
             </b-button>
 
             <b-button
@@ -361,6 +378,7 @@ export default {
       loading: "loading",
       pfis: "allPfis",
 
+      pfiStage0:"allNewRecordsAdded",
       pfiStage1:"allNewPfisAwaitingAcknowledgement",
       pfiStage2:"allPfisAcknowledgedByCompliance",
       pfiStage3:"allPAsInMotionAwaitingFinanceApproval",

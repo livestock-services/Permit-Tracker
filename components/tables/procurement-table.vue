@@ -75,6 +75,11 @@
         <span
           :class="[
             'tag',
+
+            {
+              'is-info':
+                props.row.status === 'New record added',
+            },
             {
               'is-warning is-light':
                 props.row.status === 'New PFI added, awaiting acknowledgement',
