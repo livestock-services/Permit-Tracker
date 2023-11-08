@@ -428,7 +428,7 @@
     <b-tooltip  label="Mark As Ready For Use when all neccesary details are present" multilined position="is-top" type="is-dark"> 
       <b-button 
       v-model="markAsReadyForUse" 
-      v-if="pfi.status ==='New record added' && this.$auth.user.email === 'itsupport@livestock.co.zm' && pfi.pfiNumber != isNullOrUndefined" 
+      v-if="pfi.status ==='New record added' && this.$auth.user.email === 'itsupport@livestock.co.zm' && pfi.pfiNumber != isNullOrUndefined && pfi.pfiNumber && pfi.purchaseOrderNumber" 
       class="is-success mx-2 ml-4" 
       icon-left="check"
       label="Mark As Ready For Use" 
@@ -438,7 +438,7 @@
     <b-tooltip  label="Mark As Ready For Use when all neccesary details are present" multilined position="is-top" type="is-dark"> 
       <b-button 
       v-model="markAsReadyForUse" 
-      v-if="pfi.status ==='New record added' && this.$auth.user.email === 'procurement@livestock.co.zm' && pfi.pfiNumber != isNullOrUndefined" 
+      v-if="pfi.status ==='New record added' && this.$auth.user.email === 'procurement@livestock.co.zm' && pfi.pfiNumber != isNullOrUndefined && pfi.pfiNumber && pfi.purchaseOrderNumber" 
       class="is-blue mx-2 ml-4" 
       icon-left="check"
       label="Mark As Ready For Use" 
