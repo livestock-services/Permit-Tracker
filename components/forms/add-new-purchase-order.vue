@@ -27,17 +27,18 @@
                     
                     <div  class="column is-full">
                       <h5 class="my-2">Suppliers List</h5>    
-                  <b-autocomplete
-                  rounded
-                  v-model="supplierName"
-                  :data="allSupps"
-                  placeholder="select a supplier from the list"
-                  icon="magnify"
-                  clearable
-                  @select="option => selected = option">
-  
-                  <template #empty>No results found</template>
-              </b-autocomplete>
+                      <b-autocomplete
+                        rounded
+                        v-model="supplierName"
+                        :data="filteredDataArray"
+                        placeholder="Select a Supplier from the list"
+                        icon="magnify"
+                        clearable
+                        @select="supplier => selected = supplier"
+                    >
+                        <template #empty>No results found</template>
+                    </b-autocomplete>
+
   
             
                     </div>
@@ -176,15 +177,12 @@ import Upload from '../upload/upload.vue'
     data() {
         const today = new Date();
 
-    
+        let allSuppliers = computed(()=>this.allSupps)
+
         return {
 
 
-            data:[
-
-            computed(()=>this.allSupps),
-
-            ],
+           allSuppliers,
            
 
                 name: '',
@@ -206,14 +204,14 @@ import Upload from '../upload/upload.vue'
         ]),
 
         ...mapGetters('procurement', {
-            allSupps:'allSuppliers'
+            suppliers:'allSuppliers'
              }),
 
              filteredDataArray() {
-      return this.data.filter((option) => {
-        return option.toString().toLowerCase().indexOf(this.name.toLowerCase()) >= 0;
-      });
-    }
+            return this.suppliers.filter((supplier) => {
+                return supplier.toString().toLowerCase().indexOf(this.supplierName.toLowerCase()) >= 0;
+            });
+        },
 
     },
      created() {
@@ -243,16 +241,16 @@ import Upload from '../upload/upload.vue'
             }
         },
         clearForm() {
-            this.form = {
-                supplierName: null,
-                supplierComment: null,
-                purchasOrderNumber: null,
-                pfiNumber: null,
-                pfiComments:null,
-                pfiComplianceComments:null
-            };
-            //this.reloadPage()
-        },
+        this.form = {
+        supplierName: null,
+        supplierComment: null,
+        purchaseOrderNumber: null,  // Corrected typo here
+        pfiNumber: null,
+        pfiComments: null,
+        pfiComplianceComments: null
+        };
+         },
+
         reloadPage() {
             location.reload();
         }
