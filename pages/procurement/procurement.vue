@@ -19,8 +19,18 @@
         </b-tab-item>
 
 
-        <b-tab-item label="Add New Supplier" icon="truck ">
-            <add-supplier></add-supplier>
+        <b-tab-item label="Suppliers" icon="truck ">
+            <b-tabs>
+              <b-tab-item label="Add New Supplier" icon="plus-circle">
+                <add-supplier></add-supplier>
+            
+              </b-tab-item>
+
+              <b-tab-item label="All Suppliers" icon="account">
+                
+            <supplier-table ></supplier-table>
+              </b-tab-item>
+            </b-tabs>
         </b-tab-item>
 
         <b-tab-item label="View Permits" icon="eye-check-outline">
@@ -40,6 +50,7 @@ import PermitsTable from '../../components/tables/permits-table.vue'
 import Calendar from '~/components/calendar.vue'
 import AddSupplier from '~/components/forms/add-supplier.vue'
 import { mapActions, mapGetters } from 'vuex'
+import SupplierTable from '~/components/tables/supplier-table.vue'
 
 export default {
   middleware: 'is-admin',
@@ -51,6 +62,7 @@ export default {
     PermitsApplicationTable,
     Calendar,
   AddSupplier,
+  SupplierTable,
    
    
 },

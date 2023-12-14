@@ -14,6 +14,7 @@ import {
          GET_ALL_PERMIT_APPLICATIONS,
          ACKNOWLEDGE_RECEIPT,
          UPDATE_SELECTED_PFI,
+         UPDATE_SELECTED_SUPPLIER,
          PUT_PA_IN_MOTION,
          RECEIVE_PERMIT,
          RECEIVE_PERMIT_BY_PROCUREMENT,
@@ -205,6 +206,10 @@ export const mutations = {
 
     [UPDATE_SELECTED_PFI](state, payload) {
         state.selectedPA = payload
+      },
+
+      [UPDATE_SELECTED_SUPPLIER](state, payload) {
+        state.selectedSupplier = payload
       },
     
 
@@ -582,6 +587,51 @@ export const actions = {
       },
 
       //--------------------------Acknowledge Receipt-------------------------------------------------------//
+      async onUpdateSupplier({ state, commit,_,rootGetters }) {
+        try {
+          commit(SET_LOADING, true) 
+            const newSupplier = rootGetters['procurement/selectedSupplier']
+
+            console.log(newSupplier);
+
+            const updatedDate = new Date()
+            
+            let copySupplierName = newSupplier.supplierName;
+         
+
+            const newDate = updatedDate.toLocaleDateString('en-US');
+           
+
+       //  const newSupplier = rootGetters['finance/selectedPermitApplication'] 
+          console.log(newSupplier._id)
+
+          console.log(newDate);
+
+         const {data: putResponse} = await api.put(`/comp/permits/updateSupplier/${newSupplier._id}`, {
+            
+            newSupplier,
+            supplierName: `${copySupplierName}`,
+   
+
+             })
+        
+        let  updatedStatus = putResponse.data;
+
+         console.log(updatedStatus);
+
+         console.log(newSupplier);
+
+         commit(UPDATE_SELECTED_SUPPLIER, putResponse)
+        
+
+          console.log(putResponse.data);
+         
+          commit(SET_LOADING, false)
+        } catch (error) {
+          commit(SET_LOADING, false)
+          throw error
+        }
+      },
 
      //ADD PFI 
      async onUpdate({ state, commit,_,rootGetters }, newPA) {

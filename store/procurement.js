@@ -5,9 +5,10 @@ import { getField, updateField } from 'vuex-map-fields'
 import { ADD_PFI,
         ADD_NEW_SUPPLIER,
         GET_ALL_SUPPLIERS,
-
+        GET_ALL_SUPPS,
         ADD_NEW_SUPPLIERS_TO_LIST,
         REMOVE_ALL_SUPPLIERS_FROM_LIST,
+        SET_SELECTED_SUPPLIER,
 
         UPDATE_DAYS_ELAPSED,
         UPDATE_DAYS_ELAPSED_1,
@@ -56,6 +57,7 @@ export const state = () => ({
     loading: false,
     all:[],
     allSuppliers:[],
+    allSupps:[],
     allNewRecordsAdded:[],
     deleteError: null,
     allNewPfisAwaitingAcknowledgement:[],
@@ -73,6 +75,7 @@ export const state = () => ({
     selectedPermitReceived:null,
 
     selectedPfi: null,
+    selectedSupplier:null,
 
     daysElapsed:null,
     daysElapsed1:null,
@@ -109,12 +112,20 @@ export const getters = {
         return state.selectedPfi
       },
 
+      selectedSupplier(state) {
+        return state.selectedSupplier
+      },
+
+
     allPfis(state){
         return state.all
     },
 
     allSuppliers(state){
         return state.allSuppliers
+    },
+    allSupps(state){
+        return state.allSupps
     },
 
     allNewRecordsAdded(state){
@@ -217,11 +228,20 @@ export const mutations = {
     [SET_SELECTED_PFI](state, pfi) {
         state.selectedPfi = pfi
       },
+    
+      [SET_SELECTED_SUPPLIER](state, supplier) {
+        state.selectedSupplier = supplier
+      },
+
     [GET_ALL_PFIS](state, payload) {
         state.all = payload
     },
     [GET_ALL_SUPPLIERS](state, payload){
         state.allSuppliers = payload
+    },
+
+    [GET_ALL_SUPPS](state, payload){
+        state.allSupps = payload
     },
 
     [ADD_NEW_SUPPLIERS_TO_LIST](state, payload){
@@ -401,8 +421,32 @@ export const actions = {
           
 
            // await dispatch('getInactivePolicies')
-        console.log(allSupps.data)
+        console.log(allSupps)
+
              commit(GET_ALL_SUPPLIERS, filteredSuppliersList);
+            //   ...getters.allPolicies,
+            //   ...getters.inactivePolicies,
+            commit(SET_LOADING, false);
+            
+        } catch (error) {
+            commit(SET_LOADING, false);
+            this.$log.error("Could not get details. Please try again!")
+        }
+    },
+
+    async getAllSupps({ state, commit,_,rootGetters }) {
+        try {
+            commit(SET_LOADING, true)
+
+            const {data: response} = await api.get(`/pfis/allSuppliers`)
+
+            const allSupps = response.data;
+
+
+            console.log(allSupps);
+
+        
+             commit(GET_ALL_SUPPS, allSupps);
             //   ...getters.allPolicies,
             //   ...getters.inactivePolicies,
             commit(SET_LOADING, false);
@@ -595,6 +639,17 @@ export const actions = {
         } catch (error) {
           commit(SET_LOADING, false)
           throw error
+        }
+      },
+
+
+      selectSupplier({commit}, supplier){
+        try {
+            commit(SET_SELECTED_SUPPLIER, supplier)
+            console.log(supplier._id) 
+            console.log(supplier.supplierName) 
+        } catch (error) {
+            console.log('Error')  
         }
       },
 
