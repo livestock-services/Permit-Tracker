@@ -6,6 +6,7 @@ import { ADD_PFI,
         ADD_NEW_SUPPLIER,
         GET_ALL_SUPPLIERS,
         GET_ALL_SUPPS,
+        GET_TOTAL_SUPPS,
         ADD_NEW_SUPPLIERS_TO_LIST,
         REMOVE_ALL_SUPPLIERS_FROM_LIST,
         SET_SELECTED_SUPPLIER,
@@ -48,6 +49,7 @@ import { ADD_PFI,
          GET_ALL_PERMITS_RECEIVED_BY_PROCUREMENT,
 
          DELETE_SELECTED_PFI,
+         DELETE_SELECTED_SUPPLIER
          
 
 
@@ -58,6 +60,7 @@ export const state = () => ({
     all:[],
     allSuppliers:[],
     allSupps:[],
+    totalSupps:null,
     allNewRecordsAdded:[],
     deleteError: null,
     allNewPfisAwaitingAcknowledgement:[],
@@ -126,6 +129,10 @@ export const getters = {
     },
     allSupps(state){
         return state.allSupps
+    },
+
+    totalSupps(state){
+        return state.totalSupps
     },
 
     allNewRecordsAdded(state){
@@ -244,6 +251,10 @@ export const mutations = {
         state.allSupps = payload
     },
 
+    [GET_TOTAL_SUPPS](state, payload){
+        state.totalSupps = payload
+    },
+
     [ADD_NEW_SUPPLIERS_TO_LIST](state, payload){
         state.allSuppliers.push(payload)
     },
@@ -352,6 +363,15 @@ export const mutations = {
     state.deleteError = null;
     },
 
+    
+    [DELETE_SELECTED_SUPPLIER](state, putResponse) {
+        const index = state.allSuppliers.findIndex(newSupplier => newSupplier._id === putResponse);
+    if (index !== -1) {
+      state.allSuppliers.splice(index, 1);
+    }
+    state.deleteError = null;
+    },
+
 
 
     
@@ -424,6 +444,7 @@ export const actions = {
         console.log(allSupps)
 
              commit(GET_ALL_SUPPLIERS, filteredSuppliersList);
+             commit(GET_TOTAL_SUPPS, filteredSuppliersList.length);
             //   ...getters.allPolicies,
             //   ...getters.inactivePolicies,
             commit(SET_LOADING, false);
@@ -443,10 +464,13 @@ export const actions = {
             const allSupps = response.data;
 
 
-            console.log(allSupps);
+            console.log(allSupps.length);
 
         
              commit(GET_ALL_SUPPS, allSupps);
+
+
+             commit(GET_TOTAL_SUPPS, allSupps.length);
             //   ...getters.allPolicies,
             //   ...getters.inactivePolicies,
             commit(SET_LOADING, false);
@@ -634,6 +658,38 @@ export const actions = {
         
 
           console.log(deletedPfi);
+         
+          commit(SET_LOADING, false)
+        } catch (error) {
+          commit(SET_LOADING, false)
+          throw error
+        }
+      },
+
+      async onDeleteSupplier({ state, commit,_,rootGetters }, pfi) {
+        try {
+          commit(SET_LOADING, true) 
+            const newSupplier = rootGetters['procurement/selectedSupplier']
+          
+            
+
+          console.log(newSupplier._id)
+          console.log(newSupplier.supplierName)
+
+        
+
+         const {data: putResponse} = await api.delete(`/pfis/allSuppliers/${newSupplier._id}`)
+        
+        let  deletedSupplier = putResponse.data;
+
+        
+
+         console.log(newSupplier);
+
+         commit(DELETE_SELECTED_SUPPLIER, deletedSupplier);
+        
+
+          console.log(deletedSupplier);
          
           commit(SET_LOADING, false)
         } catch (error) {

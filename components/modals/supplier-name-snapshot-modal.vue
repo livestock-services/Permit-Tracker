@@ -50,7 +50,7 @@
           label="Delete"
           type="is-danger"
           icon-left="delete"
-          @click="onDeletePfi"
+          @click="deleteSupplier"
         /> 
   
         <b-tooltip multilined label="Approve PA" position="is-top" type="is-success is-light" icon-left="money">
@@ -125,7 +125,7 @@
   
     methods: {
   
-      ...mapActions('procurement', ['load', 'selectPfi', 'onDeletePFI']),
+      ...mapActions('procurement', ['load', 'selectPfi', 'onDeletePFI','onDeleteSupplier']),
         ...mapActions('compliance',['markAsReadyForUse','approvePA', 'receivePermit','receivePermitByProcurement', 'putPaInMotion', 'selectPA', 'onUpdate','onUpdateSupplier'] ),
   
       
@@ -159,8 +159,8 @@
         
       },
   
-      async onDeletePfi() {
-        await this.onDeletePFI();
+      async deleteSupplier() {
+        await this.onDeleteSupplier();
         const msg = await Promise.resolve('Record Deleted!')
         this.$buefy.toast.open({
           message: msg, // 'Operation successful',

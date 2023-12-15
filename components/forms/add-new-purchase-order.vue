@@ -86,12 +86,6 @@
 
            
 
-            
-
-            
-
-
-           
 
             
     
@@ -99,7 +93,7 @@
 
 
         <div class="columns">
-            <div class="column is-one-quarter">
+            <div class="column is-half">
                 <b-field label="PFI No.">
                     <template v-slot:label>
                       Procurement Comments. <span class="has-text-success">*</span>
@@ -112,10 +106,22 @@
                     placeholder="Comments"></b-input>
                 </b-field>
             </div>
+
+            <div class="column is-half">    
+                <h4>
+                      Summary <span class="has-text-success">*</span>
+                </h4>
+                <p class="content"><b>Selected Supplier:</b> {{ supplierName }}</p>
+                <p class="content"><b>Extar Details/Comments:</b> {{ supplierComment }}</p>
+                <p class="content"><b>Purchase Order:</b> {{ purchaseOrderNumber }}</p>
+                <p class="content"><b>PFI Number:</b> {{ pfiNumber }}</p>
+                <p class="content"><b>Comments:</b> {{ pfiComments }}</p>
+
+            </div>
         </div>
 
 
-        <div v-if="this.$auth.user.email === 'itsupport@livestock.co.zm' || this.$auth.user.email === 'compliance@livestock.co.zm'" class="columns">
+        <!-- <div v-if="this.$auth.user.email === 'itsupport@livestock.co.zm' || this.$auth.user.email === 'compliance@livestock.co.zm'" class="columns">
             <div class="column is-one-quarter">
                 <b-field label="PFI No.">
                     <template v-slot:label>
@@ -129,7 +135,7 @@
                     placeholder="Comments"></b-input>
                 </b-field>
             </div>
-        </div>
+        </div> -->
         
         <!-- <div class="column is-one-quarter">
                   <b-field>
@@ -137,14 +143,10 @@
                 </b-field>
              </div> -->
           
-             <p class="content"><b>Selected Supplier:</b> {{ supplierName }}</p>
-             <p class="content"><b>Extar Details/Comments:</b> {{ supplierComment }}</p>
-             <p class="content"><b>Purchase Order:</b> {{ purchaseOrderNumber }}</p>
-             <p class="content"><b>PFI Number:</b> {{ pfiNumber }}</p>
-             <p class="content"><b>Comments:</b> {{ pfiComments }}</p>
+          
            
 
-         <div class="buttons columns">
+         <div v-if="supplierName" class="buttons columns">
                 <div class="column is-one-third">
                     <b-button  @click="onSubmit" type="is-info" expanded>
                         Submit
@@ -209,7 +211,7 @@ import Upload from '../upload/upload.vue'
 
              filteredDataArray() {
             return this.suppliers.filter((supplier) => {
-                return supplier.toString().toLowerCase().indexOf(this.supplierName.toLowerCase()) >= 0;
+                return supplier.toString().toLowerCase().indexOf(this.supplierName) >= 0;
             });
         },
 
@@ -258,3 +260,5 @@ import Upload from '../upload/upload.vue'
     components: { Upload }
 }
 </script>
+
+

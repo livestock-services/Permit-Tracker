@@ -10,12 +10,19 @@
             {{ option }} entries
           </option>
         </b-select>
+
+        <div class=" card px-2 py-2 mx-2 my-2">
+          <h5> Total Suppliers: <span class="tag is-primary "> {{ supps.length }}</span></h5>
+        </div>
+
   
         <div class="buttons">
           <b-button type="is-info" icon-left="refresh" @click="load"
             >Refresh</b-button
           >
         </div>
+
+       
       </b-field>
       <b-table
         :data="tableData"
@@ -124,6 +131,7 @@
       ...mapGetters("procurement", {
         loading: "loading",
         supps:"allSupps",
+        totalSuppliers:"totalSupps"
         
   
         
